@@ -38,8 +38,7 @@
 				$(element).last().insertAfter($("#text-body"+count));
 			}
 			function remove(ele) {
-				
-				console.log($(ele).parent().parent().remove());
+				$(ele).parent().parent().remove();
 			}
 		</script>
 		<style>
