@@ -8,6 +8,8 @@
 		<link rel="stylesheet" href="<?php echo base_url('asset/css/style.css'); ?>" />
 		<link rel="stylesheet" href="<?php echo base_url('asset/css/modify.css'); ?>" />
 		<script src="<?php echo base_url('assets/js/jquery-2.1.1.min.js'); ?>"></script>
+		<script type="text/javascript" src="<?php echo base_url('asset/js/vendor.js'); ?>"></script>
+		<script type="text/javascript" src="<?php echo base_url('asset/js/bundle.js'); ?>"></script>
 		<script>
 			window.addEventListener('load', () => {
 				const loader = document.getElementById('loader');
@@ -39,24 +41,6 @@
 				$(ele).parent().parent().remove();
 			}
 		</script>
-		<style>
-			form {
-				display: inline-block;
-			}
-			
-			form div {
-				display: block;
-				min-height: 40px;
-			}
-			
-			.float-left {
-				float: left;
-			}
-			
-			.width-90p {
-				width: 90%;
-			}
-		</style>
 	</head>
 	<body class="app">
 		<div id="loader">
@@ -88,7 +72,5 @@
 				<div><button type="submit" class="btn btn-success">Generate</button></div>
 			</form>
 		</div>
-		<script type="text/javascript" src="<?php echo base_url('asset/js/vendor.js'); ?>"></script>
-		<script type="text/javascript" src="<?php echo base_url('asset/js/bundle.js'); ?>"></script>
 	</body>
 </html>
