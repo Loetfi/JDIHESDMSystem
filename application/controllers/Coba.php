@@ -153,7 +153,7 @@ $paragraphMenimbang = array(
 	);
 	
 $section->addText(
-	"Menimbang\t:\tbahwa untuk memberikan pedoman pelaksanaan kaidah teknik pertambangan yang baik sebagaimana dimaksud dalam Pasal 95 huruf a dan Pasal 96 Undang-Undang Nomor 4 Tahun 2009 tentang Pertambangan Mineral dan Batubara serta untuk melaksanakan ketentuan Pasal 35 Peraturan Pemerintah Nomor 55 Tahun 2010 tentang Pembinaan dan Pengawasan Penyelenggaraan Pengelolaan Usaha Pertambangan Mineral dan Batubara, perlu menetapkan Peraturan Menteri Energi dan Sumber Daya Mineral tentang Pelaksanaan Kaidah Pertambangan yang Baik dan Pengawasan Pertambangan Mineral dan Batubara;",
+	"Menimbang\t:\tbahwa untuk memberikan pedoman pelaksanaan kaidah teknik pertambangan yang baik sebagaimana dimaksud dalam Pasal 95 huruf a dan Pasal 96 Undang-Undang Nomor 4 Tahun 2009 tentang Pertambangan Mineral dan Batubara serta untuk melaksanakan ketentuan Pasal 35 Peraturan Pemerintah Nomor 55 Tahun 2010 tentang Pembinaan dan Pengawasan Penyelenggaraan Pengelolaan Usaha Pertambangan Mineral dan Batubara, perlu Memutuskan Peraturan Menteri Energi dan Sumber Daya Mineral tentang Pelaksanaan Kaidah Pertambangan yang Baik dan Pengawasan Pertambangan Mineral dan Batubara;",
 	$fontStyle,
 	$paragraphMenimbang
 );
@@ -261,7 +261,7 @@ try {
 
 	}
 	
-	function sanusi(){
+	function sanusi_2(){
 		
 		$this->load->library('Phpword');
 
@@ -285,6 +285,16 @@ try {
 		$phpWord->setDefaultParagraphStyle(
 			array(
 				'align'  => 'both',
+				'spacing' => 120,
+				'spaceAfter' => 0,
+				'tabs' => array(
+					new \PhpOffice\PhpWord\Style\Tab('left', \PhpOffice\PhpWord\Shared\Converter::cmToTwip(3)),
+					new \PhpOffice\PhpWord\Style\Tab('left', \PhpOffice\PhpWord\Shared\Converter::cmToTwip(3.5)),
+					new \PhpOffice\PhpWord\Style\Tab('left', \PhpOffice\PhpWord\Shared\Converter::cmToTwip(4.5)),
+					new \PhpOffice\PhpWord\Style\Tab('left', \PhpOffice\PhpWord\Shared\Converter::cmToTwip(5.5)),
+					new \PhpOffice\PhpWord\Style\Tab('left', \PhpOffice\PhpWord\Shared\Converter::cmToTwip(6.5)),
+					new \PhpOffice\PhpWord\Style\Tab('left', \PhpOffice\PhpWord\Shared\Converter::cmToTwip(7.5)),
+				),
 			)
 		);
 		
@@ -293,14 +303,54 @@ try {
 		$fontStyle['size'] = 12;
 		$fontStyle['allCaps'] = true;
 		
+		
+		$header = $section->addHeader();
+		$header->firstPage();
+		$table = $header->addTable();
+		$table->addRow();
+		$cell = $table->addCell(450);
+		$textrun = $cell->addTextRun();
+		$textrun->addText('');
+
+		// Add header for all other pages
+		$subsequent = $section->addHeader();
+		$subsequent->addPreserveText('- {PAGE} -', $fontStyle, array('align' => 'center'));
+		
+		
 		// setting paragraph Judul
-		$paragraphStyleName = 'alignCenter';
+		$paragraphStyleName = 'paragrafJudul';
 		$phpWord->addParagraphStyle(
 			$paragraphStyleName, 
 			array(
 				'align' => 'center',
 			)
 		);
+		
+		// subLevel 0
+		$subLevel[0]['default']['indentation'] = array(
+			'left' => \PhpOffice\PhpWord\Shared\Converter::cmToTwip(3.5), 
+		);
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		// setting paragraphMenimbang awal
 		$paragraphMenimbangHeadNoPointer = array(
@@ -311,8 +361,6 @@ try {
 					'firstLine' => \PhpOffice\PhpWord\Shared\Converter::cmToTwip(3.5) * -1, 
 					'left' => \PhpOffice\PhpWord\Shared\Converter::cmToTwip(3.5), 
 				),
-				'spacing' => 120,
-				'align' => 'both',
 			);
 		$paragraphMenimbangHeadContentNoPointer = array(
 				'tabs' => array(
@@ -388,7 +436,7 @@ try {
 		foreach($barisJudul as $row){
 			if ($row != ""){
 				$txtTitle = $row;
-				$section->addText($txtTitle, $fontStyle, 'alignCenter');
+				$section->addText($txtTitle, $fontStyle, 'paragrafJudul');
 			} else {
 				$section->addTextBreak(1,$fontStyle);
 			}
@@ -479,7 +527,7 @@ try {
 		$pointerMengingat = $_POST['pointerMengingat'];
 		$Mengingat = $_POST['Mengingat'];
 		for($i=0; $i<count($Mengingat); $i++){
-			if ($Menimbang[$i] != ''){
+			if ($Mengingat[$i] != ''){
 				$barisMengingat = explode("\r\n",$Mengingat[$i]);
 				
 				// print_r($Mengingat[$i]);
@@ -556,6 +604,468 @@ try {
 			}
 			// echo '<hr>';
 		}
+		
+		
+		$objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'Word2007');
+		try {
+			$filename = 'coba.docx';
+			$fullPath = './'.$filename;
+			$objWriter->save($fullPath, 'Word2007');
+
+		} catch (Exception $e) {}
+
+		header('Content-Description: File Transfer');
+		header('Content-Type: application/octet-stream');
+		header('Content-Disposition: attachment; filename='.$filename);
+		header('Content-Transfer-Encoding: binary');
+		header('Expires: 0');
+		header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+		header('Pragma: public');
+		header('Content-Length: ' . filesize($fullPath));
+		flush();
+		readfile($fullPath);
+		unlink($fullPath); // deletes the temporary file
+		exit;
+		
+		
+		
+		
+	}
+	
+	function sanusi(){
+		
+		$this->load->library('Phpword');
+
+		$phpWord = new \PhpOffice\PhpWord\PhpWord();
+		
+		// setting kertas dan margin
+		$thisPage = array(
+			'paperSize' 	=> 'Legal', 
+			'marginLeft' 	=> \PhpOffice\PhpWord\Shared\Converter::cmToTwip(2.5), 
+			'marginRight' 	=> \PhpOffice\PhpWord\Shared\Converter::cmToTwip(2.5), 
+			'marginTop' 	=> \PhpOffice\PhpWord\Shared\Converter::cmToTwip(2.5), 
+			'marginBottom' 	=> \PhpOffice\PhpWord\Shared\Converter::cmToTwip(4),
+			'headerHeight' => \PhpOffice\PhpWord\Shared\Converter::cmToTwip(0.5),
+			'footerHeight' => \PhpOffice\PhpWord\Shared\Converter::cmToTwip(0.5), 
+		);
+		$section = $phpWord->addSection($thisPage);
+		
+		// setting paragraf global
+		$phpWord->setDefaultParagraphStyle(
+			array(
+				'align'  => 'both',
+				'spacing' => 120,
+				'spaceAfter' => 0,
+				'tabs' => array(
+					new \PhpOffice\PhpWord\Style\Tab('left', \PhpOffice\PhpWord\Shared\Converter::cmToTwip(3)),
+					new \PhpOffice\PhpWord\Style\Tab('left', \PhpOffice\PhpWord\Shared\Converter::cmToTwip(3.5)),
+					new \PhpOffice\PhpWord\Style\Tab('left', \PhpOffice\PhpWord\Shared\Converter::cmToTwip(4.5)),
+					new \PhpOffice\PhpWord\Style\Tab('left', \PhpOffice\PhpWord\Shared\Converter::cmToTwip(5.5)),
+					new \PhpOffice\PhpWord\Style\Tab('left', \PhpOffice\PhpWord\Shared\Converter::cmToTwip(6.5)),
+					new \PhpOffice\PhpWord\Style\Tab('left', \PhpOffice\PhpWord\Shared\Converter::cmToTwip(7.5)),
+				),
+			)
+		);
+		
+		$centerContent = array(
+			'indentation' => array(
+				'left' => \PhpOffice\PhpWord\Shared\Converter::cmToTwip(3.5), 
+			),
+			'align' => 'center',
+		);
+		
+		// setting subLevel 0
+		$subLevel[0]['default']['indentation'] = array(
+			'left' => \PhpOffice\PhpWord\Shared\Converter::cmToTwip(3.5), 
+		);
+		$subLevel[0]['firstLine']['indentation'] = array(
+			'firstLine' => \PhpOffice\PhpWord\Shared\Converter::cmToTwip(3.5) * -1,
+			'left' => \PhpOffice\PhpWord\Shared\Converter::cmToTwip(3.5), 
+		);
+		$subLevel[0]['pointer']['indentation'] = array(
+			'firstLine' => \PhpOffice\PhpWord\Shared\Converter::cmToTwip(1) * -1, 
+			'left' => \PhpOffice\PhpWord\Shared\Converter::cmToTwip(4.5),
+		);
+		
+		// setting subLevel 1
+		$subLevel[1]['default']['indentation'] = array(
+			'left' => \PhpOffice\PhpWord\Shared\Converter::cmToTwip(4.5),
+		);
+		// setting subLevel 1 pointer
+		$subLevel[1]['pointer']['indentation'] = array(
+			'firstLine' => \PhpOffice\PhpWord\Shared\Converter::cmToTwip(1) * -1, 
+			'left' => \PhpOffice\PhpWord\Shared\Converter::cmToTwip(4.5),
+		);
+		// setting subLevel 1 pointer body
+		$subLevel[1]['firstLine']['indentation'] = array(
+			'firstLine' => \PhpOffice\PhpWord\Shared\Converter::cmToTwip(4.5) * -1,
+			'left' => \PhpOffice\PhpWord\Shared\Converter::cmToTwip(4.5),
+		);
+		
+		// setting subLevel 2
+		$subLevel[2]['default']['indentation'] = array(
+			'left' => \PhpOffice\PhpWord\Shared\Converter::cmToTwip(5.5),
+		);
+		// setting subLevel 2 pointer
+		$subLevel[2]['pointer']['indentation'] = array(
+			'firstLine' => \PhpOffice\PhpWord\Shared\Converter::cmToTwip(1) * -1, 
+			'left' => \PhpOffice\PhpWord\Shared\Converter::cmToTwip(5.5),
+		);
+		
+		// setting subLevel 3
+		$subLevel[3]['default']['indentation'] = array(
+			'left' => \PhpOffice\PhpWord\Shared\Converter::cmToTwip(6.5),
+		);
+		// setting subLevel 3 pointer
+		$subLevel[3]['pointer']['indentation'] = array(
+			'firstLine' => \PhpOffice\PhpWord\Shared\Converter::cmToTwip(1) * -1, 
+			'left' => \PhpOffice\PhpWord\Shared\Converter::cmToTwip(6.5),
+		);
+		// setting subLevel 4
+		$subLevel[4]['default']['indentation'] = array(
+			'left' => \PhpOffice\PhpWord\Shared\Converter::cmToTwip(7.5),
+		);
+		// setting subLevel 3 pointer
+		$subLevel[4]['pointer']['indentation'] = array(
+			'firstLine' => \PhpOffice\PhpWord\Shared\Converter::cmToTwip(1) * -1, 
+			'left' => \PhpOffice\PhpWord\Shared\Converter::cmToTwip(7.5),
+		);
+		
+		// setting font global
+		$fontStyle['name'] = 'Bookman Old Style';
+		$fontStyle['size'] = 12;
+		
+		
+		
+		
+		// header firstPage
+		$header = $section->addHeader();
+		$header->firstPage();
+		$table = $header->addTable();
+		$table->addRow();
+		$cell = $table->addCell(450);
+		$textrun = $cell->addTextRun();
+		$textrun->addText('');
+
+		// Add header for all other pages
+		$subsequent = $section->addHeader();
+		$subsequent->addPreserveText('- {PAGE} -', $fontStyle, array('align' => 'center'));
+		
+		
+		/* *********************************************************************************** */
+		## judul
+		$fontStyle['allCaps'] = TRUE;
+		$judul = $_POST['super_judul'];
+		$barisJudul = explode("\r\n",$judul);
+		foreach($barisJudul as $row){
+			if ($row != ""){
+				$txtTitle = $row;
+				$section->addText($txtTitle, $fontStyle, array('align' => 'center'));
+			} else {
+				$section->addTextBreak(1,$fontStyle);
+			}
+		}
+		/* *********************************************************************************** */
+		
+		
+		$fontStyle['allCaps'] = false;
+		/* *********************************************************************************** */
+		## menimbang
+		$Menimbang = $_POST['Menimbang'];
+		$pointerMenimbang = $_POST['pointerMenimbang'];
+		
+		$nextPageMenimbang = @$_POST['nextPageMenimbang'];
+		$subLevelMenimbang = @$_POST['subLevelMenimbang'];
+		$theFirst = true;
+		
+		// print_r($nextPageMenimbang); die();
+		for($i=0; $i<count($Menimbang); $i++){
+			
+			if ($Menimbang[$i] != ''){
+				$barisMenimbang = explode("\r\n",$Menimbang[$i]);
+				
+				if (@$nextPageMenimbang[$i] == 1) 
+					$section = $phpWord->addSection($thisPage);
+				
+				// print_r($Menimbang[$i]);
+				// print_r($barisMenimbang);
+				for($j=0; $j<count($barisMenimbang); $j++){
+					
+					$idxSubLevel = @$subLevelMenimbang[$i];
+					
+					if ($theFirst==true){ // awal Menimbang
+						if ($j==0){ // awal baris menimbang
+							
+							if ($pointerMenimbang[$i] == ''){ // awal tanpa pointer
+								$section->addText(
+									"Menimbang\t:\t".$barisMenimbang[$j],
+									$fontStyle,
+									$subLevel[0]['firstLine']
+								);
+							}
+							else{ // awal ada pointer 
+								$section->addText(
+									"Menimbang\t:\t".$pointerMenimbang[$i]."\t".$barisMenimbang[$j],
+									$fontStyle,
+									$subLevel[1]['firstLine']
+								);
+							}
+						}
+						else {
+							if ($pointerMenimbang[$i] == ''){ // lanjutan tanpa pointer
+								$section->addText(
+									$barisMenimbang[$j],
+									$fontStyle,
+									$subLevel[0]['default']
+								);
+							}
+							else { // lanjutan ada pointer
+								$section->addText(
+									$barisMenimbang[$j],
+									$fontStyle,
+									$subLevel[1]['default']
+								);
+							}
+						}
+					}
+					else { // body Menimbang
+						if ($j==0){ // awal body baris menimbang
+							if ($pointerMenimbang[$i] == ''){ // awal body menimbang tanpa pointer 
+								$section->addText(
+									$barisMenimbang[$j],
+									$fontStyle,
+									$subLevel[$idxSubLevel]['default']
+								);
+							}
+							else { // awal body menimbang ada pointer 
+								$section->addText(
+									$pointerMenimbang[$i]."\t".$barisMenimbang[$j],
+									$fontStyle,
+									$subLevel[$idxSubLevel]['pointer']
+								);
+								
+							}
+						}
+						else {
+							$section->addText(
+								$barisMenimbang[$j],
+								$fontStyle,
+								$subLevel[$idxSubLevel]['default']
+							);
+						}
+					}
+					
+				}
+				$theFirst = false;
+			}
+			
+		}
+		
+		/* *********************************************************************************** */
+		
+		/* *********************************************************************************** */
+		## Mengingat
+		$Mengingat = $_POST['Mengingat'];
+		$pointerMengingat = $_POST['pointerMengingat'];
+		
+		$nextPageMengingat = @$_POST['nextPageMengingat'];
+		$subLevelMengingat = @$_POST['subLevelMengingat'];
+		$theFirst = true;
+		for($i=0; $i<count($Mengingat); $i++){
+			
+			if ($Mengingat[$i] != ''){
+				$barisMengingat = explode("\r\n",$Mengingat[$i]);
+				
+				if (@$nextPageMengingat[$i] == 1) 
+					$section = $phpWord->addSection($thisPage);
+				
+				// print_r($Mengingat[$i]);
+				// print_r($barisMengingat);
+				for($j=0; $j<count($barisMengingat); $j++){
+					
+					$idxSubLevel = @$subLevelMengingat[$i];
+					
+					if ($theFirst==true){ // awal Mengingat
+						if ($j==0){ // awal baris Mengingat
+							
+							if ($pointerMengingat[$i] == ''){ // awal tanpa pointer
+								$section->addText(
+									"Mengingat\t:\t".$barisMengingat[$j],
+									$fontStyle,
+									$subLevel[0]['firstLine']
+								);
+							}
+							else{ // awal ada pointer 
+								$section->addText(
+									"Mengingat\t:\t".$pointerMengingat[$i]."\t".$barisMengingat[$j],
+									$fontStyle,
+									$subLevel[1]['firstLine']
+								);
+							}
+						}
+						else {
+							if ($pointerMengingat[$i] == ''){ // lanjutan tanpa pointer
+								$section->addText(
+									$barisMengingat[$j],
+									$fontStyle,
+									$subLevel[0]['default']
+								);
+							}
+							else { // lanjutan ada pointer
+								$section->addText(
+									$barisMengingat[$j],
+									$fontStyle,
+									$subLevel[1]['default']
+								);
+							}
+						}
+					}
+					else { // body Mengingat
+						if ($j==0){ // awal body baris Mengingat
+							if ($pointerMengingat[$i] == ''){ // awal body Mengingat tanpa pointer 
+								$section->addText(
+									$barisMengingat[$j],
+									$fontStyle,
+									$subLevel[$idxSubLevel]['default']
+								);
+							}
+							else { // awal body Mengingat ada pointer 
+								$section->addText(
+									$pointerMengingat[$i]."\t".$barisMengingat[$j],
+									$fontStyle,
+									$subLevel[$idxSubLevel]['pointer']
+								);
+								
+							}
+						}
+						else {
+							$section->addText(
+								$barisMengingat[$j],
+								$fontStyle,
+								$subLevel[$idxSubLevel]['default']
+							);
+						}
+					}
+					
+				}
+				$theFirst = false;
+			}
+			
+		}
+		/* *********************************************************************************** */
+		
+		/* *********************************************************************************** */
+		
+		$section->addTextBreak(1,$fontStyle);
+		$section->addText(
+			"MEMUTUSKAN:",
+			$fontStyle,
+			$centerContent
+		);
+		
+		
+		## Memutuskan
+		$Memutuskan = $_POST['Memutuskan'];
+		$pointerMemutuskan = $_POST['pointerMemutuskan'];
+		
+		$nextPageMemutuskan = @$_POST['nextPageMemutuskan'];
+		$subLevelMemutuskan = @$_POST['subLevelMemutuskan'];
+		$theFirst = true;
+		for($i=0; $i<count($Memutuskan); $i++){
+			
+			if ($Memutuskan[$i] != ''){
+				$barisMemutuskan = explode("\r\n",$Memutuskan[$i]);
+				
+				if (@$nextPageMemutuskan[$i] == 1) 
+					$section = $phpWord->addSection($thisPage);
+				
+				// print_r($Memutuskan[$i]);
+				// print_r($barisMemutuskan);
+				for($j=0; $j<count($barisMemutuskan); $j++){
+					
+					$idxSubLevel = @$subLevelMemutuskan[$i];
+					
+					if ($theFirst==true){ // awal Memutuskan
+						if ($j==0){ // awal baris Memutuskan
+							
+							if ($pointerMemutuskan[$i] == ''){ // awal tanpa pointer
+								$section->addText(
+									"Menetapkan\t:\t".$barisMemutuskan[$j],
+									$fontStyle,
+									$subLevel[0]['firstLine']
+								);
+							}
+							else{ // awal ada pointer 
+								$section->addText(
+									"Menetapkan\t:\t".$pointerMemutuskan[$i]."\t".$barisMemutuskan[$j],
+									$fontStyle,
+									$subLevel[1]['firstLine']
+								);
+							}
+						}
+						else {
+							if ($pointerMemutuskan[$i] == ''){ // lanjutan tanpa pointer
+								$section->addText(
+									$barisMemutuskan[$j],
+									$fontStyle,
+									$subLevel[0]['default']
+								);
+							}
+							else { // lanjutan ada pointer
+								$section->addText(
+									$barisMemutuskan[$j],
+									$fontStyle,
+									$subLevel[1]['default']
+								);
+							}
+						}
+					}
+					else { // body Memutuskan
+						if ($j==0){ // awal body baris Memutuskan
+							if ($pointerMemutuskan[$i] == ''){ // awal body Memutuskan tanpa pointer 
+								$section->addText(
+									$barisMemutuskan[$j],
+									$fontStyle,
+									$subLevel[$idxSubLevel]['default']
+								);
+							}
+							else { // awal body Memutuskan ada pointer 
+								$section->addText(
+									$pointerMemutuskan[$i]."\t".$barisMemutuskan[$j],
+									$fontStyle,
+									$subLevel[$idxSubLevel]['pointer']
+								);
+								
+							}
+						}
+						else {
+							$section->addText(
+								$barisMemutuskan[$j],
+								$fontStyle,
+								$subLevel[$idxSubLevel]['default']
+							);
+						}
+					}
+					
+				}
+				$theFirst = false;
+			}
+			
+		}
+		/* *********************************************************************************** */
+		
+		// echo '<hr><hr><hr><hr>';
+		// $fontStyle['allCaps'] = false;
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		
 		$objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'Word2007');
