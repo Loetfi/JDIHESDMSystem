@@ -21,6 +21,10 @@
 			.width-80px {
 				width: 80px;
 			}
+			fieldset {
+				border: 1px #000 solid;
+				padding: 10px;
+			}
 		</style>
 	</head>
 	<body class="app">
@@ -203,15 +207,15 @@
 					</table>
 				</fieldset>
 				
-				<fieldset><legend>BAB xx(1)</legend>
+				<fieldset><legend>BAB/pasal xx(1)</legend>
 					<center>
-						<label>Judul Header<br><textarea name="judulBab1[]" rows="4" cols="70" placeholder="ex: BAB I dan/atau Pasal 1"></textarea></label><br>
+						<label>Judul Header<br><textarea name="judulBab1" rows="4" cols="70" placeholder="ex: BAB I dan/atau Pasal 1"></textarea></label><br>
 					</center>
 					<br>
 					<table width="100%" border="0">
 						<tr>
 							<td valign="top"><input type="text" name="pointerPasal1[]" placeholder="" size="5"></td>
-							<td valign="top"><textarea type="text" name="contentPasa1[]" placeholder="" rows="4" cols="50" required></textarea></td>
+							<td valign="top"><textarea type="text" name="contentPasal1[]" placeholder="" rows="4" cols="50" required></textarea></td>
 							<td valign="top">
 								<label><select name="nextPagePasal1[]"><option value="0">Continues Page</option><option value="1">Next Page</option></select></label><br>
 								<label>Sub level <select name="subLevelPasal1[]">
@@ -225,7 +229,7 @@
 						</tr>
 						<tr>
 							<td valign="top"><input type="text" name="pointerPasal1[]" placeholder="" size="5"></td>
-							<td valign="top"><textarea type="text" name="contentPasa1[]" placeholder="" rows="4" cols="50" required></textarea></td>
+							<td valign="top"><textarea type="text" name="contentPasal1[]" placeholder="" rows="4" cols="50" required></textarea></td>
 							<td valign="top">
 								<label><select name="nextPagePasal1[]"><option value="0">Continues Page</option><option value="1">Next Page</option></select></label><br>
 								<label>Sub level <select name="subLevelPasal1[]">
@@ -239,7 +243,21 @@
 						</tr>
 						<tr>
 							<td valign="top"><input type="text" name="pointerPasal1[]" placeholder="" size="5"></td>
-							<td valign="top"><textarea type="text" name="contentPasa1[]" placeholder="" rows="4" cols="50" required></textarea></td>
+							<td valign="top"><textarea type="text" name="contentPasal1[]" placeholder="" rows="4" cols="50"></textarea></td>
+							<td valign="top">
+								<label><select name="nextPagePasal1[]"><option value="0">Continues Page</option><option value="1">Next Page</option></select></label><br>
+								<label>Sub level <select name="subLevelPasal1[]">
+									<option value="0">0</option>
+									<option value="1">1</option>
+									<option value="2">2</option>
+									<option value="3">3</option>
+									<option value="4">4</option>
+								</select></label>
+							</td>
+						</tr>
+						<tr>
+							<td valign="top"><input type="text" name="pointerPasal1[]" placeholder="" size="5"></td>
+							<td valign="top"><textarea type="text" name="contentPasal1[]" placeholder="" rows="4" cols="50"></textarea></td>
 							<td valign="top">
 								<label><select name="nextPagePasal1[]"><option value="0">Continues Page</option><option value="1">Next Page</option></select></label><br>
 								<label>Sub level <select name="subLevelPasal1[]">
@@ -253,17 +271,17 @@
 						</tr>
 					</table>
 				</fieldset>
-				<fieldset><legend>BAB xx(2)</legend>
+				<fieldset><legend>BAB/pasal xx(2)</legend>
 					<center>
-						<label>Judul Header<br><textarea name="judulBab2[]" rows="4" cols="70" placeholder="ex: BAB I dan/atau Pasal 1"></textarea></label><br>
+						<label>Judul Header<br><textarea name="judulBab2" rows="4" cols="70" placeholder="ex: BAB I dan/atau Pasal 1"></textarea></label><br>
 					</center><br>
 					
-					<table width="200%" border="0">
+					<table width="100%" border="0">
 						<tr>
 							<td valign="top"><input type="text" name="pointerPasal2[]" placeholder="" size="5"></td>
-							<td valign="top"><textarea type="text" name="contentPasa2[]" placeholder="" rows="4" cols="50" required></textarea></td>
+							<td valign="top"><textarea type="text" name="contentPasal2[]" placeholder="" rows="4" cols="50" required></textarea></td>
 							<td valign="top">
-								<label><select name="nextPagePasal2[]"><option value="0">Continues Page</option><option value="2">Next Page</option></select></label><br>
+								<label><select name="nextPagePasal2[]"><option value="0">Continues Page</option><option value="1">Next Page</option></select></label><br>
 								<label>Sub level <select name="subLevelPasal2[]">
 									<option value="0">0</option>
 									<option value="1">1</option>
@@ -275,9 +293,9 @@
 						</tr>
 						<tr>
 							<td valign="top"><input type="text" name="pointerPasal2[]" placeholder="" size="5"></td>
-							<td valign="top"><textarea type="text" name="contentPasa2[]" placeholder="" rows="4" cols="50" required></textarea></td>
+							<td valign="top"><textarea type="text" name="contentPasal2[]" placeholder="" rows="4" cols="50" required></textarea></td>
 							<td valign="top">
-								<label><select name="nextPagePasal2[]"><option value="0">Continues Page</option><option value="2">Next Page</option></select></label><br>
+								<label><select name="nextPagePasal2[]"><option value="0">Continues Page</option><option value="1">Next Page</option></select></label><br>
 								<label>Sub level <select name="subLevelPasal2[]">
 									<option value="0">0</option>
 									<option value="1">1</option>
@@ -289,9 +307,23 @@
 						</tr>
 						<tr>
 							<td valign="top"><input type="text" name="pointerPasal2[]" placeholder="" size="5"></td>
-							<td valign="top"><textarea type="text" name="contentPasa2[]" placeholder="" rows="4" cols="50" required></textarea></td>
+							<td valign="top"><textarea type="text" name="contentPasal2[]" placeholder="" rows="4" cols="50"></textarea></td>
 							<td valign="top">
-								<label><select name="nextPagePasal2[]"><option value="0">Continues Page</option><option value="2">Next Page</option></select></label><br>
+								<label><select name="nextPagePasal2[]"><option value="0">Continues Page</option><option value="1">Next Page</option></select></label><br>
+								<label>Sub level <select name="subLevelPasal2[]">
+									<option value="0">0</option>
+									<option value="1">1</option>
+									<option value="2">2</option>
+									<option value="3">3</option>
+									<option value="4">4</option>
+								</select></label>
+							</td>
+						</tr>
+						<tr>
+							<td valign="top"><input type="text" name="pointerPasal2[]" placeholder="" size="5"></td>
+							<td valign="top"><textarea type="text" name="contentPasal2[]" placeholder="" rows="4" cols="50"></textarea></td>
+							<td valign="top">
+								<label><select name="nextPagePasal2[]"><option value="0">Continues Page</option><option value="1">Next Page</option></select></label><br>
 								<label>Sub level <select name="subLevelPasal2[]">
 									<option value="0">0</option>
 									<option value="1">1</option>

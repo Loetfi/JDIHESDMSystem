@@ -1057,8 +1057,86 @@ try {
 		// echo '<hr><hr><hr><hr>';
 		// $fontStyle['allCaps'] = false;
 		
+		/* *********************************************************************************** */
+		// all content bab dan pasal
+		$numberBab = 1;
+		for($numberBab=1; $numberBab<4; $numberBab++){
+			@$judulBab = @$_POST['judulBab'.@$numberBab];
+			@$contentPasal = @$_POST['contentPasal'.@$numberBab];
+			@$pointerPasal = @$_POST['pointerPasal'.@$numberBab];
+			
+			@$nextPagePasal = @$_POST['nextPagePasal'.@$numberBab];
+			@$subLevelPasal = @$_POST['subLevelPasal'.@$numberBab];
+			
+			$barisJudulBab = explode("\r\n",$judulBab);
+			foreach($barisJudulBab as $row){
+				if ($row != ""){
+					$txtTitle = $row;
+					$section->addText(
+						@$txtTitle,
+						@$fontStyle,
+						$centerContent
+					);
+				} else {
+					$section->addTextBreak(1,$fontStyle);
+				}
+			}
+			
+			
+			for($i=0; $i<count(@$contentPasal); $i++){
+				
+				if (@$contentPasal[$i] != ''){
+					@$barisContentPasal = explode("\r\n",@$contentPasal[$i]);
+					
+					if (@$nextPagecontentPasal[$i] == 1) 
+						$section = $phpWord->addSection($thisPage);
+					
+					for($j=0; $j<count(@$barisContentPasal); $j++){
+						
+						@$idxSubLevel = @$subLevelPasal[$i];
+						
+						if (@$j==0){ // awal body baris contentPasal
+							if (@$pointerPasal[$i] == ''){ // awal body contentPasal tanpa pointer 
+								$section->addText(
+									@$barisContentPasal[@$j],
+									@$fontStyle,
+									@$subLevel[@$idxSubLevel]['default']
+								);
+							}
+							else { // awal body contentPasal ada pointer 
+								$section->addText(
+									@$pointerPasal[$i]."\t".@$barisContentPasal[$j],
+									$fontStyle,
+									@$subLevel[@$idxSubLevel]['pointer']
+								);
+								
+							}
+						}
+						else {
+							$section->addText(
+								$barisContentPasal[$j],
+								$fontStyle,
+								$subLevel[$idxSubLevel]['default']
+							);
+						}
+						
+						
+					}
+				}
+				
+			}
+			
+			
+		}
+		
+		/* *********************************************************************************** */
 		
 		
+		
+		
+		/* *********************************************************************************** */
+		// footer tanda tangan 
+		// print_r($_POST); die();
 		
 		
 		
@@ -1076,18 +1154,18 @@ try {
 
 		} catch (Exception $e) {}
 
-		header('Content-Description: File Transfer');
-		header('Content-Type: application/octet-stream');
-		header('Content-Disposition: attachment; filename='.$filename);
-		header('Content-Transfer-Encoding: binary');
-		header('Expires: 0');
-		header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
-		header('Pragma: public');
-		header('Content-Length: ' . filesize($fullPath));
-		flush();
-		readfile($fullPath);
-		unlink($fullPath); // deletes the temporary file
-		exit;
+		// header('Content-Description: File Transfer');
+		// header('Content-Type: application/octet-stream');
+		// header('Content-Disposition: attachment; filename='.$filename);
+		// header('Content-Transfer-Encoding: binary');
+		// header('Expires: 0');
+		// header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+		// header('Pragma: public');
+		// header('Content-Length: ' . filesize($fullPath));
+		// flush();
+		// readfile($fullPath);
+		// unlink($fullPath); // deletes the temporary file
+		// exit;
 		
 		
 		
