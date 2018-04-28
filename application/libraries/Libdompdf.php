@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 require_once APPPATH.'third_party/dompdf/autoload.inc.php';
 
 use Dompdf\Dompdf;
-
+// mantab
 class libdompdf extends Dompdf {
 	
 	protected function ci() {
