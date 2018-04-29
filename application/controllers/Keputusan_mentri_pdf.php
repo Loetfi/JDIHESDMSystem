@@ -14,30 +14,57 @@ class Keputusan_mentri_pdf extends CI_Controller {
 	public function generatePdf() {
 		$post = $this->input->post();
 		$superjudul = @$post['super_judul'] ? nl2br($post['super_judul'], false) : 'Judul Kosong';
-		$judulMenimbang = '';
-		$judulMengingat = '';
+		$ttd = @$post['ttd'] ? nl2br($post['ttd'], false) : 'Tanda Tangan Kosong';
+		$isiMenimbang = '';
+		$isiMengingat = '';
+		$isiTembusan = '';
+		$isiPasal = '';
+		$pasalJudul = array('KESATU', 'KEDUA', 'KETIGA', 'KEEMPAT', 'KELIMA', 'KEENAM', 'KETUJUH', 'KEDELAPAN', 'KESEMBILAN', 'KESEPULUH');
 		for($var = 0; $var < count($post['menimbang']); $var++) {
 			$menimbang = ($post['menimbang'][$var] !== '') ? $post['menimbang'][$var] : '&nbsp;' ;
-			$judulMenimbang .= '<li style="margin-bottom:4px; text-align:justify;">'.$menimbang.'</li>';
+			$isiMenimbang .= '<li style="margin-bottom:4px; text-align:justify;">'.$menimbang.'</li>';
 		}
 		for($var = 0; $var < count($post['mengingat']); $var++) {
 			$mengingat = ($post['mengingat'][$var] !== '') ? $post['mengingat'][$var] : '&nbsp;' ;
-			$judulMengingat .= '<li style="margin-bottom:4px; text-align:justify;">'.$mengingat.'</li>';
+			$isiMengingat .= '<li style="margin-bottom:4px; text-align:justify;">'.$mengingat.'</li>';
 		}
-		$html = '<div style="font-family:"Bookman Old Style"; font-size:12px;">
+		for($var = 0; $var < count($post['pasal']); $var++) {
+			$judulPasal = '';
+			$pasal = ($post['pasal'][$var] !== '') ? $post['pasal'][$var] : '&nbsp;' ;
+			$isiPasal .= '<div style="margin-top:20px;">
+						  <div style="position:absolute; left:55px;">'.$pasalJudul[$var].'</div><div style="position:absolute; left:24%;">:</div>
+						  <div style="margin:0 auto 0 23%; text-align:justify; width:73%;">'.$pasal.'</div>
+						  </div>';
+		}
+		for($var = 0; $var < count($post['tembusan']); $var++) {
+			$judulPasal = '';
+			$tembusan = ($post['tembusan'][$var] !== '') ? $post['tembusan'][$var] : '&nbsp;' ;
+			$isiTembusan .= '<li style="margin-bottom:4px; text-align:justify;">&nbsp;&nbsp;&nbsp;'.$tembusan.'</li>';
+		}
+		$html = '<style>
+				@font-face { font-family:"Bookman Old Style"; font-size:12px; src:url("'.base_url('assets/assets_backend/adminator/font/BOOKOS.TTF').'") format("truetype"); }
+				</style>
+				<div style="font-family:Bookman Old Style; font-style:normal;">
 				<div style="margin:0 1.5em 0 1.5em">
 				<div style="line-height:25px; margin:8em auto 2em auto; text-align:center; text-transform:uppercase; width:90%;">'.$superjudul.'</div>
 				<div>
 					<div style="position:absolute; left:55px;">Menimbang</div><div style="position:absolute; left:24%;">:</div>
-					<ol type="a" style="margin:0 auto 0 20%; width:70%;">'.$judulMenimbang.'</ol>
+					<ol type="a" style="margin:0 auto 0 20%; width:70%;">'.$isiMenimbang.'</ol>
 				</div>
 				<div>
 					<div style="position:absolute; left:55px; margin-top:10px;">Mengingat</div><div style="position:absolute; left:24%;">:</div>
-					<ol type="1" style="margin:0 auto 0 20%; width:70%;">'.$judulMengingat.'</ol>
+					<ol type="1" style="margin:0 auto 0 20%; width:70%;">'.$isiMengingat.'</ol>
 				</div>
 				<div>
-					<div style="margin-top:25px;text-align:center; width:100%">MEMUTUSKAN:</div>
+					<div style="margin-top:25px; text-align:center; width:100%">MEMUTUSKAN:</div>
 					<div style="position:absolute; left:55px; margin-top:10px;">Menetapkan</div><div style="position:absolute; left:24%;">:</div>
+					<div style="margin:0 auto 0 23%; text-align:justify; width:73%;">'.$post['menetapkan'].'</div>
+				</div>
+				'.$isiPasal.'
+				<div style="line-height:25px; margin:1.5em 0 0 35%; text-align:left; width:90%; page-break-inside: avoid">'.$ttd.'</div>
+				<div style="margin-top:30px">
+					<div style="position:absolute; left:55px;">Tembusan:</div>
+					<ol type="1" style="position:absolute; left:38px; margin-top:28px;">'.$isiTembusan.'</ol>
 				</div>
 				</div>
 				</div>';
