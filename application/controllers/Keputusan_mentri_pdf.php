@@ -28,12 +28,16 @@ class Keputusan_mentri_pdf extends CI_Controller {
 				<div style="margin:0 1.5em 0 1.5em">
 				<div style="line-height:25px; margin:8em auto 2em auto; text-align:center; text-transform:uppercase; width:90%;">'.$superjudul.'</div>
 				<div>
-				<div style="position:absolute; left:55px;">Menimbang</div><div style="position:absolute; left:24%;">:</div>
-				<ol type="a" style="margin:0 auto 0 20%; width:70%;">'.$judulMenimbang.'</ol>
+					<div style="position:absolute; left:55px;">Menimbang</div><div style="position:absolute; left:24%;">:</div>
+					<ol type="a" style="margin:0 auto 0 20%; width:70%;">'.$judulMenimbang.'</ol>
 				</div>
 				<div>
-				<div style="position:absolute; left:55px; margin-top:10px;">Mengingat</div><div style="position:absolute; left:24%;">:</div>
-				<ol type="1" style="margin:0 auto 0 20%; width:70%;">'.$judulMengingat.'</ol>
+					<div style="position:absolute; left:55px; margin-top:10px;">Mengingat</div><div style="position:absolute; left:24%;">:</div>
+					<ol type="1" style="margin:0 auto 0 20%; width:70%;">'.$judulMengingat.'</ol>
+				</div>
+				<div>
+					<div style="margin-top:25px;text-align:center; width:100%">MEMUTUSKAN:</div>
+					<div style="position:absolute; left:55px; margin-top:10px;">Menetapkan</div><div style="position:absolute; left:24%;">:</div>
 				</div>
 				</div>
 				</div>';

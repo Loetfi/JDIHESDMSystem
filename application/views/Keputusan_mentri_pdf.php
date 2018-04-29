@@ -33,7 +33,7 @@
 		$(ele).parent().parent().remove();
 	}
 </script>
-<form class="width-100p" method="POST" action="<?php echo site_url('Peraturan_mentri/generatePdf'); ?>" target="_blank">
+<form class="width-100p" method="POST" action="<?php echo site_url('Keputusan_mentri_pdf/generatePdf'); ?>" target="_blank">
 	<div class="form-group" style="margin-bottom:5px">
 		<textarea name="super_judul" class="form-control" autocomplete="off" placeholder="Judul Dokumen" rows="4"></textarea>
 	</div>
