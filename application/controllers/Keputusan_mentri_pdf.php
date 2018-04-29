@@ -41,7 +41,7 @@ class Keputusan_mentri_pdf extends CI_Controller {
 			$tembusan = ($post['tembusan'][$var] !== '') ? $post['tembusan'][$var] : '&nbsp;' ;
 			$isiTembusan .= '<li style="margin-bottom:4px; text-align:justify;">&nbsp;&nbsp;&nbsp;'.$tembusan.'</li>';
 		}
-		$html = '<style>
+		$html1 = '<style>
 				@font-face { font-family:"Bookman Old Style"; font-size:12px; src:url("'.base_url('assets/assets_backend/adminator/font/BOOKOS.TTF').'") format("truetype"); }
 				</style>
 				<div style="font-family:Bookman Old Style; font-style:normal;">
@@ -55,20 +55,22 @@ class Keputusan_mentri_pdf extends CI_Controller {
 					<div style="position:absolute; left:55px; margin-top:10px;">Mengingat</div><div style="position:absolute; left:24%;">:</div>
 					<ol type="1" style="margin:0 auto 0 20%; width:70%;">'.$isiMengingat.'</ol>
 				</div>
-				<div style="page-break-inside: avoid">
+				<div style="page-break-inside:avoid">
 					<div style="margin-top:25px; text-align:center; width:100%">MEMUTUSKAN:</div>
 					<div style="position:absolute; left:55px; margin-top:10px;">Menetapkan</div><div style="position:absolute; left:24%;">:</div>
 					<div style="margin:0 auto 0 23%; padding:0 0 0 10px; text-align:justify; width:73%;">'.$post['menetapkan'].'</div>
 				</div>
 				'.$isiPasal.'
-				<div style="line-height:25px; margin:1.5em 0 0 35%; text-align:left; width:90%; page-break-inside: avoid;">'.$ttd.'</div>
+				<div style="line-height:25px; margin:1.5em 0 0 35%; text-align:left; width:90%; page-break-inside:avoid;">'.$ttd.'</div>
 				<div style="margin-top:30px">
 					<div style="position:absolute; left:55px;">Tembusan:</div>
 					<ol type="1" style="position:absolute; left:38px; margin-top:28px;">'.$isiTembusan.'</ol>
 				</div>
 				</div>
 				</div>';
+		
+		$html2 = '<div>TES</div>';
+		$this->libdompdf->mergePDF($html1, $html2);
 		//echo $html; exit;
-		$this->libdompdf->generate($html);
 	}
 }

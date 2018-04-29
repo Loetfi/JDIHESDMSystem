@@ -39,6 +39,40 @@
 		$(ele).children().attr("onclick","remove(this)");
 		$(element).last().insertAfter($("#text-tembusan"+count));
 	}
+	function addKolomLampiran(count) {
+		var eleJudul = $('#judul-tabel'+count), eleContent = $('.content-tabel'+count), countColspan = eleJudul.children().prop("colSpan") + 1;
+		eleJudul.children().first().attr('colspan', countColspan);
+		$('<td><input type="text" name="kolom'+count+'[]" class="form-control float-left" placeholder="Konten" /></td>').insertBefore(".lastrow"+count);
+	}
+	function rmKolomLampiran(count) {
+		var eleJudul = $('#judul-tabel'+count), lastRow = $('.lastrow'+count), countColspan = eleJudul.children().prop("colSpan") - 1;
+		if(lastRow.parent().children().length > 3) {
+			lastRow.prev().remove();
+			eleJudul.children().first().attr('colspan', countColspan);
+		}
+	}
+	function addRowLampiran(ele, count) {
+		var counts = count + 1;
+		var eleContent = $(ele),
+			tbodyContent = eleContent.parent().parent().parent(),
+			countCol = eleContent.parent().parent().children(),
+			countRow = eleContent.parent().parent().parent().children();
+		eleContent.children().addClass('fa-minus-square').removeClass('fa-plus-square');
+		//console.log($('#nocol'+count).nextUntil('.lastrow'+counts, 'td'));
+		var rows = '<tr class="content-tabel'+count+'">';
+		rows += '<td class="firstrow1" align="center" style="min-width:30px">'+
+				'<input type="text" name="kolom'+count+'[\'no\'][]" value="'+countRow.length+'" style="border:none; background:transparent; text-align:center;" size="1" disabled />'+
+				'</td>';
+		for(var i = 0; i < (countCol.length - 2); i++) {
+			rows += '<td><input type="text" name="kolom'+count+'[\'isi\'][]" class="form-control float-left" placeholder="Konten" /></td>';
+		}
+		rows += '<td class="lastrow'+count+'" align="center">'+
+				'<a href="javascript:void(0)" style="line-height:32px; margin:0 5px;" onclick="addRowLampiran(this, '+count+')">'+
+				'<i class="fa fa-plus-square"></i>'+
+				'</a>'+
+				'</td>';
+		$(tbodyContent).children().last('tr').after(rows);
+	}
 	function remove(ele) {
 		$(ele).parent().parent().remove();
 	}
@@ -98,5 +132,62 @@
 			</div>
 		</div>
 	</fieldset>
-	<div><button type="submit" class="btn btn-success">Generate</button></div>
+	<fieldset>
+		<legend>
+			Lampiran
+			<a href="javascript:void(0)" style="font-size:12px; line-height:32px;" title="Hapus Lampiran" onclick=""><i class="fa fa-minus-square"></i></a>
+			<a href="javascript:void(0)" style="font-size:12px; line-height:32px;" title="Tambah Lampiran" onclick=""><i class="fa fa-plus-square"></i></a>
+		</legend>
+		<div>
+			<div class="form-group" id="text-lampiran1">
+				<div class="form-group">
+					<textarea name="perihal-lampiran1[]" class="form-control margin-bottom-5px" autocomplete="off" placeholder="Perihal Lampiran" rows="4"></textarea>
+					<input type="text" name="judul_lampiran1[]" class="form-control float-left margin-bottom-5px" placeholder="Judul Lampiran" />
+				</div>
+				<div class="margin-left-right-top70px width-90p">
+					<fieldset class="width-100p">
+						<legend>
+							Tabel
+							<a href="javascript:void(0)" style="font-size:12px; line-height:32px;" title="Hapus Tabel" onclick=""><i class="fa fa-minus-square"></i></a>
+							<a href="javascript:void(0)" style="font-size:12px; line-height:32px;" title="Tambah Tabel" onclick=""><i class="fa fa-plus-square"></i></a>
+						</legend>
+						<input type="text" name="subjudul1[]" class="form-control float-left margin-bottom-5px" placeholder="Sub Judul Lampiran" />
+						<table id="tabel-lampiran1" border="1">
+							<thead>
+								<tr id="judul-tabel1">
+									<td colspan="2">
+										<input type="text" name="judultabel1[]" class="form-control float-left" placeholder="Judul Tabel" />
+									</td>
+									<td align="center">
+										<a href="javascript:void(0)" style="line-height:32px; margin:0 auto;" title="Hapus Kolom" onclick="rmKolomLampiran(1)">
+											<i class="fa fa-minus-square"></i>
+										</a>
+										<a href="javascript:void(0)" style="line-height:32px; margin:0 auto;" title="Tambah Kolom" onclick="addKolomLampiran(1)">
+											<i class="fa fa-plus-square"></i>
+										</a>
+									</td>
+								</tr>
+							</thead>
+							<tbody id="tbody-tabel1">
+								<tr class="content-tabel1">
+									<td class="firstrow1" align="center" style="min-width:30px">
+										<input type="text" name="kolom1['no'][]" value="NO" style="border:none; background:transparent; text-align:center;" size="1" disabled />
+									</td>
+									<td>
+										<input type="text" name="kolom1['isi'][]" class="form-control float-left" placeholder="Konten" />
+									</td>
+									<td class="lastrow1" align="center">
+										<a href="javascript:void(0)" style="line-height:32px; margin:0 5px;" onclick="addRowLampiran(this, 1)">
+											<i class="fa fa-plus-square"></i>
+										</a>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</fieldset>
+				</div>
+			</div>
+		</div>
+	</fieldset>
+	<div class="form-group margin-top-5px"><button type="submit" class="btn btn-success">Generate</button></div>
 </form>

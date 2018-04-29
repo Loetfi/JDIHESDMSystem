@@ -42,7 +42,7 @@
                             <a class="sidebar-link td-n" href="index.html">
                                 <div class="peers ai-c fxw-nw">
                                     <div class="peer">
-                                        <div class="logo"><img src="<?php echo base_url('asset/images/logo/logo.png'); ?>" alt=""></div>
+                                        <div class="logo"><img src="<?php echo base_url('assets/assets_backend/flatlab/img/ring.jpg'); ?>" width="60"></div>
                                     </div>
                                     <div class="peer peer-greed">
                                         <h5 class="lh-1 mB-0 logo-text">Adminator</h5></div>
@@ -105,7 +105,7 @@
 				</div>
 			</div>
 			<main class="main-content bgc-grey-100">
-				<div class="margin-left-right-auto mT-30 width-50p">
+				<div class="margin-left-right-auto mT-30 width-80p">
 					<!-- Load Content in Here -->
 					<span id="contentHTML"></span>
 				</div>
