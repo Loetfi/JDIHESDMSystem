@@ -16,6 +16,7 @@ class Peraturan_mentri extends CI_Controller {
 		$superjudul = @$post['super_judul'] ? nl2br($post['super_judul'], false) : 'Judul Kosong';
 		$judulMenimbang = '';
 		$judulMengingat = '';
+		$newPage = '<div style="page-break-after:always;"></div>';
 		for($var = 0; $var < count($post['menimbang']); $var++) {
 			$menimbang = ($post['menimbang'][$var] !== '') ? $post['menimbang'][$var] : '&nbsp;' ;
 			$judulMenimbang .= '<li style="margin-bottom:4px; text-align:justify;">'.$menimbang.'</li>';
@@ -34,6 +35,11 @@ class Peraturan_mentri extends CI_Controller {
 				 <div>
 					<div style="position:absolute; left:55px; margin-top:10px;">Mengingat</div><div style="position:absolute; left:24%;">:</div>
 					<ol type="1" style="margin:0 auto 0 20%; width:70%;">'.$judulMengingat.'</ol>
+				 </div>
+				 <div style="margin-top:30px">
+					<div style="text-align:center; width:100%;">MEMUTUSKAN:</div>
+					<div style="position:absolute; left:55px; margin-top:10px;">Menetapkan</div><div style="position:absolute; left:24%;">:</div>
+					<div style="margin:0 auto 0 23%; text-align:justify; text-transform:uppercase; width:73%;">'.$post['menetapkan'].'</div>
 				 </div>
 				 </div>
 				 </div>';
