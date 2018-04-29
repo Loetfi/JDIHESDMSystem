@@ -8,8 +8,12 @@ class libdompdf extends Dompdf {
 		return get_instance();
 	}
 	
+	protected function getDompdf() {
+		return new Dompdf();
+	}
+	
 	public function generate($html, $filename='', $stream=TRUE, $paper = 'A4', $orientation = "portrait") {
-		$dompdf = new Dompdf();
+		$dompdf = $this->getDompdf();
 		$dompdf->load_html($html);
 		$dompdf->set_paper($paper, $orientation);
 		$dompdf->set_option('defaultFont', 'Courier');
@@ -20,6 +24,10 @@ class libdompdf extends Dompdf {
 		else {
 			return $dompdf->output();
 		}
+	}
+	
+	public function setLandscape() {
+		$dompdf->set_paper($paper, $orientation);
 	}
 	
 }
