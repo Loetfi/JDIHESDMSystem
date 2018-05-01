@@ -107,7 +107,7 @@
                         <div class="col-xs-11 col-sm-11 col-md-5 logo">
                             <!-- Main Logo -->
                             <a href="<?php echo site_url(); ?>">
-								<img src="<?php echo base_url('logo-jdihn.png'); ?>" alt="PPID Logo" style="max-width: 20%" />
+								<img src="<?php echo base_url('logo-jdihn.png'); ?>" alt="JDIH Logo" style="max-width: 20%" />
 								<!-- img src="https://www.esdm.go.id/themes/v1/img/xlogo-esdm-web.png.pagespeed.ic.39xo2sd53Y.webp" alt="PPID Logo" / -->
 							</a>
                             <!-- Responsive Toggle Menu -->
@@ -127,7 +127,7 @@
                                     </div>
                                     <div class="email">
                                         <h3> Email Kami</h3>
-                                        <p> info@ppid.esdm.go.id </p>
+                                        <p> info@jdih.esdm.go.id </p>
                                     </div>
                                 </div>
                                 <div class="social">
@@ -213,8 +213,8 @@
                                         <li><a href="<?php echo site_url('profil'); ?>">Profil</a></li>
                                         <li><a href="<?php echo site_url('auth/clearSession'); ?>">Logout</a></li>
                             <?php } else { ?>
-                                        <li><a href="<?php echo site_url('auth'); ?>"> Masuk</a> </li>
-                                        <li><a href="<?php echo site_url('auth/register'); ?>"> Daftar</a> </li> 
+                                        <li><a href="<?php echo site_url('backend/auth'); ?>"> Masuk</a> </li>
+                                        <!-- <li><a href="<?php echo site_url('auth/register'); ?>"> Daftar</a> </li>  -->
                             <?php } ?>
                                     </ul>
                                 </li>
@@ -261,8 +261,8 @@
                                     <i class="fa fa-envelope" aria-hidden="true"></i>
                                     <div class="contact-details">
                                         <h4 class="pre-footer-title">Email Kami</h4>
-                                        <p>info@ppid.esdm.go.id
-                                            <br> info@ppid.esdm.go.id </p>
+                                        <p>info@jdih.esdm.go.id
+                                            <br> info@jdih.esdm.go.id </p>
                                         </div>
                                     </div>
                                 </div>
