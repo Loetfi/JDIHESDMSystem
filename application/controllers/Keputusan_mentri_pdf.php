@@ -68,9 +68,43 @@ class Keputusan_mentri_pdf extends CI_Controller {
 				</div>
 				</div>
 				</div>';
-		
-		$html2 = '<div>TES</div>';
+		$html2 = '';
+		foreach($post['perihal_lampiran'] as $key => $value) {
+			$subcontent = '<ol type="A">';
+			foreach($post['subjudul'] as $subkey => $subvalue) {
+				foreach($subvalue as $subdetailkey => $subdetailvalue) {
+					$totalRows = count($post['kolom'][$key]['header']) + 1;
+					$tableContent = '<tbody>';
+					$tableContent .= '<tr><td style="border:1px solid #000; text-align:center; padding:5px 0;">NO</td>';
+					foreach($post['kolom'][$key]['header'] as $colHeadKey => $colHeadVal) {
+						$tableContent .= '<td style="border:1px solid #000; text-align:center; padding:5px 0;">'.$colHeadVal.'</td>';
+					}
+					$tableContent .= '</tr>';
+					foreach($post['kolom'][$key]['content'] as $colContentKey => $colContentVal) {
+						$tableContent .= '<tr><td style="border:1px solid #000; text-align:center; padding:5px 0;">'.$colContentKey.'</td>';
+						foreach($post['kolom'][$key]['content'][$colContentKey] as $rowContentKey => $rowContentVal) {
+							$tableContent .= '<td style="border:1px solid #000; text-align:center; padding:5px 0;">'.$rowContentVal.'</td>';
+						}
+						$tableContent .= '</tr>';
+					}
+					$tableContent .= '</tbody>';
+					$subcontent .= '<li><div style="margin-left:25px">'.$subdetailvalue.'</div>
+									<table style="border-collapse:collapse; position:absolute; left:15px; margin-top:10px; width:100%;">
+									<thead>
+									<tr>
+									<th style="border:1px solid #000; text-align:center; padding:5px 0;" colspan="'.$totalRows.'">'.$post['judultabel'][$subkey][$subdetailkey].'</th>
+									</tr>
+									</thead>
+									'.$tableContent.'
+									</table>
+									</li>';
+				}
+			}
+			$subcontent .= '</ol>';
+			$html2 .= '<div style="line-height:27px; margin-left:50%;">'.nl2br($post['perihal_lampiran'][$key], false).'</div>
+					  <div style="margin-top:35px; text-align:center; width:100%;">'.$post['judul_lampiran'][$key].'</div>
+					  <div>'.$subcontent.'</div>';
+		}
 		$this->libdompdf->mergePDF($html1, $html2);
-		//echo $html; exit;
 	}
 }
