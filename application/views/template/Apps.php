@@ -42,7 +42,7 @@
                                         <div class="logo"><img src="<?php echo base_url('assets/logo/logo-esdm.png'); ?>" width="60"></div>
                                     </div>
                                     <div class="peer peer-greed">
-                                        <h5 class="lh-1 mB-0 logo-text">Adminator</h5></div>
+                                        <h5 class="lh-1 mB-0 logo-text">Smart Legal Drafting</h5></div>
                                 </div>
                             </a>
                         </div>
@@ -54,7 +54,7 @@
                 <ul id="ul-sidemenu" class="sidebar-menu scrollable pos-r">
                 	<li class="nav-item mT-30 active" onclick="sidemenu_click(this)">
 						<a class="sidebar-link" href="javascript:void(0)" data-url="backend/dashboard">
-							<span class="icon-holder"><i class="c-blue-500 ti-home fa fa-home"></i></span>
+							<span class="icon-holder"><i class="fa fa-home"></i></span>
 							<span class="title">Dashboard</span>
 						</a>
 					</li>
@@ -67,15 +67,15 @@
 
                     <li class="nav-item mT-30 active" onclick="sidemenu_click(this)">
 						<a class="sidebar-link" href="javascript:void(0)" data-url="Keputusan_mentri_pdf">
-							<span class="icon-holder">PM</span><span class="title"></span>
+							<span class="icon-holder"><i class="fa fa-file"></i></span><span class="title">Buat Dokumen (PDF)</span>
 						</a>
 					</li>
 
 					<li class="nav-item mT-30 active" onclick="sidemenu_click(this)">
-						<a class="sidebar-link" href="javascript:void(0)">
-							<span class="icon-holder">As</span><span class="title">Aselole</span>
+						<a class="sidebar-link" href="javascript:void(0)" data-url="Keputusan_menteri_doc">
+							<span class="icon-holder"><i class="fa fa-file"></i></span><span class="title">Buat Dokumen (DOC)</span>
 						</a>
-					</li>
+					</li> 
                 </ul>
             </div>
         </div>

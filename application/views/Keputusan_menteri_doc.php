@@ -1,14 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<link rel="stylesheet" href="<?php echo base_url('asset/css/style.css'); ?>" />
-		<link rel="stylesheet" href="<?php echo base_url('asset/css/modify.css'); ?>" />
-		<script type="text/javascript" src="<?php echo base_url('asset/js/vendor.js'); ?>"></script>
-		<script type="text/javascript" src="<?php echo base_url('asset/js/bundle.js'); ?>"></script>
-		<title>Company-HTML Bootstrap theme</title>
+ 
 		<script>
 			window.addEventListener('load', () => {
 				const loader = document.getElementById('loader');
@@ -27,10 +17,8 @@
 			}
 		</style>
 	</head>
-	<body class="app">
-		<div id="loader">
-			<div class="spinner"></div>
-		</div>
+	 
+	 <legend>Buat Dokumen Keputusan Menteri</legend>
 		<div style="width:60%; margin: 0 auto">
 			<form method="POST" action="<?php echo site_url('keputusan_menteri_doc/sanusi'); ?>" target="_blank">
 				<div class="form-group" style="margin-bottom:5px">

@@ -1,3 +1,5 @@
+<legend>Buat Dokumen Keputusan Menteri</legend>
+
 <script>
 	function addMenimbang(ele, count) {
 		var counts = count + 1;
