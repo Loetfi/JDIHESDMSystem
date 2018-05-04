@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>Company-HTML Bootstrap theme</title>
+		<title>Smart Legal Drafting - Kementerian ESDM</title>
 		<link rel="stylesheet" href="<?php echo base_url('assets/assets_backend/adminator/css/style.css'); ?>" />
 		<link rel="stylesheet" href="<?php echo base_url('assets/assets_backend/adminator/css/modify.css'); ?>" />
 		<link rel="stylesheet" href="<?php echo base_url('assets/assets_backend/flatlab/assets/bootoast/bootoast.css'); ?>" />
@@ -20,7 +20,7 @@
 					var indexEle = {
 						children: [
 							{
-								attributes: ['', '', {value: 'Welcome'}]
+								attributes: ['', '', {value: 'Backend/dashboard'}]
 							}
 						]
 					}
@@ -30,10 +30,7 @@
 			window.site_url = '<?php echo site_url();?>';
 		</script>
 	</head>
-	<body class="app">
-		<div id="loader">
-			<div class="spinner"></div>
-		</div>
+	<body class="app"> 
 		<div class="sidebar">
             <div class="sidebar-inner">
                 <div class="sidebar-logo">
@@ -42,7 +39,7 @@
                             <a class="sidebar-link td-n" href="index.html">
                                 <div class="peers ai-c fxw-nw">
                                     <div class="peer">
-                                        <div class="logo"><img src="<?php echo base_url('assets/assets_backend/flatlab/img/ring.jpg'); ?>" width="60"></div>
+                                        <div class="logo"><img src="<?php echo base_url('assets/logo/logo-esdm.png'); ?>" width="60"></div>
                                     </div>
                                     <div class="peer peer-greed">
                                         <h5 class="lh-1 mB-0 logo-text">Adminator</h5></div>
@@ -55,11 +52,25 @@
                     </div>
                 </div>
                 <ul id="ul-sidemenu" class="sidebar-menu scrollable pos-r">
-                    <li class="nav-item mT-30 active" onclick="sidemenu_click(this)">
-						<a class="sidebar-link" href="javascript:void(0)" data-url="Keputusan_mentri_pdf">
-							<span class="icon-holder">PM</span><span class="title">Peraturan Mentri</span>
+                	<li class="nav-item mT-30 active" onclick="sidemenu_click(this)">
+						<a class="sidebar-link" href="javascript:void(0)" data-url="backend/dashboard">
+							<span class="icon-holder"><i class="c-blue-500 ti-home fa fa-home"></i></span>
+							<span class="title">Dashboard</span>
 						</a>
 					</li>
+
+					<li class="nav-item mT-30 active" onclick="sidemenu_click(this)">
+						<a class="sidebar-link" href="javascript:void(0)" data-url="backend/dokumen">
+							<span class="icon-holder"><i class="fa fa-file"></i></span><span class="title">Master Dokumen</span>
+						</a>
+					</li>
+
+                    <li class="nav-item mT-30 active" onclick="sidemenu_click(this)">
+						<a class="sidebar-link" href="javascript:void(0)" data-url="Keputusan_mentri_pdf">
+							<span class="icon-holder">PM</span><span class="title"></span>
+						</a>
+					</li>
+
 					<li class="nav-item mT-30 active" onclick="sidemenu_click(this)">
 						<a class="sidebar-link" href="javascript:void(0)">
 							<span class="icon-holder">As</span><span class="title">Aselole</span>

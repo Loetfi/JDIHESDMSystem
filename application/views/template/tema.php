@@ -202,12 +202,10 @@
 								</li>
 								<?php } ?>
                             <?php } ?>
-                            <li><a href="careers.html"> Tata Cara Permohonan </a> </li>
-                            <li><a href="contact.html"> Hubungi Kami </a> </li>
 
 
-                                <li class="dropdown">
-                                <a href="#" class="" data-toggle="dropdown">Akun <?php // echo $this->session->userdata('ses_ppid_user_nama'); ?> &nbsp;&nbsp; &nbsp; &nbsp;  <i class="fa fa-chevron-down dropdown-toggle"> </i>  </a>
+                                <li class="dropdown pull-right">
+                                <a href="#" class="" data-toggle="dropdown">Masuk &nbsp;&nbsp; &nbsp; &nbsp;  <i class="fa fa-chevron-down dropdown-toggle"> </i>  </a>
                                     <ul>
                             <?php if ($this->session->userdata('ses_ppid_user_status')) { ?>
                                         <li><a href="<?php echo site_url('profil'); ?>">Profil</a></li>

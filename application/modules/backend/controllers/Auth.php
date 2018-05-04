@@ -20,7 +20,7 @@ class Auth extends CI_Controller {
 			'contents'	=> 'auth/login',
 			'title'		=> 'Login Sistem'
 		);
-		$this->load->view('template/head', $data, FALSE);
+		$this->load->view('template/auth', $data, FALSE);
 	}
 
 }
