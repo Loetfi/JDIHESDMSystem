@@ -5,13 +5,13 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>Company-HTML Bootstrap theme</title>
-		<link rel="stylesheet" href="<?php echo base_url('asset/css/style.css'); ?>" />
-		<link rel="stylesheet" href="<?php echo base_url('asset/css/modify.css'); ?>" />
-		<link rel="stylesheet" href="<?php echo base_url('asset/css/bootoast.css'); ?>" />
-		<script src="<?php echo base_url('assets/js/jquery-2.1.1.min.js'); ?>"></script>
-		<script type="text/javascript" src="<?php echo base_url('asset/js/vendor.js'); ?>"></script>
-		<script type="text/javascript" src="<?php echo base_url('asset/js/bundle.js'); ?>"></script>
-		<script type="text/javascript" src="<?php echo base_url('asset/js/bootoast.js'); ?>"></script>
+		<link rel="stylesheet" href="<?php echo base_url('assets/assets_backend/adminator/css/style.css'); ?>" />
+		<link rel="stylesheet" href="<?php echo base_url('assets/assets_backend/adminator/css/modify.css'); ?>" />
+		<link rel="stylesheet" href="<?php echo base_url('assets/assets_backend/flatlab/assets/bootoast/bootoast.css'); ?>" />
+		<script type="text/javascript" src="<?php echo base_url('assets/assets_backend/flatlab/js/jquery-2.1.1.min.js'); ?>"></script>
+		<script type="text/javascript" src="<?php echo base_url('assets/assets_backend/adminator/js/vendor.js'); ?>"></script>
+		<script type="text/javascript" src="<?php echo base_url('assets/assets_backend/adminator/js/bundle.js'); ?>"></script>
+		<script type="text/javascript" src="<?php echo base_url('assets/assets_backend/flatlab/assets/bootoast/bootoast.js'); ?>"></script>
 		<script>
 			window.addEventListener('load', () => {
 				const loader = document.getElementById('loader');

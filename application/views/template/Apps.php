@@ -8,15 +8,16 @@
 		<link rel="stylesheet" href="<?php echo base_url('assets/assets_backend/adminator/css/style.css'); ?>" />
 		<link rel="stylesheet" href="<?php echo base_url('assets/assets_backend/adminator/css/modify.css'); ?>" />
 		<link rel="stylesheet" href="<?php echo base_url('assets/assets_backend/flatlab/assets/bootoast/bootoast.css'); ?>" />
-		<script src="<?php echo base_url('assets/assets_backend/flatlab/js/jquery-1.8.3.min.js'); ?>"></script>
+		<script type="text/javascript" src="<?php echo base_url('assets/assets_backend/flatlab/js/jquery-1.8.3.min.js'); ?>"></script>
 		<script type="text/javascript" src="<?php echo base_url('assets/assets_backend/adminator/js/vendor.js'); ?>"></script>
 		<script type="text/javascript" src="<?php echo base_url('assets/assets_backend/adminator/js/bundle.js'); ?>"></script>
 		<script type="text/javascript" src="<?php echo base_url('assets/assets_backend/flatlab/assets/bootoast/bootoast.js'); ?>"></script>
+		<script type="text/javascript" src="<?php echo base_url('assets/assets_backend/adminator/js/modify.js'); ?>"></script>
 		<script>
 			window.addEventListener('load', () => {
-				const loader = document.getElementById('loader');
+				//const loader = document.getElementById('loader');
 				setTimeout(() => {
-					loader.classList.add('fadeOut');
+					//loader.classList.add('fadeOut');
 					var indexEle = {
 						children: [
 							{
@@ -125,6 +126,5 @@
 				<span>Copyright © 2018 Nama Perusahaan.</span>
 			</footer>
 		</div>
-		<script type="text/javascript" src="<?php echo base_url('assets/assets_backend/adminator/js/modify.js'); ?>"></script>
 	</body>
 </html>
