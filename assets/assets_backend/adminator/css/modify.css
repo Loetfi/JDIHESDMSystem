@@ -77,12 +77,20 @@ table {
 	margin: auto;
 }
 
+.margin-bottom-3px {
+	margin-bottom: 3px;
+}
+
 .margin-bottom-5px {
 	margin-bottom: 5px;
 }
 
 .margin-top-5px {
 	margin-top: 5px;
+}
+
+.margin-right-5px {
+	margin: 0 5px;
 }
 
 .margin-left-right-top70px {
@@ -96,8 +104,16 @@ table {
 	margin-right: auto;
 }
 
+.width-10p {
+	width: 10% !important;
+}
+
 .width-50p {
 	width: 50% !important;
+}
+
+.width-75p {
+	width: 75% !important;
 }
 
 .width-80p {

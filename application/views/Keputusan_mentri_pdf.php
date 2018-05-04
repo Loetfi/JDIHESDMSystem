@@ -2,7 +2,8 @@
 	function addMenimbang(ele, count) {
 		var counts = count + 1;
 		var element =	'<div class="form-group" id="text-menimbang'+counts+'">'+
-							'<input type="text" name="menimbang[]" class="form-control float-left width-90p" placeholder="Menimbang" />'+
+							'<input type="text" name="poinMenimbang[]" class="form-control float-left margin-right-5px width-10p" placeholder="Pointer" />'+
+							'<input type="text" name="menimbang[]" class="form-control float-left width-75p" placeholder="Menimbang" />'+
 							'<a href="javascript:void(0)" class="fb tool-tip" style="line-height:32px; margin-left:10px;" onclick="addMenimbang(this, '+counts+')"><i class="fa fa-lg fa-plus"></i></a>'+
 						'</div>';
 		$(ele).children().toggleClass('fa-plus fa-minus');
@@ -12,7 +13,8 @@
 	function addMengingat(ele, count) {
 		var counts = count + 1;
 		var element =	'<div class="form-group" id="text-mengingat'+counts+'">'+
-							'<input type="text" name="mengingat[]" class="form-control float-left width-90p" placeholder="Mengingat" />'+
+							'<input type="text" name="poinMengingat[]" class="form-control float-left margin-right-5px width-10p" placeholder="Pointer" />'+
+							'<input type="text" name="mengingat[]" class="form-control float-left width-75p" placeholder="Mengingat" />'+
 							'<a href="javascript:void(0)" class="fb tool-tip" style="line-height:32px; margin-left:10px;" onclick="addMengingat(this, '+counts+')"><i class="fa fa-lg fa-plus"></i></a>'+
 						'</div>';
 		$(ele).children().toggleClass('fa-plus fa-minus');
@@ -22,7 +24,8 @@
 	function addPasal(ele, count) {
 		var counts = count + 1;
 		var element =	'<div class="form-group" id="text-pasal'+counts+'">'+
-							'<input type="text" name="pasal[]" class="form-control float-left width-90p" placeholder="Pasal" />'+
+							'<input type="text" name="poinPasal[]" class="form-control float-left margin-right-5px width-10p" placeholder="Pointer" />'+
+							'<input type="text" name="pasal[]" class="form-control float-left width-75p" placeholder="Pasal" />'+
 							'<a href="javascript:void(0)" class="fb tool-tip" style="line-height:32px; margin-left:10px;" onclick="addPasal(this, '+counts+')"><i class="fa fa-lg fa-plus"></i></a>'+
 						'</div>';
 		$(ele).children().toggleClass('fa-plus fa-minus');
@@ -32,7 +35,8 @@
 	function addTembusan(ele, count) {
 		var counts = count + 1;
 		var element =	'<div class="form-group" id="text-tembusan'+counts+'">'+
-							'<input type="text" name="tembusan[]" class="form-control float-left width-90p" placeholder="Tembusan" />'+
+							'<input type="text" name="poinTembusan[]" class="form-control float-left margin-right-5px width-10p" placeholder="Pointer" />'+
+							'<input type="text" name="tembusan[]" class="form-control float-left width-75p" placeholder="Tembusan" />'+
 							'<a href="javascript:void(0)" class="fb tool-tip" style="line-height:32px; margin-left:10px;" onclick="addTembusan(this, '+counts+')"><i class="fa fa-lg fa-plus"></i></a>'+
 						'</div>';
 		$(ele).children().toggleClass('fa-plus fa-minus');
@@ -42,25 +46,33 @@
 	function remove(ele) {
 		$(ele).parent().parent().remove();
 	}
-	function addKolomLampiran(count) {
-		var eleJudul = $('#judul-tabel'+count), eleContent = $('.content-tabel'+count), countColspan = eleJudul.children().prop("colSpan") + 1, minCount = count - 1;
+	function addKolomLampiran(ele, count) {console.log($(ele).parent().parent().parent().next().children('tr:first').next().children('td:last').hasClass('numrows'));
+		var eleJudul = $(ele).parent().parent()/*$('#judul-tabel'+count)*/, 
+			eleContent = $(ele).parent().parent().parent().next().children()/*$('.content-tabel'+count)*/, 
+			countColspan = eleJudul.children().prop("colSpan") + 1,
+			lastRowHeader = $(ele).parent().parent().parent().next().children('tr:first').children('td:last').attr('class'),
+			minCount = count - 1;
 		//var getColumnArray = Object.keys(eleContent).filter(function(a) {return /^\d+$/.test(a);});
-		eleJudul.children().first().attr('colspan', countColspan); console.log(eleContent);
-		$('<td><input type="text" name="kolom['+minCount+'][header][]" class="form-control float-left" placeholder="Konten" /></td>').insertBefore(".lastrowheader"+count);
+		eleJudul.children().first().attr('colspan', countColspan);
+		$('<td><input type="text" name="kolom['+minCount+'][header][]" class="form-control float-left" placeholder="Konten" /></td>').insertBefore('.'+lastRowHeader);
 		for(var i = 0; i < (eleContent.length); i++) {
 			$('<td><input type="text" name="kolom['+minCount+'][content]['+i+'][]" class="form-control float-left" placeholder="Konten" /></td>').insertBefore(".numrows"+i);
 		}
 	}
-	function rmKolomLampiran(count) {
-		var eleJudulHeader = $('#judul-tabel'+count), lastRowHeader = $('.lastrowheader'+count), countColspan = eleJudulHeader.children().prop("colSpan") - 1,
-			eleJudulContent = $('#judul-tabel'+count), lastRowContent = $('.lastrowcontent'+count), countColspan = eleJudulContent.children().prop("colSpan") - 1;
+	function rmKolomLampiran(ele, count) {
+		var eleJudul = $(ele).parent().parent()/*$('#judul-tabel'+count)*/, 
+			lastRowHeader = $('.lastrowheader'+count), 
+			countColspan = eleJudul.children().prop("colSpan") - 1,
+			/*eleJudulContent = $('#judul-tabel'+count),*/ 
+			lastRowContent = $('.lastrowcontent'+count), 
+			countColspan = eleJudul.children().prop("colSpan") - 1;
 		if(lastRowHeader.parent().children().length > 3) {
 			lastRowHeader.prev().remove();
-			eleJudulHeader.children().first().attr('colspan', countColspan);
+			eleJudul.children().first().attr('colspan', countColspan);
 		}
 		if(lastRowContent.parent().children().length > 3) {
 			lastRowContent.prev().remove();
-			eleJudulContent.children().first().attr('colspan', countColspan);
+			eleJudul.children().first().attr('colspan', countColspan);
 		}
 	}
 	function addRowLampiran(ele, count, row) {
@@ -110,6 +122,10 @@
 			}
 		}
 	}
+	function addTabelLampiran(ele, count) {
+		//console.log($(ele).parent().next().wrap('<div></div>').parent().html());
+		$('#fieldTabelLampiran'+count).append('<div class="margin-top-5px">'+$(ele).parent().next().html()+'</div>');
+	}
 </script>
 <form class="width-100p" method="POST" action="<?php echo site_url('Keputusan_mentri_pdf/generatePdf'); ?>" target="_blank">
 	<div class="form-group" style="margin-bottom:5px">
@@ -119,7 +135,8 @@
 		<legend>Menimbang</legend>
 		<div>
 			<div class="form-group" id="text-menimbang1">
-				<input type="text" name="menimbang[]" class="form-control float-left width-90p" placeholder="Menimbang" />
+				<input type="text" name="poinMenimbang[]" class="form-control float-left margin-right-5px width-10p" placeholder="Pointer" />
+				<input type="text" name="menimbang[]" class="form-control float-left width-75p" placeholder="Menimbang" />
 				<a href="javascript:void(0)" class="fb tool-tip" style="line-height:32px; margin-left:10px;" onclick="addMenimbang(this, 1)"><i class="fa fa-lg fa-plus"></i></a>
 			</div>
 		</div>
@@ -128,7 +145,8 @@
 		<legend>Mengingat</legend>
 		<div>
 			<div class="form-group" id="text-mengingat1">
-				<input type="text" name="mengingat[]" class="form-control float-left width-90p" placeholder="Mengingat" />
+				<input type="text" name="poinMengingat[]" class="form-control float-left margin-right-5px width-10p" placeholder="Pointer" />
+				<input type="text" name="mengingat[]" class="form-control float-left width-75p" placeholder="Mengingat" />
 				<a href="javascript:void(0)" class="fb tool-tip" style="line-height:32px; margin-left:10px;" onclick="addMengingat(this, 1)"><i class="fa fa-lg fa-plus"></i></a>
 			</div>
 		</div>
@@ -146,7 +164,8 @@
 		<legend>Pasal</legend>
 		<div>
 			<div class="form-group" id="text-pasal1">
-				<input type="text" name="pasal[]" class="form-control float-left width-90p" placeholder="Pasal" />
+				<input type="text" name="poinPasal[]" class="form-control float-left margin-right-5px width-10p" placeholder="Pointer" />
+				<input type="text" name="pasal[]" class="form-control float-left width-75p" placeholder="Pasal" />
 				<a href="javascript:void(0)" class="fb tool-tip" style="line-height:32px; margin-left:10px;" onclick="addPasal(this, 1)"><i class="fa fa-lg fa-plus"></i></a>
 			</div>
 		</div>
@@ -161,7 +180,8 @@
 		<legend>Tembusan</legend>
 		<div>
 			<div class="form-group" id="text-tembusan1">
-				<input type="text" name="tembusan[]" class="form-control float-left width-90p" placeholder="Tembusan" />
+				<input type="text" name="poinTembusan[]" class="form-control float-left margin-right-5px width-10p" placeholder="Pointer" />
+				<input type="text" name="tembusan[]" class="form-control float-left width-75p" placeholder="Tembusan" />
 				<a href="javascript:void(0)" class="fb tool-tip" style="line-height:32px; margin-left:10px;" onclick="addTembusan(this, 1)"><i class="fa fa-lg fa-plus"></i></a>
 			</div>
 		</div>
@@ -179,45 +199,47 @@
 					<input type="text" name="judul_lampiran[]" class="form-control float-left margin-bottom-5px" placeholder="Judul Lampiran" />
 				</div>
 				<div class="margin-left-right-top70px width-90p">
-					<fieldset class="width-100p">
+					<fieldset class="width-100p" id="fieldTabelLampiran1">
 						<legend>
 							Tabel
 							<a href="javascript:void(0)" style="font-size:12px; line-height:32px;" title="Hapus Tabel" onclick=""><i class="fa fa-minus-square"></i></a>
-							<a href="javascript:void(0)" style="font-size:12px; line-height:32px;" title="Tambah Tabel" onclick=""><i class="fa fa-plus-square"></i></a>
+							<a href="javascript:void(0)" style="font-size:12px; line-height:32px;" title="Tambah Tabel" onclick="addTabelLampiran(this, 1)"><i class="fa fa-plus-square"></i></a>
 						</legend>
-						<input type="text" name="subjudul[][]" class="form-control float-left margin-bottom-5px" placeholder="Sub Judul Lampiran" />
-						<table id="tabel-lampiran1" border="1">
-							<thead>
-								<tr id="judul-tabel1">
-									<th colspan="2">
-										<input type="text" name="judultabel[][]" class="form-control float-left" placeholder="Judul Tabel" />
-									</th>
-									<th align="center">
-										<a href="javascript:void(0)" style="line-height:32px; margin:0 auto;" title="Hapus Kolom" onclick="rmKolomLampiran(1)">
-											<i class="fa fa-minus-square"></i>
-										</a>
-										<a href="javascript:void(0)" style="line-height:32px; margin:0 auto;" title="Tambah Kolom" onclick="addKolomLampiran(1)">
-											<i class="fa fa-plus-square"></i>
-										</a>
-									</th>
-								</tr>
-							</thead>
-							<tbody id="tbody-tabel1">
-								<tr class="content-tabel1">
-									<td class="firstrow1" align="center" style="min-width:30px">
-										<input type="text" name="kolom[0][header][]" value="NO" style="border:none; background:transparent; text-align:center;" size="1" disabled />
-									</td>
-									<td>
-										<input type="text" name="kolom[0][header][]" class="form-control float-left" placeholder="Konten" />
-									</td>
-									<td class="lastrowheader1" align="center">
-										<a href="javascript:void(0)" style="line-height:32px; margin:0 5px;" onclick="addRowLampiran(this, 1, 0)">
-											<i class="fa fa-plus-square"></i>
-										</a>
-									</td>
-								</tr>
-							</tbody>
-						</table>
+						<div>
+							<input type="text" name="subjudul[][]" class="form-control float-left margin-bottom-3px" placeholder="Sub Judul Lampiran" />
+							<table class="tabel-lampiran1" border="1">
+								<thead>
+									<tr id="judul-tabel1">
+										<th colspan="2">
+											<input type="text" name="judultabel[][]" class="form-control float-left" placeholder="Judul Tabel" />
+										</th>
+										<th align="center">
+											<a href="javascript:void(0)" style="line-height:32px; margin:0 auto;" title="Hapus Kolom" onclick="rmKolomLampiran(this, 1)">
+												<i class="fa fa-minus-square"></i>
+											</a>
+											<a href="javascript:void(0)" style="line-height:32px; margin:0 auto;" title="Tambah Kolom" onclick="addKolomLampiran(this, 1)">
+												<i class="fa fa-plus-square"></i>
+											</a>
+										</th>
+									</tr>
+								</thead>
+								<tbody id="tbody-tabel1">
+									<tr class="content-tabel1">
+										<td class="firstrow1" align="center" style="min-width:30px">
+											<input type="text" name="kolom[0][header][]" value="NO" style="border:none; background:transparent; text-align:center;" size="1" disabled />
+										</td>
+										<td>
+											<input type="text" name="kolom[0][header][]" class="form-control float-left" placeholder="Konten" />
+										</td>
+										<td class="lastrowheader1" align="center">
+											<a href="javascript:void(0)" style="line-height:32px; margin:0 5px;" onclick="addRowLampiran(this, 1, 0)">
+												<i class="fa fa-plus-square"></i>
+											</a>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
 					</fieldset>
 				</div>
 			</div>
