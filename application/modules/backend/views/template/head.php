@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>aside - Bootstrap 4 web application</title>
+  <title><?php echo @$title; ?></title>
   <meta name="description" content="Responsive, Bootstrap, BS4" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimal-ui" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -131,43 +131,7 @@
              
             </ul>
           </nav>
-      </div>
-      <div data-flex-no-shrink>
-        <div class="nav-fold dropup">
-          <a data-toggle="dropdown">
-              <div class="pull-left">
-                <div class="inline"><span class="avatar w-40 grey">JR</span></div>
-                <img src="<?php echo base_url('assetnew/images/a0.jpg');?>" alt="..." class="w-40 img-circle hide">
-              </div>
-              <div class="clear hidden-folded p-x">
-                <span class="block _500 text-muted">Jean Reyes</span>
-                <div class="progress-xxs m-y-sm lt progress">
-                    <div class="progress-bar info" style="width: 15%;">
-                    </div>
-                </div>
-              </div>
-          </a>
-          <div class="dropdown-menu w dropdown-menu-scale ">
-            <a class="dropdown-item" href="profile.html">
-              <span>Profile</span>
-            </a>
-            <a class="dropdown-item" href="setting.html">
-              <span>Settings</span>
-            </a>
-            <a class="dropdown-item" href="app.inbox.html">
-              <span>Inbox</span>
-            </a>
-            <a class="dropdown-item" href="app.message.html">
-              <span>Message</span>
-            </a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="docs.html">
-              Need help?
-            </a>
-            <a class="dropdown-item" href="signin.html">Sign out</a>
-          </div>
-        </div>
-      </div>
+      </div> 
     </div>
   </div>
   <!-- / -->
