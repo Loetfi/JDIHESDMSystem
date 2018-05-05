@@ -74,7 +74,7 @@
                   <i class="fa fa-caret-down"></i>
                 </span>
                 <span class="nav-icon">
-                  <i class="fa fa-file"></i>
+                  <i class="ion-filing"></i>
                 </span>
                 <span class="nav-text">Master</span>
               </a>
@@ -92,35 +92,14 @@
             </li>  
 
 
-            
             <li>
-              <a>
-                <span class="nav-caret">
-                  <i class="fa fa-caret-down"></i>
+              <a href="<?php echo site_url('backend/dashboard/') ?>" class="">
+                <span class="nav-icon text-white no-fade">
+                  <i class="fa fa-cog"></i>
                 </span>
-                <span class="nav-icon">
-                  <i class="ion-ios-grid-view"></i>
-                </span>
-                <span class="nav-text">Tables</span>
+                <span class="nav-text">Pengaturan</span>
               </a>
-              <ul class="nav-sub">
-                <li>
-                  <a href="static.html" >
-                    <span class="nav-text">Static table</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="datatable.html" >
-                    <span class="nav-text">Datatable</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="footable.html" >
-                    <span class="nav-text">Footable</span>
-                  </a>
-                </li>
-              </ul>
-            </li>
+            </li>  
 
           </ul>
         </nav>
