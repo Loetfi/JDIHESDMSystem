@@ -1,4 +1,8 @@
- 
+<div class="row-col">
+	<div class="col-lg b-r"> 
+		<div class="padding">
+			<div class="box">
+				<div class="padding"> 
 		<script>
 			window.addEventListener('load', () => {
 				const loader = document.getElementById('loader');
@@ -19,7 +23,7 @@
 	</head>
 	 
 	 <legend>Buat Dokumen Keputusan Menteri</legend>
-		<div style="width:60%; margin: 0 auto">
+		<!-- <div style="width:60%; margin: 0 auto"> -->
 			<form method="POST" action="<?php echo site_url('keputusan_menteri_doc/sanusi'); ?>" target="_blank">
 				<div class="form-group" style="margin-bottom:5px">
 					<textarea name="super_judul" class="form-control" placeholder="Judul Dokumen" rows="4" cols="70"></textarea>

@@ -10,7 +10,13 @@ class Keputusan_menteri_doc extends CI_Controller {
 
 	function index()
 	{
-		$this->load->view('Keputusan_menteri_doc');
+		
+		$data = array(
+			'contents'	=> 'Keputusan_menteri_doc', 
+			'title'		=> 'Dashbord Sistem'
+		);
+		$this->load->view('backend/template/head', $data, FALSE);
+		// $this->load->view('');
 	}
 	
 	function sanusi(){
