@@ -29,7 +29,7 @@
   <link rel="stylesheet" href="<?php echo base_url('assetnew/css/styles/app.css?v.1');?>" type="text/css" />
   <link rel="stylesheet" href="<?php echo base_url('assetnew/css/styles/style.css?v.1');?>" type="text/css" />
   <!-- endbuild -->
-  <link rel="stylesheet" href="<?php echo base_url('assetnew/css/styles/font.css');?>" type="text/css" />
+  <link rel="stylesheet" href="<?php echo base_url('assetnew/css/styles/font.css?v.1');?>" type="text/css" />
 </head>
 <body>
   <div class="app" id="app">
@@ -37,7 +37,7 @@
 <!-- ############ LAYOUT START-->
 
   <!-- aside -->
-  <div id="aside" class="app-aside fade nav-dropdown black folded">
+  <div id="aside" class="app-aside fade nav-dropdown black">
     <!-- fluid app aside -->
     <div class="navside dk" data-layout="column">
       <div class="navbar no-radius">
@@ -45,7 +45,7 @@
         <a href="index.html" class="navbar-brand">
         	<div data-ui-include="'<?php echo base_url('assetnew/images/logo.svg');?>'"></div>
         	<img src="<?php echo base_url('assetnew/images/logo.png');?>" alt="." class="hide">
-        	<span class="inline">aside</span>
+        	<span class="hidden-folded inline">aside</span>
         </a>
         <!-- / brand -->
       </div>
@@ -53,7 +53,7 @@
           <nav class="scroll nav-stacked nav-stacked-rounded nav-color">
             
             <ul class="nav" data-ui-nav>
-              <li class="nav-header ">
+              <li class="nav-header hidden-folded">
                 <span class="text-xs">Main</span>
               </li>
               <li>
@@ -94,7 +94,7 @@
                 </ul>
               </li>
             
-              <li class="nav-header m-t">
+              <li class="nav-header hidden-folded m-t">
                 <span class="text-xs">Pengaturan</span>
               </li>  
               
