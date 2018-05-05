@@ -7,7 +7,7 @@ class Dokumen extends CI_Controller {
 	{
 		$data = array(
 			'contents'	=> 'dokumen/data',
-			'title'		=> 'Dashbord Sistem'
+			'title'		=> 'Master Dokumen'
 		);
 		$this->load->view('template/head', $data, FALSE);
 		// $data = array();
@@ -16,8 +16,22 @@ class Dokumen extends CI_Controller {
 
 	public function pilih()
 	{
-		$data = array();
-		$this->load->view('dokumen/pilih', $data, FALSE);
+		$data = array(
+			'contents'	=> 'dokumen/pilih',
+			'title'		=> 'Master Dokumen'
+		);
+		$this->load->view('template/head', $data, FALSE);
+		// $this->load->view('dokumen/pilih', $data, FALSE);
+	}
+
+	public function detail()
+	{
+		$data = array(
+			'contents'	=> 'dokumen/pilih',
+			'title'		=> 'Master Dokumen'
+		);
+		$this->load->view('template/head', $data, FALSE);
+		// $this->load->view('dokumen/pilih', $data, FALSE);
 	}
 
 }
