@@ -1,41 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <title><?php echo @$title; ?></title>
-  <meta name="description" content="Responsive, Bootstrap, BS4" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimal-ui" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
-  <!-- for ios 7 style, multi-resolution icon of 152x152 -->
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-barstyle" content="black-translucent">
-  <link rel="apple-touch-icon" href="<?php echo base_url('assetnew/images/logo.png');?>">
-  <meta name="apple-mobile-web-app-title" content="Lutfi">
-  <!-- for Chrome on Android, multi-resolution icon of 196x196 -->
-  <meta name="mobile-web-app-capable" content="yes">
-  <link rel="shortcut icon" sizes="196x196" href="<?php echo base_url('assetnew/images/logo.png');?>">
-  
-  <!-- style -->
-  <link rel="stylesheet" href="<?php echo base_url('assetnew/css/animate.css/animate.min.css');?>" type="text/css" />
-  <link rel="stylesheet" href="<?php echo base_url('assetnew/css/glyphicons/glyphicons.css');?>" type="text/css" />
-  <link rel="stylesheet" href="<?php echo base_url('assetnew/css/font-awesome/css/font-awesome.min.css');?>" type="text/css" />
-  <link rel="stylesheet" href="<?php echo base_url('assetnew/css/material-design-icons/material-design-icons.css');?>" type="text/css" />
-  <link rel="stylesheet" href="<?php echo base_url('assetnew/css/ionicons/css/ionicons.min.css');?>" type="text/css" />
-  <link rel="stylesheet" href="<?php echo base_url('assetnew/css/simple-line-icons/css/simple-line-icons.css');?>" type="text/css" />
-  <link rel="stylesheet" href="<?php echo base_url('assetnew/css/bootstrap/dist/css/bootstrap.min.css');?>" type="text/css" />
-
-  <!-- build:css css/styles/app.min.css -->
-  <link rel="stylesheet" href="<?php echo base_url('assetnew/css/styles/app.css?v.1');?>" type="text/css" />
-  <link rel="stylesheet" href="<?php echo base_url('assetnew/css/styles/style.css?v.1');?>" type="text/css" />
-  <!-- endbuild -->
-
-  <!-- datatable -->
-  <style type="text/css" href="<?=base_url('assetnew/libs/datatables/media/css/dataTables.bootstrap4.min.css');?>"></style>
-  <link rel="stylesheet" href="<?php echo base_url('assetnew/css/styles/font.css?v.1');?>" type="text/css" />
-</head>
-<body>
-  <div class="app" id="app">
+<?php $this->load->view('kepala'); ?>
 
     <!-- ############ LAYOUT START-->
 
@@ -163,46 +126,5 @@
   <!-- ############ LAYOUT END-->
 </div>
 
-<!-- build:js scripts/app.min.js -->
-<!-- jQuery -->
-<script src="<?php echo base_url('assetnew/libs/jquery/dist/jquery.js');?> "></script>
-<!-- Bootstrap -->
-<script src="<?php echo base_url('assetnew/libs/tether/dist/js/tether.min.js');?> "></script>
-<script src="<?php echo base_url('assetnew/libs/bootstrap/dist/js/bootstrap.js');?> "></script>
-<!-- core -->
-<script src="<?php echo base_url('assetnew/libs/jQuery-Storage-API/jquery.storageapi.min.js');?> "></script>
-<script src="<?php echo base_url('assetnew/libs/PACE/pace.min.js');?>"></script>
-<script src="<?php echo base_url('assetnew/libs/jquery-pjax/jquery.pjax.js');?>"></script>
-<script src="<?php echo base_url('assetnew/libs/blockUI/jquery.blockUI.js');?>"></script>
-<script src="<?php echo base_url('assetnew/libs/jscroll/jquery.jscroll.min.js');?>"></script>
 
-
-<script src="<?=base_url('assetnew/libs/datatables/media/js/jquery.dataTables.min.js');?>"></script>
-<script src="<?=base_url('assetnew/libs/datatables/media/js/dataTables.bootstrap4.min.js');?>"></script>
-<script src="<?=base_url('assetnew/libs/datatables/extensions/buttons/dataTables.buttons.min.js');?>"></script>
-<script src="<?=base_url('assetnew/libs/datatables/extensions/buttons/buttons.bootstrap4.min.js');?>"></script>
-<script src="<?=base_url('assetnew/libs/datatables/extensions/buttons/jszip.min.js');?>"></script>
-<script src="<?=base_url('assetnew/libs/datatables/extensions/buttons/pdfmake.min.js');?>"></script>
-<script src="<?=base_url('assetnew/libs/datatables/extensions/buttons/vfs_fonts.js');?>"></script>
-<script src="<?=base_url('assetnew/libs/datatables/extensions/buttons/buttons.html5.min.js');?>"></script>
-<script src="<?=base_url('assetnew/libs/datatables/extensions/buttons/buttons.print.min.js');?>"></script>
-<script src="<?=base_url('assetnew/libs/datatables/extensions/buttons/buttons.colVis.min.js');?>"></script>
-
-<script src="<?php echo base_url('assetnew/scripts/config.lazyload.js');?>"></script>
-<script src="<?php echo base_url('assetnew/scripts/ui-load.js');?>"></script>
-<script src="<?php echo base_url('assetnew/scripts/ui-jp.js');?>"></script>
-<script src="<?php echo base_url('assetnew/scripts/ui-include.js');?>"></script>
-<script src="<?php echo base_url('assetnew/scripts/ui-device.js');?>"></script>
-<script src="<?php echo base_url('assetnew/scripts/ui-form.js');?>"></script>
-<script src="<?php echo base_url('assetnew/scripts/ui-modal.js');?>"></script>
-<script src="<?php echo base_url('assetnew/scripts/ui-nav.js');?>"></script>
-<script src="<?php echo base_url('assetnew/scripts/ui-list.js');?>"></script>
-<script src="<?php echo base_url('assetnew/scripts/ui-screenfull.js');?>"></script>
-<script src="<?php echo base_url('assetnew/scripts/ui-scroll-to.js');?>"></script>
-<script src="<?php echo base_url('assetnew/scripts/ui-toggle-class.js');?>"></script>
-<script src="<?php echo base_url('assetnew/scripts/ui-taburl.js') ?>"></script>
-<script src="<?php echo base_url('assetnew/scripts/app.js') ?>"></script>
-<script src="<?php echo base_url('assetnew/scripts/ajax.js') ?>"></script>
-<!-- endbuild -->
-</body>
-</html>
+<?php $this->load->view('footer'); ?>
