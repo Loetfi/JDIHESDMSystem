@@ -9,7 +9,7 @@ class Keputusan_mentri_pdf extends CI_Controller {
   
 	public function index() {
 		$data = array(
-			'contents'	=> 'Keputusan_mentri_pdf',
+			'contents'	=> 'Keputusan_mentri_pdf', 
 			'title'		=> 'Dashbord Sistem'
 		);
 		$this->load->view('backend/template/head', $data, FALSE);

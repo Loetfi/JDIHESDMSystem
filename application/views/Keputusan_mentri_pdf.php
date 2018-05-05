@@ -1,3 +1,8 @@
+<div class="row-col">
+	<div class="col-lg b-r"> 
+		<div class="padding">
+			<div class="box">
+				<div class="padding">
 <legend>Buat Dokumen Keputusan Menteri</legend>
 
 <script>
