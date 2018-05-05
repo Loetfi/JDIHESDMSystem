@@ -82,8 +82,10 @@ function sidemenu_click(ele) {
 		var des_site = ele.children[0].attributes[2].value;
 		$.ajax({
 			url: site_url+'/'+des_site,
-			beforeSend: function() {
-				$('#contentHTML').replaceWith('<div id="contentHTML" class="spinner"></div>');
+			beforeSend: function(xhr) {
+				var is_collapsed = $('body').hasClass('is-collapsed');console.log(is_collapsed);
+				var spinner_position = (is_collapsed === true) ? '58%' : '50%';
+				$('#contentHTML').replaceWith('<div id="contentHTML" class="spinner" style="left:'+spinner_position+'"></div>');
 			},
 			success: function(data) {
 				var span = '<span id="contentHTML">'+data+'</span>';

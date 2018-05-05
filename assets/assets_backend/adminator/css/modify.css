@@ -77,6 +77,10 @@ table {
 	left: 43px;
 }
 
+.left-57p {
+	left: 57% !important;
+}
+
 .margin-auto {
 	margin: auto;
 }
