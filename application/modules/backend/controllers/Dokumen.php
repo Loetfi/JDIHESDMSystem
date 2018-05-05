@@ -5,8 +5,13 @@ class Dokumen extends CI_Controller {
 
 	public function index()
 	{
-		$data = array();
-		$this->load->view('dokumen/data', $data, FALSE);
+		$data = array(
+			'contents'	=> 'dokumen/data',
+			'title'		=> 'Dashbord Sistem'
+		);
+		$this->load->view('template/head', $data, FALSE);
+		// $data = array();
+		// $this->load->view('dokumen/data', $data, FALSE);
 	}
 
 	public function pilih()

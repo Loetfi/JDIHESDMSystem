@@ -1,4 +1,5 @@
 // lazyload config
+var link = 'http://jdih.awanesia.com/assetnew/';
 var MODULE_CONFIG = {
     screenfull:     [
                       'libs/screenfull/dist/screenfull.min.js'
@@ -35,17 +36,17 @@ var MODULE_CONFIG = {
                       'libs/bower-jvectormap/jquery-jvectormap-us-aea-en.js' 
                     ],
     dataTable:      [
-                      'libs/datatables/media/js/jquery.dataTables.min.js',
-                      'libs/datatables/media/js/dataTables.bootstrap4.min.js',
-                      'libs/datatables/media/css/dataTables.bootstrap4.min.css',
-                      'libs/datatables/extensions/buttons/dataTables.buttons.min.js',
-                      'libs/datatables/extensions/buttons/buttons.bootstrap4.min.js',
-                      'libs/datatables/extensions/buttons/jszip.min.js',
-                      'libs/datatables/extensions/buttons/pdfmake.min.js',
-                      'libs/datatables/extensions/buttons/vfs_fonts.js',
-                      'libs/datatables/extensions/buttons/buttons.html5.min.js',
-                      'libs/datatables/extensions/buttons/buttons.print.min.js',
-                      'libs/datatables/extensions/buttons/buttons.colVis.min.js'
+                      link+'libs/datatables/media/js/jquery.dataTables.min.js',
+                      link+'libs/datatables/media/js/dataTables.bootstrap4.min.js',
+                      link+'libs/datatables/media/css/dataTables.bootstrap4.min.css',
+                      link+'libs/datatables/extensions/buttons/dataTables.buttons.min.js',
+                      link+'libs/datatables/extensions/buttons/buttons.bootstrap4.min.js',
+                      link+'libs/datatables/extensions/buttons/jszip.min.js',
+                      link+'libs/datatables/extensions/buttons/pdfmake.min.js',
+                      link+'libs/datatables/extensions/buttons/vfs_fonts.js',
+                      link+'libs/datatables/extensions/buttons/buttons.html5.min.js',
+                      link+'libs/datatables/extensions/buttons/buttons.print.min.js',
+                      link+'libs/datatables/extensions/buttons/buttons.colVis.min.js'
                     ],
     footable:       [
                       'libs/footable/dist/footable.all.min.js',
