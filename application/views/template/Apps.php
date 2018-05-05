@@ -8,9 +8,9 @@
 		<link rel="stylesheet" href="<?php echo base_url('assets/assets_backend/adminator/css/style.css'); ?>" />
 		<link rel="stylesheet" href="<?php echo base_url('assets/assets_backend/adminator/css/modify.css'); ?>" />
 		<link rel="stylesheet" href="<?php echo base_url('assets/assets_backend/flatlab/assets/bootoast/bootoast.css'); ?>" />
-		<script type="text/javascript" src="<?php echo base_url('assets/assets_backend/flatlab/js/jquery-1.8.3.min.js'); ?>"></script>
 		<script type="text/javascript" src="<?php echo base_url('assets/assets_backend/adminator/js/vendor.js'); ?>"></script>
 		<script type="text/javascript" src="<?php echo base_url('assets/assets_backend/adminator/js/bundle.js'); ?>"></script>
+		<script type="text/javascript" src="<?php echo base_url('assets/assets_backend/flatlab/js/jquery-1.8.3.min.js'); ?>"></script>
 		<script type="text/javascript" src="<?php echo base_url('assets/assets_backend/flatlab/assets/bootoast/bootoast.js'); ?>"></script>
 		<script type="text/javascript" src="<?php echo base_url('assets/assets_backend/adminator/js/modify.js'); ?>"></script>
 		<script>
@@ -40,10 +40,11 @@
                             <a class="sidebar-link td-n" href="index.html">
                                 <div class="peers ai-c fxw-nw">
                                     <div class="peer">
-                                        <div class="logo"><img src="<?php echo base_url('assets/logo/logo-esdm.png'); ?>" width="60"></div>
+                                        <div class="logo"><img src="<?php echo base_url('assets/logo/logo-esdm.png'); ?>" width="50"></div>
                                     </div>
                                     <div class="peer peer-greed">
-                                        <h5 class="lh-1 mB-0 logo-text">Smart Legal Drafting</h5></div>
+                                        <h5 class="lh-1 mB-0 logo-text">Smart Legal Drafting</h5>
+									</div>
                                 </div>
                             </a>
                         </div>
@@ -55,26 +56,29 @@
                 <ul id="ul-sidemenu" class="sidebar-menu scrollable pos-r">
                 	<li class="nav-item mT-30 active" onclick="sidemenu_click(this)">
 						<a class="sidebar-link" href="javascript:void(0)" data-url="backend/dashboard">
-							<span class="icon-holder"><i class="fa fa-home"></i></span>
+							<span class="icon-holder"><i class="fa fa-lg fa-home"></i></span>
 							<span class="title">Dashboard</span>
 						</a>
 					</li>
 
-					<li class="nav-item mT-30 active" onclick="sidemenu_click(this)">
+					<li class="nav-item active" onclick="sidemenu_click(this)">
 						<a class="sidebar-link" href="javascript:void(0)" data-url="backend/dokumen">
-							<span class="icon-holder"><i class="fa fa-file"></i></span><span class="title">Master Dokumen</span>
+							<span class="icon-holder"><i class="fa fa-database"></i></span>
+							<span class="title">Master Dokumen</span>
 						</a>
 					</li>
 
-                    <li class="nav-item mT-30 active" onclick="sidemenu_click(this)">
+                    <li class="nav-item active" onclick="sidemenu_click(this)">
 						<a class="sidebar-link" href="javascript:void(0)" data-url="Keputusan_mentri_pdf">
-							<span class="icon-holder"><i class="fa fa-file"></i></span><span class="title">Buat Dokumen (PDF)</span>
+							<span class="icon-holder"><i class="fa fa-file-pdf-o"></i></span>
+							<span class="title">Buat Dokumen (PDF)</span>
 						</a>
 					</li>
 
-					<li class="nav-item mT-30 active" onclick="sidemenu_click(this)">
+					<li class="nav-item active" onclick="sidemenu_click(this)">
 						<a class="sidebar-link" href="javascript:void(0)" data-url="Keputusan_menteri_doc">
-							<span class="icon-holder"><i class="fa fa-file"></i></span><span class="title">Buat Dokumen (DOC)</span>
+							<span class="icon-holder"><i class="fa fa-file-word-o"></i></span>
+							<span class="title">Buat Dokumen (DOC)</span>
 						</a>
 					</li> 
                 </ul>
@@ -83,6 +87,9 @@
 		<div class="page-container">
 			<div class="header navbar">
 				<div class="header-container">
+					<ul class="nav-left">
+						<li><a id="sidebar-toggle" class="sidebar-toggle" href="javascript:void(0);"><i class="fa fa-bars"></i></a></li>
+					</ul>
 					<ul class="nav-right">
 						<li class="dropdown">
 							<a href="" class="dropdown-toggle no-after peers fxw-nw ai-c lh-1" data-toggle="dropdown">
@@ -126,5 +133,21 @@
 				<span>Copyright © 2018 Nama Perusahaan.</span>
 			</footer>
 		</div>
+		<script>
+			$('#sidebar-toggle').click(function() {
+				if(getCookie('sidebar-toggle') === '') {
+					setCookie('sidebar-toggle', '1');
+				}
+				else if(getCookie('sidebar-toggle') === '0') {
+					setCookie('sidebar-toggle', '1');
+				}
+				else if(getCookie('sidebar-toggle') === '1') {
+					setCookie('sidebar-toggle', '0');
+				}
+			});
+			if(getCookie('sidebar-toggle') !== '' && getCookie('sidebar-toggle') === '1') {
+				$('body').addClass('is-collapsed');
+			}
+		</script>
 	</body>
 </html>
