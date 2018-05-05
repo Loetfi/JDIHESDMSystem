@@ -27,8 +27,8 @@ class Dokumen extends CI_Controller {
 	public function detail()
 	{
 		$data = array(
-			'contents'	=> 'dokumen/pilih',
-			'title'		=> 'Master Dokumen'
+			'contents'	=> 'dokumen/detail',
+			'title'		=> 'Detail Dokumen '
 		);
 		$this->load->view('template/head', $data, FALSE);
 		// $this->load->view('dokumen/pilih', $data, FALSE);
