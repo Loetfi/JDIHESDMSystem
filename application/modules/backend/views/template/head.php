@@ -9,9 +9,8 @@
         <div class="navbar no-radius">
           <!-- brand -->
           <a href="index.html" class="navbar-brand">
-           <div data-ui-include="'<?php echo base_url('assetnew/images/logo.svg');?>'"></div>
-           <img src="<?php echo base_url('assetnew/images/logo.png');?>" alt="." class="hide">
-           <span class="hidden-folded inline">aside</span>
+           <img src="<?php echo base_url('assets/logo/logo-esdm.png');?>" alt=".">
+           <span class="hidden-folded inline">ESDM</span>
          </a>
          <!-- / brand -->
        </div>
@@ -104,7 +103,7 @@
               <a class="dropdown-item" href="docs.html">
                 Need help?
               </a>
-              <a class="dropdown-item" href="signin.html">Sign out</a>
+              <a class="dropdown-item" href="<?php echo site_url('backend/auth') ?>">Sign out</a>
             </div>
           </li>
         </ul>
