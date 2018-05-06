@@ -8,10 +8,25 @@
 <script>
 	function addMenimbang(ele, count) {
 		var counts = count + 1;
-		var element =	'<div class="form-group" id="text-menimbang'+counts+'">'+
-							'<input type="text" name="poinMenimbang[]" class="form-control float-left margin-right-5px width-10p" placeholder="Pointer" />'+
-							'<input type="text" name="menimbang[]" class="form-control float-left width-75p" placeholder="Menimbang" />'+
-							'<a href="javascript:void(0)" class="fb tool-tip" style="line-height:32px; margin-left:10px;" onclick="addMenimbang(this, '+counts+')"><i class="fa fa-lg fa-plus"></i></a>'+
+		var element =	'<div class="form-group" id="text-menimbang'+counts+'" style="display:inline-block; margin-top:5px; width:100%;">'+
+							'<div style="float:left; width:20%">'+
+								'<input type="text" name="poinMenimbang[]" class="form-control" placeholder="Pointer" />'+
+								'<select class="form-control" style="cursor:pointer; margin-top:10px;">'+
+									'<option value="0">Continues Page</option>'+
+									'<option value="0">Next Page</option>'+
+								'</select>'+
+								'<select class="form-control" style="cursor:pointer; margin-top:10px;">'+
+									'<option value="0">SubLevel 0</option>'+
+									'<option value="0">SubLevel 1</option>'+
+									'<option value="0">SubLevel 2</option>'+
+									'<option value="0">SubLevel 3</option>'+
+									'<option value="0">SubLevel 4</option>'+
+								'</select>'+
+							'</div>'+
+							'<div style="width:100%">'+
+								'<textarea type="text" name="menimbang[]" class="form-control" placeholder="Menimbang" rows="6" style="float:left; margin-left:5px; width:75%;"></textarea>'+
+								'<a href="javascript:void(0)" onclick="addMenimbang(this, '+counts+')" style="position:absolute; right:5%;"><i class="fa fa-lg fa-plus"></i></a>'+
+							'</div>'+
 						'</div>';
 		$(ele).children().toggleClass('fa-plus fa-minus');
 		$(ele).children().attr("onclick","remove(this)");
@@ -19,10 +34,25 @@
 	}
 	function addMengingat(ele, count) {
 		var counts = count + 1;
-		var element =	'<div class="form-group" id="text-mengingat'+counts+'">'+
-							'<input type="text" name="poinMengingat[]" class="form-control float-left margin-right-5px width-10p" placeholder="Pointer" />'+
-							'<input type="text" name="mengingat[]" class="form-control float-left width-75p" placeholder="Mengingat" />'+
-							'<a href="javascript:void(0)" class="fb tool-tip" style="line-height:32px; margin-left:10px;" onclick="addMengingat(this, '+counts+')"><i class="fa fa-lg fa-plus"></i></a>'+
+		var element =	'<div class="form-group" id="text-mengingat'+counts+'" style="display:inline-block; margin-top:5px; width:100%;">'+
+							'<div style="float:left; width:20%">'+
+								'<input type="text" name="poinMengingat[]" class="form-control" placeholder="Pointer" />'+
+								'<select class="form-control" style="cursor:pointer; margin-top:10px;">'+
+									'<option value="0">Continues Page</option>'+
+									'<option value="0">Next Page</option>'+
+								'</select>'+
+								'<select class="form-control" style="cursor:pointer; margin-top:10px;">'+
+									'<option value="0">SubLevel 0</option>'+
+									'<option value="0">SubLevel 1</option>'+
+									'<option value="0">SubLevel 2</option>'+
+									'<option value="0">SubLevel 3</option>'+
+									'<option value="0">SubLevel 4</option>'+
+								'</select>'+
+							'</div>'+
+							'<div style="width:100%">'+
+								'<textarea type="text" name="mengingat[]" class="form-control" placeholder="Mengingat" rows="6" style="float:left; margin-left:5px; width:75%;"></textarea>'+
+								'<a href="javascript:void(0)" onclick="addMengingat(this, '+counts+')" style="position:absolute; right:5%;"><i class="fa fa-lg fa-plus"></i></a>'+
+							'</div>'+
 						'</div>';
 		$(ele).children().toggleClass('fa-plus fa-minus');
 		$(ele).children().attr("onclick","remove(this)");
@@ -30,10 +60,25 @@
 	}
 	function addPasal(ele, count) {
 		var counts = count + 1;
-		var element =	'<div class="form-group" id="text-pasal'+counts+'">'+
-							'<input type="text" name="poinPasal[]" class="form-control float-left margin-right-5px width-10p" placeholder="Pointer" />'+
-							'<input type="text" name="pasal[]" class="form-control float-left width-75p" placeholder="Pasal" />'+
-							'<a href="javascript:void(0)" class="fb tool-tip" style="line-height:32px; margin-left:10px;" onclick="addPasal(this, '+counts+')"><i class="fa fa-lg fa-plus"></i></a>'+
+		var element =	'<div class="form-group" id="text-pasal'+counts+'" style="display:inline-block; margin-top:5px; width:100%;">'+
+							'<div style="float:left; width:20%">'+
+								'<input type="text" name="poinPasal[]" class="form-control" placeholder="Pointer" />'+
+								'<select class="form-control" style="cursor:pointer; margin-top:10px;">'+
+									'<option value="0">Continues Page</option>'+
+									'<option value="0">Next Page</option>'+
+								'</select>'+
+								'<select class="form-control" style="cursor:pointer; margin-top:10px;">'+
+									'<option value="0">SubLevel 0</option>'+
+									'<option value="0">SubLevel 1</option>'+
+									'<option value="0">SubLevel 2</option>'+
+									'<option value="0">SubLevel 3</option>'+
+									'<option value="0">SubLevel 4</option>'+
+								'</select>'+
+							'</div>'+
+							'<div style="width:100%">'+
+								'<textarea type="text" name="pasal[]" class="form-control" placeholder="Pasal" rows="6" style="float:left; margin-left:5px; width:75%;"></textarea>'+
+								'<a href="javascript:void(0)" onclick="addPasal(this, '+counts+')" style="position:absolute; right:5%;"><i class="fa fa-lg fa-plus"></i></a>'+
+							'</div>'+
 						'</div>';
 		$(ele).children().toggleClass('fa-plus fa-minus');
 		$(ele).children().attr("onclick","remove(this)");
@@ -41,17 +86,32 @@
 	}
 	function addTembusan(ele, count) {
 		var counts = count + 1;
-		var element =	'<div class="form-group" id="text-tembusan'+counts+'">'+
-							'<input type="text" name="poinTembusan[]" class="form-control float-left margin-right-5px width-10p" placeholder="Pointer" />'+
-							'<input type="text" name="tembusan[]" class="form-control float-left width-75p" placeholder="Tembusan" />'+
-							'<a href="javascript:void(0)" class="fb tool-tip" style="line-height:32px; margin-left:10px;" onclick="addTembusan(this, '+counts+')"><i class="fa fa-lg fa-plus"></i></a>'+
+		var element =	'<div class="form-group" id="text-tembusan'+counts+'" style="display:inline-block; margin-top:5px; width:100%;">'+
+							'<div style="float:left; width:20%">'+
+								'<input type="text" name="poinTembusan[]" class="form-control" placeholder="Pointer" />'+
+								'<select class="form-control" style="cursor:pointer; margin-top:10px;">'+
+									'<option value="0">Continues Page</option>'+
+									'<option value="0">Next Page</option>'+
+								'</select>'+
+								'<select class="form-control" style="cursor:pointer; margin-top:10px;">'+
+									'<option value="0">SubLevel 0</option>'+
+									'<option value="0">SubLevel 1</option>'+
+									'<option value="0">SubLevel 2</option>'+
+									'<option value="0">SubLevel 3</option>'+
+									'<option value="0">SubLevel 4</option>'+
+								'</select>'+
+							'</div>'+
+							'<div style="width:100%">'+
+								'<textarea type="text" name="tembusan[]" class="form-control" placeholder="Tembusan" rows="6" style="float:left; margin-left:5px; width:75%;"></textarea>'+
+								'<a href="javascript:void(0)" onclick="addTembusan(this, '+counts+')" style="position:absolute; right:5%;"><i class="fa fa-lg fa-plus"></i></a>'+
+							'</div>'+
 						'</div>';
 		$(ele).children().toggleClass('fa-plus fa-minus');
 		$(ele).children().attr("onclick","remove(this)");
 		$(element).last().insertAfter($("#text-tembusan"+count));
 	}
 	function remove(ele) {
-		$(ele).parent().parent().remove();
+		$(ele).parent().parent().parent().remove();
 	}
 	function addKolomLampiran(ele, count) {console.log($(ele).parent().parent().parent().next().children('tr:first').next().children('td:last').hasClass('numrows'));
 		var eleJudul = $(ele).parent().parent()/*$('#judul-tabel'+count)*/, 
@@ -141,29 +201,66 @@
 	<fieldset>
 		<legend>Menimbang</legend>
 		<div>
-			<div class="form-group" id="text-menimbang1">
-				<input type="text" name="poinMenimbang[]" class="form-control float-left margin-right-5px width-10p" placeholder="Pointer" />
-				<input type="text" name="menimbang[]" class="form-control float-left width-75p" placeholder="Menimbang" />
-				<a href="javascript:void(0)" class="fb tool-tip" style="line-height:32px; margin-left:10px;" onclick="addMenimbang(this, 1)"><i class="fa fa-lg fa-plus"></i></a>
+			<div class="form-group" id="text-menimbang1" style="display:inline-block; width:100%;">
+				<div style="float:left; width:20%">
+					<input type="text" name="poinMenimbang[]" class="form-control" placeholder="Pointer" />
+					<select class="form-control" style="cursor:pointer; margin-top:10px;">
+						<option value="0">Continues Page</option>
+						<option value="0">Next Page</option>
+					</select>
+					<select class="form-control" style="cursor:pointer; margin-top:10px;">
+						<option value="0">SubLevel 0</option>
+						<option value="0">SubLevel 1</option>
+						<option value="0">SubLevel 2</option>
+						<option value="0">SubLevel 3</option>
+						<option value="0">SubLevel 4</option>
+					</select>
+				</div>
+				<div style="width:100%">
+					<textarea type="text" name="menimbang[]" class="form-control" placeholder="Menimbang" rows="6" style="float:left; margin-left:5px; width:75%;"></textarea>
+					<a href="javascript:void(0)" onclick="addMenimbang(this, 1)" style="position:absolute; right:5%;"><i class="fa fa-lg fa-plus"></i></a>
+				</div>
 			</div>
 		</div>
 	</fieldset>
 	<fieldset>
 		<legend>Mengingat</legend>
 		<div>
-			<div class="form-group" id="text-mengingat1">
-				<input type="text" name="poinMengingat[]" class="form-control float-left margin-right-5px width-10p" placeholder="Pointer" />
-				<input type="text" name="mengingat[]" class="form-control float-left width-75p" placeholder="Mengingat" />
-				<a href="javascript:void(0)" class="fb tool-tip" style="line-height:32px; margin-left:10px;" onclick="addMengingat(this, 1)"><i class="fa fa-lg fa-plus"></i></a>
+			<div class="form-group" id="text-mengingat1" style="display:inline-block; width:100%;">
+				<div style="float:left; width:20%">
+					<input type="text" name="poinMengingat[]" class="form-control" placeholder="Pointer" />
+					<select class="form-control" style="cursor:pointer; margin-top:10px;">
+						<option value="0">Continues Page</option>
+						<option value="0">Next Page</option>
+					</select>
+					<select class="form-control" style="cursor:pointer; margin-top:10px;">
+						<option value="0">SubLevel 0</option>
+						<option value="0">SubLevel 1</option>
+						<option value="0">SubLevel 2</option>
+						<option value="0">SubLevel 3</option>
+						<option value="0">SubLevel 4</option>
+					</select>
+				</div>
+				<div style="width:100%">
+					<textarea type="text" name="mengingat[]" class="form-control" placeholder="Mengingat" rows="6" style="float:left; margin-left:5px; width:75%;"></textarea>
+					<a href="javascript:void(0)" onclick="addMengingat(this, 1)" style="position:absolute; right:5%;"><i class="fa fa-lg fa-plus"></i></a>
+				</div>
 			</div>
 		</div>
 	</fieldset>
 	<fieldset>
 		<legend>Menetapkan</legend>
 		<div>
-			<div class="form-group" id="text-menetapkan">
-				<input type="text" name="menetapkan" class="form-control float-left width-90p" placeholder="Menetapkan" />
-				<a href="javascript:void(0)" class="fb tool-tip" style="line-height:32px; margin-left:10px;" onclick="addMenetapkan(this)">&nbsp;</a>
+			<div class="form-group" id="text-menetapkan" style="display:inline-block; width:100%;">
+				<div style="float:left; width:20%">
+					<select class="form-control" style="cursor:pointer">
+						<option value="0">Continues Page</option>
+						<option value="0">Next Page</option>
+					</select>
+				</div>
+				<div style="float: left; margin-left:5px; width: 75%;">
+					<textarea type="text" name="menetapkan" class="form-control" placeholder="Menetapkan" rows="6" style="width:100%;"></textarea>
+				</div>
 			</div>
 		</div>
 	</fieldset>
@@ -171,25 +268,55 @@
 		<legend>Pasal</legend>
 		<div>
 			<div class="form-group" id="text-pasal1">
-				<input type="text" name="poinPasal[]" class="form-control float-left margin-right-5px width-10p" placeholder="Pointer" />
-				<input type="text" name="pasal[]" class="form-control float-left width-75p" placeholder="Pasal" />
-				<a href="javascript:void(0)" class="fb tool-tip" style="line-height:32px; margin-left:10px;" onclick="addPasal(this, 1)"><i class="fa fa-lg fa-plus"></i></a>
+				<div style="float:left; width:20%">
+					<input type="text" name="poinPasal[]" class="form-control" placeholder="Pointer" />
+					<select class="form-control" style="cursor:pointer; margin-top:10px;">
+						<option value="0">Continues Page</option>
+						<option value="0">Next Page</option>
+					</select>
+					<select class="form-control" style="cursor:pointer; margin-top:10px;">
+						<option value="0">SubLevel 0</option>
+						<option value="0">SubLevel 1</option>
+						<option value="0">SubLevel 2</option>
+						<option value="0">SubLevel 3</option>
+						<option value="0">SubLevel 4</option>
+					</select>
+				</div>
+				<div style="width:100%">
+					<textarea type="text" name="pasal[]" class="form-control" placeholder="Pasal" rows="6" style="float:left; margin-left:5px; width:75%;"></textarea>
+					<a href="javascript:void(0)" onclick="addPasal(this, 1)" style="position:absolute; right:5%;"><i class="fa fa-lg fa-plus"></i></a>
+				</div>
 			</div>
 		</div>
 	</fieldset>
 	<fieldset>
 		<legend>Tanda Tangan</legend>
 		<div class="form-group">
-			<textarea name="ttd" class="form-control" autocomplete="off" placeholder="Tanda Tangan" rows="4"></textarea>
+			<textarea name="ttd" class="form-control" autocomplete="off" placeholder="Tanda Tangan" rows="4" style="width:95%"></textarea>
 		</div>
 	</fieldset>
 	<fieldset>
 		<legend>Tembusan</legend>
 		<div>
 			<div class="form-group" id="text-tembusan1">
-				<input type="text" name="poinTembusan[]" class="form-control float-left margin-right-5px width-10p" placeholder="Pointer" />
-				<input type="text" name="tembusan[]" class="form-control float-left width-75p" placeholder="Tembusan" />
-				<a href="javascript:void(0)" class="fb tool-tip" style="line-height:32px; margin-left:10px;" onclick="addTembusan(this, 1)"><i class="fa fa-lg fa-plus"></i></a>
+				<div style="float:left; width:20%">
+					<input type="text" name="poinTembusan[]" class="form-control" placeholder="Pointer" />
+					<select class="form-control" style="cursor:pointer; margin-top:10px;">
+						<option value="0">Continues Page</option>
+						<option value="0">Next Page</option>
+					</select>
+					<select class="form-control" style="cursor:pointer; margin-top:10px;">
+						<option value="0">SubLevel 0</option>
+						<option value="0">SubLevel 1</option>
+						<option value="0">SubLevel 2</option>
+						<option value="0">SubLevel 3</option>
+						<option value="0">SubLevel 4</option>
+					</select>
+				</div>
+				<div style="width:100%">
+					<textarea type="text" name="tembusan[]" class="form-control" placeholder="Tembusan" rows="6" style="float:left; margin-left:5px; width:75%;"></textarea>
+					<a href="javascript:void(0)" onclick="addTembusan(this, 1)" style="position:absolute; right:5%;"><i class="fa fa-lg fa-plus"></i></a>
+				</div>
 			</div>
 		</div>
 	</fieldset>

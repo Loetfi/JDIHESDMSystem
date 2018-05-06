@@ -40,5 +40,9 @@
 <script src="<?php echo base_url('assetnew/scripts/app.js') ?>"></script>
 <script src="<?php echo base_url('assetnew/scripts/ajax.js') ?>"></script>
 <!-- endbuild -->
+
+<script>
+	var getClassName = $('#aside').removeClass('folded');
+</script>
 </body>
 </html>
