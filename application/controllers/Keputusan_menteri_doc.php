@@ -20,7 +20,7 @@ class Keputusan_menteri_doc extends CI_Controller {
 	}
 	
 	function sanusi(){
-		
+		error_reporting(0);
 		$this->load->library('Phpword');
 
 		$phpWord = new \PhpOffice\PhpWord\PhpWord();
@@ -679,20 +679,14 @@ class Keputusan_menteri_doc extends CI_Controller {
 		*/
 		/* *********************************************************************************** */
 		
-		
-		
-		
 		/* *********************************************************************************** */
 		// footer tanda tangan 
-		// print_r($_POST); die();
+		// echo "<pre>"; print_r($_POST); die();
 		
-		
-		
-		
-		
-		
-		
-		
+		/* Insert Into DB */
+		$id = $this->insert_document();
+		$this->insert_detail_document($id, $_POST);
+		exit;
 		
 		$objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'Word2007');
 		try {
@@ -720,6 +714,70 @@ class Keputusan_menteri_doc extends CI_Controller {
 		
 	}
 	
+	function insert_document() {
+		$dataDokumen = array(
+			'jenis_dokumen'	=> 'Keputusan Menteri',
+			'nama_dokumen'	=> 'KM01/001/2018',
+			'cdate'			=> date('Y-m-d H:i:s'),
+			'status'		=> 0
+		);
+		$queryDokumen = $this->db->insert('dokumen', $dataDokumen);
+		return $this->db->insert_id();
+	}
+	
+	function insert_detail_document($id, $insertArray) {
+		foreach(array_keys($insertArray) as $valKeys) {
+			//echo "<pre>"; print_r($insertArray[$valKeys]);
+			if(is_string($insertArray[$valKeys])) {
+				//echo "String <b>[".$valKeys."]</b>";
+				$dataDetailDokumen = array(
+					'id_dokumen'	=> $id,
+					'jenis_field'	=> $valKeys,
+					'pointer'		=> 0,
+					'layout'		=> '',
+					'sublevel'		=> 0,
+					'teks'			=> $insertArray[$valKeys],
+					'cdate'			=> date('Y-m-d H:i:s'),
+					'status'		=> 0
+				);
+				$queryDetailDokumen = $this->db->insert('dokumen_detail', $dataDetailDokumen);
+			}
+			else if(is_array($insertArray[$valKeys])) {
+				//echo "Array <b>[".$valKeys."]</b>";
+				$arrPivot = array();
+				$jenis_field = str_replace('pointer', '', array_keys($insertArray[$valKeys])[0]);
+				foreach(array_keys($insertArray[$valKeys]) as $key => $valDetailKeys) {
+					//echo "Ada Nilai";
+					for($loop = 0; $loop < count($insertArray[$valKeys][$valDetailKeys]); $loop++) {
+						$arrPivot[$loop][$key] = $insertArray[$valKeys][$valDetailKeys][$loop];
+						if($key === (count(array_keys($insertArray[$valKeys])) -1)) {
+							$arrPivot[$loop][count($insertArray[$valKeys][$valDetailKeys])] = $jenis_field;
+						}
+					}
+				}
+				
+				foreach($arrPivot as $valPivot) {
+					$dataDetailDokumen = array(
+						'id_dokumen'	=> $id,
+						'jenis_field'	=> $valPivot[4],
+						'pointer'		=> $valPivot[0],
+						'layout'		=> $valPivot[1],
+						'sublevel'		=> $valPivot[2],
+						'teks'			=> $seqValues,
+						'cdate'			=> date('Y-m-d H:i:s'),
+						'status'		=> 0
+					);
+					$queryDetailDokumen = $this->db->insert('dokumen_detail', $dataDetailDokumen);
+				}
+			}
+		}
+	}
+	
+	// function for cek the array key is associative or sequential
+	function isAssoc(array $arr) {
+		if (array() === $arr) return false;
+		return array_keys($arr) !== range(0, count($arr) - 1);
+	}
 }
 /* End of file dashboard.php */
 /* Location: ./system/application/modules/matchbox/controllers/dashboard.php */
