@@ -153,6 +153,7 @@ class Keputusan_menteri_doc extends CI_Controller {
 				$section->addTextBreak(1,$fontStyle);
 			}
 		}
+		$arrData['judul'] = $judul;
 		/* *********************************************************************************** */
 		
 		
@@ -247,6 +248,10 @@ class Keputusan_menteri_doc extends CI_Controller {
 				$theFirst = false;
 			}
 			
+			$arrData['Menimbang']['pointerMenimbang'][] = $pointerMenimbang[$i];
+			$arrData['Menimbang']['nextPageMenimbang'][] = $nextPageMenimbang[$i];
+			$arrData['Menimbang']['subLevelMenimbang'][] = $subLevelMenimbang[$i];
+			$arrData['Menimbang']['text'][] = $Menimbang[$i];
 		}
 		
 		/* *********************************************************************************** */
@@ -339,6 +344,10 @@ class Keputusan_menteri_doc extends CI_Controller {
 				$theFirst = false;
 			}
 			
+			$arrData['Mengingat']['pointerMengingat'][] = $pointerMengingat[$i];
+			$arrData['Mengingat']['nextPageMengingat'][] = $nextPageMengingat[$i];
+			$arrData['Mengingat']['subLevelMengingat'][] = $subLevelMengingat[$i];
+			$arrData['Mengingat']['text'][] = $Mengingat[$i];
 		}
 		/* *********************************************************************************** */
 		
@@ -440,15 +449,12 @@ class Keputusan_menteri_doc extends CI_Controller {
 				// $theFirst = false;
 			}
 			
+			$arrData['Memutuskan']['pointerMemutuskan'][] = $pointerMemutuskan[$i];
+			$arrData['Memutuskan']['nextPageMemutuskan'][] = $nextPageMemutuskan[$i];
+			$arrData['Memutuskan']['subLevelMemutuskan'][] = $subLevelMemutuskan[$i];
+			$arrData['Memutuskan']['text'][] = $Memutuskan[$i];
 		}
 		/* *********************************************************************************** */
-		
-		
-		
-		
-		
-		
-		
 		
 		
 		/* *********************************************************************************** */
@@ -685,7 +691,8 @@ class Keputusan_menteri_doc extends CI_Controller {
 		
 		/* Insert Into DB */
 		$id = $this->insert_document();
-		$this->insert_detail_document($id, $_POST);
+		$alldata = $this->insert_detail_document($id, $arrData);
+		echo $alldata;
 		exit;
 		
 		$objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'Word2007');
@@ -727,7 +734,6 @@ class Keputusan_menteri_doc extends CI_Controller {
 	
 	function insert_detail_document($id, $insertArray) {
 		foreach(array_keys($insertArray) as $valKeys) {
-			//echo "<pre>"; print_r($insertArray[$valKeys]);
 			if(is_string($insertArray[$valKeys])) {
 				//echo "String <b>[".$valKeys."]</b>";
 				$dataDetailDokumen = array(
@@ -763,7 +769,7 @@ class Keputusan_menteri_doc extends CI_Controller {
 						'pointer'		=> $valPivot[0],
 						'layout'		=> $valPivot[1],
 						'sublevel'		=> $valPivot[2],
-						'teks'			=> $seqValues,
+						'teks'			=> $valPivot[3],
 						'cdate'			=> date('Y-m-d H:i:s'),
 						'status'		=> 0
 					);
@@ -771,6 +777,7 @@ class Keputusan_menteri_doc extends CI_Controller {
 				}
 			}
 		}
+		return "success insert data";
 	}
 	
 	// function for cek the array key is associative or sequential

@@ -32,10 +32,10 @@
 					<table width="100%" border="0">
 						<tr>
 							<td valign="top">
-								<div><input type="text" name="Menimbang[pointerMenimbang][]" placeholder="" size="17"></div>
-								<div><label><select name="Menimbang[nextPageMenimbang][]"><option value="continues">Continues Page</option><option value="new">Next Page</option></select></label></div>
+								<div><input type="text" name="pointerMenimbang[]" placeholder="" size="17"></div>
+								<div><label><select name="nextPageMenimbang[]"><option value="continues">Continues Page</option><option value="new">Next Page</option></select></label></div>
 								<div>
-								<label>Sub level <select name="Menimbang[subLevelMenimbang][]">
+								<label>Sub level <select name="subLevelMenimbang[]">
 									<option value="0">0</option>
 									<option value="1">1</option>
 									<option value="2">2</option>
@@ -44,14 +44,14 @@
 								</select></label>
 								</div>
 							</td>
-							<td valign="top"><textarea type="text" name="Menimbang[text][]" placeholder="Menimbang" rows="4" cols="50" required></textarea></td>
+							<td valign="top"><textarea type="text" name="Menimbang[]" placeholder="Menimbang" rows="4" cols="50" required></textarea></td>
 						</tr>
 						<tr>
 							<td valign="top">
-								<div><input type="text" name="Menimbang[pointerMenimbang][]" placeholder="" size="17"></div>
-								<div><label><select name="Menimbang[nextPageMenimbang][]"><option value="continues">Continues Page</option><option value="new">Next Page</option></select></label></div>
+								<div><input type="text" name="pointerMenimbang[]" placeholder="" size="17"></div>
+								<div><label><select name="nextPageMenimbang[]"><option value="continues">Continues Page</option><option value="new">Next Page</option></select></label></div>
 								<div>
-								<label>Sub level <select name="Menimbang[subLevelMenimbang][]">
+								<label>Sub level <select name="subLevelMenimbang[]">
 									<option value="0">0</option>
 									<option value="1">1</option>
 									<option value="2">2</option>
@@ -60,14 +60,14 @@
 								</select></label>
 								</div>
 							</td>
-							<td valign="top"><textarea type="text" name="Menimbang[text][]" placeholder="Menimbang" rows="4" cols="50"></textarea></td>
+							<td valign="top"><textarea type="text" name="Menimbang[]" placeholder="Menimbang" rows="4" cols="50"></textarea></td>
 						</tr>
 						<tr>
 							<td valign="top">
-								<div><input type="text" name="Menimbang[pointerMenimbang][]" placeholder="" size="17"></div>
-								<div><label><select name="Menimbang[nextPageMenimbang][]"><option value="continues">Continues Page</option><option value="new">Next Page</option></select></label></div>
+								<div><input type="text" name="pointerMenimbang[]" placeholder="" size="17"></div>
+								<div><label><select name="nextPageMenimbang[]"><option value="continues">Continues Page</option><option value="new">Next Page</option></select></label></div>
 								<div>
-								<label>Sub level <select name="Menimbang[subLevelMenimbang][]">
+								<label>Sub level <select name="subLevelMenimbang[]">
 									<option value="0">0</option>
 									<option value="1">1</option>
 									<option value="2">2</option>
@@ -76,14 +76,14 @@
 								</select></label>
 								</div>
 							</td>
-							<td valign="top"><textarea type="text" name="Menimbang[text][]" placeholder="Menimbang" rows="4" cols="50"></textarea></td>
+							<td valign="top"><textarea type="text" name="Menimbang[]" placeholder="Menimbang" rows="4" cols="50"></textarea></td>
 						</tr>
 						<tr>
 							<td valign="top">
-								<div><input type="text" name="Menimbang[pointerMenimbang][]" placeholder="" size="17"></div>
-								<div><label><select name="Menimbang[nextPageMenimbang][]"><option value="continues">Continues Page</option><option value="new">Next Page</option></select></label></div>
+								<div><input type="text" name="pointerMenimbang[]" placeholder="" size="17"></div>
+								<div><label><select name="nextPageMenimbang[]"><option value="continues">Continues Page</option><option value="new">Next Page</option></select></label></div>
 								<div>
-								<label>Sub level <select name="Menimbang[subLevelMenimbang][]">
+								<label>Sub level <select name="subLevelMenimbang[]">
 									<option value="0">0</option>
 									<option value="1">1</option>
 									<option value="2">2</option>
@@ -92,7 +92,7 @@
 								</select></label>
 								</div>
 							</td>
-							<td valign="top"><textarea type="text" name="Menimbang[text][]" placeholder="Menimbang" rows="4" cols="50"></textarea></td>
+							<td valign="top"><textarea type="text" name="Menimbang[]" placeholder="Menimbang" rows="4" cols="50"></textarea></td>
 						</tr>
 					</table>
 				</fieldset>
@@ -101,10 +101,10 @@
 					<table width="100%" border="0">
 						<tr>
 							<td valign="top">
-								<div><input type="text" name="Mengingat[pointerMengingat][]" placeholder="" size="17"></div>
-								<div><label><select name="Mengingat[nextPageMengingat][]"><option value="continues">Continues Page</option><option value="new">Next Page</option></select></label></div>
+								<div><input type="text" name="pointerMengingat[]" placeholder="" size="17"></div>
+								<div><label><select name="nextPageMengingat[]"><option value="continues">Continues Page</option><option value="new">Next Page</option></select></label></div>
 								<div>
-								<label>Sub level <select name="Mengingat[subLevelMengingat][]">
+								<label>Sub level <select name="subLevelMengingat[]">
 									<option value="0">0</option>
 									<option value="1">1</option>
 									<option value="2">2</option>
@@ -113,14 +113,14 @@
 								</select></label>
 								</div>
 							</td>
-							<td valign="top"><textarea type="text" name="Mengingat[text][]" placeholder="Mengingat" rows="4" cols="50" required></textarea></td>
+							<td valign="top"><textarea type="text" name="Mengingat[]" placeholder="Mengingat" rows="4" cols="50" required></textarea></td>
 						</tr>
 						<tr>
 							<td valign="top">
-								<div><input type="text" name="Mengingat[pointerMengingat][]" placeholder="" size="17"></div>
-								<div><label><select name="Mengingat[nextPageMengingat][]"><option value="continues">Continues Page</option><option value="new">Next Page</option></select></label></div>
+								<div><input type="text" name="pointerMengingat[]" placeholder="" size="17"></div>
+								<div><label><select name="nextPageMengingat[]"><option value="continues">Continues Page</option><option value="new">Next Page</option></select></label></div>
 								<div>
-								<label>Sub level <select name="Mengingat[subLevelMengingat][]">
+								<label>Sub level <select name="subLevelMengingat[]">
 									<option value="0">0</option>
 									<option value="1">1</option>
 									<option value="2">2</option>
@@ -129,14 +129,14 @@
 								</select></label>
 								</div>
 							</td>
-							<td valign="top"><textarea type="text" name="Mengingat[text][]" placeholder="Mengingat" rows="4" cols="50"></textarea></td>
+							<td valign="top"><textarea type="text" name="Mengingat[]" placeholder="Mengingat" rows="4" cols="50"></textarea></td>
 						</tr>
 						<tr>
 							<td valign="top">
-								<div><input type="text" name="Mengingat[pointerMengingat][]" placeholder="" size="17"></div>
-								<div><label><select name="Mengingat[nextPageMengingat][]"><option value="continues">Continues Page</option><option value="new">Next Page</option></select></label></div>
+								<div><input type="text" name="pointerMengingat[]" placeholder="" size="17"></div>
+								<div><label><select name="nextPageMengingat[]"><option value="continues">Continues Page</option><option value="new">Next Page</option></select></label></div>
 								<div>
-								<label>Sub level <select name="Mengingat[subLevelMengingat][]">
+								<label>Sub level <select name="subLevelMengingat[]">
 									<option value="0">0</option>
 									<option value="1">1</option>
 									<option value="2">2</option>
@@ -145,14 +145,14 @@
 								</select></label>
 								</div>
 							</td>
-							<td valign="top"><textarea type="text" name="Mengingat[text][]" placeholder="Mengingat" rows="4" cols="50"></textarea></td>
+							<td valign="top"><textarea type="text" name="Mengingat[]" placeholder="Mengingat" rows="4" cols="50"></textarea></td>
 						</tr>
 						<tr>
 							<td valign="top">
-								<div><input type="text" name="Mengingat[pointerMengingat][]" placeholder="" size="17"></div>
-								<div><label><select name="Mengingat[nextPageMengingat][]"><option value="continues">Continues Page</option><option value="new">Next Page</option></select></label></div>
+								<div><input type="text" name="pointerMengingat[]" placeholder="" size="17"></div>
+								<div><label><select name="nextPageMengingat[]"><option value="continues">Continues Page</option><option value="new">Next Page</option></select></label></div>
 								<div>
-								<label>Sub level <select name="Mengingat[subLevelMengingat][]">
+								<label>Sub level <select name="subLevelMengingat[]">
 									<option value="0">0</option>
 									<option value="1">1</option>
 									<option value="2">2</option>
@@ -161,7 +161,7 @@
 								</select></label>
 								</div>
 							</td>
-							<td valign="top"><textarea type="text" name="Mengingat[text][]" placeholder="Mengingat" rows="4" cols="50"></textarea></td>
+							<td valign="top"><textarea type="text" name="Mengingat[]" placeholder="Mengingat" rows="4" cols="50"></textarea></td>
 						</tr>
 					</table>
 				</fieldset>
@@ -170,10 +170,10 @@
 					<table width="100%" border="0">
 						<tr>
 							<td valign="top">
-								<div><input type="text" name="Memutuskan[pointerMemutuskan][]" placeholder="" size="17"></div>
-								<div><label><select name="Memutuskan[nextPageMemutuskan][]"><option value="continues">Continues Page</option><option value="new">Next Page</option></select></label></div>
+								<div><input type="text" name="pointerMemutuskan[]" placeholder="" size="17"></div>
+								<div><label><select name="nextPageMemutuskan[]"><option value="continues">Continues Page</option><option value="new">Next Page</option></select></label></div>
 								<div>
-								<label>Sub level <select name="Memutuskan[subLevelMemutuskan][]">
+								<label>Sub level <select name="subLevelMemutuskan[]">
 									<option value="0">0</option>
 									<option value="1">1</option>
 									<option value="2">2</option>
@@ -182,14 +182,14 @@
 								</select></label>
 								</div>
 							</td>
-							<td valign="top"><textarea type="text" name="Memutuskan[text][]" placeholder="Memutuskan" rows="4" cols="50" required></textarea></td>
+							<td valign="top"><textarea type="text" name="Memutuskan[]" placeholder="Memutuskan" rows="4" cols="50" required></textarea></td>
 						</tr>
 						<tr>
 							<td valign="top">
-								<div><input type="text" name="Memutuskan[pointerMemutuskan][]" placeholder="" size="17"></div>
-								<div><label><select name="Memutuskan[nextPageMemutuskan][]"><option value="continues">Continues Page</option><option value="new">Next Page</option></select></label></div>
+								<div><input type="text" name="pointerMemutuskan[]" placeholder="" size="17"></div>
+								<div><label><select name="nextPageMemutuskan[]"><option value="continues">Continues Page</option><option value="new">Next Page</option></select></label></div>
 								<div>
-								<label>Sub level <select name="Memutuskan[subLevelMemutuskan][]">
+								<label>Sub level <select name="subLevelMemutuskan[]">
 									<option value="0">0</option>
 									<option value="1">1</option>
 									<option value="2">2</option>
@@ -198,14 +198,14 @@
 								</select></label>
 								</div>
 							</td>
-							<td valign="top"><textarea type="text" name="Memutuskan[text][]" placeholder="Memutuskan" rows="4" cols="50"></textarea></td>
+							<td valign="top"><textarea type="text" name="Memutuskan[]" placeholder="Memutuskan" rows="4" cols="50"></textarea></td>
 						</tr>
 						<tr>
 							<td valign="top">
-								<div><input type="text" name="Memutuskan[pointerMemutuskan][]" placeholder="" size="17"></div>
-								<div><label><select name="Memutuskan[nextPageMemutuskan][]"><option value="0">Continues Page</option><option value="1">Next Page</option></select></label></div>
+								<div><input type="text" name="pointerMemutuskan[]" placeholder="" size="17"></div>
+								<div><label><select name="nextPageMemutuskan[]"><option value="0">Continues Page</option><option value="1">Next Page</option></select></label></div>
 								<div>
-								<label>Sub level <select name="Memutuskan[subLevelMemutuskan][]">
+								<label>Sub level <select name="subLevelMemutuskan[]">
 									<option value="0">0</option>
 									<option value="1">1</option>
 									<option value="2">2</option>
@@ -214,14 +214,14 @@
 								</select></label>
 								</div>
 							</td>
-							<td valign="top"><textarea type="text" name="Memutuskan[text][]" placeholder="Memutuskan" rows="4" cols="50"></textarea></td>
+							<td valign="top"><textarea type="text" name="Memutuskan[]" placeholder="Memutuskan" rows="4" cols="50"></textarea></td>
 						</tr>
 						<tr>
 							<td valign="top">
-								<div><input type="text" name="Memutuskan[pointerMemutuskan][]" placeholder="" size="17"></div>
-								<div><label><select name="Memutuskan[nextPageMemutuskan][]"><option value="continues">Continues Page</option><option value="new">Next Page</option></select></label></div>
+								<div><input type="text" name="pointerMemutuskan[]" placeholder="" size="17"></div>
+								<div><label><select name="nextPageMemutuskan[]"><option value="continues">Continues Page</option><option value="new">Next Page</option></select></label></div>
 								<div>
-								<label>Sub level <select name="Memutuskan[subLevelMemutuskan][]">
+								<label>Sub level <select name="subLevelMemutuskan[]">
 									<option value="0">0</option>
 									<option value="1">1</option>
 									<option value="2">2</option>
@@ -230,7 +230,7 @@
 								</select></label>
 								</div>
 							</td>
-							<td valign="top"><textarea type="text" name="Memutuskan[text][]" placeholder="Memutuskan" rows="4" cols="50"></textarea></td>
+							<td valign="top"><textarea type="text" name="Memutuskan[]" placeholder="Memutuskan" rows="4" cols="50"></textarea></td>
 						</tr>
 					</table>
 				</fieldset>
@@ -243,10 +243,10 @@
 					<table width="100%" border="0">
 						<tr>
 							<td valign="top">
-								<div><input type="text" name="contentPasal1[pointerPasal1][]" placeholder="" size="17"></div>
-								<div><label><select name="contentPasal1[nextPagePasal1][]"><option value="continues">Continues Page</option><option value="new">Next Page</option></select></label></div>
+								<div><input type="text" name="pointerPasal1[]" placeholder="" size="17"></div>
+								<div><label><select name="nextPagePasal1[]"><option value="continues">Continues Page</option><option value="new">Next Page</option></select></label></div>
 								<div>
-								<label>Sub level <select name="contentPasal1[subLevelPasal1][]">
+								<label>Sub level <select name="subLevelPasal1[]">
 									<option value="0">0</option>
 									<option value="1">1</option>
 									<option value="2">2</option>
@@ -255,14 +255,14 @@
 								</select></label>
 								</div>
 							</td>
-							<td valign="top"><textarea type="text" name="contentPasal1[text][]" placeholder="" rows="4" cols="50" required></textarea></td>
+							<td valign="top"><textarea type="text" name="contentPasal1[]" placeholder="" rows="4" cols="50" required></textarea></td>
 						</tr>
 						<tr>
 							<td valign="top">
-								<div><input type="text" name="contentPasal1[pointerPasal1][]" placeholder="" size="17"></div>
-								<div><label><select name="contentPasal1[nextPagePasal1][]"><option value="continues">Continues Page</option><option value="new">Next Page</option></select></label></div>
+								<div><input type="text" name="pointerPasal1[]" placeholder="" size="17"></div>
+								<div><label><select name="nextPagePasal1[]"><option value="continues">Continues Page</option><option value="new">Next Page</option></select></label></div>
 								<div>
-								<label>Sub level <select name="contentPasal1[subLevelPasal1][]">
+								<label>Sub level <select name="subLevelPasal1[]">
 									<option value="0">0</option>
 									<option value="1">1</option>
 									<option value="2">2</option>
@@ -271,14 +271,14 @@
 								</select></label>
 								</div>
 							</td>
-							<td valign="top"><textarea type="text" name="contentPasal1[text][]" placeholder="" rows="4" cols="50" required></textarea></td>
+							<td valign="top"><textarea type="text" name="contentPasal1[]" placeholder="" rows="4" cols="50" required></textarea></td>
 						</tr>
 						<tr>
 							<td valign="top">
-								<div><input type="text" name="contentPasal1[pointerPasal1][]" placeholder="" size="17"></div>
-								<div><label><select name="contentPasal1[nextPagePasal1][]"><option value="continues">Continues Page</option><option value="new">Next Page</option></select></label></div>
+								<div><input type="text" name="pointerPasal1[]" placeholder="" size="17"></div>
+								<div><label><select name="nextPagePasal1[]"><option value="continues">Continues Page</option><option value="new">Next Page</option></select></label></div>
 								<div>
-								<label>Sub level <select name="contentPasal1[subLevelPasal1][]">
+								<label>Sub level <select name="subLevelPasal1[]">
 									<option value="0">0</option>
 									<option value="1">1</option>
 									<option value="2">2</option>
@@ -287,14 +287,14 @@
 								</select></label>
 								</div>
 							</td>
-							<td valign="top"><textarea type="text" name="contentPasal1[text][]" placeholder="" rows="4" cols="50" required></textarea></td>
+							<td valign="top"><textarea type="text" name="contentPasal1[]" placeholder="" rows="4" cols="50" required></textarea></td>
 						</tr>
 						<tr>
 							<td valign="top">
-								<div><input type="text" name="contentPasal1[pointerPasal1][]" placeholder="" size="17"></div>
-								<div><label><select name="contentPasal1[nextPagePasal1][]"><option value="continues">Continues Page</option><option value="new">Next Page</option></select></label></div>
+								<div><input type="text" name="pointerPasal1[]" placeholder="" size="17"></div>
+								<div><label><select name="nextPagePasal1[]"><option value="continues">Continues Page</option><option value="new">Next Page</option></select></label></div>
 								<div>
-								<label>Sub level <select name="contentPasal1[subLevelPasal1][]">
+								<label>Sub level <select name="subLevelPasal1[]">
 									<option value="0">0</option>
 									<option value="1">1</option>
 									<option value="2">2</option>
@@ -303,7 +303,7 @@
 								</select></label>
 								</div>
 							</td>
-							<td valign="top"><textarea type="text" name="contentPasal1[text][]" placeholder="" rows="4" cols="50" required></textarea></td>
+							<td valign="top"><textarea type="text" name="contentPasal1[]" placeholder="" rows="4" cols="50" required></textarea></td>
 						</tr>
 					</table>
 				</fieldset>
@@ -316,10 +316,10 @@
 					<table width="100%" border="0">
 						<tr>
 							<td valign="top">
-								<div><input type="text" name="contentPasal2[pointerPasal2][]" placeholder="" size="17"></div>
-								<div><label><select name="contentPasal2[nextPagePasal2][]"><option value="continues">Continues Page</option><option value="new">Next Page</option></select></label></div>
+								<div><input type="text" name="pointerPasal2[]" placeholder="" size="17"></div>
+								<div><label><select name="nextPagePasal2[]"><option value="continues">Continues Page</option><option value="new">Next Page</option></select></label></div>
 								<div>
-								<label>Sub level <select name="contentPasal2[subLevelPasal2][]">
+								<label>Sub level <select name="subLevelPasal2[]">
 									<option value="0">0</option>
 									<option value="1">1</option>
 									<option value="2">2</option>
@@ -328,14 +328,14 @@
 								</select></label>
 								</div>
 							</td>
-							<td valign="top"><textarea type="text" name="contentPasal2[text][]" placeholder="" rows="4" cols="50" required></textarea></td>
+							<td valign="top"><textarea type="text" name="contentPasal2[]" placeholder="" rows="4" cols="50" required></textarea></td>
 						</tr>
 						<tr>
 							<td valign="top">
-								<div><input type="text" name="contentPasal2[pointerPasal2][]" placeholder="" size="17"></div>
-								<div><label><select name="contentPasal2[nextPagePasal2][]"><option value="continues">Continues Page</option><option value="new">Next Page</option></select></label></div>
+								<div><input type="text" name="pointerPasal2[]" placeholder="" size="17"></div>
+								<div><label><select name="nextPagePasal2[]"><option value="continues">Continues Page</option><option value="new">Next Page</option></select></label></div>
 								<div>
-								<label>Sub level <select name="contentPasal2[subLevelPasal2][]">
+								<label>Sub level <select name="subLevelPasal2[]">
 									<option value="0">0</option>
 									<option value="1">1</option>
 									<option value="2">2</option>
@@ -344,14 +344,14 @@
 								</select></label>
 								</div>
 							</td>
-							<td valign="top"><textarea type="text" name="contentPasal2[text][]" placeholder="" rows="4" cols="50" required></textarea></td>
+							<td valign="top"><textarea type="text" name="contentPasal2[]" placeholder="" rows="4" cols="50" required></textarea></td>
 						</tr>
 						<tr>
 							<td valign="top">
-								<div><input type="text" name="contentPasal2[pointerPasal2][]" placeholder="" size="17"></div>
-								<div><label><select name="contentPasal2[nextPagePasal2][]"><option value="continues">Continues Page</option><option value="new">Next Page</option></select></label></div>
+								<div><input type="text" name="pointerPasal2[]" placeholder="" size="17"></div>
+								<div><label><select name="nextPagePasal2[]"><option value="continues">Continues Page</option><option value="new">Next Page</option></select></label></div>
 								<div>
-								<label>Sub level <select name="contentPasal2[subLevelPasal2][]">
+								<label>Sub level <select name="subLevelPasal2[]">
 									<option value="0">0</option>
 									<option value="1">1</option>
 									<option value="2">2</option>
@@ -360,14 +360,14 @@
 								</select></label>
 								</div>
 							</td>
-							<td valign="top"><textarea type="text" name="contentPasal2[text][]" placeholder="" rows="4" cols="50" required></textarea></td>
+							<td valign="top"><textarea type="text" name="contentPasal2[]" placeholder="" rows="4" cols="50" required></textarea></td>
 						</tr>
 						<tr>
 							<td valign="top">
-								<div><input type="text" name="contentPasal2[pointerPasal2][]" placeholder="" size="17"></div>
-								<div><label><select name="contentPasal2[nextPagePasal2][]"><option value="continues">Continues Page</option><option value="new">Next Page</option></select></label></div>
+								<div><input type="text" name="pointerPasal2[]" placeholder="" size="17"></div>
+								<div><label><select name="nextPagePasal2[]"><option value="continues">Continues Page</option><option value="new">Next Page</option></select></label></div>
 								<div>
-								<label>Sub level <select name="contentPasal2[subLevelPasal2][]">
+								<label>Sub level <select name="subLevelPasal2[]">
 									<option value="0">0</option>
 									<option value="1">1</option>
 									<option value="2">2</option>
@@ -376,7 +376,7 @@
 								</select></label>
 								</div>
 							</td>
-							<td valign="top"><textarea type="text" name="contentPasal2[text][]" placeholder="" rows="4" cols="50" required></textarea></td>
+							<td valign="top"><textarea type="text" name="contentPasal2[]" placeholder="" rows="4" cols="50" required></textarea></td>
 						</tr>
 					</table>
 				</fieldset>
