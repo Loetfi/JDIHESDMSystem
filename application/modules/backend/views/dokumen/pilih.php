@@ -10,7 +10,7 @@
 							</div>
 							<div class="text-center">
 								<p class="text-muted m-b-md"></p> 
-								<a href="<?php echo site_url('Keputusan_mentri_pdf') ?>" class="btn btn-primary btn-xs">Pilih <i class="fa fa-chevron-right"></i></a>
+								<a href="<?php echo site_url('Keputusan_menteri_doc') ?>" class="btn btn-primary btn-xs">Pilih <i class="fa fa-chevron-right"></i></a>
 								<!-- <h2 class="text-center _600">45</h2> -->
 							</div>
 						</div>
