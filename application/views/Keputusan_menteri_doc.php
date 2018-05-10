@@ -220,9 +220,9 @@
 		$('#fieldTabelLampiran'+count).append('<div class="margin-top-5px">'+$(ele).parent().next().html()+'</div>');
 	}
 </script>
-<form class="width-100p" method="POST" action="<?php echo site_url('Keputusan_menteri_doc/sanusi'); ?>" target="_blank">
+<form class="width-100p" method="POST" id="form-keputusan" target="_blank">
 	<div class="form-group" style="margin-bottom:5px">
-		<textarea name="super_judul" class="form-control" autocomplete="off" placeholder="Judul Dokumen" rows="4"><?php echo @$detail_dokumen['judul'][0]['teks']; ?></textarea>
+		<textarea name="super_judul" class="form-control" autocomplete="off" placeholder="Judul Dokumen" rows="4" required><?php echo @$detail_dokumen['judul'][0]['teks']; ?></textarea>
 	</div>
 	<fieldset>
 		<legend>Menimbang</legend>
@@ -244,7 +244,7 @@
 					</select>
 				</div>
 				<div style="width:100%">
-					<textarea type="text" name="<?php echo $namaJenisField; ?>[]" class="form-control" placeholder="Menimbang" rows="6" style="float:left; margin-left:5px; width:75%;"></textarea>
+					<textarea type="text" name="<?php echo $namaJenisField; ?>[]" class="form-control" placeholder="Menimbang" rows="6" style="float:left; margin-left:5px; width:75%;" required></textarea>
 					<a href="javascript:void(0)" onclick="addMenimbang(this, 1)" style="position:absolute; right:5%;"><i class="fa fa-lg fa-plus"></i></a>
 				</div>
 			</div>
@@ -270,12 +270,11 @@
 					</select>
 				</div>
 				<div style="width:100%">
-					<textarea type="text" name="<?php echo $namaJenisField; ?>[]" class="form-control" placeholder="Menimbang" rows="6" style="float:left; margin-left:5px; width:75%;"></textarea>
+					<textarea type="text" name="<?php echo $namaJenisField; ?>[]" class="form-control" placeholder="Menimbang" rows="6" style="float:left; margin-left:5px; width:75%;" required></textarea>
 					<a href="javascript:void(0)" onclick="addMengingat(this, 1)" style="position:absolute; right:5%;"><i class="fa fa-lg fa-plus"></i></a>
 				</div>
 			</div>
 		</div>
-		
 	</fieldset>
 	<fieldset>
 		<legend>Menetapkan</legend>
@@ -297,12 +296,11 @@
 					</select>
 				</div>
 				<div style="width:100%">
-					<textarea type="text" name="<?php echo $namaJenisField; ?>[]" class="form-control" placeholder="Menimbang" rows="6" style="float:left; margin-left:5px; width:75%;"></textarea>
+					<textarea type="text" name="<?php echo $namaJenisField; ?>[]" class="form-control" placeholder="Menimbang" rows="6" style="float:left; margin-left:5px; width:75%;" required></textarea>
 					<a href="javascript:void(0)" onclick="addMemutuskan(this, 1)" style="position:absolute; right:5%;"><i class="fa fa-lg fa-plus"></i></a>
 				</div>
 			</div>
 		</div>
-		
 	</fieldset>
 	<fieldset>
 		<legend>Pasal</legend>
@@ -323,7 +321,7 @@
 					</select>
 				</div>
 				<div style="width:100%">
-					<textarea type="text" name="pasal[]" class="form-control" placeholder="Pasal" rows="6" style="float:left; margin-left:5px; width:75%;"></textarea>
+					<textarea type="text" name="pasal[]" class="form-control" placeholder="Pasal" rows="6" style="float:left; margin-left:5px; width:75%;" required></textarea>
 					<a href="javascript:void(0)" onclick="addPasal(this, 1)" style="position:absolute; right:5%;"><i class="fa fa-lg fa-plus"></i></a>
 				</div>
 			</div>
@@ -332,7 +330,7 @@
 	<fieldset>
 		<legend>Tanda Tangan</legend>
 		<div class="form-group">
-			<textarea name="ttd" class="form-control" autocomplete="off" placeholder="Tanda Tangan" rows="4" style="width:95%"></textarea>
+			<textarea name="ttd" class="form-control" autocomplete="off" placeholder="Tanda Tangan" rows="4" style="width:95%" required></textarea>
 		</div>
 	</fieldset>
 	<fieldset>
@@ -354,7 +352,7 @@
 					</select>
 				</div>
 				<div style="width:100%">
-					<textarea type="text" name="tembusan[]" class="form-control" placeholder="Tembusan" rows="6" style="float:left; margin-left:5px; width:75%;"></textarea>
+					<textarea type="text" name="tembusan[]" class="form-control" placeholder="Tembusan" rows="6" style="float:left; margin-left:5px; width:75%;" required></textarea>
 					<a href="javascript:void(0)" onclick="addTembusan(this, 1)" style="position:absolute; right:5%;"><i class="fa fa-lg fa-plus"></i></a>
 				</div>
 			</div>
@@ -419,5 +417,18 @@
 			</div>
 		</div>
 	</fieldset>
-	<div class="form-group margin-top-5px"><button type="submit" class="btn btn-success">Save</button></div>
+	<div class="form-group margin-top-5px">
+		<button type="submit" class="btn btn-success" id="view_doc">Lihat Dokumen</button>
+		<button type="submit" class="btn btn-success" id="save_doc">Simpan Dokumen</button>
+	</div>
 </form>
+
+<script>
+$("#view_doc").click(function(e) {
+	$("#form-keputusan").attr("action", "<?php echo site_url('keputusan_menteri_doc/sanusi'); ?>");
+});
+
+$("#save_doc").click(function(e) {
+	$("#form-keputusan").attr("action", "<?php echo site_url('keputusan_menteri_doc/save_document'); ?>");
+});
+</script>

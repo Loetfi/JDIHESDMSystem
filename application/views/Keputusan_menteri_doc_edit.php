@@ -220,7 +220,7 @@
 		$('#fieldTabelLampiran'+count).append('<div class="margin-top-5px">'+$(ele).parent().next().html()+'</div>');
 	}
 </script>
-<form class="width-100p" method="POST" action="<?php echo site_url('Keputusan_menteri_doc/sanusi'); ?>" target="_blank">
+<form class="width-100p" method="POST" target="_blank">
 	<input type="hidden" name="id_dokumen" value="<?php echo @$id_dokumen; ?>">
 	<div class="form-group" style="margin-bottom:5px">
 		<textarea name="super_judul" class="form-control" autocomplete="off" placeholder="Judul Dokumen" rows="4"><?php echo @$detail_dokumen['judul'][0]['teks']; ?></textarea>
@@ -507,5 +507,18 @@
 			</div>
 		</div>
 	</fieldset>
-	<div class="form-group margin-top-5px"><button type="submit" class="btn btn-success">Generate</button></div>
+	<div class="form-group margin-top-5px">
+		<button type="submit" class="btn btn-success" id="view_doc">Lihat Dokumen</button>
+		<button type="submit" class="btn btn-success" id="save_doc">Simpan Dokumen</button>
+	</div>
 </form>
+
+<script>
+$("#view_doc").click(function(e) {
+	$("#form-keputusan").attr("action", "<?php echo site_url('keputusan_menteri_doc/sanusi'); ?>");
+});
+
+$("#save_doc").click(function(e) {
+	$("#form-keputusan").attr("action", "<?php echo site_url('keputusan_menteri_doc/save_document'); ?>");
+});
+</script>

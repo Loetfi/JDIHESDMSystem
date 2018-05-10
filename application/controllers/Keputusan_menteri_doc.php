@@ -741,6 +741,48 @@ class Keputusan_menteri_doc extends CI_Controller {
 		
 		
 	}
+	
+	function save_document() {
+		$arrData['judul'] = $_POST['super_judul'];
+		$Menimbang = $_POST['Menimbang'];
+		$pointerMenimbang = $_POST['pointerMenimbang'];
+		$nextPageMenimbang = @$_POST['nextPageMenimbang'];
+		$subLevelMenimbang = @$_POST['subLevelMenimbang'];
+		for($i=0; $i<count($Menimbang); $i++) {
+			$arrData['Menimbang']['pointerMenimbang'][] = $pointerMenimbang[$i];
+			$arrData['Menimbang']['nextPageMenimbang'][] = $nextPageMenimbang[$i];
+			$arrData['Menimbang']['subLevelMenimbang'][] = $subLevelMenimbang[$i];
+			$arrData['Menimbang']['text'][] = $Menimbang[$i];
+		}
+
+		$Mengingat = $_POST['Mengingat'];
+		$pointerMengingat = $_POST['pointerMengingat'];
+		$nextPageMengingat = @$_POST['nextPageMengingat'];
+		$subLevelMengingat = @$_POST['subLevelMengingat'];
+		for($i=0; $i<count($Mengingat); $i++) {
+			$arrData['Mengingat']['pointerMengingat'][] = $pointerMengingat[$i];
+			$arrData['Mengingat']['nextPageMengingat'][] = $nextPageMengingat[$i];
+			$arrData['Mengingat']['subLevelMengingat'][] = $subLevelMengingat[$i];
+			$arrData['Mengingat']['text'][] = $Mengingat[$i];
+		}
+
+		$Memutuskan = $_POST['Memutuskan'];
+		$pointerMemutuskan = $_POST['pointerMemutuskan'];
+		$nextPageMemutuskan = @$_POST['nextPageMemutuskan'];
+		$subLevelMemutuskan = @$_POST['subLevelMemutuskan'];
+		for($i=0; $i<count($Memutuskan); $i++) {
+			$arrData['Memutuskan']['pointerMemutuskan'][] = $pointerMemutuskan[$i];
+			$arrData['Memutuskan']['nextPageMemutuskan'][] = $nextPageMemutuskan[$i];
+			$arrData['Memutuskan']['subLevelMemutuskan'][] = $subLevelMemutuskan[$i];
+			$arrData['Memutuskan']['text'][] = $Memutuskan[$i];
+		}
+		
+		/* Insert Into DB */
+		$id = $this->insert_document();
+		$alldata = $this->insert_detail_document($id, $arrData);
+		echo $alldata;
+	}
+	
 	function insert_document() {
 		$dataDokumen = array(
 			'jenis_dokumen'	=> 'Keputusan Menteri',
