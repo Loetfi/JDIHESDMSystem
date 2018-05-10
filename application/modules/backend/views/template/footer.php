@@ -1,7 +1,7 @@
 
 <!-- build:js scripts/app.min.js -->
 <!-- jQuery -->
-<script src="<?php echo base_url('assetnew/libs/jquery/dist/jquery.js');?> "></script>
+<!--script src="<?php echo base_url('assetnew/libs/jquery/dist/jquery.js');?> "></script-->
 <!-- Bootstrap -->
 <script src="<?php echo base_url('assetnew/libs/tether/dist/js/tether.min.js');?> "></script>
 <script src="<?php echo base_url('assetnew/libs/bootstrap/dist/js/bootstrap.js');?> "></script>
