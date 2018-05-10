@@ -147,7 +147,7 @@
 			minCount = count - 1;
 		//var getColumnArray = Object.keys(eleContent).filter(function(a) {return /^\d+$/.test(a);});
 		eleJudul.children().first().attr('colspan', countColspan);
-		$('<td><input type="text" name="kolom['+minCount+'][header][]" class="form-control float-left" placeholder="Konten" /></td>').insertBefore('.'+lastRowHeader);
+		$('<td><input type="text" name="kolom['+minCount+'][header][]" class="form-control form-control-sm float-left" placeholder="Konten" /></td>').insertBefore('.'+lastRowHeader);
 		for(var i = 0; i < (eleContent.length); i++) {
 			$('<td><input type="text" name="kolom['+minCount+'][content]['+i+'][]" class="form-control float-left" placeholder="Konten" /></td>').insertBefore(".numrows"+i);
 		}
@@ -178,10 +178,10 @@
 		eleContent.attr("onclick","rmRowLampiran(this, "+count+")");
 		var rows = '<tr class="content-tabel'+count+'">';
 		rows += '<td class="firstrow1" align="center" style="min-width:30px">'+
-				'<input type="text" name="kolom['+minCount+'][content]['+numrow+'][]" value="'+countRow.length+'" style="border:none; background:transparent; text-align:center;" size="1" disabled />'+
+				'<input type="text" class="form-control-sm" name="kolom['+minCount+'][content]['+numrow+'][]" value="'+countRow.length+'" style="border:none; background:transparent; text-align:center;" size="1" disabled />'+
 				'</td>';
 		for(var i = 0; i < (countCol.length - 2); i++) {
-			rows += '<td><input type="text" name="kolom['+minCount+'][content]['+numrow+'][]" class="form-control float-left" placeholder="Konten" /></td>';
+			rows += '<td><input type="text" name="kolom['+minCount+'][content]['+numrow+'][]" class="form-control form-control-sm float-left" placeholder="Konten" /></td>';
 		}
 		rows += '<td class="lastrowcontent'+count+' numrows'+numrow+'" align="center">'+
 				'<a href="javascript:void(0)" style="line-height:32px; margin:0 5px;" onclick="addRowLampiran(this, '+count+', '+numrow+')">'+
@@ -383,7 +383,7 @@
 								<thead>
 									<tr id="judul-tabel1">
 										<th colspan="2">
-											<input type="text" name="judultabel[][]" class="form-control float-left" placeholder="Judul Tabel" />
+											<input type="text" name="judultabel[][]" class="form-control form-control-sm float-left" placeholder="Judul Tabel" />
 										</th>
 										<th align="center">
 											<a href="javascript:void(0)" style="line-height:32px; margin:0 auto;" title="Hapus Kolom" onclick="rmKolomLampiran(this, 1)">
@@ -398,10 +398,10 @@
 								<tbody id="tbody-tabel1">
 									<tr class="content-tabel1">
 										<td class="firstrow1" align="center" style="min-width:30px">
-											<input type="text" name="kolom[0][header][]" value="NO" style="border:none; background:transparent; text-align:center;" size="1" disabled />
+											<input type="text" name="kolom[0][header][]" value="NO" style="border:none; background:transparent; text-align:center;" size="2" disabled />
 										</td>
 										<td>
-											<input type="text" name="kolom[0][header][]" class="form-control float-left" placeholder="Konten" />
+											<input type="text" name="kolom[0][header][]" class="form-control form-control-sm float-left" placeholder="Konten" />
 										</td>
 										<td class="lastrowheader1" align="center">
 											<a href="javascript:void(0)" style="line-height:32px; margin:0 5px;" onclick="addRowLampiran(this, 1, 0)">
