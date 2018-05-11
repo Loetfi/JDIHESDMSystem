@@ -10,7 +10,6 @@ class Keputusan_menteri_doc extends CI_Controller {
 
 	function index()
 	{
-		
 		$data = array(
 			'contents'	=> 'Keputusan_menteri_doc', 
 			'title'		=> 'Dashbord Sistem'
@@ -35,17 +34,18 @@ class Keputusan_menteri_doc extends CI_Controller {
 			'headerHeight' => \PhpOffice\PhpWord\Shared\Converter::cmToTwip(1.25),
 			'footerHeight' => \PhpOffice\PhpWord\Shared\Converter::cmToTwip(1.25), 
 		);
+		
 		$thisPageLandscape = array(
-			'paperSize' 	=> 'Folio', 
+			'paperSize'   => 'Folio', 
 			'orientation' => 'landscape',
-			'marginLeft' 	=> \PhpOffice\PhpWord\Shared\Converter::cmToTwip(2.5), 
-			'marginRight' 	=> \PhpOffice\PhpWord\Shared\Converter::cmToTwip(2.5), 
-			'marginTop' 	=> \PhpOffice\PhpWord\Shared\Converter::cmToTwip(2.5), 
-			'marginBottom' 	=> \PhpOffice\PhpWord\Shared\Converter::cmToTwip(4),
+			'marginLeft'   => \PhpOffice\PhpWord\Shared\Converter::cmToTwip(2.5), 
+			'marginRight'   => \PhpOffice\PhpWord\Shared\Converter::cmToTwip(2.5), 
+			'marginTop'   => \PhpOffice\PhpWord\Shared\Converter::cmToTwip(2.5), 
+			'marginBottom'   => \PhpOffice\PhpWord\Shared\Converter::cmToTwip(4),
 			'headerHeight' => \PhpOffice\PhpWord\Shared\Converter::cmToTwip(1.25),
 			'footerHeight' => \PhpOffice\PhpWord\Shared\Converter::cmToTwip(1.25), 
 		);
-		
+
 		// addSection portrait awal
 		$section = $phpWord->addSection($thisPage);
 		
@@ -166,10 +166,6 @@ class Keputusan_menteri_doc extends CI_Controller {
 			}
 		}
 		$arrData['judul'] = $judul;
-		// $arrData['judul']['pointerMenimbang'][] = "";
-		// $arrData['judul']['nextPageMenimbang'][] = "";
-		// $arrData['judul']['subLevelMenimbang'][] = 0;
-		// $arrData['judul']['text'][] = $judul;
 		/* *********************************************************************************** */
 		
 		
@@ -191,7 +187,7 @@ class Keputusan_menteri_doc extends CI_Controller {
 				
 				if (@$nextPageMenimbang[$i] == 'newP') 
 					$section = $phpWord->addSection($thisPage);
-				else if (@$nextPageMenimbang[$i] == 'newL') 
+				else if (@$nextPageMenimbang[$i] == 'newL')
 					$section = $phpWord->addSection($thisPageLandscape);
 				
 				// print_r($Menimbang[$i]);
@@ -265,11 +261,6 @@ class Keputusan_menteri_doc extends CI_Controller {
 				}
 				$theFirst = false;
 			}
-			
-			$arrData['Menimbang']['pointerMenimbang'][] = $pointerMenimbang[$i];
-			$arrData['Menimbang']['nextPageMenimbang'][] = $nextPageMenimbang[$i];
-			$arrData['Menimbang']['subLevelMenimbang'][] = $subLevelMenimbang[$i];
-			$arrData['Menimbang']['text'][] = $Menimbang[$i];
 		}
 		
 		/* *********************************************************************************** */
@@ -289,9 +280,8 @@ class Keputusan_menteri_doc extends CI_Controller {
 				
 				if (@$nextPageMengingat[$i] == 'newP') 
 					$section = $phpWord->addSection($thisPage);
-				else if (@$nextPageMengingat[$i] == 'newL') 
+				else if (@$nextPageMengingat[$i] == 'newL')
 					$section = $phpWord->addSection($thisPageLandscape);
-				
 				
 				// print_r($Mengingat[$i]);
 				// print_r($barisMengingat);
@@ -364,11 +354,6 @@ class Keputusan_menteri_doc extends CI_Controller {
 				}
 				$theFirst = false;
 			}
-			
-			$arrData['Mengingat']['pointerMengingat'][] = $pointerMengingat[$i];
-			$arrData['Mengingat']['nextPageMengingat'][] = $nextPageMengingat[$i];
-			$arrData['Mengingat']['subLevelMengingat'][] = $subLevelMengingat[$i];
-			$arrData['Mengingat']['text'][] = $Mengingat[$i];
 		}
 		/* *********************************************************************************** */
 		
@@ -396,8 +381,8 @@ class Keputusan_menteri_doc extends CI_Controller {
 				
 				if (@$nextPageMemutuskan[$i] == 'newP') 
 					$section = $phpWord->addSection($thisPage);
-				else if (@$nextPageMemutuskan[$i] == 'newL') 
-					$section = $phpWord->addSection($thisPageLandscape);
+				else if (@$nextPageMemutuskan[$i] == 'newL')
+					$section = $phpWord->addSection($thisPageLandscape); 
 				
 				// print_r($Memutuskan[$i]);
 				// print_r($barisMemutuskan);
@@ -471,11 +456,6 @@ class Keputusan_menteri_doc extends CI_Controller {
 				}
 				// $theFirst = false;
 			}
-			
-			$arrData['Memutuskan']['pointerMemutuskan'][] = $pointerMemutuskan[$i];
-			$arrData['Memutuskan']['nextPageMemutuskan'][] = $nextPageMemutuskan[$i];
-			$arrData['Memutuskan']['subLevelMemutuskan'][] = $subLevelMemutuskan[$i];
-			$arrData['Memutuskan']['text'][] = $Memutuskan[$i];
 		}
 		/* *********************************************************************************** */
 		
@@ -701,24 +681,23 @@ class Keputusan_menteri_doc extends CI_Controller {
 		
 		/* *********************************************************************************** */
 		// footer tanda tangan 
-		// echo "<pre>"; 
-		// print_r($arrData); 
-		// $this->insert_detail_document(3, $arrData);
+		// echo "<pre>";  
+		// print_r($arrData);  
+		// $this->insert_detail_document(3, $arrData); 
 		// die();
 		
-		/* Insert Into DB */
-		if (@$_POST['id_dokumen'] == ''){
-			$id = $this->insert_document();
-			$alldata = $this->insert_detail_document($id, $arrData);
-		} else {
-			$id = $_POST['id_dokumen'];
-		}
-		// echo $alldata;
+		if (@$_POST['id_dokumen'] == ''){ 
+			$id = $this->insert_document(); 
+			$alldata = $this->insert_detail_document($id, $arrData); 
+		} else { 
+			$id = $_POST['id_dokumen']; 
+		} 
+		// echo $alldata; 
 		// exit;
 		
 		$objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'Word2007');
 		try {
-			$filename = $id.'_'.time().'_keputusan_menteri_doc.docx';
+			$filename = $id.'_'.time().'_keputusan_menteri_doc.docx'; 
 			$fullPath = './'.$filename;
 			$objWriter->save($fullPath, 'Word2007');
 
@@ -743,7 +722,7 @@ class Keputusan_menteri_doc extends CI_Controller {
 	}
 	
 	function save_document() {
-		$arrData['judul'] = $_POST['super_judul'];
+		$judul = $_POST['super_judul'];
 		$Menimbang = $_POST['Menimbang'];
 		$pointerMenimbang = $_POST['pointerMenimbang'];
 		$nextPageMenimbang = @$_POST['nextPageMenimbang'];
@@ -797,19 +776,19 @@ class Keputusan_menteri_doc extends CI_Controller {
 	function insert_detail_document($id, $insertArray) {
 		foreach(array_keys($insertArray) as $valKeys) {
 			if(is_string($insertArray[$valKeys])) {
-				//echo "String <b>[".$valKeys."]</b>";
-				$dataDetailDokumen = array(
-					'id_dokumen'	=> $id,
-					'jenis_field'	=> $valKeys,
-					'pointer'		=> 0,
-					'layout'		=> '',
-					'sublevel'		=> 0,
-					'teks'			=> $insertArray[$valKeys],
-					'cdate'			=> date('Y-m-d H:i:s'),
-					'status'		=> 0
-				);
-				// // // // print_r($dataDetailDokumen);
-				$queryDetailDokumen = $this->db->insert('dokumen_detail', $dataDetailDokumen);
+				if (@$valPivot[3] != "") {
+					$dataDetailDokumen = array(
+						'id_dokumen'	=> $id,
+						'jenis_field'	=> $valKeys,
+						'pointer'		=> 0,
+						'layout'		=> '',
+						'sublevel'		=> 0,
+						'teks'			=> $insertArray[$valKeys],
+						'cdate'			=> date('Y-m-d H:i:s'),
+						'status'		=> 0
+					);
+					$queryDetailDokumen = $this->db->insert('dokumen_detail', $dataDetailDokumen);
+				}
 			}
 			else if(is_array($insertArray[$valKeys])) {
 				//echo "Array <b>[".$valKeys."]</b>";
@@ -826,20 +805,17 @@ class Keputusan_menteri_doc extends CI_Controller {
 				}
 				
 				foreach($arrPivot as $valPivot) {
-					if (@$valPivot[3] != ""){
-						$dataDetailDokumen = array(
-							'id_dokumen'	=> $id,
-							'jenis_field'	=> $valPivot[4],
-							'pointer'		=> $valPivot[0],
-							'layout'		=> $valPivot[1],
-							'sublevel'		=> $valPivot[2],
-							'teks'			=> $valPivot[3],
-							'cdate'			=> date('Y-m-d H:i:s'),
-							'status'		=> 0
-						);
-						// // // // print_r($dataDetailDokumen);
-						$queryDetailDokumen = $this->db->insert('dokumen_detail', $dataDetailDokumen);
-					}
+					$dataDetailDokumen = array(
+						'id_dokumen'	=> $id,
+						'jenis_field'	=> $valPivot[4],
+						'pointer'		=> $valPivot[0],
+						'layout'		=> $valPivot[1],
+						'sublevel'		=> $valPivot[2],
+						'teks'			=> $valPivot[3],
+						'cdate'			=> date('Y-m-d H:i:s'),
+						'status'		=> 0
+					);
+					$queryDetailDokumen = $this->db->insert('dokumen_detail', $dataDetailDokumen);
 				}
 			}
 		}
@@ -852,33 +828,32 @@ class Keputusan_menteri_doc extends CI_Controller {
 		return array_keys($arr) !== range(0, count($arr) - 1);
 	}
 	
-	function edit($id_dokumen = 0){
-		$data = array(
-			'contents'	=> 'Keputusan_menteri_doc_edit', 
-			'title'		=> 'Dashbord Sistem'
-		);
-		
-		$groupField = array();
-		$sql = "SELECT *
-			FROM dokumen_detail dd
-			LEFT JOIN dokumen d ON dd.id_dokumen = d.id_dokumen
-			WHERE d.id_dokumen = '$id_dokumen'
-			ORDER BY id_detail ASC
-		";
-		$allRow = $this->db->query($sql)->result_array();
-		foreach($allRow as $row){
-			$namaJenisField = $row['jenis_field'];
-			
-			if(!in_array($namaJenisField, $groupField))
-				$groupField[] = $namaJenisField;
-			
-			$detail_dokumen[$namaJenisField][] = $row;
-		}
-		
-		$data['id_dokumen'] = $id_dokumen;
-		$data['detail_dokumen'] = $detail_dokumen;
-		
-		$this->load->view('backend/template/head', $data, FALSE);
+	function edit($id_dokumen = 0) { 
+		$data = array( 
+			'contents'  => 'Keputusan_menteri_doc_edit',  
+			'title'    => 'Dashbord Sistem' 
+		); 
+
+		$groupField = array(); 
+		$sql = "SELECT * 
+				FROM dokumen_detail dd 
+				LEFT JOIN dokumen d ON dd.id_dokumen = d.id_dokumen 
+				WHERE d.id_dokumen = '$id_dokumen' 
+				ORDER BY id_detail ASC"; 
+		$allRow = $this->db->query($sql)->result_array(); 
+		foreach($allRow as $row) { 
+			$namaJenisField = $row['jenis_field']; 
+
+			if(!in_array($namaJenisField, $groupField)) 
+			$groupField[] = $namaJenisField; 
+
+			$detail_dokumen[$namaJenisField][] = $row; 
+		} 
+
+		$data['id_dokumen'] = $id_dokumen; 
+		$data['detail_dokumen'] = $detail_dokumen; 
+
+		$this->load->view('backend/template/head', $data, FALSE); 
 	}
 }
 /* End of file dashboard.php */
