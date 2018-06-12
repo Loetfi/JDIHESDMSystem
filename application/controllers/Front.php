@@ -18,10 +18,18 @@ class Front extends CI_Controller {
             'news'      => $this->Home_model->getNewsperKat(20, 'ID'),
             'gallery'    => $this->Home_model->getMenuDetail(3,'ID',4),
             'footer'    => $this->Home_model->getMenuDetail(4,'ID',1),
-            );
+        );
         // $this->load->view('api/front', $data, FALSE); 
         $this->load->view('mockup/buatdepan', $data, FALSE);
+    }   
+
+
+    public function landing()
+    {  
+        $data['title'] = 'Beranda'; 
+        $this->load->view('front/landing', $data, FALSE);
     }
+
 
 
     public function content()
@@ -37,13 +45,13 @@ class Front extends CI_Controller {
 
     public function page($slugpage)
     { 
-        
+
         if (isset($slugpage)) {
-            
-        $data['content']    = $this->Home_model->gerperpage($slugpage);
-        $data['title']      = 'List Unit';
-        $data['page']       = 'front/page'; 
-        $this->load->view('template/tema', $data);
+
+            $data['content']    = $this->Home_model->gerperpage($slugpage);
+            $data['title']      = 'List Unit';
+            $data['page']       = 'front/page'; 
+            $this->load->view('template/tema', $data);
         } else {
             redirect('','refresh');
         }
