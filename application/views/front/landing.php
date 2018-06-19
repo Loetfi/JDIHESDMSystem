@@ -1,72 +1,171 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html>
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <!-- Meta, title, CSS, favicons, etc. -->
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8">
+<title>Animated Circle Menu Demo</title>
+<style>
+html,
+body { height: 100%; }
 
-  <title> Aplikasi JDIH </title>
-  <link rel="icon" type="image/png" href="images/logopeka.png" />
+body {
+  background: url(https://picsum.photos/1800/1600/?image=888);
+  margin: 0;
+  /*background: linear-gradient(#eeeeee, #cccccc);*/
+  overflow: hidden;
+}
 
+.selector {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 140px;
+  height: 140px;
+  margin-top: -70px;
+  margin-left: -70px;
+}
 
-  <link href="http://sipeka.esdm.go.id/themes/esdm/vendors/login/style.css" rel="stylesheet">
-  <link href="http://sipeka.esdm.go.id/themes/esdm/vendors/bootstrap/dist/css/style_sipeka.css" rel="stylesheet"> 
-  <style>
-  @font-face{
-    font-family:"Haettenschweiler";
-    src:url("http://sipeka.esdm.go.id/themes/esdm/fonts/Haettenschweiler.ttf");
-  }
-  /* For width smaller than 400px: */
-  body {
-    background: url(http://sipeka.esdm.go.id/themes/esdm/images/backgroundsipeka22222.png) no-repeat center center fixed; 
-    font-family: Haettenschweiler;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-  }
+.selector,
+.selector button {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 300;
+}
 
+.selector button {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  background: #428bca;
+  border-radius: 50%;
+  border: 0;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+  box-shadow: 0 3px 3px rgba(0, 0, 0, 0.1);
+  transition: all .1s;
+}
 
-  /* For width 400px and larger: */
-  @media only screen and (min-width: 700px) {
-    body {  
-      background: url(http://sipeka.esdm.go.id/themes/esdm/images/backgroundsipeka22.png) no-repeat center center fixed; 
-      font-family: Haettenschweiler;
-      font-size: 100px;
-      -webkit-background-size: cover;
-      -moz-background-size: cover;
-      -o-background-size: cover;
-      background-size: cover;
-    }  
-  }
+.selector button:hover { background: #3071a9; }
+
+.selector button:focus { outline: none; }
+
+.selector ul {
+  position: absolute;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  top: -20px;
+  right: -20px;
+  bottom: -20px;
+  left: -20px;
+}
+
+.selector li {
+  position: absolute;
+  width: 0;
+  height: 100%;
+  margin: 0 50%;
+  -webkit-transform: rotate(-360deg);
+  transition: all 0.8s ease-in-out;
+}
+
+.selector li input { display: none; }
+
+.selector li input + label {
+  position: absolute;
+  left: 50%;
+  bottom: 100%;
+  width: 0;
+  height: 0;
+  line-height: 1px;
+  margin-left: 0;
+  background: #fff;
+  border-radius: 50%;
+  text-align: center;
+  font-size: 1px;
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: none;
+  transition: all 0.8s ease-in-out, color 0.1s, background 0.1s;
+}
+
+.selector li input + label:hover { background: #f0f0f0; }
+
+.selector li input:checked + label {
+  background: #5cb85c;
+  color: white;
+}
+
+.selector li input:checked + label:hover { background: #449d44; }
+
+.selector.open li input + label {
+  width: 80px;
+  height: 80px;
+  line-height: 80px;
+  margin-left: -40px;
+  box-shadow: 0 3px 3px rgba(0, 0, 0, 0.1);
+  font-size: 14px;
 }
 </style>
 </head>
+ 
+<div class='selector'>
+  <ul>
+    <li>
+      <input id='c1' type='checkbox'>
+      <label for='c1'> <a href="##">FORMAT</a> </label>
+      
+    </li>
+    <li>
+      <input id='c2' type='checkbox'>
+      <label for='c2'>TELAHAAN</label>
+    </li>
 
-<body id="bodi"> 
-  <div class="container"> 
-    <a href="http://sipeka.esdm.go.id/index.php?go=login">
-      <div class="button">
-        <div class="compass"></div>
-        <div class="msg"><font face="Haettenschweiler" size="20">JDIH</div>
-        </div></a>
-      </div> 
-    </body>
+    <li>
+      <input id='c3' type='checkbox'>
+      <label for='c3'>FORUM KORDINASI</label>
+    </li>
+
+    <li>
+      <input id='c3' type='checkbox'>
+      <label for='c4'>DATABASE PROSES</label>
+    </li>
     
-  
-    <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script> 
-    <script src="http://sipeka.esdm.go.id/themes/esdm/vendors/login/js/index.js"></script>
-    <script src="http://sipeka.esdm.go.id/themes/esdm/vendors/jquery/dist/index.js"></script> 
-    </html>
+  </ul>
+  <button>PRODUK HUKUM</button>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script><script>var nbOptions = 8;
+var angleStart = -360;
 
+// jquery rotate animation
+function rotate(li,d) {
+    $({d:angleStart}).animate({d:d}, {
+        step: function(now) {
+            $(li)
+               .css({ transform: 'rotate('+now+'deg)' })
+               .find('label')
+                  .css({ transform: 'rotate('+(-now)+'deg)' });
+        }, duration: 0
+    });
+}
 
-  <script>
-      $('#bodi').on('click',function(){
-        location.href='http://sipeka.esdm.go.id/index.php?go=login';
-      });
-    </script>
+// show / hide the options
+function toggleOptions(s) {
+    $(s).toggleClass('open');
+    var li = $(s).find('li');
+    var deg = $(s).hasClass('half') ? 180/(li.length-1) : 360/li.length;
+    for(var i=0; i<li.length; i++) {
+        var d = $(s).hasClass('half') ? (i*deg)-90 : i*deg;
+        $(s).hasClass('open') ? rotate(li[i],d) : rotate(li[i],angleStart);
+    }
+}
 
+$('.selector button').click(function(e) {
+    toggleOptions($(this).parent());
+});
 
-    <!-- jQuery --> 
+setTimeout(function() { toggleOptions('.selector'); }, 100);//@ sourceURL=pen.js
+</script> 
+
+</body>
+</html>
