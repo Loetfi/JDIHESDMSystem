@@ -32,7 +32,7 @@
     <link rel="stylesheet" href="<?php echo base_url('assets/front/new/css/owl.theme.min.css');?>">
 
     <!-- Custom styles for this template -->
-    <link href="<?php echo base_url('assets/front/new/css/style.css');?>" rel="stylesheet">
+    <link href="<?php echo base_url('assets/front/new/css/style.css?v.2');?>" rel="stylesheet">
 
 
 
