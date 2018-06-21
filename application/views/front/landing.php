@@ -8,7 +8,8 @@ html,
 body { height: 100%; }
 
 body {
-  background: url(https://picsum.photos/1800/1600/?image=888);
+  font-family: 'Oswald', sans-serif;
+  background: #dddddd; /*url(https://picsum.photos/1800/1600/?image=888);*/
   margin: 0;
   /*background: linear-gradient(#eeeeee, #cccccc);*/
   overflow: hidden;
@@ -23,8 +24,8 @@ a{
   position: absolute;
   left: 50%;
   top: 50%;
-  width: 140px;
-  height: 140px;
+  width: 170px;
+  height: 170px;
   margin-top: -70px;
   margin-left: -70px;
 }
@@ -104,9 +105,9 @@ a{
 .selector li input:checked + label:hover { background: #449d44; }
 
 .selector.open li input + label {
-  width: 80px;
-  height: 80px;
-  line-height: 80px;
+  width: 100px;
+  height: 100px;
+  line-height: 100px;
   margin-left: -40px;
   box-shadow: 0 3px 3px rgba(0, 0, 0, 0.1);
   font-size: 14px;
@@ -114,7 +115,7 @@ a{
 </style>
 </head>
  
-<center><img src="<?php echo base_url('assetnew/logo-esdm.png');?>" width="100px" style="padding-top: 20px;"></center>
+<center><img src="https://www.esdm.go.id/themes/v1/img/xlogo-esdm-web.png.pagespeed.ic.rpNW33_FYz.png" style="padding-top: 0px;"></center>
 <div class='selector'>
   <ul>
     <li>
@@ -139,6 +140,9 @@ a{
     
   </ul>
   <button><font color="black">PRODUK HUKUM</font></button>
+</div>
+<div style="">
+  <center><a href="">Aplikasi perancangan produk hukum Kementerian Energi Sumber Daya Manusia</a></center>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script><script>var nbOptions = 8;
 var angleStart = -360;
