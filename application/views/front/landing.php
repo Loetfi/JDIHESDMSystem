@@ -120,7 +120,7 @@ a{
   <ul>
     <li>
       <input id='c1' type='checkbox'>
-      <label for='c1'> <a href="<?php echo site_url('#');?>">FORMAT</a> </label>
+      <label for='c1'> <a href="<?php echo site_url('format');?>">FORMAT</a> </label>
       
     </li>
     <li>

@@ -30,6 +30,16 @@ class Front extends CI_Controller {
         $this->load->view('front/landing', $data, FALSE);
     }
 
+    public function format()
+    {  
+        $data['slider'] = $this->Home_model->getMenuDetail(1,'ID',3);
+        $data['news'] = $this->Home_model->getNewsperKat(20, 'ID' , 3);
+        $data['link'] = $this->Home_model->getMenuDetail(2,'ID',8);
+        $data['title'] = 'Beranda';
+        $data['page'] = 'front/format'; 
+        $this->load->view('template/tema', $data, FALSE);
+    }
+
 
 
     public function content()
