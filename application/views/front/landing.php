@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>Animated Circle Menu Demo</title>
+<title>JDIH ESDM</title>
 <style>
 html,
 body { height: 100%; }
@@ -12,6 +12,11 @@ body {
   margin: 0;
   /*background: linear-gradient(#eeeeee, #cccccc);*/
   overflow: hidden;
+}
+
+a{
+  text-decoration: none;
+  color: black;
 }
 
 .selector {
@@ -27,7 +32,7 @@ body {
 .selector,
 .selector button {
   font-family: 'Oswald', sans-serif;
-  font-weight: 300;
+  font-weight: 300; 
 }
 
 .selector button {
@@ -35,7 +40,7 @@ body {
   width: 100%;
   height: 100%;
   padding: 10px;
-  background: #428bca;
+  background: yellow;
   border-radius: 50%;
   border: 0;
   color: white;
@@ -45,7 +50,7 @@ body {
   transition: all .1s;
 }
 
-.selector button:hover { background: #3071a9; }
+.selector button:hover { background: #f0f0f0;/*#3071a9*/; }
 
 .selector button:focus { outline: none; }
 
@@ -109,30 +114,31 @@ body {
 </style>
 </head>
  
+<center><img src="<?php echo base_url('assetnew/logo-esdm.png');?>" width="100px" style="padding-top: 20px;"></center>
 <div class='selector'>
   <ul>
     <li>
       <input id='c1' type='checkbox'>
-      <label for='c1'> <a href="##">FORMAT</a> </label>
+      <label for='c1'> <a href="<?php echo site_url('#');?>">FORMAT</a> </label>
       
     </li>
     <li>
       <input id='c2' type='checkbox'>
-      <label for='c2'>TELAHAAN</label>
+      <label for='c2'><a href="<?php echo site_url('backend/dashboard');?>">TELAHAAN</a></label>
     </li>
 
     <li>
       <input id='c3' type='checkbox'>
-      <label for='c3'>FORUM KORDINASI</label>
+      <label for='c3'><a href="<?php echo site_url('backend/dashboard');?>">FORUM KORDINASI</a></label>
     </li>
 
     <li>
       <input id='c3' type='checkbox'>
-      <label for='c4'>DATABASE PROSES</label>
+      <label for='c4'><a href="#">DATABASE PROSES</a></label>
     </li>
     
   </ul>
-  <button>PRODUK HUKUM</button>
+  <button><font color="black">PRODUK HUKUM</font></button>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script><script>var nbOptions = 8;
 var angleStart = -360;
