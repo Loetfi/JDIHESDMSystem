@@ -41,9 +41,12 @@ class Welcome extends CI_Controller {
 	public function index($compay_id)
 	{ 
 		$url = 'https://ibid.astra.co.id/backend/service/stok/acv/data/index/'.$compay_id; //linkservice('master')."item/get";  
-		$method = 'GET';
-		$responseApi = $this->admsCurl($url, array(), $method);
-		echo ($responseApi['response']); die();
+		$res = file_get_contents($url);
+		echo $res;
+
+		// $method = 'GET';
+		// $responseApi = $this->admsCurl($url, array(), $method);
+		// echo ($responseApi['response']); die();
 	}
 
 
