@@ -1,4 +1,3 @@
-
 <!-- Main Content Section -->
 <main class="main">
     <!-- <?php print_r($slider); ?> -->

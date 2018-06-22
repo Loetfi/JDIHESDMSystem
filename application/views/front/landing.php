@@ -120,17 +120,17 @@ a{
   <ul>
     <li>
       <input id='c1' type='checkbox'>
-      <label for='c1'> <a href="<?php echo site_url('format');?>">FORMAT</a> </label>
+      <label for='c1'> <a href="<?php echo site_url('backend/dokumen/pilih');?>">FORMAT</a> </label>
       
     </li>
     <li>
       <input id='c2' type='checkbox'>
-      <label for='c2'><a href="<?php echo site_url('backend/dashboard');?>">TELAHAAN</a></label>
+      <label for='c2'><a href="<?php echo site_url('backend/dokumen/');?>">TELAHAAN</a></label>
     </li>
 
     <li>
       <input id='c3' type='checkbox'>
-      <label for='c3'><a href="<?php echo site_url('backend/dashboard');?>">FORUM KORDINASI</a></label>
+      <label for='c3'><a href="<?php echo site_url('forum');?>">FORUM KORDINASI</a></label>
     </li>
 
     <li>
