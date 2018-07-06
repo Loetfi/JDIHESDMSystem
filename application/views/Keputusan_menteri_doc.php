@@ -25,7 +25,8 @@
 							'</div>'+
 							'<div style="width:100%">'+
 								'<textarea type="text" name="Menimbang[]" class="form-control" placeholder="Menimbang" rows="6" style="float:left; margin-left:5px; width:75%;"></textarea>'+
-								'<a href="javascript:void(0)" onclick="addMenimbang(this, '+counts+')" style="position:absolute; right:5%;"><i class="fa fa-lg fa-plus"></i></a>'+
+								'<a href="javascript:void(0)" onclick="addMenimbang(this, '+counts+')" style="position:absolute; right:5%;" title="Tambah Isi"><i class="fa fa-lg fa-plus"></i></a>'+
+								'<a href="javascript:void(0)" style="position:absolute; right:4.7%; margin-top:25px;" title="Tambah Telaah"><i class="fa fa-lg fa-comments-o"></i></a>'+
 							'</div>'+
 						'</div>';
 		$(ele).children().toggleClass('fa-plus fa-minus');
@@ -51,7 +52,8 @@
 							'</div>'+
 							'<div style="width:100%">'+
 								'<textarea type="text" name="Mengingat[]" class="form-control" placeholder="Mengingat" rows="6" style="float:left; margin-left:5px; width:75%;"></textarea>'+
-								'<a href="javascript:void(0)" onclick="addMengingat(this, '+counts+')" style="position:absolute; right:5%;"><i class="fa fa-lg fa-plus"></i></a>'+
+								'<a href="javascript:void(0)" onclick="addMengingat(this, '+counts+')" style="position:absolute; right:5%;" title="Tambah Isi"><i class="fa fa-lg fa-plus"></i></a>'+
+								'<a href="javascript:void(0)" style="position:absolute; right:4.7%; margin-top:25px;" title="Tambah Telaah"><i class="fa fa-lg fa-comments-o"></i></a>'+
 							'</div>'+
 						'</div>';
 		$(ele).children().toggleClass('fa-plus fa-minus');
@@ -77,7 +79,8 @@
 							'</div>'+
 							'<div style="width:100%">'+
 								'<textarea type="text" name="Memutuskan[]" class="form-control" placeholder="Memutuskan/Menetapkan" rows="6" style="float:left; margin-left:5px; width:75%;"></textarea>'+
-								'<a href="javascript:void(0)" onclick="addMemutuskan(this, '+counts+')" style="position:absolute; right:5%;"><i class="fa fa-lg fa-plus"></i></a>'+
+								'<a href="javascript:void(0)" onclick="addMemutuskan(this, '+counts+')" style="position:absolute; right:5%;" title="Tambah Isi"><i class="fa fa-lg fa-plus"></i></a>'+
+								'<a href="javascript:void(0)" style="position:absolute; right:4.7%; margin-top:25px;" title="Tambah Telaah"><i class="fa fa-lg fa-comments-o"></i></a>'+
 							'</div>'+
 						'</div>';
 		$(ele).children().toggleClass('fa-plus fa-minus');
@@ -103,7 +106,8 @@
 							'</div>'+
 							'<div style="width:100%">'+
 								'<textarea type="text" name="pasal[]" class="form-control" placeholder="Pasal" rows="6" style="float:left; margin-left:5px; width:75%;"></textarea>'+
-								'<a href="javascript:void(0)" onclick="addPasal(this, '+counts+')" style="position:absolute; right:5%;"><i class="fa fa-lg fa-plus"></i></a>'+
+								'<a href="javascript:void(0)" onclick="addPasal(this, '+counts+')" style="position:absolute; right:5%;" title="Tambah Diktum"><i class="fa fa-lg fa-plus"></i></a>'+
+								'<a href="javascript:void(0)" style="position:absolute; right:4.7%; margin-top:25px;" title="Tambah Telaah"><i class="fa fa-lg fa-comments-o"></i></a>'+
 							'</div>'+
 						'</div>';
 		$(ele).children().toggleClass('fa-plus fa-minus');
@@ -129,7 +133,8 @@
 							'</div>'+
 							'<div style="width:100%">'+
 								'<textarea type="text" name="tembusan[]" class="form-control" placeholder="Tembusan" rows="6" style="float:left; margin-left:5px; width:75%;"></textarea>'+
-								'<a href="javascript:void(0)" onclick="addTembusan(this, '+counts+')" style="position:absolute; right:5%;"><i class="fa fa-lg fa-plus"></i></a>'+
+								'<a href="javascript:void(0)" onclick="addTembusan(this, '+counts+')" style="position:absolute; right:5%;" title="Tambah Isi"><i class="fa fa-lg fa-plus"></i></a>'+
+								'<a href="javascript:void(0)" style="position:absolute; right:4.7%; margin-top:25px;" title="Tambah Telaah"><i class="fa fa-lg fa-comments-o"></i></a>'+
 							'</div>'+
 						'</div>';
 		$(ele).children().toggleClass('fa-plus fa-minus');
@@ -280,7 +285,8 @@
 				</div>
 				<div style="width:100%">
 					<textarea type="text" name="<?php echo $namaMenimbang; ?>[]" class="form-control" placeholder="Menimbang" rows="6" style="float:left; margin-left:5px; width:75%;" required></textarea>
-					<a href="javascript:void(0)" onclick="addMenimbang(this, 1)" style="position:absolute; right:5%;"><i class="fa fa-lg fa-plus"></i></a>
+					<a href="javascript:void(0)" onclick="addMenimbang(this, 1)" style="position:absolute; right:5%;" title="Tambah Isi"><i class="fa fa-lg fa-plus"></i></a>
+					<a href="javascript:void(0)" style="position:absolute; right:4.7%; margin-top:25px;" title="Tambah Telaah"><i class="fa fa-lg fa-comments-o"></i></a>
 				</div>
 			</div>
 		</div>
@@ -306,7 +312,8 @@
 				</div>
 				<div style="width:100%">
 					<textarea type="text" name="<?php echo $namaMengingat; ?>[]" class="form-control" placeholder="Mengingat" rows="6" style="float:left; margin-left:5px; width:75%;" required></textarea>
-					<a href="javascript:void(0)" onclick="addMengingat(this, 1)" style="position:absolute; right:5%;"><i class="fa fa-lg fa-plus"></i></a>
+					<a href="javascript:void(0)" onclick="addMengingat(this, 1)" style="position:absolute; right:5%;" title="Tambah Isi"><i class="fa fa-lg fa-plus"></i></a>
+					<a href="javascript:void(0)" style="position:absolute; right:4.7%; margin-top:25px;" title="Tambah Telaah"><i class="fa fa-lg fa-comments-o"></i></a>
 				</div>
 			</div>
 		</div>
@@ -332,7 +339,8 @@
 				</div>
 				<div style="width:100%">
 					<textarea type="text" name="<?php echo $namaMemutuskan; ?>[]" class="form-control" placeholder="Memutuskan/Menetapkan" rows="6" style="float:left; margin-left:5px; width:75%;" required></textarea>
-					<a href="javascript:void(0)" onclick="addMemutuskan(this, 1)" style="position:absolute; right:5%;"><i class="fa fa-lg fa-plus"></i></a>
+					<a href="javascript:void(0)" onclick="addMemutuskan(this, 1)" style="position:absolute; right:5%;" title="Tambah Isi"><i class="fa fa-lg fa-plus"></i></a>
+					<a href="javascript:void(0)" style="position:absolute; right:4.7%; margin-top:25px;" title="Tambah Telaah"><i class="fa fa-lg fa-comments-o"></i></a>
 				</div>
 			</div>
 		</div>
@@ -357,7 +365,8 @@
 				</div>
 				<div style="width:100%">
 					<textarea type="text" name="pasal[]" class="form-control" placeholder="Pasal" rows="6" style="float:left; margin-left:5px; width:75%;" required></textarea>
-					<a href="javascript:void(0)" onclick="addPasal(this, 1)" style="position:absolute; right:5%;"><i class="fa fa-lg fa-plus"></i></a>
+					<a href="javascript:void(0)" onclick="addPasal(this, 1)" style="position:absolute; right:5%;" title="Tambah Diktum"><i class="fa fa-lg fa-plus"></i></a>
+					<a href="javascript:void(0)" style="position:absolute; right:4.7%; margin-top:25px;" title="Tambah Telaah"><i class="fa fa-lg fa-comments-o"></i></a>
 				</div>
 			</div>
 		</div>
@@ -366,6 +375,7 @@
 		<legend>Tanda Tangan</legend>
 		<div class="form-group">
 			<textarea name="ttd" class="form-control" autocomplete="off" placeholder="Tanda Tangan" rows="4" style="width:95%" required></textarea>
+			<a href="javascript:void(0)" style="position:absolute; right:4.7%; margin-top:-95px;" title="Tambah Telaah"><i class="fa fa-lg fa-comments-o"></i></a>
 		</div>
 	</fieldset>
 	<fieldset>
@@ -388,7 +398,8 @@
 				</div>
 				<div style="width:100%">
 					<textarea type="text" name="tembusan[]" class="form-control" placeholder="Tembusan" rows="6" style="float:left; margin-left:5px; width:75%;" required></textarea>
-					<a href="javascript:void(0)" onclick="addTembusan(this, 1)" style="position:absolute; right:5%;"><i class="fa fa-lg fa-plus"></i></a>
+					<a href="javascript:void(0)" onclick="addTembusan(this, 1)" style="position:absolute; right:5%;" title="Tambah Isi"><i class="fa fa-lg fa-plus"></i></a>
+					<a href="javascript:void(0)" style="position:absolute; right:4.7%; margin-top:25px;" title="Tambah Telaah"><i class="fa fa-lg fa-comments-o"></i></a>
 				</div>
 			</div>
 		</div>
