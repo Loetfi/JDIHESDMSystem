@@ -139,7 +139,7 @@
 	function remove(ele) {
 		$(ele).parent().parent().parent().remove();
 	}
-	function addKolomLampiran(ele, count) {console.log($(ele).parent().parent().parent().next().children('tr:first').next().children('td:last').hasClass('numrows'));
+	function addKolomLampiran(ele, count) {
 		var eleJudul = $(ele).parent().parent()/*$('#judul-tabel'+count)*/, 
 			eleContent = $(ele).parent().parent().parent().next().children()/*$('.content-tabel'+count)*/, 
 			countColspan = eleJudul.children().prop("colSpan") + 1,
@@ -216,8 +216,38 @@
 		}
 	}
 	function addTabelLampiran(ele, count) {
-		//console.log($(ele).parent().next().wrap('<div></div>').parent().html());
-		$('#fieldTabelLampiran'+count).append('<div class="margin-top-5px">'+$(ele).parent().next().html()+'</div>');
+		var _count = count + 1;
+		var new_table = '<div>'+$(ele).parent().parent().children('div:last').html()+'</div>';
+		
+		var replace_1 = $(new_table).find('table.tabel-lampiran'+count).attr('class', 'tabel-lampiran'+_count);
+		new_table = '<div>'+replace_1.parent().html()+'</div>';
+		
+		var replace_2 = $(new_table).contents().find('tr#judul-tabel'+count).attr('id', 'judul-tabel'+_count);
+		new_table = '<div>'+replace_2.parent().parent().parent().html()+'</div>';
+		
+		var replace_3 = $(new_table).contents().find('tbody#tbody-tabel'+count).attr('id', 'tbody-tabel'+_count);
+		new_table = '<div>'+replace_3.parent().parent().html()+'</div>';
+		
+		var replace_4 = $(new_table).contents().find('tr.content-tabel'+count).attr('class', 'content-tabel'+_count);
+		new_table = '<div>'+replace_4.parent().parent().parent().html()+'</div>';
+		
+		var replace_5 = $(new_table).contents().find('td.lastrowheader'+count).attr('class', 'lastrowheader'+_count);
+		new_table = '<div class="table'+_count+' margin-top-5px">'+replace_5.parent().parent().parent().parent().html()+'</div>';
+		
+		$(ele).attr('onclick', 'addTabelLampiran(this, '+_count+')');
+		$('#fieldTabelLampiran').children().last().after(new_table);
+	}
+	
+	function removeTabelLampiran(ele) {
+		var total_tabel = $('#fieldTabelLampiran').children('div').length;
+		var _count = total_tabel - 1;
+		if(_count > 0) {
+			$('#add_tabel').attr('onclick', 'addTabelLampiran(this, '+_count+')');
+			$('#fieldTabelLampiran').children('div:last').remove();
+		}
+		else {
+			alert('Tidak Dapat Menghapus Tabel Lagi!');
+		}
 	}
 </script>
 <form class="width-100p" method="POST" id="form-keputusan" target="_blank">
@@ -371,13 +401,13 @@
 					<input type="text" name="judul_lampiran[]" class="form-control float-left margin-bottom-5px" placeholder="Judul Lampiran" />
 				</div>
 				<div class="margin-left-right-top70px width-90p">
-					<fieldset class="width-100p" id="fieldTabelLampiran1">
+					<fieldset class="width-100p" id="fieldTabelLampiran">
 						<legend>
 							Tabel
-							<a href="javascript:void(0)" style="font-size:12px; line-height:32px;" title="Hapus Tabel" onclick=""><i class="fa fa-minus-square"></i></a>
-							<a href="javascript:void(0)" style="font-size:12px; line-height:32px;" title="Tambah Tabel" onclick="addTabelLampiran(this, 1)"><i class="fa fa-plus-square"></i></a>
+							<a href="javascript:void(0)" style="font-size:12px; line-height:32px;" title="Hapus Tabel" onclick="removeTabelLampiran(this)"><i class="fa fa-minus-square"></i></a>
+							<a href="javascript:void(0)" style="font-size:12px; line-height:32px;" title="Tambah Tabel" onclick="addTabelLampiran(this, 1)" id="add_tabel"><i class="fa fa-plus-square"></i></a>
 						</legend>
-						<div>
+						<div class="table1">
 							<input type="text" name="subjudul[][]" class="form-control float-left margin-bottom-3px" placeholder="Sub Judul Lampiran" />
 							<table class="tabel-lampiran1" border="1">
 								<thead>
