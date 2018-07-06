@@ -34,7 +34,7 @@
 	}
 	function addMengingat(ele, count) {
 		var counts = count + 1;
-		var element =	'<div class="form-group" id="text-mengingat'+counts+'" style="display:inline-block; margin-top:5px; width:100%;">'+
+		var element =	'<div class="form-group" id="text-Mengingat'+counts+'" style="display:inline-block; margin-top:5px; width:100%;">'+
 							'<div style="float:left; width:20%">'+
 								'<input type="text" name="pointerMengingat[]" class="form-control" placeholder="Pointer" />'+
 								'<select name="nextPageMengingat[]" class="form-control" style="cursor:pointer; margin-top:10px;">'+
@@ -56,11 +56,11 @@
 						'</div>';
 		$(ele).children().toggleClass('fa-plus fa-minus');
 		$(ele).children().attr("onclick","remove(this)");
-		$(element).last().insertAfter($("#text-mengingat"+count));
+		$(element).last().insertAfter($("#text-Mengingat"+count));
 	}
 	function addMemutuskan(ele, count) {
 		var counts = count + 1;
-		var element =	'<div class="form-group" id="text-memutuskan'+counts+'" style="display:inline-block; margin-top:5px; width:100%;">'+
+		var element =	'<div class="form-group" id="text-Memutuskan'+counts+'" style="display:inline-block; margin-top:5px; width:100%;">'+
 							'<div style="float:left; width:20%">'+
 								'<input type="text" name="pointerMemutuskan[]" class="form-control" placeholder="Pointer" />'+
 								'<select name="nextMemutuskan[]" class="form-control" style="cursor:pointer; margin-top:10px;">'+
@@ -82,7 +82,7 @@
 						'</div>';
 		$(ele).children().toggleClass('fa-plus fa-minus');
 		$(ele).children().attr("onclick","remove(this)");
-		$(element).last().insertAfter($("#text-memutuskan"+count));
+		$(element).last().insertAfter($("#text-Memutuskan"+count));
 	}
 	function addPasal(ele, count) {
 		var counts = count + 1;
@@ -230,12 +230,17 @@
 		
 		var replace_4 = $(new_table).contents().find('tr.content-tabel'+count).attr('class', 'content-tabel'+_count);
 		new_table = '<div>'+replace_4.parent().parent().parent().html()+'</div>';
+
+		var replace_5 = $(new_table).contents().find('a#deleteTableLampiran'+count).attr('id', 'deleteTableLampiran'+_count);
+		new_table = '<div>'+replace_5.parent().parent().parent().parent().parent().html()+'</div>';
 		
-		var replace_5 = $(new_table).contents().find('td.lastrowheader'+count).attr('class', 'lastrowheader'+_count);
-		new_table = '<div class="table'+_count+' margin-top-5px">'+replace_5.parent().parent().parent().parent().html()+'</div>';
-		
+		var replace_6 = $(new_table).contents().find('td.lastrowheader'+count).attr('class', 'lastrowheader'+_count);
+		new_table = '<div class="table'+_count+' margin-top-5px">'+replace_6.parent().parent().parent().parent().html()+'</div>';
+
 		$(ele).attr('onclick', 'addTabelLampiran(this, '+_count+')');
+
 		$('#fieldTabelLampiran').children().last().after(new_table);
+		$('a#deleteTableLampiran'+_count).attr('onclick', 'rmKolomLampiran(this, '+_count+')');
 	}
 	
 	function removeTabelLampiran(ele) {
@@ -257,15 +262,15 @@
 	<fieldset>
 		<legend>Menimbang</legend>
 		<div>
-			<?php $namaJenisField = 'Menimbang';?>
-			<div class="form-group" id="text-<?php echo $namaJenisField; ?>1" style="display:inline-block; width:100%;">
+			<?php $namaMenimbang = 'Menimbang';?>
+			<div class="form-group" id="text-<?php echo $namaMenimbang; ?>1" style="display:inline-block; width:100%;">
 				<div style="float:left; width:20%">
-					<input type="text" name="pointer<?php echo $namaJenisField; ?>[]" class="form-control" placeholder="Pointer" />
-					<select name="nextPage<?php echo $namaJenisField; ?>[]" class="form-control" style="cursor:pointer; margin-top:10px;">
+					<input type="text" name="pointer<?php echo $namaMenimbang; ?>[]" class="form-control" placeholder="Pointer" />
+					<select name="nextPage<?php echo $namaMenimbang; ?>[]" class="form-control" style="cursor:pointer; margin-top:10px;">
 						<option value="continue">Continues Page</option>
 						<option value="newP">Next Page Portrait</option><option value="newL">Next Page Landscape</option>
 					</select>
-					<select name="subLevel<?php echo $namaJenisField; ?>[]" class="form-control" style="cursor:pointer; margin-top:10px;">
+					<select name="subLevel<?php echo $namaMenimbang; ?>[]" class="form-control" style="cursor:pointer; margin-top:10px;">
 						<option value="0">SubLevel 0</option>
 						<option value="1">SubLevel 1</option>
 						<option value="2">SubLevel 2</option>
@@ -274,7 +279,7 @@
 					</select>
 				</div>
 				<div style="width:100%">
-					<textarea type="text" name="<?php echo $namaJenisField; ?>[]" class="form-control" placeholder="Menimbang" rows="6" style="float:left; margin-left:5px; width:75%;" required></textarea>
+					<textarea type="text" name="<?php echo $namaMenimbang; ?>[]" class="form-control" placeholder="Menimbang" rows="6" style="float:left; margin-left:5px; width:75%;" required></textarea>
 					<a href="javascript:void(0)" onclick="addMenimbang(this, 1)" style="position:absolute; right:5%;"><i class="fa fa-lg fa-plus"></i></a>
 				</div>
 			</div>
@@ -283,15 +288,15 @@
 	<fieldset>
 		<legend>Mengingat</legend>
 		<div>
-			<?php $namaJenisField = 'Mengingat'; ?>
-			<div class="form-group" id="text-<?php echo $namaJenisField; ?>1" style="display:inline-block; width:100%;">
+			<?php $namaMengingat = 'Mengingat'; ?>
+			<div class="form-group" id="text-<?php echo $namaMengingat; ?>1" style="display:inline-block; width:100%;">
 				<div style="float:left; width:20%">
-					<input type="text" name="pointer<?php echo $namaJenisField; ?>[]" class="form-control" placeholder="Pointer" />
-					<select name="nextPage<?php echo $namaJenisField; ?>[]" class="form-control" style="cursor:pointer; margin-top:10px;">
+					<input type="text" name="pointer<?php echo $namaMengingat; ?>[]" class="form-control" placeholder="Pointer" />
+					<select name="nextPage<?php echo $namaMengingat; ?>[]" class="form-control" style="cursor:pointer; margin-top:10px;">
 						<option value="continue">Continues Page</option>
 						<option value="newP">Next Page Portrait</option><option value="newL">Next Page Landscape</option>
 					</select>
-					<select name="subLevel<?php echo $namaJenisField; ?>[]" class="form-control" style="cursor:pointer; margin-top:10px;">
+					<select name="subLevel<?php echo $namaMengingat; ?>[]" class="form-control" style="cursor:pointer; margin-top:10px;">
 						<option value="0">SubLevel 0</option>
 						<option value="1">SubLevel 1</option>
 						<option value="2">SubLevel 2</option>
@@ -300,7 +305,7 @@
 					</select>
 				</div>
 				<div style="width:100%">
-					<textarea type="text" name="<?php echo $namaJenisField; ?>[]" class="form-control" placeholder="Menimbang" rows="6" style="float:left; margin-left:5px; width:75%;" required></textarea>
+					<textarea type="text" name="<?php echo $namaMengingat; ?>[]" class="form-control" placeholder="Mengingat" rows="6" style="float:left; margin-left:5px; width:75%;" required></textarea>
 					<a href="javascript:void(0)" onclick="addMengingat(this, 1)" style="position:absolute; right:5%;"><i class="fa fa-lg fa-plus"></i></a>
 				</div>
 			</div>
@@ -309,15 +314,15 @@
 	<fieldset>
 		<legend>Menetapkan</legend>
 		<div>
-			<?php $namaJenisField = 'Memutuskan'; ?>
-			<div class="form-group" id="text-<?php echo $namaJenisField; ?>1" style="display:inline-block; width:100%;">
+			<?php $namaMemutuskan = 'Memutuskan'; ?>
+			<div class="form-group" id="text-<?php echo $namaMemutuskan; ?>1" style="display:inline-block; width:100%;">
 				<div style="float:left; width:20%">
-					<input type="text" name="pointer<?php echo $namaJenisField; ?>[]" class="form-control" placeholder="Pointer" />
-					<select name="nextPage<?php echo $namaJenisField; ?>[]" class="form-control" style="cursor:pointer; margin-top:10px;">
+					<input type="text" name="pointer<?php echo $namaMemutuskan; ?>[]" class="form-control" placeholder="Pointer" />
+					<select name="nextPage<?php echo $namaMemutuskan; ?>[]" class="form-control" style="cursor:pointer; margin-top:10px;">
 						<option value="continue">Continues Page</option>
 						<option value="newP">Next Page Portrait</option><option value="newL">Next Page Landscape</option>
 					</select>
-					<select name="subLevel<?php echo $namaJenisField; ?>[]" class="form-control" style="cursor:pointer; margin-top:10px;">
+					<select name="subLevel<?php echo $namaMemutuskan; ?>[]" class="form-control" style="cursor:pointer; margin-top:10px;">
 						<option value="0">SubLevel 0</option>
 						<option value="1">SubLevel 1</option>
 						<option value="2">SubLevel 2</option>
@@ -326,14 +331,14 @@
 					</select>
 				</div>
 				<div style="width:100%">
-					<textarea type="text" name="<?php echo $namaJenisField; ?>[]" class="form-control" placeholder="Menimbang" rows="6" style="float:left; margin-left:5px; width:75%;" required></textarea>
+					<textarea type="text" name="<?php echo $namaMemutuskan; ?>[]" class="form-control" placeholder="Memutuskan/Menetapkan" rows="6" style="float:left; margin-left:5px; width:75%;" required></textarea>
 					<a href="javascript:void(0)" onclick="addMemutuskan(this, 1)" style="position:absolute; right:5%;"><i class="fa fa-lg fa-plus"></i></a>
 				</div>
 			</div>
 		</div>
 	</fieldset>
 	<fieldset>
-		<legend>Pasal</legend>
+		<legend>Diktum</legend>
 		<div>
 			<div class="form-group" id="text-pasal1">
 				<div style="float:left; width:20%">
@@ -416,7 +421,7 @@
 											<input type="text" name="judultabel[][]" class="form-control form-control-sm float-left" placeholder="Judul Tabel" />
 										</th>
 										<th align="center">
-											<a href="javascript:void(0)" style="line-height:32px; margin:0 auto;" title="Hapus Kolom" onclick="rmKolomLampiran(this, 1)">
+											<a href="javascript:void(0)" style="line-height:32px; margin:0 auto;" title="Hapus Kolom" onclick="rmKolomLampiran(this, 1)" id="deleteTableLampiran1">
 												<i class="fa fa-minus-square"></i>
 											</a>
 											<a href="javascript:void(0)" style="line-height:32px; margin:0 auto;" title="Tambah Kolom" onclick="addKolomLampiran(this, 1)">
