@@ -75,7 +75,7 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'server.awanesia.com',
+	'hostname' => 'localhost',
 	'username' => 'root',
 	'password' => 'm0v3lo0t',
 	'database' => 'project_jdih',
