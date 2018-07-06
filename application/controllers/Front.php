@@ -7,6 +7,7 @@ class Front extends CI_Controller {
     {
         parent::__construct();
         $this->load->model('Home_model');
+        
     }
 
     public function index()

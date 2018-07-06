@@ -36,7 +36,7 @@ a{
   font-weight: 300; 
 }
 
-.selector button {
+.selector button { /**/
   position: relative;
   width: 100%;
   height: 100%;
@@ -119,9 +119,13 @@ a{
 <div class='selector'>
   <ul>
     <li>
+      <input id='c5' type='checkbox'>
+      <label for='c5'> <a href="<?php echo site_url('backend/dokumen/pilih');?>">Quick Format</a> </label>
+    </li>
+    <li>
       <input id='c1' type='checkbox'>
+      <!-- sfsdf -->
       <label for='c1'> <a href="<?php echo site_url('backend/dokumen/pilih');?>">FORMAT</a> </label>
-      
     </li>
     <li>
       <input id='c2' type='checkbox'>

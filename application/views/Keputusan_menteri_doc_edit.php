@@ -366,6 +366,13 @@
 					</a>
 				</div>
 			</div>
+			<div class="form-group" style="width:100%;">
+				
+				<textarea type="text" name="Komentar_<?php echo $namaJenisField; ?>[]" class="form-control" rows="2" id="textKomentar-<?php echo $namaJenisField.($idxField +1); ?>" style="display:none; margin-left:5px; width:95%;" placeholder="Komentar <?php echo $namaJenisField.($idxField +1); ?>"></textarea>
+				<button type="button" id="btnKomentar-<?php echo $namaJenisField.($idxField +1); ?>" targetKomentar="textKomentar-<?php echo $namaJenisField.($idxField +1); ?>" onclick="addKomentar(this.id)" style="float: left">
+					<i class="fa fa-lg fa-plus <?php echo ($idxField +1) < count(@$detail_dokumen[$namaJenisField]) ? 'fa-minus' : ''; ?>"></i>
+				</button>
+			</div>
 				<?php }
 			} else { ?>
 			<div class="form-group" id="text-<?php echo $namaJenisField; ?>1" style="display:inline-block; width:100%;">
@@ -521,4 +528,9 @@ $("#view_doc").click(function(e) {
 $("#save_doc").click(function(e) {
 	$("#form-keputusan").attr("action", "<?php echo site_url('keputusan_menteri_doc/save_document'); ?>");
 });
+function addKomentar(thisId){
+	idTarget  = $('#'+thisId).attr('targetKomentar');
+	$('#'+idTarget).show(1000);
+	return false;
+}
 </script>
