@@ -1,11 +1,15 @@
-
+<style>
+	.display-inline-block {
+		display: inline-block;
+	}
+</style>
 
 <div class="row-col">
 
 	<div class="col-lg b-r"> 
 		<div class="padding">
 			<div class="row">
-				<div class="box">
+				<div class="box display-inline-block">
 					<div class="box-header b-b">
 						<h3>Format</h3>
 					</div>
