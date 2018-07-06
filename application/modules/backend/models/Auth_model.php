@@ -9,7 +9,7 @@ class Auth_model extends CI_Model {
 			return true;
 		} else {
 			$this->session->set_flashdata('message', '<div class="alert alert-danger">Pengguna tidak ditemukan</div>');
-			return false;
+			return false;  //
 		} 
 	}
 	

@@ -10,8 +10,9 @@
         <!-- <span class="hidden-folded inline">Smart Legal Drafting - KESDM</span>  -->
       </a>
       <!-- / brand -->
+      <!--  -->
     </div>
-  </div>
+  </div> 
 </div>
 <div class="b-t">
   <div class="center-block w-xxl w-auto-xs p-y-md text-center box">

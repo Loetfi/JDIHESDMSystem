@@ -36,7 +36,7 @@ a{
   font-weight: 300; 
 }
 
-.selector button {
+.selector button { /**/
   position: relative;
   width: 100%;
   height: 100%;
