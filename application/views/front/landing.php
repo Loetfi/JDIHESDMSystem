@@ -115,7 +115,7 @@ a{
 </style>
 </head>
  
-<!-- <center><img src="https://www.esdm.go.id/themes/v1/img/xlogo-esdm-web.png.pagespeed.ic.rpNW33_FYz.png" style="padding-top: 0px;"></center> -->
+<center><img src="https://www.esdm.go.id/themes/v1/img/xlogo-esdm-web.png.pagespeed.ic.rpNW33_FYz.png" style="padding-top: 0px;"></center>
 <div class='selector'>
   <ul>
     <li>
@@ -124,6 +124,7 @@ a{
     </li>
     <li>
       <input id='c1' type='checkbox'>
+      <!-- sfsdf -->
       <label for='c1'> <a href="<?php echo site_url('backend/dokumen/pilih');?>">FORMAT</a> </label>
     </li>
     <li>
