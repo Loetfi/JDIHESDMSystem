@@ -293,8 +293,13 @@
 					<a href="javascript:void(0)" onclick="addMenimbang(this, <?php echo ($idxField +1); ?>)" style="position:absolute; right:5%;">
 						<i class="fa fa-lg fa-plus <?php echo ($idxField +1) < count(@$detail_dokumen[$namaJenisField]) ? 'fa-minus' : ''; ?>"></i>
 					</a>
-					<a href="javascript:void(0)" style="position:absolute; right:4.7%; margin-top:25px;" title="Tambah Telaah"><i class="fa fa-lg fa-comments-o"></i></a>
+					<a href="javascript:void(0)" id="btnKomentar-<?php echo $namaJenisField.($idxField+1); ?>" targetKomentar="textKomentar-<?php echo $namaJenisField.($idxField+1); ?>" onclick="addKomentar(this.id)" style="position:absolute; right:4.7%; margin-top:25px;" title="Tambah Telaah">
+						<i class="fa fa-lg <?php echo ($idxField+1) < count(@$detail_dokumen[$namaJenisField]) ? 'fa-comments-o' : 'fa-comments'; ?>"></i>
+					</a>
 				</div>
+			</div>
+			<div class="form-group" style="width:100%; top:-15px; position:relative;">
+				<textarea type="text" name="Komentar_<?php echo $namaJenisField; ?>[]" class="form-control" rows="2" id="textKomentar-<?php echo $namaJenisField.($idxField+1); ?>" style="display:none; width:95%;" placeholder="Komentar <?php echo $namaJenisField.($idxField+1); ?>"></textarea>
 			</div>
 				<?php }
 			} else { ?>
@@ -350,8 +355,13 @@
 					<a href="javascript:void(0)" onclick="addMengingat(this, <?php echo ($idxField +1); ?>)" style="position:absolute; right:5%;">
 						<i class="fa fa-lg fa-plus <?php echo ($idxField +1) < count(@$detail_dokumen[$namaJenisField]) ? 'fa-minus' : ''; ?>"></i>
 					</a>
-					<a href="javascript:void(0)" style="position:absolute; right:4.7%; margin-top:25px;" title="Tambah Telaah"><i class="fa fa-lg fa-comments-o"></i></a>
+					<a href="javascript:void(0)" id="btnKomentar-<?php echo $namaJenisField.($idxField+1); ?>" targetKomentar="textKomentar-<?php echo $namaJenisField.($idxField+1); ?>" onclick="addKomentar(this.id)" style="position:absolute; right:4.7%; margin-top:25px;" title="Tambah Telaah">
+						<i class="fa fa-lg <?php echo ($idxField+1) < count(@$detail_dokumen[$namaJenisField]) ? 'fa-comments-o' : 'fa-comments'; ?>"></i>
+					</a>
 				</div>
+			</div>
+			<div class="form-group" style="width:100%; top:-15px; position:relative;">
+				<textarea type="text" name="Komentar_<?php echo $namaJenisField; ?>[]" class="form-control" rows="2" id="textKomentar-<?php echo $namaJenisField.($idxField+1); ?>" style="display:none; width:95%;" placeholder="Komentar <?php echo $namaJenisField.($idxField+1); ?>"></textarea>
 			</div>
 				<?php }
 			} else { ?>
@@ -405,18 +415,16 @@
 				</div>
 				<div style="width:100%">
 					<textarea type="text" name="<?php echo $namaJenisField; ?>[]" class="form-control" placeholder="Menimbang" rows="6" style="float:left; margin-left:5px; width:75%;"><?php echo @$detail_dokumen[$namaJenisField][$idxField]['teks']; ?></textarea>
-					<a href="javascript:void(0)" onclick="addMemutuskan(this, <?php echo ($idxField +1); ?>)" style="position:absolute; right:5%;">
-						<i class="fa fa-lg fa-plus <?php echo ($idxField +1) < count(@$detail_dokumen[$namaJenisField]) ? 'fa-minus' : ''; ?>"></i>
+					<a href="javascript:void(0)" onclick="addMemutuskan(this, <?php echo ($idxField+1); ?>)" style="position:absolute; right:5%;">
+						<i class="fa fa-lg fa-plus <?php echo ($idxField+1) < count(@$detail_dokumen[$namaJenisField]) ? 'fa-minus' : ''; ?>"></i>
 					</a>
-					<a href="javascript:void(0)" style="position:absolute; right:4.7%; margin-top:25px;" title="Tambah Telaah"><i class="fa fa-lg fa-comments-o"></i></a>
+					<a href="javascript:void(0)" id="btnKomentar-<?php echo $namaJenisField.($idxField +1); ?>" targetKomentar="textKomentar-<?php echo $namaJenisField.($idxField+1); ?>" onclick="addKomentar(this.id)" style="position:absolute; right:4.7%; margin-top:25px;" title="Tambah Telaah">
+						<i class="fa fa-lg <?php echo ($idxField+1) < count(@$detail_dokumen[$namaJenisField]) ? 'fa-comments-o' : 'fa-comments'; ?>"></i>
+					</a>
 				</div>
 			</div>
-			<div class="form-group" style="width:100%;">
-				
-				<textarea type="text" name="Komentar_<?php echo $namaJenisField; ?>[]" class="form-control" rows="2" id="textKomentar-<?php echo $namaJenisField.($idxField +1); ?>" style="display:none; margin-left:5px; width:95%;" placeholder="Komentar <?php echo $namaJenisField.($idxField +1); ?>"></textarea>
-				<button type="button" id="btnKomentar-<?php echo $namaJenisField.($idxField +1); ?>" targetKomentar="textKomentar-<?php echo $namaJenisField.($idxField +1); ?>" onclick="addKomentar(this.id)" style="float: left">
-					<i class="fa fa-lg fa-plus <?php echo ($idxField +1) < count(@$detail_dokumen[$namaJenisField]) ? 'fa-minus' : ''; ?>"></i>
-				</button>
+			<div class="form-group" style="width:100%; top:-15px; position:relative;">
+				<textarea type="text" name="Komentar_<?php echo $namaJenisField; ?>[]" class="form-control" rows="2" id="textKomentar-<?php echo $namaJenisField.($idxField+1); ?>" style="display:none; width:95%;" placeholder="Komentar <?php echo $namaJenisField.($idxField+1); ?>"></textarea>
 			</div>
 				<?php }
 			} else { ?>
@@ -580,9 +588,14 @@ $("#view_doc").click(function(e) {
 $("#save_doc").click(function(e) {
 	$("#form-keputusan").attr("action", "<?php echo site_url('keputusan_menteri_doc/save_document'); ?>");
 });
-function addKomentar(thisId){
+function addKomentar(thisId) {
 	idTarget  = $('#'+thisId).attr('targetKomentar');
-	$('#'+idTarget).show(1000);
+	if($('#'+idTarget).css('display') === 'none') {
+		$('#'+idTarget).show(400);
+	}
+	else if($('#'+idTarget).css('display') === 'block') {
+		$('#'+idTarget).hide(400);
+	}
 	return false;
 }
 </script>
