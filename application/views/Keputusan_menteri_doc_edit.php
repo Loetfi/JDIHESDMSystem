@@ -25,7 +25,8 @@
 							'</div>'+
 							'<div style="width:100%">'+
 								'<textarea type="text" name="Menimbang[]" class="form-control" placeholder="Menimbang" rows="6" style="float:left; margin-left:5px; width:75%;"></textarea>'+
-								'<a href="javascript:void(0)" onclick="addMenimbang(this, '+counts+')" style="position:absolute; right:5%;"><i class="fa fa-lg fa-plus"></i></a>'+
+								'<a href="javascript:void(0)" onclick="addMenimbang(this, '+counts+')" style="position:absolute; right:5%;" title="Tambah Isi"><i class="fa fa-lg fa-plus"></i></a>'+
+								'<a href="javascript:void(0)" style="position:absolute; right:4.7%; margin-top:25px;" title="Tambah Telaah"><i class="fa fa-lg fa-comments-o"></i></a>'+
 							'</div>'+
 						'</div>';
 		$(ele).children().toggleClass('fa-plus fa-minus');
@@ -34,7 +35,7 @@
 	}
 	function addMengingat(ele, count) {
 		var counts = count + 1;
-		var element =	'<div class="form-group" id="text-mengingat'+counts+'" style="display:inline-block; margin-top:5px; width:100%;">'+
+		var element =	'<div class="form-group" id="text-Mengingat'+counts+'" style="display:inline-block; margin-top:5px; width:100%;">'+
 							'<div style="float:left; width:20%">'+
 								'<input type="text" name="pointerMengingat[]" class="form-control" placeholder="Pointer" />'+
 								'<select name="nextPageMengingat[]" class="form-control" style="cursor:pointer; margin-top:10px;">'+
@@ -51,16 +52,17 @@
 							'</div>'+
 							'<div style="width:100%">'+
 								'<textarea type="text" name="Mengingat[]" class="form-control" placeholder="Mengingat" rows="6" style="float:left; margin-left:5px; width:75%;"></textarea>'+
-								'<a href="javascript:void(0)" onclick="addMengingat(this, '+counts+')" style="position:absolute; right:5%;"><i class="fa fa-lg fa-plus"></i></a>'+
+								'<a href="javascript:void(0)" onclick="addMengingat(this, '+counts+')" style="position:absolute; right:5%;" title="Tambah Isi"><i class="fa fa-lg fa-plus"></i></a>'+
+								'<a href="javascript:void(0)" style="position:absolute; right:4.7%; margin-top:25px;" title="Tambah Telaah"><i class="fa fa-lg fa-comments-o"></i></a>'+
 							'</div>'+
 						'</div>';
 		$(ele).children().toggleClass('fa-plus fa-minus');
 		$(ele).children().attr("onclick","remove(this)");
-		$(element).last().insertAfter($("#text-mengingat"+count));
+		$(element).last().insertAfter($("#text-Mengingat"+count));
 	}
 	function addMemutuskan(ele, count) {
 		var counts = count + 1;
-		var element =	'<div class="form-group" id="text-memutuskan'+counts+'" style="display:inline-block; margin-top:5px; width:100%;">'+
+		var element =	'<div class="form-group" id="text-Memutuskan'+counts+'" style="display:inline-block; margin-top:5px; width:100%;">'+
 							'<div style="float:left; width:20%">'+
 								'<input type="text" name="pointerMemutuskan[]" class="form-control" placeholder="Pointer" />'+
 								'<select name="nextMemutuskan[]" class="form-control" style="cursor:pointer; margin-top:10px;">'+
@@ -77,12 +79,13 @@
 							'</div>'+
 							'<div style="width:100%">'+
 								'<textarea type="text" name="Memutuskan[]" class="form-control" placeholder="Memutuskan/Menetapkan" rows="6" style="float:left; margin-left:5px; width:75%;"></textarea>'+
-								'<a href="javascript:void(0)" onclick="addMemutuskan(this, '+counts+')" style="position:absolute; right:5%;"><i class="fa fa-lg fa-plus"></i></a>'+
+								'<a href="javascript:void(0)" onclick="addMemutuskan(this, '+counts+')" style="position:absolute; right:5%;" title="Tambah Isi"><i class="fa fa-lg fa-plus"></i></a>'+
+								'<a href="javascript:void(0)" style="position:absolute; right:4.7%; margin-top:25px;" title="Tambah Telaah"><i class="fa fa-lg fa-comments-o"></i></a>'+
 							'</div>'+
 						'</div>';
 		$(ele).children().toggleClass('fa-plus fa-minus');
 		$(ele).children().attr("onclick","remove(this)");
-		$(element).last().insertAfter($("#text-memutuskan"+count));
+		$(element).last().insertAfter($("#text-Memutuskan"+count));
 	}
 	function addPasal(ele, count) {
 		var counts = count + 1;
@@ -103,7 +106,8 @@
 							'</div>'+
 							'<div style="width:100%">'+
 								'<textarea type="text" name="pasal[]" class="form-control" placeholder="Pasal" rows="6" style="float:left; margin-left:5px; width:75%;"></textarea>'+
-								'<a href="javascript:void(0)" onclick="addPasal(this, '+counts+')" style="position:absolute; right:5%;"><i class="fa fa-lg fa-plus"></i></a>'+
+								'<a href="javascript:void(0)" onclick="addPasal(this, '+counts+')" style="position:absolute; right:5%;" title="Tambah Isi"><i class="fa fa-lg fa-plus"></i></a>'+
+								'<a href="javascript:void(0)" style="position:absolute; right:4.7%; margin-top:25px;" title="Tambah Telaah"><i class="fa fa-lg fa-comments-o"></i></a>'+
 							'</div>'+
 						'</div>';
 		$(ele).children().toggleClass('fa-plus fa-minus');
@@ -129,7 +133,8 @@
 							'</div>'+
 							'<div style="width:100%">'+
 								'<textarea type="text" name="tembusan[]" class="form-control" placeholder="Tembusan" rows="6" style="float:left; margin-left:5px; width:75%;"></textarea>'+
-								'<a href="javascript:void(0)" onclick="addTembusan(this, '+counts+')" style="position:absolute; right:5%;"><i class="fa fa-lg fa-plus"></i></a>'+
+								'<a href="javascript:void(0)" onclick="addTembusan(this, '+counts+')" style="position:absolute; right:5%;" title="Tambah Isi"><i class="fa fa-lg fa-plus"></i></a>'+
+								'<a href="javascript:void(0)" style="position:absolute; right:4.7%; margin-top:25px;" title="Tambah Telaah"><i class="fa fa-lg fa-comments-o"></i></a>'+
 							'</div>'+
 						'</div>';
 		$(ele).children().toggleClass('fa-plus fa-minus');
@@ -216,8 +221,43 @@
 		}
 	}
 	function addTabelLampiran(ele, count) {
-		//console.log($(ele).parent().next().wrap('<div></div>').parent().html());
-		$('#fieldTabelLampiran'+count).append('<div class="margin-top-5px">'+$(ele).parent().next().html()+'</div>');
+		var _count = count + 1;
+		var new_table = '<div>'+$(ele).parent().parent().children('div:last').html()+'</div>';
+		
+		var replace_1 = $(new_table).find('table.tabel-lampiran'+count).attr('class', 'tabel-lampiran'+_count);
+		new_table = '<div>'+replace_1.parent().html()+'</div>';
+		
+		var replace_2 = $(new_table).contents().find('tr#judul-tabel'+count).attr('id', 'judul-tabel'+_count);
+		new_table = '<div>'+replace_2.parent().parent().parent().html()+'</div>';
+		
+		var replace_3 = $(new_table).contents().find('tbody#tbody-tabel'+count).attr('id', 'tbody-tabel'+_count);
+		new_table = '<div>'+replace_3.parent().parent().html()+'</div>';
+		
+		var replace_4 = $(new_table).contents().find('tr.content-tabel'+count).attr('class', 'content-tabel'+_count);
+		new_table = '<div>'+replace_4.parent().parent().parent().html()+'</div>';
+
+		var replace_5 = $(new_table).contents().find('a#deleteTableLampiran'+count).attr('id', 'deleteTableLampiran'+_count);
+		new_table = '<div>'+replace_5.parent().parent().parent().parent().parent().html()+'</div>';
+		
+		var replace_6 = $(new_table).contents().find('td.lastrowheader'+count).attr('class', 'lastrowheader'+_count);
+		new_table = '<div class="table'+_count+' margin-top-5px">'+replace_6.parent().parent().parent().parent().html()+'</div>';
+
+		$(ele).attr('onclick', 'addTabelLampiran(this, '+_count+')');
+
+		$('#fieldTabelLampiran').children().last().after(new_table);
+		$('a#deleteTableLampiran'+_count).attr('onclick', 'rmKolomLampiran(this, '+_count+')');
+	}
+	
+	function removeTabelLampiran(ele) {
+		var total_tabel = $('#fieldTabelLampiran').children('div').length;
+		var _count = total_tabel - 1;
+		if(_count > 0) {
+			$('#add_tabel').attr('onclick', 'addTabelLampiran(this, '+_count+')');
+			$('#fieldTabelLampiran').children('div:last').remove();
+		}
+		else {
+			alert('Tidak Dapat Menghapus Tabel Lagi!');
+		}
 	}
 </script>
 <form class="width-100p" method="POST" target="_blank">
@@ -253,6 +293,7 @@
 					<a href="javascript:void(0)" onclick="addMenimbang(this, <?php echo ($idxField +1); ?>)" style="position:absolute; right:5%;">
 						<i class="fa fa-lg fa-plus <?php echo ($idxField +1) < count(@$detail_dokumen[$namaJenisField]) ? 'fa-minus' : ''; ?>"></i>
 					</a>
+					<a href="javascript:void(0)" style="position:absolute; right:4.7%; margin-top:25px;" title="Tambah Telaah"><i class="fa fa-lg fa-comments-o"></i></a>
 				</div>
 			</div>
 				<?php }
@@ -275,6 +316,7 @@
 				<div style="width:100%">
 					<textarea type="text" name="<?php echo $namaJenisField; ?>[]" class="form-control" placeholder="Menimbang" rows="6" style="float:left; margin-left:5px; width:75%;"></textarea>
 					<a href="javascript:void(0)" onclick="addMenimbang(this, 1)" style="position:absolute; right:5%;"><i class="fa fa-lg fa-plus"></i></a>
+					<a href="javascript:void(0)" style="position:absolute; right:4.7%; margin-top:25px;" title="Tambah Telaah"><i class="fa fa-lg fa-comments-o"></i></a>
 				</div>
 			</div>
 			<?php } ?>
@@ -308,6 +350,7 @@
 					<a href="javascript:void(0)" onclick="addMengingat(this, <?php echo ($idxField +1); ?>)" style="position:absolute; right:5%;">
 						<i class="fa fa-lg fa-plus <?php echo ($idxField +1) < count(@$detail_dokumen[$namaJenisField]) ? 'fa-minus' : ''; ?>"></i>
 					</a>
+					<a href="javascript:void(0)" style="position:absolute; right:4.7%; margin-top:25px;" title="Tambah Telaah"><i class="fa fa-lg fa-comments-o"></i></a>
 				</div>
 			</div>
 				<?php }
@@ -330,6 +373,7 @@
 				<div style="width:100%">
 					<textarea type="text" name="<?php echo $namaJenisField; ?>[]" class="form-control" placeholder="Menimbang" rows="6" style="float:left; margin-left:5px; width:75%;"></textarea>
 					<a href="javascript:void(0)" onclick="addMengingat(this, 1)" style="position:absolute; right:5%;"><i class="fa fa-lg fa-plus"></i></a>
+					<a href="javascript:void(0)" style="position:absolute; right:4.7%; margin-top:25px;" title="Tambah Telaah"><i class="fa fa-lg fa-comments-o"></i></a>
 				</div>
 			</div>
 			<?php } ?>
@@ -364,6 +408,7 @@
 					<a href="javascript:void(0)" onclick="addMemutuskan(this, <?php echo ($idxField +1); ?>)" style="position:absolute; right:5%;">
 						<i class="fa fa-lg fa-plus <?php echo ($idxField +1) < count(@$detail_dokumen[$namaJenisField]) ? 'fa-minus' : ''; ?>"></i>
 					</a>
+					<a href="javascript:void(0)" style="position:absolute; right:4.7%; margin-top:25px;" title="Tambah Telaah"><i class="fa fa-lg fa-comments-o"></i></a>
 				</div>
 			</div>
 			<div class="form-group" style="width:100%;">
@@ -393,6 +438,7 @@
 				<div style="width:100%">
 					<textarea type="text" name="<?php echo $namaJenisField; ?>[]" class="form-control" placeholder="Menimbang" rows="6" style="float:left; margin-left:5px; width:75%;"></textarea>
 					<a href="javascript:void(0)" onclick="addMemutuskan(this, 1)" style="position:absolute; right:5%;"><i class="fa fa-lg fa-plus"></i></a>
+					<a href="javascript:void(0)" style="position:absolute; right:4.7%; margin-top:25px;" title="Tambah Telaah"><i class="fa fa-lg fa-comments-o"></i></a>
 				</div>
 			</div>
 			<?php } ?>
@@ -400,7 +446,7 @@
 		
 	</fieldset>
 	<fieldset>
-		<legend>Pasal</legend>
+		<legend>Diktum</legend>
 		<div>
 			<div class="form-group" id="text-pasal1">
 				<div style="float:left; width:20%">
@@ -420,6 +466,7 @@
 				<div style="width:100%">
 					<textarea type="text" name="pasal[]" class="form-control" placeholder="Pasal" rows="6" style="float:left; margin-left:5px; width:75%;"></textarea>
 					<a href="javascript:void(0)" onclick="addPasal(this, 1)" style="position:absolute; right:5%;"><i class="fa fa-lg fa-plus"></i></a>
+					<a href="javascript:void(0)" style="position:absolute; right:4.7%; margin-top:25px;" title="Tambah Telaah"><i class="fa fa-lg fa-comments-o"></i></a>
 				</div>
 			</div>
 		</div>
@@ -451,6 +498,7 @@
 				<div style="width:100%">
 					<textarea type="text" name="tembusan[]" class="form-control" placeholder="Tembusan" rows="6" style="float:left; margin-left:5px; width:75%;"></textarea>
 					<a href="javascript:void(0)" onclick="addTembusan(this, 1)" style="position:absolute; right:5%;"><i class="fa fa-lg fa-plus"></i></a>
+					<a href="javascript:void(0)" style="position:absolute; right:4.7%; margin-top:25px;" title="Tambah Telaah"><i class="fa fa-lg fa-comments-o"></i></a>
 				</div>
 			</div>
 		</div>
@@ -468,11 +516,15 @@
 					<input type="text" name="judul_lampiran[]" class="form-control float-left margin-bottom-5px" placeholder="Judul Lampiran" />
 				</div>
 				<div class="margin-left-right-top70px width-90p">
-					<fieldset class="width-100p" id="fieldTabelLampiran1">
+					<fieldset class="width-100p" id="fieldTabelLampiran">
 						<legend>
 							Tabel
-							<a href="javascript:void(0)" style="font-size:12px; line-height:32px;" title="Hapus Tabel" onclick=""><i class="fa fa-minus-square"></i></a>
-							<a href="javascript:void(0)" style="font-size:12px; line-height:32px;" title="Tambah Tabel" onclick="addTabelLampiran(this, 1)"><i class="fa fa-plus-square"></i></a>
+							<a href="javascript:void(0)" style="font-size:12px; line-height:32px;" title="Hapus Tabel" onclick="removeTabelLampiran(this)">
+								<i class="fa fa-minus-square"></i>
+							</a>
+							<a href="javascript:void(0)" style="font-size:12px; line-height:32px;" title="Tambah Tabel" onclick="addTabelLampiran(this, 1)">
+								<i class="fa fa-plus-square"></i>
+							</a>
 						</legend>
 						<div>
 							<input type="text" name="subjudul[][]" class="form-control float-left margin-bottom-3px" placeholder="Sub Judul Lampiran" />
@@ -483,7 +535,7 @@
 											<input type="text" name="judultabel[][]" class="form-control form-control-sm float-left" placeholder="Judul Tabel" />
 										</th>
 										<th align="center">
-											<a href="javascript:void(0)" style="line-height:32px; margin:0 auto;" title="Hapus Kolom" onclick="rmKolomLampiran(this, 1)">
+											<a href="javascript:void(0)" style="line-height:32px; margin:0 auto;" title="Hapus Kolom" onclick="rmKolomLampiran(this, 1)" id="deleteTableLampiran1">
 												<i class="fa fa-minus-square"></i>
 											</a>
 											<a href="javascript:void(0)" style="line-height:32px; margin:0 auto;" title="Tambah Kolom" onclick="addKolomLampiran(this, 1)">
