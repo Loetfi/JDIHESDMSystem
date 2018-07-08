@@ -29,7 +29,7 @@
 							'</div>'+
 						'</div>';
 		$(ele).children().toggleClass('fa-plus fa-minus');
-		$(ele).children().attr("onclick","remove(this)");
+		$(ele).children().attr("onclick","remove(this)").attr('title', 'Hapus Isi');
 		$(element).last().insertAfter($("#text-Menimbang"+count));
 	}
 	function addMengingat(ele, count) {
@@ -55,7 +55,7 @@
 							'</div>'+
 						'</div>';
 		$(ele).children().toggleClass('fa-plus fa-minus');
-		$(ele).children().attr("onclick","remove(this)");
+		$(ele).children().attr("onclick","remove(this)").attr('title', 'Hapus Isi');
 		$(element).last().insertAfter($("#text-Mengingat"+count));
 	}
 	function addMemutuskan(ele, count) {
@@ -81,7 +81,7 @@
 							'</div>'+
 						'</div>';
 		$(ele).children().toggleClass('fa-plus fa-minus');
-		$(ele).children().attr("onclick","remove(this)");
+		$(ele).children().attr("onclick","remove(this)").attr('title', 'Hapus Isi');
 		$(element).last().insertAfter($("#text-Memutuskan"+count));
 	}
 	function addPasal(ele, count) {
@@ -107,7 +107,7 @@
 							'</div>'+
 						'</div>';
 		$(ele).children().toggleClass('fa-plus fa-minus');
-		$(ele).children().attr("onclick","remove(this)");
+		$(ele).children().attr("onclick","remove(this)").attr('title', 'Hapus Isi');
 		$(element).last().insertAfter($("#text-pasal"+count));
 	}
 	function addTembusan(ele, count) {
@@ -133,7 +133,7 @@
 							'</div>'+
 						'</div>';
 		$(ele).children().toggleClass('fa-plus fa-minus');
-		$(ele).children().attr("onclick","remove(this)");
+		$(ele).children().attr("onclick","remove(this)").attr('title', 'Hapus Isi');
 		$(element).last().insertAfter($("#text-tembusan"+count));
 	}
 	function remove(ele) {
