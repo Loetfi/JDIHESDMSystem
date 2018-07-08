@@ -259,8 +259,13 @@
 			alert('Tidak Dapat Menghapus Tabel Lagi!');
 		}
 	}
+	
+	function addLampiran(ele) {
+		var lampiran = $(ele).parent().parent().html(); console.log(lampiran);
+		$('#form-keputusan').children('fieldset:last').after('<fieldset style="margin-top:30px">'+lampiran+'</fieldset>');
+	}
 </script>
-<form class="width-100p" method="POST" target="_blank">
+<form class="width-100p" method="POST" id="form-keputusan" target="_blank">
 	<input type="hidden" name="id_dokumen" value="<?php echo @$id_dokumen; ?>">
 	<div class="form-group" style="margin-bottom:5px">
 		<textarea name="super_judul" class="form-control" autocomplete="off" placeholder="Judul Dokumen" rows="4"><?php echo @$detail_dokumen['judul'][0]['teks']; ?></textarea>
@@ -456,6 +461,7 @@
 	<fieldset>
 		<legend>Diktum</legend>
 		<div>
+			<?php $namaJenisField = 'Diktum'; ?>
 			<div class="form-group" id="text-pasal1">
 				<div style="float:left; width:20%">
 					<input type="text" name="poinPasal[]" class="form-control" placeholder="Pointer" />
@@ -472,10 +478,15 @@
 					</select>
 				</div>
 				<div style="width:100%">
-					<textarea type="text" name="pasal[]" class="form-control" placeholder="Pasal" rows="6" style="float:left; margin-left:5px; width:75%;"></textarea>
+					<textarea type="text" name="pasal[]" class="form-control" placeholder="Diktum" rows="6" style="float:left; margin-left:5px; width:75%;"></textarea>
 					<a href="javascript:void(0)" onclick="addPasal(this, 1)" style="position:absolute; right:5%;"><i class="fa fa-lg fa-plus"></i></a>
-					<a href="javascript:void(0)" style="position:absolute; right:4.7%; margin-top:25px;" title="Tambah Telaah"><i class="fa fa-lg fa-comments-o"></i></a>
+					<a href="javascript:void(0)" id="btnKomentar-<?php echo $namaJenisField; ?>" targetKomentar="textKomentar-<?php echo $namaJenisField; ?>" onclick="addKomentar(this.id)" style="position:absolute; right:4.7%; margin-top:25px;" title="Tambah Telaah">
+						<i class="fa fa-lg <?php echo ($idxField+1) < count(@$detail_dokumen[$namaJenisField]) ? 'fa-comments-o' : 'fa-comments'; ?>"></i>
+					</a>
 				</div>
+			</div>
+			<div class="form-group" style="width:100%; top:-15px; position:relative;">
+				<textarea type="text" name="Komentar_<?php echo $namaJenisField; ?>[]" class="form-control" rows="2" id="textKomentar-<?php echo $namaJenisField; ?>" style="display:none; position:relative; top:20px; width:95%;" placeholder="Komentar <?php echo $namaJenisField; ?>"></textarea>
 			</div>
 		</div>
 	</fieldset>
@@ -483,6 +494,7 @@
 		<legend>Tanda Tangan</legend>
 		<div class="form-group">
 			<textarea name="ttd" class="form-control" autocomplete="off" placeholder="Tanda Tangan" rows="4" style="width:95%"></textarea>
+			<a href="javascript:void(0)" style="position:absolute; right:4.7%; margin-top:-95px;" title="Tambah Telaah"><i class="fa fa-lg fa-comments-o"></i></a>
 		</div>
 	</fieldset>
 	<fieldset>
@@ -511,11 +523,11 @@
 			</div>
 		</div>
 	</fieldset>
-	<fieldset>
+	<fieldset style="margin-top:30px">
 		<legend>
 			Lampiran
 			<a href="javascript:void(0)" style="font-size:12px; line-height:32px;" title="Hapus Lampiran" onclick=""><i class="fa fa-minus-square"></i></a>
-			<a href="javascript:void(0)" style="font-size:12px; line-height:32px;" title="Tambah Lampiran" onclick=""><i class="fa fa-plus-square"></i></a>
+			<a href="javascript:void(0)" style="font-size:12px; line-height:32px;" title="Tambah Lampiran" onclick="addLampiran(this)"><i class="fa fa-plus-square"></i></a>
 		</legend>
 		<div>
 			<div class="form-group" id="text-lampiran1">

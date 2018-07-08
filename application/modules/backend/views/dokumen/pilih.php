@@ -148,7 +148,7 @@
 								</div>
 								<div class="text-center">
 									<p class="text-muted m-b-md"></p> 
-									<a href="<?php echo site_url('#');?>" class="btn btn-primary btn-xs disabled">Pilih <i class="fa fa-chevron-right"></i></a>
+									<a href="<?php echo site_url('Undang2');?>" class="btn btn-primary btn-xs">Pilih <i class="fa fa-chevron-right"></i></a>
 								</div>
 							</div>
 						</div>	
@@ -163,7 +163,7 @@
 								</div>
 								<div class="text-center">
 									<p class="text-muted m-b-md"></p> 
-									<a href="<?php echo site_url('#');?>" class="btn btn-primary btn-xs disabled">Pilih <i class="fa fa-chevron-right"></i></a>
+									<a href="<?php echo site_url('Perpres');?>" class="btn btn-primary btn-xs">Pilih <i class="fa fa-chevron-right"></i></a>
 								</div>
 							</div>
 						</div>	
