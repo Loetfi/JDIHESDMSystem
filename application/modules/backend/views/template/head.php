@@ -103,7 +103,7 @@
               <a class="dropdown-item" href="docs.html">
                 Need help?
               </a>
-              <a class="dropdown-item" href="<?php echo site_url('backend/auth') ?>">Sign out</a>
+              <a class="dropdown-item" href="<?php echo site_url('backend/auth/logout?true') ?>">Sign out</a>
             </div>
           </li>
         </ul>

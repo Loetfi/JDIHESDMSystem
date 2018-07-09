@@ -18,7 +18,7 @@
 <script src="<?=base_url('assetnew/libs/datatables/extensions/buttons/dataTables.buttons.min.js');?>"></script>
 <script src="<?=base_url('assetnew/libs/datatables/extensions/buttons/buttons.bootstrap4.min.js');?>"></script>
 <script src="<?=base_url('assetnew/libs/datatables/extensions/buttons/jszip.min.js');?>"></script>
-<script src="<?=base_url('assetnew/libs/datatables/extensions/buttons/pdfmake.min.js');?>"></script>
+
 <script src="<?=base_url('assetnew/libs/datatables/extensions/buttons/vfs_fonts.js');?>"></script>
 <script src="<?=base_url('assetnew/libs/datatables/extensions/buttons/buttons.html5.min.js');?>"></script>
 <script src="<?=base_url('assetnew/libs/datatables/extensions/buttons/buttons.print.min.js');?>"></script>
