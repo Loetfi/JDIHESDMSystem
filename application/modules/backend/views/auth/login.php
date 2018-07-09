@@ -6,8 +6,8 @@
       <!-- brand -->
       <a href="index.html" class="navbar-brand">
         <div data-ui-include="'<?=base_url('assets/logo/logo-esdm.png');?>'"></div>
-        <!-- <img src="<?=base_url('assets/logo/logo-esdm.png');?>">  -->
-        <!-- <span class="hidden-folded inline">Smart Legal Drafting - KESDM</span>  -->
+        <img src="<?=base_url('assets/logo/logo-esdm.png');?>"> 
+        <span class="hidden-folded inline">Smart Legal Drafting - KESDM</span>
       </a>
       <!-- / brand -->
       <!--  -->

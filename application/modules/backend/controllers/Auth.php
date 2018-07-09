@@ -12,12 +12,7 @@ class Auth extends CI_Controller {
 	}
 
 	public function index()
-	{
-		$this->login();
-	}
-
-	public function login()
-	{
+	{ 
 		$data = array(
 			'contents'	=> 'auth/login',
 			'title'		=> 'Login Sistem',
@@ -27,7 +22,7 @@ class Auth extends CI_Controller {
 		$this->load->view('template/auth', $data, FALSE);
 		$this->load->view('template/footer', $data, FALSE);
 	}
-
+ 
 	public function proses()
 	{
 		// 
@@ -37,18 +32,29 @@ class Auth extends CI_Controller {
 		if ($this->form_validation->run()==TRUE) {
 			
 			$parameter = array(
-				'username'	=> $this->input->post('username'),
-				'password'	=> $this->input->post('password')
+				'username'	=> !empty($this->input->post('username')) ? $this->input->post('username') : 0,
+				'password'	=> !empty($this->input->post('password')) ? $this->input->post('password') : 0
 			);
- 			
- 			($this->auth->login($parameter)) ? redirect('backend/dashboard/','refresh') : $this->login();
+
+			($this->auth->login($parameter)) ? redirect($this->session->userdata('referrer_url'),'refresh') : $this->index();
 
 		} else { 
 
-			$this->login(); 
+			$this->index(); 
 
 		}
 
+	}
+
+	/*
+	* for logout user
+	*/
+
+	public function logout()
+	{ 
+		$this->session->set_flashdata('message', 'Berhasil keluar dari sistem');
+		$this->session->sess_destroy();
+		redirect('backend/auth/login','refresh');
 	}
 
 }

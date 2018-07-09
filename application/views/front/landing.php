@@ -127,7 +127,7 @@
   <ul>
     <li>
       <input id='c5' type='checkbox'>
-      <label for='c5'> <a href="<?php echo site_url('backend/dokumen/pilih');?>">Quick Format</a> </label>
+      <label for='c5'> <a href="<?php echo site_url('backend/dokumen/pilih?nologin');?>">Quick Format</a> </label>
     </li>
     <li>
       <input id='c1' type='checkbox'>
