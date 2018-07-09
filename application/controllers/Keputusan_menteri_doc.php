@@ -30,8 +30,8 @@ class Keputusan_menteri_doc extends CI_Controller {
 			'paperSize' 	=> 'Folio', 
 			'marginLeft' 	=> \PhpOffice\PhpWord\Shared\Converter::cmToTwip(2.5), 
 			'marginRight' 	=> \PhpOffice\PhpWord\Shared\Converter::cmToTwip(2.5), 
-			'marginTop' 	=> \PhpOffice\PhpWord\Shared\Converter::cmToTwip(2.5), 
-			'marginBottom' 	=> \PhpOffice\PhpWord\Shared\Converter::cmToTwip(4),
+			'marginTop' 	=> \PhpOffice\PhpWord\Shared\Converter::cmToTwip(3), 
+			'marginBottom' 	=> \PhpOffice\PhpWord\Shared\Converter::cmToTwip(2.5),
 			'headerHeight' => \PhpOffice\PhpWord\Shared\Converter::cmToTwip(1.25),
 			'footerHeight' => \PhpOffice\PhpWord\Shared\Converter::cmToTwip(1.25), 
 		);
@@ -482,26 +482,38 @@ class Keputusan_menteri_doc extends CI_Controller {
 		
 		/* *********************************************************************************** */
 		
+		$centerContents = array(
+			'indentation' => array(
+				'left' => \PhpOffice\PhpWord\Shared\Converter::cmToTwip(6), 
+			),
+			// 'align' => 'center',
+		);
+
 		$section->addText(
 			"Ditetapkan di xxxxx",
-			$fontStyle
+			$fontStyle, 
+			$centerContents
 		);
 		$section->addText(
 			"Pada tanggal xxxxx",
-			$fontStyle
+			$fontStyle,
+			$centerContents
 		);
 		$section->addText(
 			"MENTERI ENERGI DAN SUMBER DAYA MINERAL",
-			$fontStyle
+			$fontStyle,
+			$centerContents
 		);
 		$section->addText(
 			"REPUBLIK INDONESIA,",
-			$fontStyle
+			$fontStyle,
+			$centerContents
 		);
 		$section->addTextBreak(3,$fontStyle);
 		$section->addText(
-			"xxxxxxxxxxxxxxxxx",
-			$fontStyle
+			"IGNASIUS JONAN",
+			$fontStyle,
+			$centerContents
 		);
 		$section->addTextBreak(1,$fontStyle);
 		/* *********************************************************************************** */
