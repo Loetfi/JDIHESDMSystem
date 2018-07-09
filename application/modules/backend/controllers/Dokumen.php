@@ -3,6 +3,27 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Dokumen extends CI_Controller {
 
+	public function __construct()
+	{
+		parent::__construct();
+		$this->check_login('backend/dokumen/pilih');
+	}
+
+	public function check_login($referrer_url)
+	{
+		if (isset($_GET['nologin'])) {
+			return true;
+			exit;
+		} else {
+    	$this->session->set_userdata('referrer_url', $referrer_url);  //Set session for the referrer url
+    	if ($this->session->userdata('login_id')) {
+				return true; exit;
+			}
+		}
+		return false;
+
+	}
+
 	public function index()
 	{
 		$data = array(
