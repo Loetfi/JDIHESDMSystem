@@ -17,6 +17,9 @@ class Keputusan_menteri_doc extends CI_Controller {
 	}
 	
 	function sanusi(){
+		
+		// print_r(@$_POST);
+		// die();
 		error_reporting(0);
 		$this->load->library('Phpword');
 		$phpWord = new \PhpOffice\PhpWord\PhpWord();
@@ -704,22 +707,78 @@ class Keputusan_menteri_doc extends CI_Controller {
 		
 		
 		
+		// $subjudul = @$_POST['subjudul'];
+		// $widthMaxCol = 16000;
+		// $judultabel = @$_POST['judultabel'];
+		// $table = @$_POST['kolom'];
+		
+		// if (count($subjudul) > 0 && count($judultabel) > 0 && count($kolom) > 0){
+			// for($idxTable=0 $idxTable<count())
+		// }
+		
+		
 		
 		$section->addText(
 			"A.	WILAYAH IZIN USAHA PERTAMBANGAN PERIODE I ",
-			$fontStyle, array('align' => 'center')
+			$fontStyle, array('align' => 'left')
 		);
 		/* *********************************************************************************** */
-		$rows = 10;
-		$cols = 5;
-		$section->addText('Basic table', $header);
-		$table = $section->addTable();
-		for ($r = 1; $r <= 8; $r++) {
-			$table->addRow();
-			for ($c = 1; $c <= 5; $c++) {
-				$table->addCell(1750)->addText("Row {$r}, Cell {$c}");
+		
+		$widthMaxCol = 16000;
+		$table = @$_POST['kolom'];
+		$judultabel = @$_POST['judultabel'];
+		if (count($table) > 0){
+			$idxTable = 0;
+			
+			
+			
+			$headerTable 	= $table[$idxTable]['header'];
+			$contentTable 	= $table[$idxTable]['content'];
+			
+			$rows = count($contentTable) + 1;
+			$cols = count($headerTable);
+			
+			// $section->addText('Basic table', $header);
+			
+			$cellHCentered = array('alignment' => \PhpOffice\PhpWord\SimpleType\JcTable::CENTER);
+			$borderTableStyle = array('borderSize' => 1, 'borderColor' => '000000');
+			$spanTableStyleName = 'BorderAll';
+			$phpWord->addTableStyle($spanTableStyleName, $borderTableStyle);
+			$thisTable = $section->addTable($spanTableStyleName);
+			
+			$thisTable->addRow();
+			$cellColSpan = array('gridSpan' => $cols+1, 'valign' => 'center');
+			$cell2 = $thisTable->addCell($widthMaxCol, $cellColSpan);
+			$textrun2 = $cell2->addTextRun($cellHCentered);
+			$textrun2->addText($judultabel[$idxTable][0]);
+			
+			$thisTable->addRow();
+			$thisTable->addCell(600)->addText("NO", null, $cellHCentered);
+			for ($idxHeader = 0; $idxHeader < count($headerTable); $idxHeader++) {
+				$textHeader = $headerTable[$idxHeader];
+				$thisWidth = ($widthMaxCol - 600)/($cols - 1);
+				$thisTable->addCell($thisWidth)->addText($textHeader, null, $cellHCentered);
 			}
+			
+			
+			for ($r = 1; $r < $rows; $r++) {
+				$thisTable->addRow();
+				for ($c = 0; $c <= $cols; $c++) {
+					if ($c == 0) {
+						$thisWidth = 600;
+						$thisTable->addCell($thisWidth)->addText($r, null, $cellHCentered);
+					}
+					else {
+						$thisWidth = ($widthMaxCol - 600)/($cols - 1);
+						$thisTable->addCell($thisWidth)->addText($contentTable[$r][$c-1], null, $cellHCentered);
+					}
+					
+				}
+			}
+			
+			
 		}
+		
 		/* *********************************************************************************** */
 		
 		
@@ -809,14 +868,14 @@ class Keputusan_menteri_doc extends CI_Controller {
 		// die();
 		
 		/* Insert Into DB */
-		if (@$_POST['id_dokumen'] == '')
-			$id = $this->insert_document();
-		else 
-			$id = $_POST['id_dokumen'];
+		// if (@$_POST['id_dokumen'] == '')
+			// $id = $this->insert_document();
+		// else 
+			// $id = $_POST['id_dokumen'];
 		
-		$revisi = $this->cek_revisi_document($id);
-		$idRevisi = $this->insert_revisi_document($id, $revisi);
-		$alldata = $this->insert_detail_document($id, $idRevisi, $arrData);
+		// $revisi = $this->cek_revisi_document($id);
+		// $idRevisi = $this->insert_revisi_document($id, $revisi);
+		// $alldata = $this->insert_detail_document($id, $idRevisi, $arrData);
 		
 		
 		// echo $alldata;
@@ -889,6 +948,24 @@ class Keputusan_menteri_doc extends CI_Controller {
 			$arrData['Diktum']['subLevelDiktum'][] = @$subLevelDiktum[$i];
 			$arrData['Diktum']['text'][] = @$Diktum[$i];
 		}
+		
+		$Tembusan = @$_POST['Tembusan'];
+		$pointerTembusan = @$_POST['pointerTembusan'];
+		$nextPageTembusan = @$_POST['nextPageTembusan'];
+		$subLevelTembusan = @$_POST['subLevelTembusan'];
+		for($i=0; $i<count($Tembusan); $i++) {
+			$arrData['Tembusan']['pointerTembusan'][] = @$pointerTembusan[$i];
+			$arrData['Tembusan']['nextPageTembusan'][] = @$nextPageTembusan[$i] == '' ? 'continue' : @$nextPageTembusan[$i];
+			$arrData['Tembusan']['subLevelTembusan'][] = @$subLevelTembusan[$i];
+			$arrData['Tembusan']['text'][] = @$Tembusan[$i];
+		}
+		
+		// print_r($Tembusan); 
+		// print_r($pointerTembusan); 
+		// print_r($nextPageTembusan); 
+		// print_r($subLevelTembusan); 
+		// print_r($arrData['Tembusan']); 
+		// die();
 		
 		/* Insert Into DB */
 		if (@$_POST['id_dokumen'] == '')

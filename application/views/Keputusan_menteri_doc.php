@@ -113,14 +113,14 @@
 	}
 	function addTembusan(ele, count) {
 		var counts = count + 1;
-		var element =	'<div class="form-group" id="text-tembusan'+counts+'" style="display:inline-block; margin-top:5px; width:100%;">'+
+		var element =	'<div class="form-group" id="text-Tembusan'+counts+'" style="display:inline-block; margin-top:5px; width:100%;">'+
 							'<div style="float:left; width:20%">'+
-								'<input type="text" name="poinTembusan[]" class="form-control" placeholder="Pointer" />'+
+								'<input type="text" name="pointerTembusan[]" class="form-control" placeholder="Pointer" />'+
 								'<select class="form-control" style="cursor:pointer; margin-top:10px;">'+
 									'<option value="continue">Continues Page</option>'+
 									'<option value="newP">Next Page Portrait</option><option value="newL">Next Page Landscape</option>'+
 								'</select>'+
-								'<select class="form-control" style="cursor:pointer; margin-top:10px;">'+
+								'<select name="subLevelTembusan[]" class="form-control" style="cursor:pointer; margin-top:10px;">'+
 									'<option value="0">SubLevel 0</option>'+
 									'<option value="1">SubLevel 1</option>'+
 									'<option value="2">SubLevel 2</option>'+
@@ -129,13 +129,13 @@
 								'</select>'+
 							'</div>'+
 							'<div style="width:100%">'+
-								'<textarea type="text" name="tembusan[]" class="form-control" placeholder="Tembusan" rows="6" style="float:left; margin-left:5px; width:75%;"></textarea>'+
+								'<textarea type="text" name="Tembusan[]" class="form-control" placeholder="Tembusan" rows="6" style="float:left; margin-left:5px; width:75%;"></textarea>'+
 								'<a href="javascript:void(0)" onclick="addTembusan(this, '+counts+')" style="position:absolute; right:5%;" title="Tambah Isi"><i class="fa fa-lg fa-plus"></i></a>'+
 							'</div>'+
 						'</div>';
 		$(ele).children().toggleClass('fa-plus fa-minus');
 		$(ele).children().attr("onclick","remove(this)").attr('title', 'Hapus Isi');
-		$(element).last().insertAfter($("#text-tembusan"+count));
+		$(element).last().insertAfter($("#text-Tembusan"+count));
 	}
 	function remove(ele) {
 		$(ele).parent().parent().parent().remove();
@@ -379,14 +379,15 @@
 	<fieldset>
 		<legend>Tembusan</legend>
 		<div>
-			<div class="form-group" id="text-tembusan1">
+			<?php $namaTembusan = 'Tembusan'; ?>
+			<div class="form-group" id="text-<?php echo $namaTembusan; ?>1">
 				<div style="float:left; width:20%">
-					<input type="text" name="poinTembusan[]" class="form-control" placeholder="Pointer" />
+					<input type="text" name="pointer<?php echo $namaTembusan; ?>[]" class="form-control" placeholder="Pointer" />
 					<select class="form-control" style="cursor:pointer; margin-top:10px;">
 						<option value="continue">Continues Page</option>
 						<option value="newP">Next Page Portrait</option><option value="newL">Next Page Landscape</option>
 					</select>
-					<select class="form-control" style="cursor:pointer; margin-top:10px;">
+					<select name="subLevel<?php echo $namaTembusan; ?>[]" class="form-control" style="cursor:pointer; margin-top:10px;">
 						<option value="0">SubLevel 0</option>
 						<option value="1">SubLevel 1</option>
 						<option value="2">SubLevel 2</option>
@@ -395,7 +396,7 @@
 					</select>
 				</div>
 				<div style="width:100%">
-					<textarea type="text" name="tembusan[]" class="form-control" placeholder="Tembusan" rows="6" style="float:left; margin-left:5px; width:75%;" required></textarea>
+					<textarea type="text" name="<?php echo $namaTembusan; ?>[]" class="form-control" placeholder="<?php echo $namaTembusan; ?>" rows="6" style="float:left; margin-left:5px; width:75%;" required></textarea>
 					<a href="javascript:void(0)" onclick="addTembusan(this, 1)" style="position:absolute; right:5%;" title="Tambah Isi"><i class="fa fa-lg fa-plus"></i></a>
 				</div>
 			</div>
