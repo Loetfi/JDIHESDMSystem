@@ -1,13 +1,10 @@
 <?php
 /* @property phpword_model $phpword_model */
-
 class Keputusan_menteri_doc extends CI_Controller {
-
 	function __construct(){
 	  parent::__construct();
 		// $this->load->model('phpword_model');
     }
-
 	function index()
 	{
 		
@@ -22,7 +19,6 @@ class Keputusan_menteri_doc extends CI_Controller {
 	function sanusi(){
 		error_reporting(0);
 		$this->load->library('Phpword');
-
 		$phpWord = new \PhpOffice\PhpWord\PhpWord();
 		
 		// setting kertas dan margin
@@ -146,7 +142,6 @@ class Keputusan_menteri_doc extends CI_Controller {
 		$cell = $table->addCell(450);
 		$textrun = $cell->addTextRun();
 		$textrun->addText('');
-
 		// Add header for all other pages
 		$subsequent = $section->addHeader();
 		$subsequent->addPreserveText('- {PAGE} -', $fontStyle, array('align' => 'center'));
@@ -586,7 +581,6 @@ class Keputusan_menteri_doc extends CI_Controller {
 			),
 			// 'align' => 'center',
 		);
-
 		$section->addText(
 			"Ditetapkan di xxxxx",
 			$fontStyle, 
@@ -640,7 +634,6 @@ class Keputusan_menteri_doc extends CI_Controller {
 		$cell = $table->addCell(450);
 		$textrun = $cell->addTextRun();
 		$textrun->addText('');
-
 		// Add header for all other pages
 		$subsequent = $section->addHeader();
 		$subsequent->addPreserveText('- {PAGE} -', $fontStyle, array('align' => 'center'));
@@ -720,7 +713,6 @@ class Keputusan_menteri_doc extends CI_Controller {
 		$rows = 10;
 		$cols = 5;
 		$section->addText('Basic table', $header);
-
 		$table = $section->addTable();
 		for ($r = 1; $r <= 8; $r++) {
 			$table->addRow();
@@ -835,9 +827,7 @@ class Keputusan_menteri_doc extends CI_Controller {
 			$filename = $id.'_'.time().'_keputusan_menteri_doc.docx';
 			$fullPath = './'.$filename;
 			$objWriter->save($fullPath, 'Word2007');
-
 		} catch (Exception $e) {}
-
 		header('Content-Description: File Transfer');
 		header('Content-Type: application/octet-stream');
 		header('Content-Disposition: attachment; filename='.$filename);
@@ -868,7 +858,6 @@ class Keputusan_menteri_doc extends CI_Controller {
 			$arrData['Menimbang']['subLevelMenimbang'][] = $subLevelMenimbang[$i];
 			$arrData['Menimbang']['text'][] = $Menimbang[$i];
 		}
-
 		$Mengingat = $_POST['Mengingat'];
 		$pointerMengingat = $_POST['pointerMengingat'];
 		$nextPageMengingat = @$_POST['nextPageMengingat'];
@@ -879,7 +868,6 @@ class Keputusan_menteri_doc extends CI_Controller {
 			$arrData['Mengingat']['subLevelMengingat'][] = $subLevelMengingat[$i];
 			$arrData['Mengingat']['text'][] = $Mengingat[$i];
 		}
-
 		$Memutuskan = $_POST['Memutuskan'];
 		$pointerMemutuskan = $_POST['pointerMemutuskan'];
 		$nextPageMemutuskan = @$_POST['nextPageMemutuskan'];
