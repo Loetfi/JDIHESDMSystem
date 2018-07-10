@@ -84,16 +84,16 @@
 		$(ele).children().attr("onclick","remove(this)").attr('title', 'Hapus Isi');
 		$(element).last().insertAfter($("#text-Memutuskan"+count));
 	}
-	function addPasal(ele, count) {
+	function addDiktum(ele, count) {
 		var counts = count + 1;
-		var element =	'<div class="form-group" id="text-pasal'+counts+'" style="display:inline-block; margin-top:5px; width:100%;">'+
+		var element =	'<div class="form-group" id="text-Diktum'+counts+'" style="display:inline-block; margin-top:5px; width:100%;">'+
 							'<div style="float:left; width:20%">'+
-								'<input type="text" name="poinPasal[]" class="form-control" placeholder="Pointer" />'+
-								'<select class="form-control" style="cursor:pointer; margin-top:10px;">'+
+								'<input type="text" name="pointerDiktum[]" class="form-control" placeholder="Pointer" />'+
+								'<select name="nextDiktum[]" class="form-control" style="cursor:pointer; margin-top:10px;">'+
 									'<option value="continue">Continues Page</option>'+
 									'<option value="newP">Next Page Portrait</option><option value="newL">Next Page Landscape</option>'+
 								'</select>'+
-								'<select class="form-control" style="cursor:pointer; margin-top:10px;">'+
+								'<select name="subLevelDiktum[]" class="form-control" style="cursor:pointer; margin-top:10px;">'+
 									'<option value="0">SubLevel 0</option>'+
 									'<option value="1">SubLevel 1</option>'+
 									'<option value="2">SubLevel 2</option>'+
@@ -102,13 +102,14 @@
 								'</select>'+
 							'</div>'+
 							'<div style="width:100%">'+
-								'<textarea type="text" name="pasal[]" class="form-control" placeholder="Pasal" rows="6" style="float:left; margin-left:5px; width:75%;"></textarea>'+
-								'<a href="javascript:void(0)" onclick="addPasal(this, '+counts+')" style="position:absolute; right:5%;" title="Tambah Diktum"><i class="fa fa-lg fa-plus"></i></a>'+
+								'<textarea type="text" name="Diktum[]" class="form-control" placeholder="Diktum" rows="6" style="float:left; margin-left:5px; width:75%;"></textarea>'+
+								'<a href="javascript:void(0)" onclick="addDiktum(this, '+counts+')" style="position:absolute; right:5%;" title="Tambah Isi"><i class="fa fa-lg fa-plus"></i></a>'+
 							'</div>'+
 						'</div>';
 		$(ele).children().toggleClass('fa-plus fa-minus');
 		$(ele).children().attr("onclick","remove(this)").attr('title', 'Hapus Isi');
-		$(element).last().insertAfter($("#text-pasal"+count));
+		$(element).last().insertAfter($("#text-Diktum"+count));
+		
 	}
 	function addTembusan(ele, count) {
 		var counts = count + 1;
@@ -345,14 +346,15 @@
 	<fieldset>
 		<legend>Diktum</legend>
 		<div>
-			<div class="form-group" id="text-pasal1">
+			<?php $namaDiktum = 'Diktum'; ?>
+			<div class="form-group" id="text-<?php echo $namaDiktum; ?>1" style="display:inline-block; width:100%;">
 				<div style="float:left; width:20%">
-					<input type="text" name="poinPasal[]" class="form-control" placeholder="Pointer" />
-					<select class="form-control" style="cursor:pointer; margin-top:10px;">
+					<input type="text" name="pointer<?php echo $namaDiktum; ?>[]" class="form-control" placeholder="Pointer" />
+					<select name="nextPage<?php echo $namaDiktum; ?>[]" class="form-control" style="cursor:pointer; margin-top:10px;">
 						<option value="continue">Continues Page</option>
 						<option value="newP">Next Page Portrait</option><option value="newL">Next Page Landscape</option>
 					</select>
-					<select class="form-control" style="cursor:pointer; margin-top:10px;">
+					<select name="subLevel<?php echo $namaDiktum; ?>[]" class="form-control" style="cursor:pointer; margin-top:10px;">
 						<option value="0">SubLevel 0</option>
 						<option value="1">SubLevel 1</option>
 						<option value="2">SubLevel 2</option>
@@ -361,12 +363,13 @@
 					</select>
 				</div>
 				<div style="width:100%">
-					<textarea type="text" name="pasal[]" class="form-control" placeholder="Pasal" rows="6" style="float:left; margin-left:5px; width:75%;" required></textarea>
-					<a href="javascript:void(0)" onclick="addPasal(this, 1)" style="position:absolute; right:5%;" title="Tambah Diktum"><i class="fa fa-lg fa-plus"></i></a>
+					<textarea type="text" name="<?php echo $namaDiktum; ?>[]" class="form-control" placeholder="Diktum" rows="6" style="float:left; margin-left:5px; width:75%;" required></textarea>
+					<a href="javascript:void(0)" onclick="addDiktum(this, 1)" style="position:absolute; right:5%;" title="Tambah Isi"><i class="fa fa-lg fa-plus"></i></a>
 				</div>
 			</div>
 		</div>
 	</fieldset>
+	
 	<fieldset>
 		<legend>Tanda Tangan</legend>
 		<div class="form-group">

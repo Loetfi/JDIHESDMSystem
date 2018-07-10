@@ -479,6 +479,104 @@ class Keputusan_menteri_doc extends CI_Controller {
 		}
 		/* *********************************************************************************** */
 		
+		/* *********************************************************************************** */
+		## Diktum
+		$Diktum = $_POST['Diktum'];
+		$pointerDiktum = $_POST['pointerDiktum'];
+		
+		$nextPageDiktum = @$_POST['nextPageDiktum'];
+		$subLevelDiktum = @$_POST['subLevelDiktum'];
+		$theFirst = true;
+		for($i=0; $i<count($Diktum); $i++){
+			
+			if ($Diktum[$i] != ''){
+				$barisDiktum = explode("\r\n",$Diktum[$i]);
+				
+				if (@$nextPageDiktum[$i] == 'newP') 
+					$section = $phpWord->addSection($thisPage);
+				else if (@$nextPageDiktum[$i] == 'newL') 
+					$section = $phpWord->addSection($thisPageLandscape);
+				
+				// print_r($Diktum[$i]);
+				// print_r($barisDiktum);
+				for($j=0; $j<count($barisDiktum); $j++){
+					
+					$idxSubLevel = @$subLevelDiktum[$i];
+					
+					if ($theFirst==true){ // awal Diktum
+						if ($j==0){ // awal baris Diktum
+							
+							if ($pointerDiktum[$i] == ''){ // awal tanpa pointer
+								$section->addText(
+									"Menetapkan\t:\t".$barisDiktum[$j],
+									$fontStyle,
+									$subLevel[0]['firstLine']
+								);
+							}
+							else{ // awal ada pointer 
+								$section->addText(
+									$pointerDiktum[$i]."\t:\t".$barisDiktum[$j],
+									$fontStyle,
+									$subLevel[0]['firstLine']
+								);
+							}
+							$section->addTextBreak(1,$fontStyle);
+						}
+						else {
+							if ($pointerDiktum[$i] == ''){ // lanjutan tanpa pointer
+								$section->addText(
+									$barisDiktum[$j],
+									$fontStyle,
+									$subLevel[0]['default']
+								);
+							}
+							else { // lanjutan ada pointer
+								$section->addText(
+									$barisDiktum[$j],
+									$fontStyle,
+									$subLevel[1]['default']
+								);
+							}
+						}
+					}
+					else { // body Diktum
+						if ($j==0){ // awal body baris Diktum
+							if ($pointerDiktum[$i] == ''){ // awal body Diktum tanpa pointer 
+								$section->addText(
+									$barisDiktum[$j],
+									$fontStyle,
+									$subLevel[$idxSubLevel]['default']
+								);
+							}
+							else { // awal body Diktum ada pointer 
+								$section->addText(
+									$pointerDiktum[$i]."\t".$barisDiktum[$j],
+									$fontStyle,
+									$subLevel[$idxSubLevel]['pointer']
+								);
+								
+							}
+						}
+						else {
+							$section->addText(
+								$barisDiktum[$j],
+								$fontStyle,
+								$subLevel[$idxSubLevel]['default']
+							);
+						}
+					}
+					
+				}
+				// $theFirst = false;
+			}
+			
+			$arrData['Diktum']['pointerDiktum'][] = $pointerDiktum[$i];
+			$arrData['Diktum']['nextPageDiktum'][] = $nextPageDiktum[$i];
+			$arrData['Diktum']['subLevelDiktum'][] = $subLevelDiktum[$i];
+			$arrData['Diktum']['text'][] = $Diktum[$i];
+		}
+		/* *********************************************************************************** */
+		
 		
 		/* *********************************************************************************** */
 		
@@ -719,12 +817,16 @@ class Keputusan_menteri_doc extends CI_Controller {
 		// die();
 		
 		/* Insert Into DB */
-		if (@$_POST['id_dokumen'] == ''){
+		if (@$_POST['id_dokumen'] == '')
 			$id = $this->insert_document();
-			$alldata = $this->insert_detail_document($id, $arrData);
-		} else {
+		else 
 			$id = $_POST['id_dokumen'];
-		}
+		
+		$revisi = $this->cek_revisi_document($id);
+		$idRevisi = $this->insert_revisi_document($id, $revisi);
+		$alldata = $this->insert_detail_document($id, $idRevisi, $arrData);
+		
+		
 		// echo $alldata;
 		// exit;
 		
@@ -787,6 +889,17 @@ class Keputusan_menteri_doc extends CI_Controller {
 			$arrData['Memutuskan']['nextPageMemutuskan'][] = @$nextPageMemutuskan[$i] == '' ? 'continue' : @$nextPageMemutuskan[$i];
 			$arrData['Memutuskan']['subLevelMemutuskan'][] = @$subLevelMemutuskan[$i];
 			$arrData['Memutuskan']['text'][] = @$Memutuskan[$i];
+		}
+		
+		$Diktum = $_POST['Diktum'];
+		$pointerDiktum = $_POST['pointerDiktum'];
+		$nextPageDiktum = @$_POST['nextPageDiktum'];
+		$subLevelDiktum = @$_POST['subLevelDiktum'];
+		for($i=0; $i<count($Diktum); $i++) {
+			$arrData['Diktum']['pointerDiktum'][] = @$pointerDiktum[$i];
+			$arrData['Diktum']['nextPageDiktum'][] = @$nextPageDiktum[$i] == '' ? 'continue' : @$nextPageDiktum[$i];
+			$arrData['Diktum']['subLevelDiktum'][] = @$subLevelDiktum[$i];
+			$arrData['Diktum']['text'][] = @$Diktum[$i];
 		}
 		
 		/* Insert Into DB */
