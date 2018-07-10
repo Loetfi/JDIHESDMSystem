@@ -1015,7 +1015,7 @@ class Keputusan_menteri_doc extends CI_Controller {
 			'id_dokumen'	=> $id,
 			'status_revisi'	=> $revisi,
 			'cdate'			=> date('Y-m-d H:i:s'),
-			'status'		=> 0
+			'appto'			=> null
 		);
 		$queryDokumen = $this->db->insert('dokumen_revisi', $dataDokumenRevisi);
 		return $this->db->insert_id();

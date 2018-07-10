@@ -87,16 +87,16 @@
 		$(ele).children().attr("onclick","remove(this)").attr('title', 'Hapus Isi');
 		$(element).last().insertAfter($("#text-Memutuskan"+count));
 	}
-	function addPasal(ele, count) {
+	function addDiktum(ele, count) {
 		var counts = count + 1;
-		var element =	'<div class="form-group" id="text-pasal'+counts+'" style="display:inline-block; margin-top:5px; width:100%;">'+
+		var element =	'<div class="form-group" id="text-Diktum'+counts+'" style="display:inline-block; margin-top:5px; width:100%;">'+
 							'<div style="float:left; width:20%">'+
-								'<input type="text" name="poinPasal[]" class="form-control" placeholder="Pointer" />'+
-								'<select class="form-control" style="cursor:pointer; margin-top:10px;">'+
+								'<input type="text" name="pointerDiktum[]" class="form-control" placeholder="Pointer" />'+
+								'<select name="nextDiktum[]" class="form-control" style="cursor:pointer; margin-top:10px;">'+
 									'<option value="continue">Continues Page</option>'+
 									'<option value="newP">Next Page Portrait</option><option value="newL">Next Page Landscape</option>'+
 								'</select>'+
-								'<select class="form-control" style="cursor:pointer; margin-top:10px;">'+
+								'<select name="subLevelDiktum[]" class="form-control" style="cursor:pointer; margin-top:10px;">'+
 									'<option value="0">SubLevel 0</option>'+
 									'<option value="1">SubLevel 1</option>'+
 									'<option value="2">SubLevel 2</option>'+
@@ -105,14 +105,14 @@
 								'</select>'+
 							'</div>'+
 							'<div style="width:100%">'+
-								'<textarea type="text" name="pasal[]" class="form-control" placeholder="Pasal" rows="6" style="float:left; margin-left:5px; width:75%;"></textarea>'+
-								'<a href="javascript:void(0)" onclick="addPasal(this, '+counts+')" style="position:absolute; right:5%;" title="Tambah Isi"><i class="fa fa-lg fa-plus"></i></a>'+
-								'<a href="javascript:void(0)" style="position:absolute; right:4.7%; margin-top:25px;" title="Tambah Telaah"><i class="fa fa-lg fa-comments-o"></i></a>'+
+								'<textarea type="text" name="Diktum[]" class="form-control" placeholder="Diktum" rows="6" style="float:left; margin-left:5px; width:75%;"></textarea>'+
+								'<a href="javascript:void(0)" onclick="addDiktum(this, '+counts+')" style="position:absolute; right:5%;" title="Tambah Isi"><i class="fa fa-lg fa-plus"></i></a>'+
 							'</div>'+
 						'</div>';
 		$(ele).children().toggleClass('fa-plus fa-minus');
 		$(ele).children().attr("onclick","remove(this)").attr('title', 'Hapus Isi');
-		$(element).last().insertAfter($("#text-pasal"+count));
+		$(element).last().insertAfter($("#text-Diktum"+count));
+		
 	}
 	function addTembusan(ele, count) {
 		var counts = count + 1;
@@ -461,15 +461,48 @@
 	<fieldset>
 		<legend>Diktum</legend>
 		<div>
-			<?php $namaJenisField = 'Diktum'; ?>
-			<div class="form-group" id="text-pasal1">
+			<?php $namaJenisField = 'Diktum'; 
+			if (count(@$detail_dokumen[$namaJenisField]) > 0){
+				for($idxField=0; $idxField<count(@$detail_dokumen[$namaJenisField]); $idxField++){ ?>
+			<div class="form-group" id="text-<?php echo $namaJenisField.($idxField +1); ?>" style="display:inline-block; width:100%;">
 				<div style="float:left; width:20%">
-					<input type="text" name="poinPasal[]" class="form-control" placeholder="Pointer" />
-					<select class="form-control" style="cursor:pointer; margin-top:10px;">
+					<input type="text" name="pointer<?php echo $namaJenisField; ?>[]" class="form-control" placeholder="Pointer" value="<?php echo @$detail_dokumen[$namaJenisField][$idxField]['pointer']; ?>" />
+					<select name="nextPage<?php echo $namaJenisField; ?>[]" class="form-control" style="cursor:pointer; margin-top:10px;">
+						<option value="continue" <?php echo @$detail_dokumen[$namaJenisField][$idxField]['layout'] == 'continue' ? 'selected' : ''; ?>>Continues Page</option>
+						<option value="newP" <?php echo @$detail_dokumen[$namaJenisField][$idxField]['layout'] == 'newP' ? 'selected' : ''; ?> >Next Page Portrait</option>
+						<option value="newL" <?php echo @$detail_dokumen[$namaJenisField][$idxField]['layout'] == 'newL' ? 'selected' : ''; ?> >Next Page Landscape</option>
+					</select>
+					<select name="subLevel<?php echo $namaJenisField; ?>[]" class="form-control" style="cursor:pointer; margin-top:10px;">
+						<option value="0" <?php echo @$detail_dokumen[$namaJenisField][$idxField]['sublevel'] == '0' ? 'selected' : ''; ?>>SubLevel 0</option>
+						<option value="1" <?php echo @$detail_dokumen[$namaJenisField][$idxField]['sublevel'] == '1' ? 'selected' : ''; ?>>SubLevel 1</option>
+						<option value="2" <?php echo @$detail_dokumen[$namaJenisField][$idxField]['sublevel'] == '2' ? 'selected' : ''; ?>>SubLevel 2</option>
+						<option value="3" <?php echo @$detail_dokumen[$namaJenisField][$idxField]['sublevel'] == '3' ? 'selected' : ''; ?>>SubLevel 3</option>
+						<option value="4" <?php echo @$detail_dokumen[$namaJenisField][$idxField]['sublevel'] == '4' ? 'selected' : ''; ?>>SubLevel 4</option>
+					</select>
+				</div>
+				<div style="width:100%">
+					<textarea type="text" name="<?php echo $namaJenisField; ?>[]" class="form-control" placeholder="Menimbang" rows="6" style="float:left; margin-left:5px; width:75%;"><?php echo @$detail_dokumen[$namaJenisField][$idxField]['teks']; ?></textarea>
+					<a href="javascript:void(0)" onclick="addDiktum(this, <?php echo ($idxField+1); ?>)" style="position:absolute; right:5%;">
+						<i class="fa fa-lg fa-plus <?php echo ($idxField+1) < count(@$detail_dokumen[$namaJenisField]) ? 'fa-minus' : ''; ?>"></i>
+					</a>
+					<a href="javascript:void(0)" id="btnKomentar-<?php echo $namaJenisField.($idxField +1); ?>" targetKomentar="textKomentar-<?php echo $namaJenisField.($idxField+1); ?>" onclick="addKomentar(this.id)" style="position:absolute; right:4.7%; margin-top:25px;" title="Tambah Telaah">
+						<i class="fa fa-lg <?php echo ($idxField+1) < count(@$detail_dokumen[$namaJenisField]) ? 'fa-comments-o' : 'fa-comments'; ?>"></i>
+					</a>
+				</div>
+			</div>
+			<div class="form-group" style="width:100%; top:-15px; position:relative;">
+				<textarea type="text" name="Komentar_<?php echo $namaJenisField; ?>[]" class="form-control" rows="2" id="textKomentar-<?php echo $namaJenisField.($idxField+1); ?>" style="display:none; width:95%;" placeholder="Komentar <?php echo $namaJenisField.($idxField+1); ?>"></textarea>
+			</div>
+				<?php }
+			} else { ?>
+			<div class="form-group" id="text-<?php echo $namaJenisField; ?>1" style="display:inline-block; width:100%;">
+				<div style="float:left; width:20%">
+					<input type="text" name="pointer<?php echo $namaJenisField; ?>[]" class="form-control" placeholder="Pointer" />
+					<select name="nextPage<?php echo $namaJenisField; ?>[]" class="form-control" style="cursor:pointer; margin-top:10px;">
 						<option value="continue">Continues Page</option>
 						<option value="newP">Next Page Portrait</option><option value="newL">Next Page Landscape</option>
 					</select>
-					<select class="form-control" style="cursor:pointer; margin-top:10px;">
+					<select name="subLevel<?php echo $namaJenisField; ?>[]" class="form-control" style="cursor:pointer; margin-top:10px;">
 						<option value="0">SubLevel 0</option>
 						<option value="1">SubLevel 1</option>
 						<option value="2">SubLevel 2</option>
@@ -478,18 +511,15 @@
 					</select>
 				</div>
 				<div style="width:100%">
-					<textarea type="text" name="pasal[]" class="form-control" placeholder="Diktum" rows="6" style="float:left; margin-left:5px; width:75%;"></textarea>
-					<a href="javascript:void(0)" onclick="addPasal(this, 1)" style="position:absolute; right:5%;"><i class="fa fa-lg fa-plus"></i></a>
-					<a href="javascript:void(0)" id="btnKomentar-<?php echo $namaJenisField; ?>" targetKomentar="textKomentar-<?php echo $namaJenisField; ?>" onclick="addKomentar(this.id)" style="position:absolute; right:4.7%; margin-top:25px;" title="Tambah Telaah">
-						<i class="fa fa-lg <?php echo ((int)@$idxField+1) < count(@$detail_dokumen[$namaJenisField]) ? 'fa-comments-o' : 'fa-comments'; ?>"></i>
-					</a>
+					<textarea type="text" name="<?php echo $namaJenisField; ?>[]" class="form-control" placeholder="Menimbang" rows="6" style="float:left; margin-left:5px; width:75%;"></textarea>
+					<a href="javascript:void(0)" onclick="addDiktum(this, 1)" style="position:absolute; right:5%;"><i class="fa fa-lg fa-plus"></i></a>
+					<a href="javascript:void(0)" style="position:absolute; right:4.7%; margin-top:25px;" title="Tambah Telaah"><i class="fa fa-lg fa-comments-o"></i></a>
 				</div>
 			</div>
-			<div class="form-group" style="width:100%; top:-15px; position:relative;">
-				<textarea type="text" name="Komentar_<?php echo $namaJenisField; ?>[]" class="form-control" rows="2" id="textKomentar-<?php echo $namaJenisField; ?>" style="display:none; position:relative; top:20px; width:95%;" placeholder="Komentar <?php echo $namaJenisField; ?>"></textarea>
-			</div>
+			<?php } ?>
 		</div>
 	</fieldset>
+	
 	<fieldset>
 		<legend>Tanda Tangan</legend>
 		<div class="form-group">
