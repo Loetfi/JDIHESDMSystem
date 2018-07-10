@@ -906,11 +906,16 @@ class Keputusan_menteri_doc extends CI_Controller {
 		return array_keys($arr) !== range(0, count($arr) - 1);
 	}
 	
-	function edit($id_dokumen = 0, $status_revisi = 'A'){
+	function edit($id_dokumen = 0, $status_revisi = ''){
 		$data = array(
 			'contents'	=> 'Keputusan_menteri_doc_edit', 
 			'title'		=> 'Dashbord Sistem'
 		);
+		
+		if ($status_revisi == ''){
+			$sqlRevisi = $this->db->query("select max(status_revisi) status_revisi from dokumen_revisi where id_dokumen = '$id_dokumen'")->row_array();
+			$status_revisi = @$sqlRevisi['status_revisi'];
+		}
 		
 		$groupField = array();
 		$sql = "SELECT *
