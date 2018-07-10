@@ -783,15 +783,23 @@ class Keputusan_menteri_doc extends CI_Controller {
 		$nextPageMemutuskan = @$_POST['nextPageMemutuskan'];
 		$subLevelMemutuskan = @$_POST['subLevelMemutuskan'];
 		for($i=0; $i<count($Memutuskan); $i++) {
-			$arrData['Memutuskan']['pointerMemutuskan'][] = $pointerMemutuskan[$i];
-			$arrData['Memutuskan']['nextPageMemutuskan'][] = $nextPageMemutuskan[$i];
-			$arrData['Memutuskan']['subLevelMemutuskan'][] = $subLevelMemutuskan[$i];
-			$arrData['Memutuskan']['text'][] = $Memutuskan[$i];
+			$arrData['Memutuskan']['pointerMemutuskan'][] = @$pointerMemutuskan[$i];
+			$arrData['Memutuskan']['nextPageMemutuskan'][] = @$nextPageMemutuskan[$i] == '' ? 'continue' : @$nextPageMemutuskan[$i];
+			$arrData['Memutuskan']['subLevelMemutuskan'][] = @$subLevelMemutuskan[$i];
+			$arrData['Memutuskan']['text'][] = @$Memutuskan[$i];
 		}
 		
 		/* Insert Into DB */
-		$id = $this->insert_document();
-		$alldata = $this->insert_detail_document($id, $arrData);
+		if (@$_POST['id_dokumen'] == '')
+			$id = $this->insert_document();
+		else 
+			$id = $_POST['id_dokumen'];
+		
+		$revisi = $this->cek_revisi_document($id);
+		$idRevisi = $this->insert_revisi_document($id, $revisi);
+		$alldata = $this->insert_detail_document($id, $idRevisi, $arrData);
+		// print_r($arrData);
+		// die();
 		echo $alldata;
 	}
 	
@@ -805,13 +813,43 @@ class Keputusan_menteri_doc extends CI_Controller {
 		$queryDokumen = $this->db->insert('dokumen', $dataDokumen);
 		return $this->db->insert_id();
 	}
+	function cek_revisi_document($id) {
+		$sql = "
+			SELECT 
+				max(status_revisi) revisi,
+				count(*) terhitung
+			FROM dokumen_revisi dr
+			WHERE dr.id_dokumen = '$id'
+		";
+		$allRow = $this->db->query($sql)->row_array();
+		if (@$allRow['terhitung'] == 0){
+			$revisi = 'A';
+		} else if (@$allRow['terhitung'] > 0){
+			$revisi = $allRow['revisi'];
+			$revisi++;
+		}
+		return $revisi;
+	}
+	function insert_revisi_document($id, $revisi) {
+		
+		
+		$dataDokumenRevisi = array(
+			'id_dokumen'	=> $id,
+			'status_revisi'	=> $revisi,
+			'cdate'			=> date('Y-m-d H:i:s'),
+			'status'		=> 0
+		);
+		$queryDokumen = $this->db->insert('dokumen_revisi', $dataDokumenRevisi);
+		return $this->db->insert_id();
+	}
 	
-	function insert_detail_document($id, $insertArray) {
+	function insert_detail_document($id, $idRevisi, $insertArray) {
 		foreach(array_keys($insertArray) as $valKeys) {
 			if(is_string($insertArray[$valKeys])) {
 				//echo "String <b>[".$valKeys."]</b>";
 				$dataDetailDokumen = array(
 					'id_dokumen'	=> $id,
+					'id_revisi'		=> $idRevisi,
 					'jenis_field'	=> $valKeys,
 					'pointer'		=> 0,
 					'layout'		=> '',
@@ -837,21 +875,25 @@ class Keputusan_menteri_doc extends CI_Controller {
 					}
 				}
 				
+				$idxKomentar=0;
 				foreach($arrPivot as $valPivot) {
 					if (@$valPivot[3] != ""){
 						$dataDetailDokumen = array(
 							'id_dokumen'	=> $id,
-							'jenis_field'	=> $valPivot[4],
+							'id_revisi'		=> $idRevisi,
+							'jenis_field'	=> $valKeys, //$valPivot[4],
 							'pointer'		=> $valPivot[0],
 							'layout'		=> $valPivot[1],
 							'sublevel'		=> $valPivot[2],
 							'teks'			=> $valPivot[3],
 							'cdate'			=> date('Y-m-d H:i:s'),
-							'status'		=> 0
+							'status'		=> 0,
+							'komentar'		=> @$_POST['Komentar_'.$valKeys][$idxKomentar],
 						);
 						// // // // print_r($dataDetailDokumen);
 						$queryDetailDokumen = $this->db->insert('dokumen_detail', $dataDetailDokumen);
 					}
+					$idxKomentar++;
 				}
 			}
 		}
@@ -864,7 +906,7 @@ class Keputusan_menteri_doc extends CI_Controller {
 		return array_keys($arr) !== range(0, count($arr) - 1);
 	}
 	
-	function edit($id_dokumen = 0){
+	function edit($id_dokumen = 0, $status_revisi = 'A'){
 		$data = array(
 			'contents'	=> 'Keputusan_menteri_doc_edit', 
 			'title'		=> 'Dashbord Sistem'
@@ -873,11 +915,15 @@ class Keputusan_menteri_doc extends CI_Controller {
 		$groupField = array();
 		$sql = "SELECT *
 			FROM dokumen_detail dd
-			LEFT JOIN dokumen d ON dd.id_dokumen = d.id_dokumen
-			WHERE d.id_dokumen = '$id_dokumen'
+			LEFT JOIN dokumen_revisi dr ON dr.id_revisi = dd.id_revisi
+			LEFT JOIN dokumen d ON d.id_dokumen = dr.id_dokumen
+			WHERE dr.id_dokumen = '$id_dokumen'
+				AND dr.status_revisi = '$status_revisi'
 			ORDER BY id_detail ASC
 		";
 		$allRow = $this->db->query($sql)->result_array();
+		
+		if (count(@$allRow) > 0)
 		foreach($allRow as $row){
 			$namaJenisField = $row['jenis_field'];
 			
@@ -888,9 +934,14 @@ class Keputusan_menteri_doc extends CI_Controller {
 		}
 		
 		$data['id_dokumen'] = $id_dokumen;
-		$data['detail_dokumen'] = $detail_dokumen;
+		$data['detail_dokumen'] = @$detail_dokumen;
 		
 		$this->load->view('backend/template/head', $data, FALSE);
+	}
+	
+	function update_document(){
+		$this->save_document();
+		
 	}
 }
 /* End of file dashboard.php */

@@ -302,9 +302,9 @@
 						<i class="fa fa-lg <?php echo ($idxField+1) < count(@$detail_dokumen[$namaJenisField]) ? 'fa-comments-o' : 'fa-comments'; ?>"></i>
 					</a>
 				</div>
-			</div>
-			<div class="form-group" style="width:100%; top:-15px; position:relative;">
-				<textarea type="text" name="Komentar_<?php echo $namaJenisField; ?>[]" class="form-control" rows="2" id="textKomentar-<?php echo $namaJenisField.($idxField+1); ?>" style="display:none; width:95%;" placeholder="Komentar <?php echo $namaJenisField.($idxField+1); ?>"></textarea>
+        <div class="form-group" style="width:100%; top:0px; position:relative;">
+          <textarea type="text" name="Komentar_<?php echo $namaJenisField; ?>[]" class="form-control" rows="2" id="textKomentar-<?php echo $namaJenisField.($idxField+1); ?>" style="display:none; width:95%;" placeholder="Komentar <?php echo $namaJenisField.($idxField+1); ?>"><?php echo @$detail_dokumen[$namaJenisField][$idxField]['komentar']."\n"; ?></textarea>
+        </div>
 			</div>
 				<?php }
 			} else { ?>
@@ -481,7 +481,7 @@
 					<textarea type="text" name="pasal[]" class="form-control" placeholder="Diktum" rows="6" style="float:left; margin-left:5px; width:75%;"></textarea>
 					<a href="javascript:void(0)" onclick="addPasal(this, 1)" style="position:absolute; right:5%;"><i class="fa fa-lg fa-plus"></i></a>
 					<a href="javascript:void(0)" id="btnKomentar-<?php echo $namaJenisField; ?>" targetKomentar="textKomentar-<?php echo $namaJenisField; ?>" onclick="addKomentar(this.id)" style="position:absolute; right:4.7%; margin-top:25px;" title="Tambah Telaah">
-						<i class="fa fa-lg <?php echo ($idxField+1) < count(@$detail_dokumen[$namaJenisField]) ? 'fa-comments-o' : 'fa-comments'; ?>"></i>
+						<i class="fa fa-lg <?php echo ((int)@$idxField+1) < count(@$detail_dokumen[$namaJenisField]) ? 'fa-comments-o' : 'fa-comments'; ?>"></i>
 					</a>
 				</div>
 			</div>
@@ -598,7 +598,7 @@ $("#view_doc").click(function(e) {
 });
 
 $("#save_doc").click(function(e) {
-	$("#form-keputusan").attr("action", "<?php echo site_url('keputusan_menteri_doc/save_document'); ?>");
+	$("#form-keputusan").attr("action", "<?php echo site_url('keputusan_menteri_doc/update_document'); ?>");
 });
 function addKomentar(thisId) {
 	idTarget  = $('#'+thisId).attr('targetKomentar');
