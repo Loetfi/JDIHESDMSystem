@@ -1,10 +1,3 @@
-<div class="row-col">
-	<div class="col-lg b-r"> 
-		<div class="padding">
-			<div class="box">
-				<div class="padding">
-<legend>Buat Dokumen Keputusan Menteri</legend>
-
 <script>
 	function addMenimbang(ele, count) {
 		var counts = count + 1;
@@ -107,6 +100,7 @@
 							'<div style="width:100%">'+
 								'<textarea type="text" name="Diktum[]" class="form-control" placeholder="Diktum" rows="6" style="float:left; margin-left:5px; width:75%;"></textarea>'+
 								'<a href="javascript:void(0)" onclick="addDiktum(this, '+counts+')" style="position:absolute; right:5%;" title="Tambah Isi"><i class="fa fa-lg fa-plus"></i></a>'+
+								'<a href="javascript:void(0)" style="position:absolute; right:4.7%; margin-top:25px;" title="Tambah Telaah"><i class="fa fa-lg fa-comments-o"></i></a>'+
 							'</div>'+
 						'</div>';
 		$(ele).children().toggleClass('fa-plus fa-minus');
@@ -118,7 +112,7 @@
 		var counts = count + 1;
 		var element =	'<div class="form-group" id="text-tembusan'+counts+'" style="display:inline-block; margin-top:5px; width:100%;">'+
 							'<div style="float:left; width:20%">'+
-								'<input type="text" name="poinTembusan[]" class="form-control" placeholder="Pointer" />'+
+								'<input type="text" name="pointerTembusan[]" class="form-control" placeholder="Pointer" />'+
 								'<select class="form-control" style="cursor:pointer; margin-top:10px;">'+
 									'<option value="continue">Continues Page</option>'+
 									'<option value="newP">Next Page Portrait</option><option value="newL">Next Page Landscape</option>'+
@@ -145,32 +139,25 @@
 		$(ele).parent().parent().parent().remove();
 	}
 	function addKolomLampiran(ele, count) {console.log($(ele).parent().parent().parent().next().children('tr:first').next().children('td:last').hasClass('numrows'));
-		var eleJudul = $(ele).parent().parent()/*$('#judul-tabel'+count)*/, 
-			eleContent = $(ele).parent().parent().parent().next().children()/*$('.content-tabel'+count)*/, 
-			countColspan = eleJudul.children().prop("colSpan") + 1,
-			lastRowHeader = $(ele).parent().parent().parent().next().children('tr:first').children('td:last').attr('class'),
-			minCount = count - 1;
-		//var getColumnArray = Object.keys(eleContent).filter(function(a) {return /^\d+$/.test(a);});
+		var eleJudul = $(ele).parent().parent(), 
+			countColspan = eleJudul.children().prop("colSpan") + 1;
+		
+		var getBodyRows = $(ele).parent().parent().parent().next().children();
+		
 		eleJudul.children().first().attr('colspan', countColspan);
-		$('<td><input type="text" name="kolom['+minCount+'][header][]" class="form-control form-control-sm float-left" placeholder="Konten" /></td>').insertBefore('.'+lastRowHeader);
-		for(var i = 0; i < (eleContent.length); i++) {
-			$('<td><input type="text" name="kolom['+minCount+'][content]['+i+'][]" class="form-control float-left" placeholder="Konten" /></td>').insertBefore(".numrows"+i);
+		for(var i = 0; i < getBodyRows.length; i++) {
+			var eleCopy = $(getBodyRows[i]).children('td:last').prev().clone();
+			eleCopy.insertBefore($(getBodyRows[i]).children('td:last'));
 		}
 	}
 	function rmKolomLampiran(ele, count) {
-		var eleJudul = $(ele).parent().parent()/*$('#judul-tabel'+count)*/, 
-			lastRowHeader = $('.lastrowheader'+count), 
+		var eleJudul = $(ele).parent().parent(),
 			countColspan = eleJudul.children().prop("colSpan") - 1,
-			/*eleJudulContent = $('#judul-tabel'+count),*/ 
-			lastRowContent = $('.lastrowcontent'+count), 
-			countColspan = eleJudul.children().prop("colSpan") - 1;
-		if(lastRowHeader.parent().children().length > 3) {
-			lastRowHeader.prev().remove();
-			eleJudul.children().first().attr('colspan', countColspan);
-		}
-		if(lastRowContent.parent().children().length > 3) {
-			lastRowContent.prev().remove();
-			eleJudul.children().first().attr('colspan', countColspan);
+			getRows = $(ele).parent().parent().parent().next().children();
+		
+		eleJudul.children().first().attr('colspan', countColspan);
+		for(var i = 0; i < getRows.length; i++) {
+			$(getRows[i]).children('td:last').prev().remove();
 		}
 	}
 	function addRowLampiran(ele, count, row) {
@@ -265,6 +252,12 @@
 		$('#form-keputusan').children('fieldset:last').after('<fieldset style="margin-top:30px">'+lampiran+'</fieldset>');
 	}
 </script>
+<div class="row-col">
+	<div class="col-lg b-r"> 
+		<div class="padding">
+			<div class="box">
+				<div class="padding">
+<legend>Buat Dokumen Keputusan Menteri</legend>
 <form class="width-100p" method="POST" id="form-keputusan" target="_blank">
 	<input type="hidden" name="id_dokumen" value="<?php echo @$id_dokumen; ?>">
 	<div class="form-group" style="margin-bottom:5px">
@@ -532,7 +525,7 @@
 		<div>
 			<div class="form-group" id="text-tembusan1">
 				<div style="float:left; width:20%">
-					<input type="text" name="poinTembusan[]" class="form-control" placeholder="Pointer" />
+					<input type="text" name="pointerTembusan[]" class="form-control" placeholder="Pointer" />
 					<select class="form-control" style="cursor:pointer; margin-top:10px;">
 						<option value="continue">Continues Page</option>
 						<option value="newP">Next Page Portrait</option><option value="newL">Next Page Landscape</option>

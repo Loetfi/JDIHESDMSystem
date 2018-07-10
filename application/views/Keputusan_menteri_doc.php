@@ -1,10 +1,3 @@
-<div class="row-col">
-	<div class="col-lg b-r"> 
-		<div class="padding">
-			<div class="box">
-				<div class="padding">
-<legend>Buat Dokumen Keputusan Menteri</legend>
-
 <script>
 	function addMenimbang(ele, count) {
 		var counts = count + 1;
@@ -140,59 +133,53 @@
 	function remove(ele) {
 		$(ele).parent().parent().parent().remove();
 	}
-	function addKolomLampiran(ele, count) {
-		var eleJudul = $(ele).parent().parent()/*$('#judul-tabel'+count)*/, 
-			eleContent = $(ele).parent().parent().parent().next().children()/*$('.content-tabel'+count)*/, 
-			countColspan = eleJudul.children().prop("colSpan") + 1,
-			lastRowHeader = $(ele).parent().parent().parent().next().children('tr:first').children('td:last').attr('class'),
-			minCount = count - 1;
-		//var getColumnArray = Object.keys(eleContent).filter(function(a) {return /^\d+$/.test(a);});
+	function addKolomLampiran(ele, count, lampiran, table) {
+		var eleJudul = $(ele).parent().parent(), 
+			countColspan = eleJudul.children().prop("colSpan") + 1;
+		
+		var getBodyRows = $(ele).parent().parent().parent().next().children();
+		
 		eleJudul.children().first().attr('colspan', countColspan);
-		$('<td><input type="text" name="kolom['+minCount+'][header][]" class="form-control form-control-sm float-left" placeholder="Konten" /></td>').insertBefore('.'+lastRowHeader);
-		for(var i = 0; i < (eleContent.length); i++) {
-			$('<td><input type="text" name="kolom['+minCount+'][content]['+i+'][]" class="form-control float-left" placeholder="Konten" /></td>').insertBefore(".numrows"+i);
+		for(var i = 0; i < getBodyRows.length; i++) {
+			var eleCopy = $(getBodyRows[i]).children('td:last').prev().clone();
+			eleCopy.insertBefore($(getBodyRows[i]).children('td:last'));
 		}
 	}
-	function rmKolomLampiran(ele, count) {
-		var eleJudul = $(ele).parent().parent()/*$('#judul-tabel'+count)*/, 
-			lastRowHeader = $('.lastrowheader'+count), 
+	function rmKolomLampiran(ele, count, lampiran) {
+		var eleJudul = $(ele).parent().parent(),
 			countColspan = eleJudul.children().prop("colSpan") - 1,
-			/*eleJudulContent = $('#judul-tabel'+count),*/ 
-			lastRowContent = $('.lastrowcontent'+count), 
-			countColspan = eleJudul.children().prop("colSpan") - 1;
-		if(lastRowHeader.parent().children().length > 3) {
-			lastRowHeader.prev().remove();
-			eleJudul.children().first().attr('colspan', countColspan);
-		}
-		if(lastRowContent.parent().children().length > 3) {
-			lastRowContent.prev().remove();
-			eleJudul.children().first().attr('colspan', countColspan);
+			getRows = $(ele).parent().parent().parent().next().children();
+		
+		eleJudul.children().first().attr('colspan', countColspan);
+		for(var i = 0; i < getRows.length; i++) {
+			$(getRows[i]).children('td:last').prev().remove();
 		}
 	}
-	function addRowLampiran(ele, count, row) {
+	function addRowLampiran(ele, count, row, lampiran, table) {
 		var counts = count + 1, minCount = count - 1, numrow = row + 1;
 		var eleContent = $(ele),
 			tbodyContent = eleContent.parent().parent().parent(),
 			countCol = eleContent.parent().parent().children(),
 			countRow = eleContent.parent().parent().parent().children();
 		eleContent.children().addClass('fa-minus-square').removeClass('fa-plus-square');
-		eleContent.attr("onclick","rmRowLampiran(this, "+count+")");
+		eleContent.attr("onclick", "rmRowLampiran(this, "+count+", "+lampiran+", "+table+")").attr('title', 'Hapus Baris');
+		
 		var rows = '<tr class="content-tabel'+count+'">';
-		rows += '<td class="firstrow1" align="center" style="min-width:30px">'+
+		rows += '<td class="firstrow'+counts+'" align="center" style="min-width:30px">'+
 				'<input type="text" class="form-control-sm" name="kolom['+minCount+'][content]['+numrow+'][]" value="'+countRow.length+'" style="border:none; background:transparent; text-align:center;" size="1" disabled />'+
 				'</td>';
 		for(var i = 0; i < (countCol.length - 2); i++) {
 			rows += '<td><input type="text" name="kolom['+minCount+'][content]['+numrow+'][]" class="form-control form-control-sm float-left" placeholder="Konten" /></td>';
 		}
-		rows += '<td class="lastrowcontent'+count+' numrows'+numrow+'" align="center">'+
-				'<a href="javascript:void(0)" style="line-height:32px; margin:0 5px;" onclick="addRowLampiran(this, '+count+', '+numrow+')">'+
+		rows += '<td class="lastrowcontent'+lampiran+'-'+table+'-'+counts+' numrows'+lampiran+'-'+table+'-'+numrow+'" align="center">'+
+				'<a href="javascript:void(0)" style="line-height:32px; margin:0 5px;" title="Tambah Baris" onclick="addRowLampiran(this, '+counts+', '+numrow+', '+lampiran+', '+table+')">'+
 				'<i class="fa fa-plus-square"></i>'+
 				'</a>'+
 				'</td>';
 		$(tbodyContent).children().last('tr').after(rows);
 	}
-	function rmRowLampiran(ele, count) {
-		var minCount = count - 1;
+	function rmRowLampiran(ele, count, lampiran, table) {
+		var minCount = count - 1, _minTable = table - 1;
 		if($(ele).parent().parent().children('td:first').children().val().toLowerCase() === 'no') {
 			bootoast.toast({
 				message: 'Header Table Tidak Bisa Dihapus',
@@ -202,7 +189,7 @@
 		else {
 			$(ele).parent().parent().remove();
 			var eleContent = $(ele),
-				tbodyContent = $('#tbody-tabel'+count),
+				tbodyContent = $('#tbody-tabel'+table),
 				countRow = $(tbodyContent).children(),
 				number = 0;
 				
@@ -210,7 +197,7 @@
 				var number = $(countRow[i]).children('td:first').children();
 				var lastnum = $(countRow[i]).children('td:last').children();
 				var betweennum = $(countRow[i]).children().nextUntil('td:last', 'td').children().not('a');
-				$(countRow[i]).children('td:last').attr('class', 'lastrowcontent'+count+' numrows'+i);
+				$(countRow[i]).children('td:last').attr('class', 'lastrowcontent'+count+' numrows'+lampiran+'-'+_minTable+'-'+i);
 				betweennum.attr('name', 'kolom['+minCount+'][content]['+i+'][]');
 				number.val(i);
 			}
@@ -228,20 +215,24 @@
 		
 		var replace_3 = $(new_table).contents().find('tbody#tbody-tabel'+count).attr('id', 'tbody-tabel'+_count);
 		new_table = '<div>'+replace_3.parent().parent().html()+'</div>';
-		
-		var replace_4 = $(new_table).contents().find('tr.content-tabel'+count).attr('class', 'content-tabel'+_count);
-		new_table = '<div>'+replace_4.parent().parent().parent().html()+'</div>';
+	
+		var replace_4 = $(new_table).contents().find('tr.content-tabel'+count).find('a#addTableRow'+count).attr('id', 'addTableRow'+_count).attr('onclick', 'addRowLampiran(this, 1, 0, 1, '+_count+')');
+		new_table = '<div>'+replace_4.parent().parent().parent().parent().parent().html()+'</div>';
+	
+		var replace_5 = $(new_table).contents().find('tr.content-tabel'+count).attr('class', 'content-tabel'+_count);
+		new_table = '<div>'+replace_5.parent().parent().parent().html()+'</div>';
 
-		var replace_5 = $(new_table).contents().find('a#deleteTableLampiran'+count).attr('id', 'deleteTableLampiran'+_count);
-		new_table = '<div>'+replace_5.parent().parent().parent().parent().parent().html()+'</div>';
+		var replace_6 = $(new_table).contents().find('a#deleteTableLampiran'+count).attr('id', 'deleteTableLampiran'+_count).attr('onclick', 'rmKolomLampiran(this, '+_count+', '+count+')');
+		new_table = '<div>'+replace_6.parent().parent().parent().parent().parent().html()+'</div>';
+	
+		var replace_7 = $(new_table).contents().find('a#addTableLampiran'+count).attr('id', 'addTableLampiran'+_count).attr('onclick', 'addKolomLampiran(this, 1, 1, '+_count+')');
+		new_table = '<div>'+replace_7.parent().parent().parent().parent().parent().html()+'</div>';
 		
-		var replace_6 = $(new_table).contents().find('td.lastrowheader'+count).attr('class', 'lastrowheader'+_count);
-		new_table = '<div class="table'+_count+' margin-top-5px">'+replace_6.parent().parent().parent().parent().html()+'</div>';
+		var replace_8 = $(new_table).contents().find('td.lastrowheader'+count).attr('class', 'lastrowheader'+_count);
+		new_table = '<div class="table'+_count+' margin-top-5px">'+replace_8.parent().parent().parent().parent().html()+'</div>';
 
 		$(ele).attr('onclick', 'addTabelLampiran(this, '+_count+')');
-
 		$('#fieldTabelLampiran').children().last().after(new_table);
-		$('a#deleteTableLampiran'+_count).attr('onclick', 'rmKolomLampiran(this, '+_count+')');
 	}
 	
 	function removeTabelLampiran(ele) {
@@ -257,10 +248,16 @@
 	}
 	
 	function addLampiran(ele) {
-		var lampiran = $(ele).parent().parent().html(); //console.log(lampiran);
+		var lampiran = $(ele).parent().parent().html();
 		$('#form-keputusan').children('fieldset:last').after('<fieldset style="margin-top:30px">'+lampiran+'</fieldset>');
 	}
 </script>
+<div class="row-col">
+	<div class="col-lg b-r"> 
+		<div class="padding">
+			<div class="box">
+				<div class="padding">
+<legend>Buat Dokumen Keputusan Menteri</legend>
 <form class="width-100p" method="POST" id="form-keputusan" target="_blank">
 	<div class="form-group" style="margin-bottom:5px">
 		<textarea name="super_judul" class="form-control" autocomplete="off" placeholder="Judul Dokumen" rows="4" required><?php echo @$detail_dokumen['judul'][0]['teks']; ?></textarea>
@@ -434,10 +431,10 @@
 											<input type="text" name="judultabel[][]" class="form-control form-control-sm float-left" placeholder="Judul Tabel" />
 										</th>
 										<th align="center">
-											<a href="javascript:void(0)" style="line-height:32px; margin:0 auto;" title="Hapus Kolom" onclick="rmKolomLampiran(this, 1)" id="deleteTableLampiran1">
+											<a href="javascript:void(0)" style="line-height:32px; margin:0 auto;" title="Hapus Kolom" onclick="rmKolomLampiran(this, 1, 1)" id="deleteTableLampiran1">
 												<i class="fa fa-minus-square"></i>
 											</a>
-											<a href="javascript:void(0)" style="line-height:32px; margin:0 auto;" title="Tambah Kolom" onclick="addKolomLampiran(this, 1)">
+											<a href="javascript:void(0)" style="line-height:32px; margin:0 auto;" title="Tambah Kolom" onclick="addKolomLampiran(this, 1, 1, 1)" id="addTableLampiran1">
 												<i class="fa fa-plus-square"></i>
 											</a>
 										</th>
@@ -446,13 +443,13 @@
 								<tbody id="tbody-tabel1">
 									<tr class="content-tabel1">
 										<td class="firstrow1" align="center" style="min-width:30px">
-											<input type="text" name="kolom[0][header][]" value="NO" style="border:none; background:transparent; text-align:center;" size="2" disabled />
+											<input type="text" name="kolom[0][header][][]" value="NO" style="border:none; background:transparent; text-align:center;" size="2" disabled />
 										</td>
 										<td>
-											<input type="text" name="kolom[0][header][]" class="form-control form-control-sm float-left" placeholder="Konten" />
+											<input type="text" name="kolom[0][header][][]" class="form-control form-control-sm float-left" placeholder="Konten" />
 										</td>
 										<td class="lastrowheader1" align="center">
-											<a href="javascript:void(0)" style="line-height:32px; margin:0 5px;" onclick="addRowLampiran(this, 1, 0)">
+											<a href="javascript:void(0)" style="line-height:32px; margin:0 5px;" title="Tambah Baris" onclick="addRowLampiran(this, 1, 0, 1, 1)" id="addTableRow1">
 												<i class="fa fa-plus-square"></i>
 											</a>
 										</td>
