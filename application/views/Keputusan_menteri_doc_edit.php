@@ -106,7 +106,7 @@
 		$(ele).children().toggleClass('fa-plus fa-minus');
 		$(ele).children().attr("onclick","remove(this)").attr('title', 'Hapus Isi');
 		$(element).last().insertAfter($("#text-Diktum"+count));
-		
+
 	}
 	function addTembusan(ele, count) {
 		var counts = count + 1;
@@ -139,11 +139,11 @@
 		$(ele).parent().parent().parent().remove();
 	}
 	function addKolomLampiran(ele, count) {console.log($(ele).parent().parent().parent().next().children('tr:first').next().children('td:last').hasClass('numrows'));
-		var eleJudul = $(ele).parent().parent(), 
+		var eleJudul = $(ele).parent().parent(),
 			countColspan = eleJudul.children().prop("colSpan") + 1;
-		
+
 		var getBodyRows = $(ele).parent().parent().parent().next().children();
-		
+
 		eleJudul.children().first().attr('colspan', countColspan);
 		for(var i = 0; i < getBodyRows.length; i++) {
 			var eleCopy = $(getBodyRows[i]).children('td:last').prev().clone();
@@ -154,36 +154,37 @@
 		var eleJudul = $(ele).parent().parent(),
 			countColspan = eleJudul.children().prop("colSpan") - 1,
 			getRows = $(ele).parent().parent().parent().next().children();
-		
+
 		eleJudul.children().first().attr('colspan', countColspan);
 		for(var i = 0; i < getRows.length; i++) {
 			$(getRows[i]).children('td:last').prev().remove();
 		}
 	}
-	function addRowLampiran(ele, count, row) {
-		var counts = count + 1, minCount = count - 1, numrow = row + 1;
+	function addRowLampiran(ele, count, row, lampiran, table) {
+		var counts = count + 1, minCount = count - 1, numrow = row + 1, _table = table - 1;
 		var eleContent = $(ele),
 			tbodyContent = eleContent.parent().parent().parent(),
 			countCol = eleContent.parent().parent().children(),
 			countRow = eleContent.parent().parent().parent().children();
 		eleContent.children().addClass('fa-minus-square').removeClass('fa-plus-square');
-		eleContent.attr("onclick","rmRowLampiran(this, "+count+")");
+		eleContent.attr("onclick", "rmRowLampiran(this, "+count+", "+lampiran+", "+table+")").attr('title', 'Hapus Baris');
+
 		var rows = '<tr class="content-tabel'+count+'">';
-		rows += '<td class="firstrow1" align="center" style="min-width:30px">'+
-				'<input type="text" class="form-control-sm" name="kolom['+minCount+'][content]['+numrow+'][]" value="'+countRow.length+'" style="border:none; background:transparent; text-align:center;" size="1" disabled />'+
+		rows += '<td class="firstrow'+counts+'" align="center" style="min-width:30px">'+
+				'<input type="text" class="form-control-sm" name="kolom['+_table+'][content]['+numrow+'][]" value="'+countRow.length+'" style="border:none; background:transparent; text-align:center;" size="1" disabled />'+
 				'</td>';
 		for(var i = 0; i < (countCol.length - 2); i++) {
-			rows += '<td><input type="text" name="kolom['+minCount+'][content]['+numrow+'][]" class="form-control form-control-sm float-left" placeholder="Konten" /></td>';
+			rows += '<td><input type="text" name="kolom['+_table+'][content]['+numrow+'][]" class="form-control form-control-sm float-left" placeholder="Konten" /></td>';
 		}
-		rows += '<td class="lastrowcontent'+count+' numrows'+numrow+'" align="center">'+
+		rows += '<td class="lastrowcontent'+lampiran+'-'+table+'-'+counts+' numrows'+lampiran+'-'+table+'-'+numrow+'" align="center">'+
 				'<a href="javascript:void(0)" style="line-height:32px; margin:0 5px;" onclick="addRowLampiran(this, '+count+', '+numrow+')">'+
 				'<i class="fa fa-plus-square"></i>'+
 				'</a>'+
 				'</td>';
 		$(tbodyContent).children().last('tr').after(rows);
 	}
-	function rmRowLampiran(ele, count) {
-		var minCount = count - 1;
+	function rmRowLampiran(ele, count, lampiran, table) {
+		var minCount = count - 1, _minTable = table - 1, _table = table - 1;
 		if($(ele).parent().parent().children('td:first').children().val().toLowerCase() === 'no') {
 			bootoast.toast({
 				message: 'Header Table Tidak Bisa Dihapus',
@@ -196,13 +197,13 @@
 				tbodyContent = $('#tbody-tabel'+count),
 				countRow = $(tbodyContent).children(),
 				number = 0;
-				
+
 			for(var i = 1; i < countRow.length; i++) {
 				var number = $(countRow[i]).children('td:first').children();
 				var lastnum = $(countRow[i]).children('td:last').children();
 				var betweennum = $(countRow[i]).children().nextUntil('td:last', 'td').children().not('a');
-				$(countRow[i]).children('td:last').attr('class', 'lastrowcontent'+count+' numrows'+i);
-				betweennum.attr('name', 'kolom['+minCount+'][content]['+i+'][]');
+				$(countRow[i]).children('td:last').attr('class', 'lastrowcontent'+count+' numrows'+lampiran+'-'+_minTable+'-'+i);
+				betweennum.attr('name', 'kolom['+_table+'][content]['+i+'][]');
 				number.val(i);
 			}
 		}
@@ -210,31 +211,41 @@
 	function addTabelLampiran(ele, count) {
 		var _count = count + 1;
 		var new_table = '<div>'+$(ele).parent().parent().children('div:last').html()+'</div>';
-		
+
 		var replace_1 = $(new_table).find('table.tabel-lampiran'+count).attr('class', 'tabel-lampiran'+_count);
 		new_table = '<div>'+replace_1.parent().html()+'</div>';
-		
+
 		var replace_2 = $(new_table).contents().find('tr#judul-tabel'+count).attr('id', 'judul-tabel'+_count);
 		new_table = '<div>'+replace_2.parent().parent().parent().html()+'</div>';
-		
+
 		var replace_3 = $(new_table).contents().find('tbody#tbody-tabel'+count).attr('id', 'tbody-tabel'+_count);
 		new_table = '<div>'+replace_3.parent().parent().html()+'</div>';
-		
-		var replace_4 = $(new_table).contents().find('tr.content-tabel'+count).attr('class', 'content-tabel'+_count);
-		new_table = '<div>'+replace_4.parent().parent().parent().html()+'</div>';
 
-		var replace_5 = $(new_table).contents().find('a#deleteTableLampiran'+count).attr('id', 'deleteTableLampiran'+_count);
-		new_table = '<div>'+replace_5.parent().parent().parent().parent().parent().html()+'</div>';
-		
-		var replace_6 = $(new_table).contents().find('td.lastrowheader'+count).attr('class', 'lastrowheader'+_count);
-		new_table = '<div class="table'+_count+' margin-top-5px">'+replace_6.parent().parent().parent().parent().html()+'</div>';
+		var replace_3_1 = $(new_table).contents().find('input[name^=kolom]');
+		for(var i = 0; i < replace_3_1.length; i++) {
+			$(replace_3_1[i]).attr('name', 'kolom['+count+'][header][][]');
+		}
+		new_table = replace_3_1.parent().parent().parent().parent().parent();
+
+		var replace_4 = $(new_table).contents().find('tr.content-tabel'+count).find('a#addTableRow'+count).attr('id', 'addTableRow'+_count).attr('onclick', 'addRowLampiran(this, 1, 0, 1, '+_count+')');
+		new_table = '<div>'+replace_4.parent().parent().parent().parent().parent().html()+'</div>';
+
+		var replace_5 = $(new_table).contents().find('tr.content-tabel'+count).attr('class', 'content-tabel'+_count);
+		new_table = '<div>'+replace_5.parent().parent().parent().html()+'</div>';
+
+		var replace_6 = $(new_table).contents().find('a#deleteTableLampiran'+count).attr('id', 'deleteTableLampiran'+_count).attr('onclick', 'rmKolomLampiran(this, '+_count+', '+count+')');
+		new_table = '<div>'+replace_6.parent().parent().parent().parent().parent().html()+'</div>';
+
+		var replace_7 = $(new_table).contents().find('a#addTableLampiran'+count).attr('id', 'addTableLampiran'+_count).attr('onclick', 'addKolomLampiran(this, 1, 1, '+_count+')');
+		new_table = '<div>'+replace_7.parent().parent().parent().parent().parent().html()+'</div>';
+
+		var replace_8 = $(new_table).contents().find('td.lastrowheader'+count).attr('class', 'lastrowheader'+_count);
+		new_table = '<div class="table'+_count+' margin-top-5px">'+replace_8.parent().parent().parent().parent().html()+'</div>';
 
 		$(ele).attr('onclick', 'addTabelLampiran(this, '+_count+')');
-
 		$('#fieldTabelLampiran').children().last().after(new_table);
-		$('a#deleteTableLampiran'+_count).attr('onclick', 'rmKolomLampiran(this, '+_count+')');
 	}
-	
+
 	function removeTabelLampiran(ele) {
 		var total_tabel = $('#fieldTabelLampiran').children('div').length;
 		var _count = total_tabel - 1;
@@ -246,14 +257,14 @@
 			alert('Tidak Dapat Menghapus Tabel Lagi!');
 		}
 	}
-	
+
 	function addLampiran(ele) {
 		var lampiran = $(ele).parent().parent().html(); console.log(lampiran);
 		$('#form-keputusan').children('fieldset:last').after('<fieldset style="margin-top:30px">'+lampiran+'</fieldset>');
 	}
 </script>
 <div class="row-col">
-	<div class="col-lg b-r"> 
+	<div class="col-lg b-r">
 		<div class="padding">
 			<div class="box">
 				<div class="padding">
@@ -261,12 +272,12 @@
 <form class="width-100p" method="POST" id="form-keputusan" target="_blank">
 	<input type="hidden" name="id_dokumen" value="<?php echo @$id_dokumen; ?>">
 	<div class="form-group" style="margin-bottom:5px">
-		<textarea name="super_judul" class="form-control" autocomplete="off" placeholder="Judul Dokumen" rows="4"><?php echo @$detail_dokumen['judul'][0]['teks']; ?></textarea>
+		<textarea name="super_judul" class="form-control" autocomplete="off" placeholder="Judul Dokumen" rows="4" required><?php echo @$detail_dokumen['judul'][0]['teks']; ?></textarea>
 	</div>
 	<fieldset>
 		<legend>Menimbang</legend>
 		<div>
-			<?php 
+			<?php
 			$namaJenisField = 'Menimbang';
 			if (count(@$detail_dokumen[$namaJenisField]) > 0){
 				for($idxField=0; $idxField<count(@$detail_dokumen[$namaJenisField]); $idxField++){ ?>
@@ -328,7 +339,7 @@
 	<fieldset>
 		<legend>Mengingat</legend>
 		<div>
-			<?php 
+			<?php
 			$namaJenisField = 'Mengingat';
 			if (count(@$detail_dokumen[$namaJenisField]) > 0){
 				for($idxField=0; $idxField<count(@$detail_dokumen[$namaJenisField]); $idxField++){ ?>
@@ -386,12 +397,12 @@
 			</div>
 			<?php } ?>
 		</div>
-		
+
 	</fieldset>
 	<fieldset>
 		<legend>Menetapkan</legend>
 		<div>
-			<?php 
+			<?php
 			$namaJenisField = 'Memutuskan';
 			if (count(@$detail_dokumen[$namaJenisField]) > 0){
 				for($idxField=0; $idxField<count(@$detail_dokumen[$namaJenisField]); $idxField++){ ?>
@@ -449,12 +460,12 @@
 			</div>
 			<?php } ?>
 		</div>
-		
+
 	</fieldset>
 	<fieldset>
 		<legend>Diktum</legend>
 		<div>
-			<?php $namaJenisField = 'Diktum'; 
+			<?php $namaJenisField = 'Diktum';
 			if (count(@$detail_dokumen[$namaJenisField]) > 0){
 				for($idxField=0; $idxField<count(@$detail_dokumen[$namaJenisField]); $idxField++){ ?>
 			<div class="form-group" id="text-<?php echo $namaJenisField.($idxField +1); ?>" style="display:inline-block; width:100%;">
@@ -512,7 +523,7 @@
 			<?php } ?>
 		</div>
 	</fieldset>
-	
+
 	<fieldset>
 		<legend>Tanda Tangan</legend>
 		<div class="form-group">
@@ -565,11 +576,11 @@
 							<a href="javascript:void(0)" style="font-size:12px; line-height:32px;" title="Hapus Tabel" onclick="removeTabelLampiran(this)">
 								<i class="fa fa-minus-square"></i>
 							</a>
-							<a href="javascript:void(0)" style="font-size:12px; line-height:32px;" title="Tambah Tabel" onclick="addTabelLampiran(this, 1)">
+							<a href="javascript:void(0)" style="font-size:12px; line-height:32px;" title="Tambah Tabel" onclick="addTabelLampiran(this, 1)" id="add_tabel">
 								<i class="fa fa-plus-square"></i>
 							</a>
 						</legend>
-						<div>
+						<div class="table1">
 							<input type="text" name="subjudul[][]" class="form-control float-left margin-bottom-3px" placeholder="Sub Judul Lampiran" />
 							<table class="tabel-lampiran1" border="1">
 								<thead>
@@ -578,10 +589,10 @@
 											<input type="text" name="judultabel[][]" class="form-control form-control-sm float-left" placeholder="Judul Tabel" />
 										</th>
 										<th align="center">
-											<a href="javascript:void(0)" style="line-height:32px; margin:0 auto;" title="Hapus Kolom" onclick="rmKolomLampiran(this, 1)" id="deleteTableLampiran1">
+											<a href="javascript:void(0)" style="line-height:32px; margin:0 auto;" title="Hapus Kolom" onclick="rmKolomLampiran(this, 1, 1)" id="deleteTableLampiran1">
 												<i class="fa fa-minus-square"></i>
 											</a>
-											<a href="javascript:void(0)" style="line-height:32px; margin:0 auto;" title="Tambah Kolom" onclick="addKolomLampiran(this, 1)">
+											<a href="javascript:void(0)" style="line-height:32px; margin:0 auto;" title="Tambah Kolom" onclick="addKolomLampiran(this, 1, 1, 1)" id="addTableLampiran1">
 												<i class="fa fa-plus-square"></i>
 											</a>
 										</th>
@@ -590,13 +601,13 @@
 								<tbody id="tbody-tabel1">
 									<tr class="content-tabel1">
 										<td class="firstrow1" align="center" style="min-width:30px">
-											<input type="text" name="kolom[0][header][]" value="NO" style="border:none; background:transparent; text-align:center;" size="2" disabled />
+											<input type="text" name="kolom[0][header][][]" value="NO" style="border:none; background:transparent; text-align:center;" size="2" disabled />
 										</td>
 										<td>
-											<input type="text" name="kolom[0][header][]" class="form-control form-control-sm float-left" placeholder="Konten" />
+											<input type="text" name="kolom[0][header][][]" class="form-control form-control-sm float-left" placeholder="Konten" />
 										</td>
 										<td class="lastrowheader1" align="center">
-											<a href="javascript:void(0)" style="line-height:32px; margin:0 5px;" onclick="addRowLampiran(this, 1, 0)">
+											<a href="javascript:void(0)" style="line-height:32px; margin:0 5px;" title="Tambah Baris" onclick="addRowLampiran(this, 1, 0, 1, 1)" id="addTableRow1">
 												<i class="fa fa-plus-square"></i>
 											</a>
 										</td>

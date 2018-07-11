@@ -179,7 +179,7 @@
 		$(tbodyContent).children().last('tr').after(rows);
 	}
 	function rmRowLampiran(ele, count, lampiran, table) {
-		var minCount = count - 1, _minTable = table - 1;
+		var minCount = count - 1, _minTable = table - 1, _table = table - 1;
 		if($(ele).parent().parent().children('td:first').children().val().toLowerCase() === 'no') {
 			bootoast.toast({
 				message: 'Header Table Tidak Bisa Dihapus',
@@ -198,7 +198,7 @@
 				var lastnum = $(countRow[i]).children('td:last').children();
 				var betweennum = $(countRow[i]).children().nextUntil('td:last', 'td').children().not('a');
 				$(countRow[i]).children('td:last').attr('class', 'lastrowcontent'+count+' numrows'+lampiran+'-'+_minTable+'-'+i);
-				betweennum.attr('name', 'kolom['+minCount+'][content]['+i+'][]');
+				betweennum.attr('name', 'kolom['+_table+'][content]['+i+'][]');
 				number.val(i);
 			}
 		}
