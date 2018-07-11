@@ -102,7 +102,7 @@
 		$(ele).children().toggleClass('fa-plus fa-minus');
 		$(ele).children().attr("onclick","remove(this)").attr('title', 'Hapus Isi');
 		$(element).last().insertAfter($("#text-Diktum"+count));
-		
+
 	}
 	function addTembusan(ele, count) {
 		var counts = count + 1;
@@ -134,11 +134,11 @@
 		$(ele).parent().parent().parent().remove();
 	}
 	function addKolomLampiran(ele, count, lampiran, table) {
-		var eleJudul = $(ele).parent().parent(), 
+		var eleJudul = $(ele).parent().parent(),
 			countColspan = eleJudul.children().prop("colSpan") + 1;
-		
+
 		var getBodyRows = $(ele).parent().parent().parent().next().children();
-		
+
 		eleJudul.children().first().attr('colspan', countColspan);
 		for(var i = 0; i < getBodyRows.length; i++) {
 			var eleCopy = $(getBodyRows[i]).children('td:last').prev().clone();
@@ -149,27 +149,27 @@
 		var eleJudul = $(ele).parent().parent(),
 			countColspan = eleJudul.children().prop("colSpan") - 1,
 			getRows = $(ele).parent().parent().parent().next().children();
-		
+
 		eleJudul.children().first().attr('colspan', countColspan);
 		for(var i = 0; i < getRows.length; i++) {
 			$(getRows[i]).children('td:last').prev().remove();
 		}
 	}
 	function addRowLampiran(ele, count, row, lampiran, table) {
-		var counts = count + 1, minCount = count - 1, numrow = row + 1;
+		var counts = count + 1, minCount = count - 1, numrow = row + 1, _table = table - 1;
 		var eleContent = $(ele),
 			tbodyContent = eleContent.parent().parent().parent(),
 			countCol = eleContent.parent().parent().children(),
 			countRow = eleContent.parent().parent().parent().children();
 		eleContent.children().addClass('fa-minus-square').removeClass('fa-plus-square');
 		eleContent.attr("onclick", "rmRowLampiran(this, "+count+", "+lampiran+", "+table+")").attr('title', 'Hapus Baris');
-		
+
 		var rows = '<tr class="content-tabel'+count+'">';
 		rows += '<td class="firstrow'+counts+'" align="center" style="min-width:30px">'+
-				'<input type="text" class="form-control-sm" name="kolom['+minCount+'][content]['+numrow+'][]" value="'+countRow.length+'" style="border:none; background:transparent; text-align:center;" size="1" disabled />'+
+				'<input type="text" class="form-control-sm" name="kolom['+_table+'][content]['+numrow+'][]" value="'+countRow.length+'" style="border:none; background:transparent; text-align:center;" size="1" disabled />'+
 				'</td>';
 		for(var i = 0; i < (countCol.length - 2); i++) {
-			rows += '<td><input type="text" name="kolom['+minCount+'][content]['+numrow+'][]" class="form-control form-control-sm float-left" placeholder="Konten" /></td>';
+			rows += '<td><input type="text" name="kolom['+_table+'][content]['+numrow+'][]" class="form-control form-control-sm float-left" placeholder="Konten" /></td>';
 		}
 		rows += '<td class="lastrowcontent'+lampiran+'-'+table+'-'+counts+' numrows'+lampiran+'-'+table+'-'+numrow+'" align="center">'+
 				'<a href="javascript:void(0)" style="line-height:32px; margin:0 5px;" title="Tambah Baris" onclick="addRowLampiran(this, '+counts+', '+numrow+', '+lampiran+', '+table+')">'+
@@ -192,7 +192,7 @@
 				tbodyContent = $('#tbody-tabel'+table),
 				countRow = $(tbodyContent).children(),
 				number = 0;
-				
+
 			for(var i = 1; i < countRow.length; i++) {
 				var number = $(countRow[i]).children('td:first').children();
 				var lastnum = $(countRow[i]).children('td:last').children();
@@ -206,35 +206,41 @@
 	function addTabelLampiran(ele, count) {
 		var _count = count + 1;
 		var new_table = '<div>'+$(ele).parent().parent().children('div:last').html()+'</div>';
-		
+
 		var replace_1 = $(new_table).find('table.tabel-lampiran'+count).attr('class', 'tabel-lampiran'+_count);
 		new_table = '<div>'+replace_1.parent().html()+'</div>';
-		
+
 		var replace_2 = $(new_table).contents().find('tr#judul-tabel'+count).attr('id', 'judul-tabel'+_count);
 		new_table = '<div>'+replace_2.parent().parent().parent().html()+'</div>';
-		
+
 		var replace_3 = $(new_table).contents().find('tbody#tbody-tabel'+count).attr('id', 'tbody-tabel'+_count);
 		new_table = '<div>'+replace_3.parent().parent().html()+'</div>';
-	
+
+		var replace_3_1 = $(new_table).contents().find('input[name^=kolom]');
+		for(var i = 0; i < replace_3_1.length; i++) {
+			$(replace_3_1[i]).attr('name', 'kolom['+count+'][header][][]');
+		}
+		new_table = replace_3_1.parent().parent().parent().parent().parent();
+
 		var replace_4 = $(new_table).contents().find('tr.content-tabel'+count).find('a#addTableRow'+count).attr('id', 'addTableRow'+_count).attr('onclick', 'addRowLampiran(this, 1, 0, 1, '+_count+')');
 		new_table = '<div>'+replace_4.parent().parent().parent().parent().parent().html()+'</div>';
-	
+
 		var replace_5 = $(new_table).contents().find('tr.content-tabel'+count).attr('class', 'content-tabel'+_count);
 		new_table = '<div>'+replace_5.parent().parent().parent().html()+'</div>';
 
 		var replace_6 = $(new_table).contents().find('a#deleteTableLampiran'+count).attr('id', 'deleteTableLampiran'+_count).attr('onclick', 'rmKolomLampiran(this, '+_count+', '+count+')');
 		new_table = '<div>'+replace_6.parent().parent().parent().parent().parent().html()+'</div>';
-	
+
 		var replace_7 = $(new_table).contents().find('a#addTableLampiran'+count).attr('id', 'addTableLampiran'+_count).attr('onclick', 'addKolomLampiran(this, 1, 1, '+_count+')');
 		new_table = '<div>'+replace_7.parent().parent().parent().parent().parent().html()+'</div>';
-		
+
 		var replace_8 = $(new_table).contents().find('td.lastrowheader'+count).attr('class', 'lastrowheader'+_count);
 		new_table = '<div class="table'+_count+' margin-top-5px">'+replace_8.parent().parent().parent().parent().html()+'</div>';
 
 		$(ele).attr('onclick', 'addTabelLampiran(this, '+_count+')');
 		$('#fieldTabelLampiran').children().last().after(new_table);
 	}
-	
+
 	function removeTabelLampiran(ele) {
 		var total_tabel = $('#fieldTabelLampiran').children('div').length;
 		var _count = total_tabel - 1;
@@ -246,14 +252,14 @@
 			alert('Tidak Dapat Menghapus Tabel Lagi!');
 		}
 	}
-	
+
 	function addLampiran(ele) {
 		var lampiran = $(ele).parent().parent().html();
 		$('#form-keputusan').children('fieldset:last').after('<fieldset style="margin-top:30px">'+lampiran+'</fieldset>');
 	}
 </script>
 <div class="row-col">
-	<div class="col-lg b-r"> 
+	<div class="col-lg b-r">
 		<div class="padding">
 			<div class="box">
 				<div class="padding">
@@ -366,7 +372,7 @@
 			</div>
 		</div>
 	</fieldset>
-	
+
 	<fieldset>
 		<legend>Tanda Tangan</legend>
 		<div class="form-group">
