@@ -130,6 +130,25 @@ class Keputusan_menteri_doc extends CI_Controller {
 			'left' => \PhpOffice\PhpWord\Shared\Converter::cmToTwip(7.5),
 		);
 		
+		
+		$subLevel['listing_1']['default']['indentation'] = array(
+			'left' => \PhpOffice\PhpWord\Shared\Converter::cmToTwip(1), 
+		);
+		$subLevel['listing_1']['firstLine']['indentation'] = array(
+			'firstLine' => \PhpOffice\PhpWord\Shared\Converter::cmToTwip(1) * -1,
+			'left' => \PhpOffice\PhpWord\Shared\Converter::cmToTwip(1), 
+		);
+		$subLevel['listing_1']['pointer']['indentation'] = array(
+			'firstLine' => \PhpOffice\PhpWord\Shared\Converter::cmToTwip(1) * -1, 
+			'left' => \PhpOffice\PhpWord\Shared\Converter::cmToTwip(2),
+		);
+		
+		// 'tabs' => array(
+			// new \PhpOffice\PhpWord\Style\Tab('left', \PhpOffice\PhpWord\Shared\Converter::cmToTwip(2)),
+			// new \PhpOffice\PhpWord\Style\Tab('left', \PhpOffice\PhpWord\Shared\Converter::cmToTwip(2.5)),
+		// ),
+		
+		
 		// setting font global
 		$fontStyle['name'] = 'Bookman Old Style';
 		$fontStyle['size'] = 12;
@@ -612,10 +631,98 @@ class Keputusan_menteri_doc extends CI_Controller {
 		);
 		$section->addTextBreak(1,$fontStyle);
 		/* *********************************************************************************** */
+		
 		$section->addText(
 			"Tembusan:",
 			$fontStyle
 		);
+		
+		## Tembusan
+		$Tembusan = $_POST['Tembusan'];
+		$pointerTembusan = $_POST['pointerTembusan'];
+		
+		$nextPageTembusan = @$_POST['nextPageTembusan'];
+		$subLevelTembusan = @$_POST['subLevelTembusan'];
+		$theFirst = true;
+		for($i=0; $i<count($Tembusan); $i++){
+			
+			if ($Tembusan[$i] != ''){
+				$barisTembusan = explode("\r\n",$Tembusan[$i]);
+				
+				if (@$nextPageTembusan[$i] == 'newP') 
+					$section = $phpWord->addSection($thisPage);
+				else if (@$nextPageTembusan[$i] == 'newL') 
+					$section = $phpWord->addSection($thisPageLandscape);
+				
+				// print_r($Tembusan[$i]);
+				// print_r($barisTembusan);
+				for($j=0; $j<count($barisTembusan); $j++){
+					
+					$idxSubLevel = @$subLevelTembusan[$i];
+					
+					if ($theFirst==true){ // awal Tembusan
+						if ($j==0){ // awal baris Tembusan
+							
+							$section->addText(
+								$pointerTembusan[$i]."\t".$barisTembusan[$j],
+								$fontStyle,
+								$subLevel['listing_1']['firstLine']
+							);
+						}
+						else {
+							if ($pointerTembusan[$i] == ''){ // lanjutan tanpa pointer
+								$section->addText(
+									$barisTembusan[$j],
+									$fontStyle,
+									$subLevel['listing_1']['default']
+								);
+							}
+							else { // lanjutan ada pointer
+								$section->addText(
+									$barisTembusan[$j],
+									$fontStyle,
+									$subLevel['listing_1']['default']
+								);
+							}
+						}
+					}
+					else { // body Tembusan
+						if ($j==0){ // awal body baris Tembusan
+							if ($pointerTembusan[$i] == ''){ // awal body Tembusan tanpa pointer 
+								$section->addText(
+									$barisTembusan[$j],
+									$fontStyle,
+									$subLevel['listing_1']['default']
+								);
+							}
+							else { // awal body Tembusan ada pointer 
+								$section->addText(
+									$pointerTembusan[$i]."\t".$barisTembusan[$j],
+									$fontStyle,
+									$subLevel['listing_1']['pointer']
+								);
+								
+							}
+						}
+						else {
+							$section->addText(
+								$barisTembusan[$j],
+								$fontStyle,
+								$subLevel['listing_1']['default']
+							);
+						}
+					}
+					
+				}
+				// $theFirst = false;
+			}
+			
+			$arrData['Tembusan']['pointerTembusan'][] = $pointerTembusan[$i];
+			$arrData['Tembusan']['nextPageTembusan'][] = $nextPageTembusan[$i];
+			$arrData['Tembusan']['subLevelTembusan'][] = $subLevelTembusan[$i];
+			$arrData['Tembusan']['text'][] = $Tembusan[$i];
+		}
+		
 		
 		/* *********************************************************************************** */
 		/* *********************************************************************************** */
@@ -727,6 +834,7 @@ class Keputusan_menteri_doc extends CI_Controller {
 		$widthMaxCol = 16000;
 		$table = @$_POST['kolom'];
 		$judultabel = @$_POST['judultabel'];
+		$table = array();
 		if (count($table) > 0){
 			$idxTable = 0;
 			
@@ -883,7 +991,7 @@ class Keputusan_menteri_doc extends CI_Controller {
 		
 		$objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'Word2007');
 		try {
-			$filename = $id.'_'.time().'_keputusan_menteri_doc.docx';
+			$filename = @$id.'_'.time().'_keputusan_menteri_doc.docx';
 			$fullPath = './'.$filename;
 			$objWriter->save($fullPath, 'Word2007');
 		} catch (Exception $e) {}
@@ -965,6 +1073,7 @@ class Keputusan_menteri_doc extends CI_Controller {
 		// print_r($nextPageTembusan); 
 		// print_r($subLevelTembusan); 
 		// print_r($arrData['Tembusan']); 
+		// $this->coba(34, 'B', $arrData);
 		// die();
 		
 		/* Insert Into DB */
@@ -1047,7 +1156,7 @@ class Keputusan_menteri_doc extends CI_Controller {
 					//echo "Ada Nilai";
 					for($loop = 0; $loop < count($insertArray[$valKeys][$valDetailKeys]); $loop++) {
 						$arrPivot[$loop][$key] = $insertArray[$valKeys][$valDetailKeys][$loop];
-						if($key === (count(array_keys($insertArray[$valKeys])) -1)) {
+						if($key === count(array_keys($insertArray[$valKeys]))) {
 							$arrPivot[$loop][count($insertArray[$valKeys][$valDetailKeys])] = $jenis_field;
 						}
 					}
