@@ -1,12 +1,30 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+function check_login($referrer_url)
+{
+	$ci =& get_instance();
+	if (isset($_GET['nologin'])) {
+		return true;
+		exit;
+	} else {
+    	$ci->session->set_userdata('referrer_url', $referrer_url);  //Set session for the referrer url
+    	if ($ci->session->userdata('login_id')) {
+    		return true; exit;
+    	} else {
+    		redirect('backend/auth','refresh');
+    	}
+    }
+    return false;
+
+}
+
 
 function admsaction($link='' , $id = '' , $color = '' , $fa = '' , $nama = '')
 {
 	return $return = '<a href="'.$link.'/'.$id.'" class="btn btn-xs btn-'.$color.' ttipDatatables" data-provide="tooltip" data-placement="top" title="'.$nama.'" data-original-title="'.$nama.'" ><i class="'.$fa.'"></i></a>';
 }
- 
+
 function admsapi($statusHeader,$status , $message, $data )
 {
 	$ci =& get_instance(); 
@@ -53,7 +71,7 @@ function admsCekSesiToken($token)
 		$respon = admsapi(200 , 1, '','');
 	}
 	return $respon;
- 
+
 
 }
 
@@ -66,7 +84,7 @@ function btnPrivileges($value= 0 )
 
 function btnStatus($value= 0 )
 {
-	$ret = $value == 0 ? '<span class="label label-success"><i class="fa fa-check"></i></span>' : '<span class="label label-danger"><i class="fa fa-remove"></i></span>';
+	$ret = $value == 1 ? '<span class="label label-success"><i class="fa fa-check"></i></span>' : '<span class="label label-danger"><i class="fa fa-remove"></i></span>';
 	return $ret;
 }
 
@@ -114,7 +132,7 @@ function admsCurl($url, $dataArray = array(), $method='GET') {
 		CURLOPT_TIMEOUT => 60,
 		CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
 		CURLOPT_HTTPHEADER => array(
-		"content-type: application/x-www-form-urlencoded"
+			"content-type: application/x-www-form-urlencoded"
 		), 
 		
 		CURLOPT_URL => $url,

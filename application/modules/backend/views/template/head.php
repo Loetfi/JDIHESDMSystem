@@ -11,7 +11,7 @@
           <a href="index.html" class="navbar-brand">
            <img src="<?php echo base_url('assets/logo/logo-esdm.png');?>" alt=".">
            <span class="hidden-folded inline">ESDM</span>
-         </a>
+         </a> 
          <!-- / brand -->
        </div>
        <div data-flex class="hide-scroll">
@@ -29,9 +29,16 @@
                 <span class="nav-text">Dashboard</span>
               </a>
             </li> 
-
+ 
             <li>
-              <a>
+              <a href="<?php echo site_url('backend/dokumen/') ?>"> 
+                <span class="nav-icon">
+                  <i class="ion-filing"></i>
+                </span>
+                <span class="nav-text">Dokumen</span>
+              </a>
+
+              <!-- <a>
                 <span class="nav-caret">
                   <i class="fa fa-caret-down"></i>
                 </span>
@@ -46,8 +53,12 @@
                     <span class="nav-text">Dokumen</span>
                   </a>
                 </li> 
-              </ul>
+
+
+              </ul> -->
             </li>
+
+
             
             <li class="nav-header hidden-folded m-t">
               <span class="text-xs">Pengaturan</span>
@@ -77,32 +88,18 @@
         <a data-toggle="modal" data-target="#aside" class="navbar-item pull-left hidden-lg-up p-r m-a-0">
           <i class="ion-navicon"></i>
         </a>
-        <div class="navbar-item pull-left h5" id="pageTitle">Dashboard</div>
+        <div class="navbar-item pull-left h5" id="pageTitle"><?php echo @$title; ?></div>
         <!-- nabar right -->
         <ul class="nav navbar-nav pull-right"> 
           <li class="nav-item dropdown">
             <a class="nav-link clear" data-toggle="dropdown">
+              <?php echo @$name; ?>
               <span class="avatar w-32">
                 <img src="<?php echo base_url('assetnew/images/a2.jpg');?>" class="w-full rounded" alt="...">
               </span>
             </a>
             <div class="dropdown-menu w dropdown-menu-scale pull-right">
-              <a class="dropdown-item" href="profile.html">
-                <span>Profile</span>
-              </a>
-              <a class="dropdown-item" href="setting.html">
-                <span>Settings</span>
-              </a>
-              <a class="dropdown-item" href="app.inbox.html">
-                <span>Inbox</span>
-              </a>
-              <a class="dropdown-item" href="app.message.html">
-                <span>Message</span>
-              </a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="docs.html">
-                Need help?
-              </a>
+               
               <a class="dropdown-item" href="<?php echo site_url('backend/auth/logout?true') ?>">Sign out</a>
             </div>
           </li>

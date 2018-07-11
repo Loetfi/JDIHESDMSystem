@@ -32,16 +32,12 @@
           <div class="form-group">
             <input type="password" class="form-control" placeholder="password" name="password">
           </div>      
-          <div class="m-b-md">        
-            <label class="md-check">
-              <input type="checkbox"><i class="primary"></i> Keep me signed in
-            </label>
-          </div>
+           
           <button type="submit" class="btn btn-sm btn-primary p-x-lg">Masuk</button>
         </form>
-        <div class="m-y">
+        <!-- <div class="m-y">
           <a href="forgot-password.html" class="_600">Lupa Password?</a>
-        </div> 
+        </div>  -->
       </div>
     </div>
   </div>

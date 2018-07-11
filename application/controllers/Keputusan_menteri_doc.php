@@ -1098,10 +1098,14 @@ class Keputusan_menteri_doc extends CI_Controller {
 	
 	function insert_document() {
 		$dataDokumen = array(
-			'jenis_dokumen'	=> 'Keputusan Menteri',
+			'jenis_dokumen'	=> 'Staff Buat Doc 1 Keputusan Menteri',
 			'nama_dokumen'	=> 'KM01/001/2018',
+			'login_id'		=> !empty($this->session->userdata('login_id')) ? $this->session->userdata('login_id') : 2, // 2 is admin
+			'cuser'			=> !empty($this->session->userdata('login_id')) ? $this->session->userdata('login_id') : 2, // 2 is admin
 			'cdate'			=> date('Y-m-d H:i:s'),
-			'status'		=> 0
+			'status'		=> 1,
+			'submit_doc'	=> 0,
+			'relasi_doc'	=> 0
 		);
 		$queryDokumen = $this->db->insert('dokumen', $dataDokumen);
 		return $this->db->insert_id();

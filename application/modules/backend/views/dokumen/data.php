@@ -11,10 +11,11 @@
         <table class="table table-striped table-bordered table-hover" id="tableadms" width="100%"> 
           <thead> 
             <tr>     
-              <th>Judul Dokumen</th>
+            <th>ID</th>
+              <th>Jenis Dokumen</th>
               <th>Nama Dokumen</th>
               <th>Dibuat pada</th>
-              <th>Status</th>
+              <th>Publish</th>
               <th>Aksi</th>
            </tr> 
          </thead> 
@@ -50,7 +51,7 @@
           'masteritem' : '#', 
         },
 
-        "url": "http://localhost/Projekan/jdih/index.php/backend/service/dokumen/", 
+        "url": "<?=@$url?>", 
         "type": "POST", 
 
         complete: function () {
