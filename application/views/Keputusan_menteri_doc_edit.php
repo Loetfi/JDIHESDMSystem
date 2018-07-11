@@ -213,6 +213,7 @@
 		var new_table = '<div>'+$(ele).parent().parent().children('div:last').html()+'</div>';
 
 		var replace_1 = $(new_table).find('table.tabel-lampiran'+count).attr('class', 'tabel-lampiran'+_count);
+		var totalRow = replace_1.children('tbody').children('tr:first').children().prevAll();
 		new_table = '<div>'+replace_1.parent().html()+'</div>';
 
 		var replace_2 = $(new_table).contents().find('tr#judul-tabel'+count).attr('id', 'judul-tabel'+_count);
@@ -221,10 +222,15 @@
 		var replace_3 = $(new_table).contents().find('tbody#tbody-tabel'+count).attr('id', 'tbody-tabel'+_count);
 		new_table = '<div>'+replace_3.parent().parent().html()+'</div>';
 
-		var replace_3_1 = $(new_table).contents().find('input[name^=kolom]');
-		for(var i = 0; i < replace_3_1.length; i++) {
-			$(replace_3_1[i]).attr('name', 'kolom['+count+'][header][][]');
-		}
+		var replace_3_1 = $(new_table).contents().find('input[name^="kolom['+(count-1)+']"]');
+		replace_3_1.each(function(num, ele) {
+			if(num > totalRow.length) {
+				$(this).attr('name', 'kolom['+count+'][content][][]');
+			}
+			else {
+				$(this).attr('name', 'kolom['+count+'][header][][]');
+			}
+		});
 		new_table = replace_3_1.parent().parent().parent().parent().parent();
 
 		var replace_4 = $(new_table).contents().find('tr.content-tabel'+count).find('a#addTableRow'+count).attr('id', 'addTableRow'+_count).attr('onclick', 'addRowLampiran(this, 1, 0, 1, '+_count+')');
@@ -534,7 +540,7 @@
 	<fieldset>
 		<legend>Tembusan</legend>
 		<div>
-			<?php $namaJenisField = 'Tembusan'; 
+			<?php $namaJenisField = 'Tembusan';
 			if (count(@$detail_dokumen[$namaJenisField]) > 0){
 				for($idxField=0; $idxField<count(@$detail_dokumen[$namaJenisField]); $idxField++){ ?>
 			<div class="form-group" id="text-<?php echo $namaJenisField.($idxField +1); ?>" style="display:inline-block; width:100%;">
