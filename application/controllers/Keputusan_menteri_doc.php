@@ -16,7 +16,7 @@ class Keputusan_menteri_doc extends CI_Controller {
 		// $this->load->view('');
 	}
 	
-	function sanusi(){
+	function sanusi($thisDownload = 'benar'){
 		
 		// print_r(@$_POST);
 		// die();
@@ -995,18 +995,23 @@ class Keputusan_menteri_doc extends CI_Controller {
 			$fullPath = './'.$filename;
 			$objWriter->save($fullPath, 'Word2007');
 		} catch (Exception $e) {}
-		header('Content-Description: File Transfer');
-		header('Content-Type: application/octet-stream');
-		header('Content-Disposition: attachment; filename='.$filename);
-		header('Content-Transfer-Encoding: binary');
-		header('Expires: 0');
-		header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
-		header('Pragma: public');
-		header('Content-Length: ' . filesize($fullPath));
-		flush();
-		readfile($fullPath);
-		unlink($fullPath); // deletes the temporary file
-		exit;
+		if ($thisDownload == 'benar'){
+			header('Content-Description: File Transfer');
+			header('Content-Type: application/octet-stream');
+			header('Content-Disposition: attachment; filename='.$filename);
+			header('Content-Transfer-Encoding: binary');
+			header('Expires: 0');
+			header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+			header('Pragma: public');
+			header('Content-Length: ' . filesize($fullPath));
+			flush();
+			readfile($fullPath);
+			unlink($fullPath); // deletes the temporary file
+			exit;
+			
+		} else {
+			return $filename;
+		}
 		
 		
 		
@@ -1082,8 +1087,9 @@ class Keputusan_menteri_doc extends CI_Controller {
 		else 
 			$id = $_POST['id_dokumen'];
 		
+		$namaFile = $this->sanusi('salah');
 		$revisi = $this->cek_revisi_document($id);
-		$idRevisi = $this->insert_revisi_document($id, $revisi);
+		$idRevisi = $this->insert_revisi_document($id, $revisi, $namaFile);
 		$alldata = $this->insert_detail_document($id, $idRevisi, $arrData);
 		// print_r($arrData);
 		// die();
@@ -1092,10 +1098,14 @@ class Keputusan_menteri_doc extends CI_Controller {
 	
 	function insert_document() {
 		$dataDokumen = array(
-			'jenis_dokumen'	=> 'Keputusan Menteri',
+			'jenis_dokumen'	=> 'Staff Buat Doc 1 Keputusan Menteri',
 			'nama_dokumen'	=> 'KM01/001/2018',
+			'login_id'		=> !empty($this->session->userdata('login_id')) ? $this->session->userdata('login_id') : 2, // 2 is admin
+			'cuser'			=> !empty($this->session->userdata('login_id')) ? $this->session->userdata('login_id') : 2, // 2 is admin
 			'cdate'			=> date('Y-m-d H:i:s'),
-			'status'		=> 0
+			'status'		=> 1,
+			'submit_doc'	=> 0,
+			'relasi_doc'	=> 0
 		);
 		$queryDokumen = $this->db->insert('dokumen', $dataDokumen);
 		return $this->db->insert_id();
@@ -1117,14 +1127,15 @@ class Keputusan_menteri_doc extends CI_Controller {
 		}
 		return $revisi;
 	}
-	function insert_revisi_document($id, $revisi) {
+	function insert_revisi_document($id, $revisi, $namaFile) {
 		
 		
 		$dataDokumenRevisi = array(
 			'id_dokumen'	=> $id,
 			'status_revisi'	=> $revisi,
 			'cdate'			=> date('Y-m-d H:i:s'),
-			'appto'			=> null
+			'appto'			=> null,
+			'namafile'		=> $namaFile
 		);
 		$queryDokumen = $this->db->insert('dokumen_revisi', $dataDokumenRevisi);
 		return $this->db->insert_id();

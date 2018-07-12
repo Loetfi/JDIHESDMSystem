@@ -54,7 +54,25 @@ class Auth extends CI_Controller {
 	{ 
 		$this->session->set_flashdata('message', 'Berhasil keluar dari sistem');
 		$this->session->sess_destroy();
-		redirect('backend/auth/login','refresh');
+		redirect(site_url(),'refresh');
+	}
+
+	/*
+	* register
+	*/
+	public function register()
+	{
+		$data = array(
+			'username'		=> 'staffsjh1_1@admin.com',
+			// 'username'		=> 'kasjh1_1@admin.com',
+			'password'		=> sha1('password'),
+			'status'		=> 1,
+			'direct_boss'	=> 7,
+			'login_access_id'	=> 1, // hak akses sistem
+			'create_date'	=> date('Y-m-d H:i:s'),
+			'name'			=> 'KA SJH 1.1'
+		);
+		$this->db->insert('login', $data);
 	}
 
 }

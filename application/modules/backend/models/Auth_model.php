@@ -17,8 +17,9 @@ class Auth_model extends CI_Model {
 				'login_id'	=> $get_user['login_id'],
 				'username'	=> $get_user['username'],
 				'password'	=> $get_user['password'],
-				'direct_boss'	=> $get_user['login_access'],
-				'login_access'	=> $get_user['login_access']
+				'direct_boss'	=> $get_user['direct_boss'],
+				'login_access_id'	=> $get_user['login_access_id'],
+				'name'	=> $get_user['name']
 			); 
 			$this->session->set_userdata( $array );
 			/*end*/
@@ -35,15 +36,17 @@ class Auth_model extends CI_Model {
 	* untuk daftar
 	*/
 
-	public function register($value='')
+	public function register()
 	{
 		$data = array(
-			'username'		=> 'admin@admin.com',
+			// 'username'		=> 'staffsjh11@admin.com',
+			'username'		=> 'migas@admin.com',
 			'password'		=> sha1('password'),
 			'status'		=> 1,
 			'direct_boss'	=> 1,
 			'login_access'	=> 1, // hak akses sistem
-			'create_date'	=> date('Y-m-d H:i:s')
+			'create_date'	=> date('Y-m-d H:i:s'),
+			'name'			=> 'Migas'
 		);
 		$this->db->insert('login', $data);
 	}

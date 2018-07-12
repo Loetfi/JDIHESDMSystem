@@ -2,40 +2,31 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Dokumen extends CI_Controller {
-
+	
+	
 	public function __construct()
 	{
 		parent::__construct();
-		$this->check_login('backend/dokumen/pilih');
+		$this->load->helper('backend');
+		check_login('backend/dokumen/pilih');
 	}
-
-	public function check_login($referrer_url)
-	{
-		if (isset($_GET['nologin'])) {
-			return true;
-			exit;
-		} else {
-    	$this->session->set_userdata('referrer_url', $referrer_url);  //Set session for the referrer url
-    	if ($this->session->userdata('login_id')) {
-				return true; exit;
-			}
-		}
-		return false;
-
-	}
-
+	
 	public function index()
-	{
+	{ 
 		$data = array(
-			'data' 		=>  $this->db->query("select id_dokumen, jenis_dokumen, nama_dokumen from dokumen order by id_dokumen")->result_array(),
+			// 'data' 		=>  $this->db->query("SELECT id_dokumen, jenis_dokumen, nama_dokumen from dokumen order by id_dokumen")->result_array(),
+			'detail'	=> site_url('backend/dokumen/detail'),
+			'edit'	=> site_url('Keputusan_menteri_doc/edit'),
 			'contents'	=> 'dokumen/data',
-			'title'		=> 'Master Dokumen'
+			'url'		=> site_url('backend/service/dokumen/index/'.$this->session->userdata('login_id')),
+			'title'		=> 'Daftar Dokumen yang kamu buat',
+			'name'		=> empty($this->session->userdata('name')) ? 'Tanpa Login' : $this->session->userdata('name')
 		);
 		$this->load->view('template/head', $data, FALSE);
 		// $data = array();
 		// $this->load->view('dokumen/data', $data, FALSE);
 	}
-
+	
 	public function data()
 	{
 		$this->output->set_header('Access-Control-Allow-Origin: *');
@@ -43,7 +34,7 @@ class Dokumen extends CI_Controller {
 		$this->output->set_header('Access-Control-Allow-Headers: Origin');
 		$this->output->set_content_type('application/json');
 		$data =  $this->db->query("select id_dokumen, jenis_dokumen, nama_dokumen from dokumen order by id_dokumen")->result_array();
-
+		
 		foreach ($data as $row) {
 			$rows['id_dokumen'] = $row['id_dokumen'];
 			$rows['jenis_dokumen'] = $row['jenis_dokumen'];
@@ -51,32 +42,58 @@ class Dokumen extends CI_Controller {
 			// result
 			$datas[] = $rows;
 		}
-
+		
 		$this->output->set_output(json_encode(array('aaData' =>$datas)));
 		$this->output->_display();
 		// print_r($q);
 	}
-
+	
 	public function pilih()
 	{
 		$data = array(
 			'contents'	=> 'dokumen/pilih',
-			'title'		=> 'Master Dokumen'
+			'title'		=> 'Pilih Dokumen',
+			'name'		=> empty($this->session->userdata('name')) ? 'Tanpa Login' : $this->session->userdata('name')
 		);
 		$this->load->view('template/head', $data, FALSE);
 		// $this->load->view('dokumen/pilih', $data, FALSE);
 	}
-
-	public function detail()
+	
+	public function detail($id_dokumen = '')
+	{	
+		$ambil_data_dokumen = $this->db->query("SELECT * from dokumen where id_dokumen = $id_dokumen ")->row_array();
+		$ambil_data_dokumen_version = $this->db->query("SELECT c.name , a.*, b.jenis_dokumen, d.name as nama_atasan from dokumen_revisi  a 
+			inner join dokumen b on a.id_dokumen = b.id_dokumen
+			left join login c on a.cuser = c.login_id
+			left join login d on a.appTo = d.login_id
+			where a.id_dokumen = $id_dokumen ")->result_array();
+		
+		$data = array(
+			'detail_dok'	=> isset($ambil_data_dokumen) ? $ambil_data_dokumen : array(),
+			'dok_versi'		=> isset($ambil_data_dokumen_version) ? $ambil_data_dokumen_version : array(),
+			'contents'		=> 'dokumen/detail',
+			'title'			=> 'Detail Dokumen ',
+			'name'			=> empty($this->session->userdata('name')) ? 'Tanpa Login' : $this->session->userdata('name')
+		);
+		$this->load->view('template/head', $data, FALSE);
+		// $this->load->view('dokumen/pilih', $data, FALSE);
+	}
+	
+	// telaah
+	public function telaah()
 	{
 		$data = array(
-			'contents'	=> 'dokumen/detail',
-			'title'		=> 'Detail Dokumen '
+			'data' 		=>  $this->db->query("SELECT id_dokumen, jenis_dokumen, nama_dokumen from dokumen order by id_dokumen")->result_array(),
+			'contents'	=> 'dokumen/data',
+			'url'		=> site_url('backend/service/dokumen/index/'.$this->session->userdata('login_id')),
+			'title'		=> 'Daftar Dokumen yang bisa ditelaah',
+			'name'		=> empty($this->session->userdata('name')) ? 'Tanpa Login' : $this->session->userdata('name')
 		);
 		$this->load->view('template/head', $data, FALSE);
-		// $this->load->view('dokumen/pilih', $data, FALSE);
+		// $data = array();
+		// $this->load->view('dokumen/data', $data, FALSE);
 	}
-
+	
 }
 
 /* End of file Dokumen.php */
