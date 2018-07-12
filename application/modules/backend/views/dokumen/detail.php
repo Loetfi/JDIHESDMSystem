@@ -5,18 +5,9 @@
 <!-- <div class="col-sm-4"> -->
 <div class="box"> 
 <div class="p-a-md b-b _600"><?php echo @$title; ?> - <?php echo @$detail_dok['jenis_dokumen']; ?>		</div>
-<div class="padding"> 
-<!-- Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-proident, sunt in culpa qui officia deserunt mollit anim id est laborum. -->
-
+<div class="padding">  
 <div class="text-center">
-<br><br>
-<a href="" class="btn btn-xs btn-primary">Export Docx</a>
-<a href="" class="btn btn-xs btn-primary">Export PDF</a>
+<br><br> 
 </div>	 
 
 Tandai sebagai finish dokumen <a href="" class="btn-xs btn-primary btn">Yes</a>
@@ -25,13 +16,19 @@ Tandai sebagai finish dokumen <a href="" class="btn-xs btn-primary btn">Yes</a>
 <div class="p-a-md b-b _600">Versioning Dokumen</div>
 <div class="padding"> 
 <?php //echo "<pre>"; print_r($dok_versi); echo "</pre>";?>
-<table class="table ">
+<div class="alert alert-info">
+	<p>Kolom Nama Atasan terisi karena dokumen di submit untuk ke atasan</p>
+</div>
+<table class="table table-hover table-bordered">
 	<tr>
 		<td>Nama </td>
 		<td>ID Revisi</td>
 		<td>ID Dok</td>
 		<td>Status Revisi</td>
 		<td>Nama Atasan</td>
+		<td>Pada Tgl</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
 	</tr>
 <?php foreach($dok_versi as $dv){?>
 	<tr>
@@ -39,8 +36,10 @@ Tandai sebagai finish dokumen <a href="" class="btn-xs btn-primary btn">Yes</a>
 		<td><?php echo $dv['id_revisi'];?> </td>
 		<td><?php echo $dv['id_dokumen'];?> </td>
 		<td><?php echo $dv['status_revisi'];?> </td>
-		<td><?php echo $dv['nama_atasan'];?></td>
+		<td><?php echo isset($dv['nama_atasan']) ? $dv['nama_atasan'] : '-';?></td>
+		<td><?php echo date('d F Y H:i:s', strtotime($dv['cdate']));?> </td>
 		<td><a href="<?php echo base_url($dv['namafile']);?>" class="btn btn-xs btn-primary">Download</a></td>
+		<td><a href="<?php echo site_url('Keputusan_menteri_doc/edit/'.$dv['id_dokumen'].'/'.$dv['status_revisi']);?>" class="btn btn-xs btn-success">Ubah</a>
 	</tr>
 <?php } ?>
 </table> 

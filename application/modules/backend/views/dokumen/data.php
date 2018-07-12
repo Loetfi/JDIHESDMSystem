@@ -11,7 +11,7 @@
         <table class="table table-striped table-bordered table-hover" id="tableadms" width="100%"> 
           <thead> 
             <tr>     
-            <th>ID</th>
+              <th>ID</th>
               <th>Jenis Dokumen</th>
               <th>Nama Dokumen</th>
               <th>Dibuat pada</th>
@@ -45,9 +45,8 @@
       "ajax": {
         "data" : {
           'masteritem' : '6', 
-          'detail' : '#',
-          'update' : '#',
-          'delete' : '#', 
+          'detail' : '<?=@urlencode($detail)?>',
+          'update' : '<?=@urlencode($edit)?>', 
           'masteritem' : '#', 
         },
 

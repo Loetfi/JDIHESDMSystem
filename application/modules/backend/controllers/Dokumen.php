@@ -15,6 +15,8 @@ class Dokumen extends CI_Controller {
 	{ 
 		$data = array(
 			// 'data' 		=>  $this->db->query("SELECT id_dokumen, jenis_dokumen, nama_dokumen from dokumen order by id_dokumen")->result_array(),
+			'detail'	=> site_url('backend/dokumen/detail'),
+			'edit'	=> site_url('Keputusan_menteri_doc/edit'),
 			'contents'	=> 'dokumen/data',
 			'url'		=> site_url('backend/service/dokumen/index/'.$this->session->userdata('login_id')),
 			'title'		=> 'Daftar Dokumen yang kamu buat',

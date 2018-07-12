@@ -31,8 +31,8 @@ class Dokumen extends CI_Controller {
 			$no++;
 			$row 	= array();  
 
-			$ACTdetail 	 = $detail ? admsaction($detail  ,  @$d->CompanyId , 'info' , 'fa fa-eye' , 'Lihat') : false;
-			$ACTupdate   = $update ? admsaction($update  ,  @$d->CompanyId , 'success' , 'fa fa-pencil' , 'Ubah') : false;
+			$ACTdetail 	 = $detail ? admsaction($detail  ,  @$d->id_dokumen , 'info' , 'fa fa-eye' , 'Lihat') : false;
+			$ACTupdate   = $update ? admsaction($update  ,  @$d->id_dokumen , 'success' , 'fa fa-pencil' , 'Ubah') : false;
 			$ACTdelete   = $delete ? anchor('#', '<i class="fa fa-trash"></i>', "class=\"btn btn-xs btn-danger ttipDatatables\" onclick=\"modal_delete('".$delete.'/'.@$d->CompanyId."');\" title=\"Hapus\"") : false; 
 
 			$row[]	= $d->id_dokumen;
