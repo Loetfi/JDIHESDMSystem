@@ -71,9 +71,9 @@ body {
 			<div class="col-xs-12 col-sm-12 col-md-8">
 				<img src="https://www.esdm.go.id/themes/v1/img/xlogo-esdm-web.png.pagespeed.ic.rpNW33_FYz.png" style="padding-top: 0px;" width="100%">
 			</div>
-			<div class="col-xs-12 col-sm-12 col-md-4">
-				<button type="button" class="btn btn-primary pull-right" style="margin: 20px 3px;">FAQ</button>
-				<button type="button" class="btn btn-info pull-right" style="margin: 20px 3px;">Beranda</button>
+			<div class="col-xs-12 col-sm-12 col-md-4"><br>
+				<button type="button" class="btn btn-primary pull-right" style="margin: 0 3px;">FAQ</button>
+				<button type="button" class="btn btn-info pull-right" style="margin: 0 3px;">Beranda</button>
 			</div>
 		</div>
 		<!-- img src="https://www.esdm.go.id/themes/v1/img/xlogo-esdm-web.png.pagespeed.ic.rpNW33_FYz.png" style="padding-top: 0px;" -->
