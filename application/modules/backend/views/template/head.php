@@ -10,7 +10,7 @@
           <!-- brand -->
           <a href="index.html" class="navbar-brand">
            <img src="<?php echo base_url('assets/logo/logo-esdm.png');?>" alt=".">
-           <span class="hidden-folded inline">ESDM</span>
+           <span class="hidden-folded inline">Biro Hukum</span>
          </a> 
          <!-- / brand -->
        </div>

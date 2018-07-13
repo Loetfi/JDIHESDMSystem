@@ -172,7 +172,15 @@ class Keputusan_menteri_doc extends CI_Controller {
 		/* *********************************************************************************** */
 		## judul
 		$fontStyle['allCaps'] = TRUE;
-		$judul = $_POST['super_judul'];
+		$judul = 'KEPUTUSAN MENTERI ENERGI DAN SUMBER DAYA MINERAL 
+		REPUBLIK INDONESIA
+		NOMOR : 
+		TENTANG ' . $_POST['super_judul'] . '
+
+DENGAN RAHMAT TUHAN YANG MAHA ESA
+
+MENTERI ENERGI DAN SUMBER DAYA MINERAL REPUBLIK INDONESIA,
+';
 		$barisJudul = explode("\r\n",$judul);
 		foreach($barisJudul as $row){
 			if ($row != ""){
@@ -434,7 +442,7 @@ class Keputusan_menteri_doc extends CI_Controller {
 							}
 							else{ // awal ada pointer 
 								$section->addText(
-									$pointerMemutuskan[$i]."\t:\t".$barisMemutuskan[$j],
+									$pointerMemutuskan[$i]."\t:\t KEPUTUSAN MENTERI ENERGI DAN SUMBER DAYA MINERAL TENTANG ".$barisMemutuskan[$j],
 									$fontStyle,
 									$subLevel[0]['firstLine']
 								);
@@ -604,15 +612,16 @@ class Keputusan_menteri_doc extends CI_Controller {
 			// 'align' => 'center',
 		);
 		$section->addText(
-			"Ditetapkan di xxxxx",
+			"Ditetapkan di Jakarta",
 			$fontStyle, 
 			$centerContents
 		);
 		$section->addText(
-			"Pada tanggal xxxxx",
+			"pada tanggal",
 			$fontStyle,
 			$centerContents
 		);
+		$section->addTextBreak(1,$fontStyle);
 		$section->addText(
 			"MENTERI ENERGI DAN SUMBER DAYA MINERAL",
 			$fontStyle,

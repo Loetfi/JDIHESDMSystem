@@ -19,7 +19,7 @@ class Dokumen extends CI_Controller {
 			'edit'	=> site_url('Keputusan_menteri_doc/edit'),
 			'contents'	=> 'dokumen/data',
 			'url'		=> site_url('backend/service/dokumen/index/'.$this->session->userdata('login_id')),
-			'title'		=> 'Daftar Dokumen yang kamu buat',
+			'title'		=> 'Daftar Rancangan ',
 			'name'		=> empty($this->session->userdata('name')) ? 'Tanpa Login' : $this->session->userdata('name')
 		);
 		$this->load->view('template/head', $data, FALSE);
