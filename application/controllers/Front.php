@@ -68,6 +68,12 @@ class Front extends CI_Controller {
         }
     } 
 
+	public function sanusi()
+    {  
+        $data['title'] = 'Beranda'; 
+        $this->load->view('front/sanusi', $data, FALSE);
+    }
+
 }
 
 
