@@ -47,14 +47,13 @@ body {
 	padding-top: 20px;
 	padding-bottom: 20px;
 }
-#allButton a > img{
-	border-radius: 10px; 
+.allButton a > img{
+	border-radius: 0 30px 0 10px; 
 	border: 1px #efefef solid;
 	box-shadow: 3px 3px 3px 3px #888888;
+	margin-bottom: 10px;
 }
-#allButton a > img:hover{
-	border-radius: 10px; 
-	border: 1px #efefef solid;
+.allButton a > img:hover{
 	box-shadow: 3px 3px 3px 3px orange;
 }
 </style>
@@ -70,7 +69,7 @@ body {
 				<h4>Rancang Bangun Naskah Hukum</h4>
 			</div -->
 			<div class="col-xs-12 col-sm-12 col-md-8">
-				<img src="https://www.esdm.go.id/themes/v1/img/xlogo-esdm-web.png.pagespeed.ic.rpNW33_FYz.png" style="padding-top: 0px;">
+				<img src="https://www.esdm.go.id/themes/v1/img/xlogo-esdm-web.png.pagespeed.ic.rpNW33_FYz.png" style="padding-top: 0px;" width="100%">
 			</div>
 			<div class="col-xs-12 col-sm-12 col-md-4">
 				<button type="button" class="btn btn-primary pull-right" style="margin: 20px 3px;">FAQ</button>
@@ -78,9 +77,9 @@ body {
 			</div>
 		</div>
 		<!-- img src="https://www.esdm.go.id/themes/v1/img/xlogo-esdm-web.png.pagespeed.ic.rpNW33_FYz.png" style="padding-top: 0px;" -->
-		<br><br><br>
+		
 		<div class="row">
-			<div class="col-md-8" id="allButton" >
+			<div class="col-md-8 allButton" >
 				<?php 
 				// style="border: 1px solid #000"
 				?>
@@ -96,9 +95,17 @@ body {
 				<div class="col-xs-3 col-sm-3 col-md-3">
 					<a href="#"><img src="<?php echo base_url(); ?>/assets/logo/icon-forum-solid.png" width="100%"></a>
 				</div>
-				<!-- div class="col-md-3">
-					<a href="#"><img src="<?php echo base_url(); ?>/assets/logo/icon-quick-format.png" width="100%"></a>
-				</div -->
+			</div>
+			<div class="col-md-8 allButton" >
+				<div class="col-xs-3 col-sm-3 col-md-3">
+					<a href="#"><img src="<?php echo base_url(); ?>/assets/logo/icon-quick-format-solid.png" width="100%"></a>
+				</div>
+				<div class="col-xs-3 col-sm-3 col-md-3">
+					<a href="#"><img src="<?php echo base_url(); ?>/assets/logo/icon-regulasi.png" width="100%"></a>
+				</div>
+				<div class="col-xs-3 col-sm-3 col-md-3">
+					<a href="#"><img src="<?php echo base_url(); ?>/assets/logo/icon-profil.png" width="100%"></a>
+				</div>
 				
 				
 			</div>
