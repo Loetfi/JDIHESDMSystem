@@ -263,7 +263,7 @@
 		<div class="padding">
 			<div class="box">
 				<div class="padding">
-<legend>Buat Dokumen Keputusan Menteri</legend>
+<legend>Rancangan Keputusan Menteri</legend>
 <form class="width-100p" method="POST" id="form-keputusan" target="_blank">
 	<div class="form-group" style="margin-bottom:5px">
 		<textarea name="super_judul" class="form-control" autocomplete="off" placeholder="Judul Dokumen" rows="4" required><?php echo @$detail_dokumen['judul'][0]['teks']; ?></textarea>
