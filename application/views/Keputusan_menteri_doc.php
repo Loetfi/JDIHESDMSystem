@@ -356,7 +356,7 @@
 										</select> -->
 									</div>
 									<div style="width:100%">
-										<p>KEPUTUSAN MENTERI ENERGI DAN SUMBER DAYA MINERAL TENTANG</p>
+										<p style="margin-left:6px; float:left;">KEPUTUSAN MENTERI ENERGI DAN SUMBER DAYA MINERAL TENTANG</p>
 										<textarea type="text" name="<?php echo $namaMemutuskan; ?>[]" class="form-control" placeholder="Memutuskan/Menetapkan" rows="6" style="float:left; margin-left:5px; width:75%;" required></textarea>
 										<a href="javascript:void(0)" onclick="addMemutuskan(this, 1)" style="position:absolute; right:5%;" title="Tambah Isi"><i class="fa fa-lg fa-plus"></i></a>
 									</div>
@@ -498,5 +498,9 @@
 
 						$("#save_doc").click(function(e) {
 							$("#form-keputusan").attr("action", "<?php echo site_url('keputusan_menteri_doc/save_document'); ?>");
+						});
+
+						$('textarea[name="super_judul"]').keyup(function() {
+							$('textarea[name^="Memutuskan"]').text($(this).val());
 						});
 					</script>
