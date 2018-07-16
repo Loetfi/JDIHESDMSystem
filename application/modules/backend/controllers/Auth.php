@@ -36,7 +36,13 @@ class Auth extends CI_Controller {
 				'password'	=> !empty($this->input->post('password')) ? $this->input->post('password') : 0
 			);
 
-			($this->auth->login($parameter)) ? redirect($this->session->userdata('referrer_url'),'refresh') : $this->index();
+			if (!empty($this->session->userdata('referrer_url'))) {
+				$referer = $this->session->userdata('referrer_url');
+			} else { 
+				$referer = 'front/landing';
+			}
+
+			($this->auth->login($parameter)) ? redirect($referer,'refresh') : $this->index();
 
 		} else { 
 

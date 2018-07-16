@@ -180,7 +180,7 @@
       <div class="col-sm-2" > 
         <div class="box black" style="border-radius: 10px; background: rancangan.png ">
           <div class="box-header">
-            <h3><i class="fa fa-pencil"></i> FORMAT</h3>
+            <h3>FORMAT</h3>
             <br>
           </div>
           <div class="box-body"> 

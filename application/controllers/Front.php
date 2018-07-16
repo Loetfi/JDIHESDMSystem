@@ -28,7 +28,7 @@ class Front extends CI_Controller {
     public function landing()
     {  
         $data['title'] = 'Beranda'; 
-        $this->load->view('front/landing', $data, FALSE);
+        $this->load->view('front/afterlogin', $data, FALSE);
     }
 
     public function format()
@@ -72,6 +72,12 @@ class Front extends CI_Controller {
     {  
         $data['title'] = 'Beranda'; 
         $this->load->view('front/sanusi', $data, FALSE);
+    }
+
+    public function landingnew()
+    {  
+        $data['title'] = 'Beranda'; 
+        $this->load->view('front/landingnew', $data, FALSE);
     }
 
 }
