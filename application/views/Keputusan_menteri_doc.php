@@ -341,7 +341,7 @@
 								<center><p>MEMUTUSKAN:</p></center>
 								<?php $namaMemutuskan = 'Memutuskan'; ?>
 								<div class="form-group" id="text-<?php echo $namaMemutuskan; ?>1" style="display:inline-block; width:100%;">
-									<div style="float:left; width:20%">
+									<div style="float:left; width:20%; margin-top:37px;">
 										<input type="text" name="pointer<?php echo $namaMemutuskan; ?>[]" class="form-control" placeholder="Pointer" value="Menetapkan" disabled=""/>
 										<!-- <select name="nextPage<?php echo $namaMemutuskan; ?>[]" class="form-control" style="cursor:pointer; margin-top:10px;">
 											<option value="continue">Continues Page</option>
@@ -368,7 +368,7 @@
 							<div>
 								<?php $namaDiktum = 'Diktum'; ?>
 								<div class="form-group" id="text-<?php echo $namaDiktum; ?>1" style="display:inline-block; width:100%;">
-									<div style="float:left; width:20%">
+									<div style="float:left; width:20%;">
 										<input type="text" name="pointer<?php echo $namaDiktum; ?>[]" class="form-control" placeholder="Pointer" />
 										<!-- <select name="nextPage<?php echo $namaDiktum; ?>[]" class="form-control" style="cursor:pointer; margin-top:10px;">
 											<option value="continue">Continues Page</option>
@@ -502,5 +502,9 @@
 
 						$('textarea[name="super_judul"]').keyup(function() {
 							$('textarea[name^="Memutuskan"]').text($(this).val());
+						});
+
+						$('input[name^="pointerDiktum"]').keyup(function() {
+							$(this).val(($(this).val()).toUpperCase());
 						});
 					</script>

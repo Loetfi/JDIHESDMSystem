@@ -274,12 +274,21 @@
 		<div class="padding">
 			<div class="box">
 				<div class="padding">
-<legend>Buat Dokumen Keputusan Menteri</legend>
+<legend>Rancangan Keputusan Menteri</legend>
 <form class="width-100p" method="POST" id="form-keputusan" target="_blank">
 	<input type="hidden" name="id_dokumen" value="<?php echo @$id_dokumen; ?>">
+	<center><p>KEPUTUSAN MENTERI ENERGI DAN SUMBER DAYA MINERAL</p>
+		<p>REPUBLIK INDONESIA</p>
+		<p>NOMOR :</p>
+		<p>TENTANG</p>
+	</center>
 	<div class="form-group" style="margin-bottom:5px">
 		<textarea name="super_judul" class="form-control" autocomplete="off" placeholder="Judul Dokumen" rows="4" required><?php echo @$detail_dokumen['judul'][0]['teks']; ?></textarea>
 	</div>
+	<center>
+		<p>DENGAN RAHMAT TUHAN YANG MAHA ESA</p>
+		<p>MENTERI ENERGI DAN SUMBER DAYA MINERAL REPUBLIK INDONESIA,</p>
+	</center>
 	<fieldset>
 		<legend>Menimbang</legend>
 		<div>
@@ -406,16 +415,17 @@
 
 	</fieldset>
 	<fieldset>
-		<legend>Menetapkan</legend>
+		<!--legend>MEMUTUSKAN:</legend-->
 		<div>
+			<center><p>MEMUTUSKAN:</p></center>
 			<?php
 			$namaJenisField = 'Memutuskan';
 			if (count(@$detail_dokumen[$namaJenisField]) > 0){
 				for($idxField=0; $idxField<count(@$detail_dokumen[$namaJenisField]); $idxField++){ ?>
 			<div class="form-group" id="text-<?php echo $namaJenisField.($idxField +1); ?>" style="display:inline-block; width:100%;">
-				<div style="float:left; width:20%">
-					<input type="text" name="pointer<?php echo $namaJenisField; ?>[]" class="form-control" placeholder="Pointer" value="<?php echo @$detail_dokumen[$namaJenisField][$idxField]['pointer']; ?>" />
-					<select name="nextPage<?php echo $namaJenisField; ?>[]" class="form-control" style="cursor:pointer; margin-top:10px;">
+				<div style="float:left; width:20%; margin-top:37px;">
+					<input type="text" name="pointer<?php echo $namaJenisField; ?>[]" class="form-control" placeholder="Pointer" value="<?php echo @$detail_dokumen[$namaJenisField][$idxField]['pointer']; ?>" disabled />
+					<!--select name="nextPage<?php echo $namaJenisField; ?>[]" class="form-control" style="cursor:pointer; margin-top:10px;">
 						<option value="continue" <?php echo @$detail_dokumen[$namaJenisField][$idxField]['layout'] == 'continue' ? 'selected' : ''; ?>>Continues Page</option>
 						<option value="newP" <?php echo @$detail_dokumen[$namaJenisField][$idxField]['layout'] == 'newP' ? 'selected' : ''; ?> >Next Page Portrait</option>
 						<option value="newL" <?php echo @$detail_dokumen[$namaJenisField][$idxField]['layout'] == 'newL' ? 'selected' : ''; ?> >Next Page Landscape</option>
@@ -426,9 +436,10 @@
 						<option value="2" <?php echo @$detail_dokumen[$namaJenisField][$idxField]['sublevel'] == '2' ? 'selected' : ''; ?>>SubLevel 2</option>
 						<option value="3" <?php echo @$detail_dokumen[$namaJenisField][$idxField]['sublevel'] == '3' ? 'selected' : ''; ?>>SubLevel 3</option>
 						<option value="4" <?php echo @$detail_dokumen[$namaJenisField][$idxField]['sublevel'] == '4' ? 'selected' : ''; ?>>SubLevel 4</option>
-					</select>
+					</select-->
 				</div>
 				<div style="width:100%">
+					<p style="margin-left:6px; float:left;">KEPUTUSAN MENTERI ENERGI DAN SUMBER DAYA MINERAL TENTANG</p>
 					<textarea type="text" name="<?php echo $namaJenisField; ?>[]" class="form-control" placeholder="Menimbang" rows="6" style="float:left; margin-left:5px; width:75%;"><?php echo @$detail_dokumen[$namaJenisField][$idxField]['teks']; ?></textarea>
 					<a href="javascript:void(0)" onclick="addMemutuskan(this, <?php echo ($idxField+1); ?>)" style="position:absolute; right:5%;">
 						<i class="fa fa-lg fa-plus <?php echo ($idxField+1) < count(@$detail_dokumen[$namaJenisField]) ? 'fa-minus' : ''; ?>"></i>
@@ -444,9 +455,9 @@
 				<?php }
 			} else { ?>
 			<div class="form-group" id="text-<?php echo $namaJenisField; ?>1" style="display:inline-block; width:100%;">
-				<div style="float:left; width:20%">
-					<input type="text" name="pointer<?php echo $namaJenisField; ?>[]" class="form-control" placeholder="Pointer" />
-					<select name="nextPage<?php echo $namaJenisField; ?>[]" class="form-control" style="cursor:pointer; margin-top:10px;">
+				<div style="float:left; width:20%; margin-top:37px;">
+					<input type="text" name="pointer<?php echo $namaJenisField; ?>[]" class="form-control" placeholder="Pointer" disabled />
+					<!--select name="nextPage<?php echo $namaJenisField; ?>[]" class="form-control" style="cursor:pointer; margin-top:10px;">
 						<option value="continue">Continues Page</option>
 						<option value="newP">Next Page Portrait</option><option value="newL">Next Page Landscape</option>
 					</select>
@@ -456,9 +467,10 @@
 						<option value="2">SubLevel 2</option>
 						<option value="3">SubLevel 3</option>
 						<option value="4">SubLevel 4</option>
-					</select>
+					</select-->
 				</div>
 				<div style="width:100%">
+					<p style="margin-left:6px; float:left;">KEPUTUSAN MENTERI ENERGI DAN SUMBER DAYA MINERAL TENTANG</p>
 					<textarea type="text" name="<?php echo $namaJenisField; ?>[]" class="form-control" placeholder="Menimbang" rows="6" style="float:left; margin-left:5px; width:75%;"></textarea>
 					<a href="javascript:void(0)" onclick="addMemutuskan(this, 1)" style="position:absolute; right:5%;"><i class="fa fa-lg fa-plus"></i></a>
 					<a href="javascript:void(0)" style="position:absolute; right:4.7%; margin-top:25px;" title="Tambah Telaah"><i class="fa fa-lg fa-comments-o"></i></a>
@@ -531,7 +543,7 @@
 	</fieldset>
 
 	<fieldset>
-		<legend>Tanda Tangan</legend>
+		<legend>Pejabat Penanda Tangan</legend>
 		<div class="form-group">
 			<textarea name="ttd" class="form-control" autocomplete="off" placeholder="Tanda Tangan" rows="4" style="width:95%"></textarea>
 			<a href="javascript:void(0)" style="position:absolute; right:4.7%; margin-top:-95px;" title="Tambah Telaah"><i class="fa fa-lg fa-comments-o"></i></a>
@@ -675,6 +687,15 @@ $("#view_doc").click(function(e) {
 $("#save_doc").click(function(e) {
 	$("#form-keputusan").attr("action", "<?php echo site_url('keputusan_menteri_doc/update_document'); ?>");
 });
+
+$('textarea[name="super_judul"]').keyup(function() {
+	$('textarea[name^="Memutuskan"]').text($(this).val());
+});
+
+$('input[name^="pointerDiktum"]').keyup(function() {
+	$(this).val(($(this).val()).toUpperCase());
+});
+
 function addKomentar(thisId) {
 	idTarget  = $('#'+thisId).attr('targetKomentar');
 	if($('#'+idTarget).css('display') === 'none') {
