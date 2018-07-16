@@ -82,8 +82,9 @@ body {
 			<div class="col-md-8 allButton" >
 				<br><br><br>
 				<?php 
-				// style="border: 1px solid #000"
-				?>
+				if ((@$this->session->userdata('login_id'))) { ?>
+
+
 				<div class="col-xs-3 col-sm-3 col-md-3">
 					<a href="<?php echo site_url('backend/dokumen/pilih/');?>"><img src="<?php echo base_url(); ?>/assets/logo/icon-rancangan-solid.png" width="100%"></a>
 				</div>
@@ -96,8 +97,9 @@ body {
 				<div class="col-xs-3 col-sm-3 col-md-3">
 					<a href="<?php echo site_url('backend/forum/') ?>"><img alt="forum" src="<?php echo base_url(); ?>/assets/logo/icon-forum-solid.png" width="100%"></a>
 				</div>
+			<?php } else { ?>
 			</div>
-		<!-- 	<div class="col-md-8 allButton" >
+			<div class="col-md-8 allButton" >
 				<div class="col-xs-3 col-sm-3 col-md-3">
 					<a href="#"><img src="<?php echo base_url(); ?>/assets/logo/icon-quick-format-solid.png" width="100%"></a>
 				</div>
@@ -109,7 +111,8 @@ body {
 				</div>
 				
 				
-			</div> -->
+			</div>
+			<?php } ?>
 		</div>
 	</div>
 
