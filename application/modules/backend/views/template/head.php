@@ -1,42 +1,42 @@
 <?php $this->load->view('kepala'); ?>
 
-    <!-- ############ LAYOUT START-->
+<!-- ############ LAYOUT START-->
 
-    <!-- aside -->
-    <div id="aside" class="app-aside fade nav-dropdown black">
-      <!-- fluid app aside -->
-      <div class="navside dk" data-layout="column">
-        <div class="navbar no-radius">
-          <!-- brand -->
-          <a href="index.html" class="navbar-brand">
-           <img src="<?php echo base_url('assets/logo/logo-esdm.png');?>" alt=".">
-           <span class="hidden-folded inline">Biro Hukum</span>
-         </a> 
-         <!-- / brand -->
-       </div>
-       <div data-flex class="hide-scroll">
-        <nav class="scroll nav-stacked nav-stacked-rounded nav-color">
+<!-- aside -->
+<div id="aside" class="app-aside fade nav-dropdown black">
+  <!-- fluid app aside -->
+  <div class="navside dk" data-layout="column">
+    <div class="navbar no-radius">
+      <!-- brand -->
+      <a href="index.html" class="navbar-brand">
+       <img src="<?php echo base_url('assets/logo/logo-esdm.png');?>" alt=".">
+       <span class="hidden-folded inline">Biro Hukum</span>
+     </a> 
+     <!-- / brand -->
+   </div>
+   <div data-flex class="hide-scroll">
+    <nav class="scroll nav-stacked nav-stacked-rounded nav-color">
 
-          <ul class="nav" data-ui-nav>
-            <li class="nav-header hidden-folded">
-              <span class="text-xs">Main</span>
-            </li>
-            <li>
-              <a href="<?php echo site_url('backend/dashboard/') ?>" class="b-danger">
-                <span class="nav-icon text-white no-fade">
-                  <i class="ion-filing"></i>
-                </span>
-                <span class="nav-text">Dashboard</span>
-              </a>
-            </li> 
- 
-            <li>
-              <a href="<?php echo site_url('backend/dokumen/') ?>"> 
-                <span class="nav-icon">
-                  <i class="ion-filing"></i>
-                </span>
-                <span class="nav-text">Dokumen</span>
-              </a>
+      <ul class="nav" data-ui-nav>
+        <li class="nav-header hidden-folded">
+          <span class="text-xs">Main</span>
+        </li>
+        <li>
+          <a href="<?php echo site_url('backend/dashboard/') ?>" class="b-danger">
+            <span class="nav-icon text-white no-fade">
+              <i class="ion-filing"></i>
+            </span>
+            <span class="nav-text">Dashboard</span>
+          </a>
+        </li> 
+
+        <li>
+          <a href="<?php echo site_url('backend/dokumen/') ?>"> 
+            <span class="nav-icon">
+              <i class="ion-filing"></i>
+            </span>
+            <span class="nav-text">Dokumen</span>
+          </a>
 
               <!-- <a>
                 <span class="nav-caret">
@@ -58,21 +58,50 @@
               </ul> -->
             </li>
 
+            <li class="nav-header hidden-folded m-t">
+              <span class="text-xs">Database</span>
+            </li>  
+
+            <li>
+              <a href="<?php echo site_url('backend/database/master/') ?>"> 
+                <span class="nav-icon">
+                  <i class="fa fa-book"></i>
+                </span>
+                <span class="nav-text">List Data</span>
+              </a>
+            </li>
+
 
             
             <li class="nav-header hidden-folded m-t">
-              <span class="text-xs">Pengaturan</span>
+              <span class="text-xs">Manajemen Pengguna</span>
             </li>  
 
 
             <li>
               <a href="<?php echo site_url('backend/dashboard/') ?>" class="">
                 <span class="nav-icon text-white no-fade">
-                  <i class="fa fa-cog"></i>
+                  <i class="fa fa-user"></i>
                 </span>
-                <span class="nav-text">Pengaturan</span>
+                <span class="nav-text">Pengguna</span>
               </a>
             </li>  
+            <li>
+              <a href="<?php echo site_url('backend/dashboard/') ?>" class="">
+                <span class="nav-icon text-white no-fade">
+                  <i class="fa fa-group"></i>
+                </span>
+                <span class="nav-text">Hak Akses</span>
+              </a>
+            </li>  
+            <!-- <li>
+              <a href="<?php echo site_url('backend/dashboard/') ?>" class="">
+                <span class="nav-icon text-white no-fade">
+                  <i class="fa fa-user"></i>
+                </span>
+                <span class="nav-text"></span>
+              </a>
+            </li> -->  
 
           </ul>
         </nav>
@@ -99,7 +128,7 @@
               </span>
             </a>
             <div class="dropdown-menu w dropdown-menu-scale pull-right">
-               
+
               <a class="dropdown-item" href="<?php echo site_url('backend/auth/logout?true') ?>">Sign out</a>
             </div>
           </li>
