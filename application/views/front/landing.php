@@ -1,18 +1,49 @@
 <!doctype html>
 <html>
 <head>
-<meta charset="utf-8">
-<title>JDIH ESDM</title>
-<style>
+  <meta charset="utf-8">
+  <title>JDIH ESDM</title> 
+
+  <!-- for ios 7 style, multi-resolution icon of 152x152 -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-barstyle" content="black-translucent">
+  <link rel="apple-touch-icon" href="http://localhost/Projekan/jdih/assetnew/images/logo.png">
+  <meta name="apple-mobile-web-app-title" content="Lutfi">
+  <!-- for Chrome on Android, multi-resolution icon of 196x196 -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <link rel="shortcut icon" sizes="196x196" href="http://localhost/Projekan/jdih/assetnew/images/logo.png">
+  
+  <!-- style -->
+  <link rel="stylesheet" href="http://localhost/Projekan/jdih/assetnew/css/animate.css/animate.min.css" type="text/css" />
+  <link rel="stylesheet" href="http://localhost/Projekan/jdih/assetnew/css/glyphicons/glyphicons.css" type="text/css" />
+  <link rel="stylesheet" href="http://localhost/Projekan/jdih/assetnew/css/font-awesome/css/font-awesome.min.css" type="text/css" />
+  <link rel="stylesheet" href="http://localhost/Projekan/jdih/assetnew/css/material-design-icons/material-design-icons.css" type="text/css" />
+  <link rel="stylesheet" href="http://localhost/Projekan/jdih/assetnew/css/ionicons/css/ionicons.min.css" type="text/css" />
+  <link rel="stylesheet" href="http://localhost/Projekan/jdih/assetnew/css/simple-line-icons/css/simple-line-icons.css" type="text/css" />
+  <link rel="stylesheet" href="http://localhost/Projekan/jdih/assetnew/css/bootstrap/dist/css/bootstrap.min.css" type="text/css" />
+
+  <!-- build:css css/styles/app.min.css -->
+  <link rel="stylesheet" href="http://localhost/Projekan/jdih/assetnew/css/styles/app.css?v.1" type="text/css" />
+  <link rel="stylesheet" href="http://localhost/Projekan/jdih/assetnew/css/styles/style.css?v.1" type="text/css" />
+  <!-- endbuild -->
+
+  <!-- datatable -->
+  <style type="text/css" href="http://localhost/Projekan/jdih/assetnew/libs/datatables/media/css/dataTables.bootstrap4.min.css"></style>
+  <link rel="stylesheet" href="http://localhost/Projekan/jdih/assetnew/css/styles/font.css?v.1" type="text/css" />
+  
+  <script type="text/javascript" src="http://localhost/Projekan/jdih/assetnew/scripts/jquery-2.1.1.min.js"></script>
+
+  <style>
   html,
   body { height: 100%; }
 
   body {
-    font-family: 'Oswald', sans-serif;
-    background: #dddddd; /*url(https://picsum.photos/1800/1600/?image=888);*/
+    font-family: 'Arial' , sans-serif;
+    background: url(<?=base_url('background.png')?>);
     margin: 0;
+    /*background-repeat: ;*/
     /*background: linear-gradient(#eeeeee, #cccccc);*/
-    overflow: hidden;
+    /*overflow: hidden;*/
   }
 
   a{
@@ -33,7 +64,7 @@
   .selector,
   .selector button {
     font-family: 'Oswald', sans-serif;
-    font-weight: 300; 
+    font-weight: 100; 
   }
 
   .selector button { /**/
@@ -119,70 +150,117 @@
     font-size: 10px;
     font-weight: 600;
   }
+
+  h3 { 
+    color: yellow;
+    text-align: center;
+  }
 </style>
 </head>
- 
-<center><img src="https://www.esdm.go.id/themes/v1/img/xlogo-esdm-web.png.pagespeed.ic.rpNW33_FYz.png" style="padding-top: 0px;"></center>
-<div class='selector'>
-  <ul>
-    <li>
-      <input id='c5' type='checkbox'>
-      <label for='c5'> <a href="<?php echo site_url('backend/dokumen/pilih?nologin');?>">Quick Format</a> </label>
-    </li>
-    <li>
-      <input id='c1' type='checkbox'>
-      <!-- sfsdf -->
-      <label for='c1'> <a href="<?php echo site_url('backend/dokumen/pilih');?>">FORMAT</a> </label>
-    </li>
-    <li>
-      <input id='c2' type='checkbox'>
-      <label for='c2'><a href="<?php echo site_url('backend/dokumen/');?>">TELAHAAN</a></label>
-    </li>
 
-    <li>
-      <input id='c3' type='checkbox'>
-      <label for='c3'><a href="<?php echo site_url('forum');?>">FORUM KORDINASI</a></label>
-    </li>
+<!-- <center></center>/ -->
+<img src="https://www.esdm.go.id/themes/v1/img/xlogo-esdm-web.png.pagespeed.ic.rpNW33_FYz.png" style="padding-top: 0px;">
+<!-- <p><a href="" style="padding: 20px; font-size: 17px"><b>Aplikasi perancangan produk hukum Kementerian Energi Sumber Daya Manusia</b></a></p> -->
+<br><br><br>
+<div class="col-lg b-r"> 
+  <div class="padding">
+    <div class="row">
+      <!-- <div class="col-sm-2" > 
+        <div class="box black" style="border-radius: 10px">
+          <div class="box-header">
+            <h3>QUICK FORMAT</h3>
+          </div>
+          <div class="box-body"> 
+            <button class="btn btn-outline rounded b-warning text-warning">Pilih</button>
+             
+          </div>
+        </div>
+      </div>  -->
 
-    <li>
-      <input id='c3' type='checkbox'>
-      <label for='c4'><a href="#">DATABASE PROSES</a></label>
-    </li>
-    
-  </ul>
-  <button><font color="black">PRODUK HUKUM</font></button>
+      <div class="col-sm-2" > 
+        <div class="box black" style="border-radius: 10px; background: rancangan.png ">
+          <div class="box-header">
+            <h3><i class="fa fa-pencil"></i> FORMAT</h3>
+            <br>
+          </div>
+          <div class="box-body"> 
+            <button class="btn btn-outline rounded b-warning text-warning">Pilih</button>
+            <!-- <a href="<?php echo site_url('Keputusan_menteri_doc') ?>" class="btn btn-success btn-xs">Pilih <i class="fa fa-chevron-right"></i></a> -->
+          </div>
+        </div>
+      </div> 
+
+      <div class="col-sm-2" > 
+        <div class="box black" style="border-radius: 10px">
+          <div class="box-header">
+            <h3>TELAAHAN</h3>
+            <br>
+          </div>
+          <div class="box-body"> 
+            <button class="btn btn-outline rounded b-warning text-warning">Pilih</button>
+            <!-- <a href="<?php echo site_url('Keputusan_menteri_doc') ?>" class="btn btn-success btn-xs">Pilih <i class="fa fa-chevron-right"></i></a> -->
+          </div>
+        </div>
+      </div> 
+
+      <div class="col-sm-2" > 
+        <div class="box black" style="border-radius: 10px">
+          <div class="box-header">
+            <h3>FORUM KOORDINASI</h3>
+
+          </div>
+          <div class="box-body"> 
+            <button class="btn btn-outline rounded b-warning text-warning">Pilih</button>
+            <!-- <a href="<?php echo site_url('Keputusan_menteri_doc') ?>" class="btn btn-success btn-xs">Pilih <i class="fa fa-chevron-right"></i></a> -->
+          </div>
+        </div>
+      </div> 
+
+      <div class="col-sm-2" > 
+        <div class="box black" style="border-radius: 10px">
+          <div class="box-header">
+            <h3>DATABASE PROSES</h3>
+          </div>
+          <div class="box-body"> 
+            <button class="btn btn-outline rounded b-warning text-warning">Pilih</button>
+            <!-- <a href="<?php echo site_url('Keputusan_menteri_doc') ?>" class="btn btn-success btn-xs">Pilih <i class="fa fa-chevron-right"></i></a> -->
+          </div>
+        </div>
+      </div>   
+    </div> 
+  </div>
 </div>
-<div style="">
-  <center><a href="">Aplikasi perancangan produk hukum Kementerian Energi Sumber Daya Manusia</a></center>
 </div>
+
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script><script>var nbOptions = 8;
 var angleStart = -360;
 
 // jquery rotate animation
 function rotate(li,d) {
-    $({d:angleStart}).animate({d:d}, {
-        step: function(now) {
-            $(li)
-               .css({ transform: 'rotate('+now+'deg)' })
-               .find('label')
-                  .css({ transform: 'rotate('+(-now)+'deg)' });
-        }, duration: 0
-    });
+  $({d:angleStart}).animate({d:d}, {
+    step: function(now) {
+      $(li)
+      .css({ transform: 'rotate('+now+'deg)' })
+      .find('label')
+      .css({ transform: 'rotate('+(-now)+'deg)' });
+    }, duration: 0
+  });
 }
 
 // show / hide the options
 function toggleOptions(s) {
-    $(s).toggleClass('open');
-    var li = $(s).find('li');
-    var deg = $(s).hasClass('half') ? 180/(li.length-1) : 360/li.length;
-    for(var i=0; i<li.length; i++) {
-        var d = $(s).hasClass('half') ? (i*deg)-90 : i*deg;
-        $(s).hasClass('open') ? rotate(li[i],d) : rotate(li[i],angleStart);
-    }
+  $(s).toggleClass('open');
+  var li = $(s).find('li');
+  var deg = $(s).hasClass('half') ? 180/(li.length-1) : 360/li.length;
+  for(var i=0; i<li.length; i++) {
+    var d = $(s).hasClass('half') ? (i*deg)-90 : i*deg;
+    $(s).hasClass('open') ? rotate(li[i],d) : rotate(li[i],angleStart);
+  }
 }
 
 $('.selector button').click(function(e) {
-    toggleOptions($(this).parent());
+  toggleOptions($(this).parent());
 });
 
 setTimeout(function() { toggleOptions('.selector'); }, 100);//@ sourceURL=pen.js
