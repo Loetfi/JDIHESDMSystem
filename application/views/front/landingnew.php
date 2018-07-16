@@ -23,15 +23,15 @@
       <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a class="nav-link" href="index.html">Panduan</a>
+            <a class="nav-link" href="#">Panduan</a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="index.html">Data Perancang PUU</a>
+            <a class="nav-link" href="#">Data Perancang PUU</a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="index.html">Kontak</a>
+            <a class="nav-link" href="#">Kontak</a>
           </li>
         </ul>
       </div>
@@ -57,7 +57,7 @@
                 <form action="<?php echo site_url('backend/auth/proses');?>" method="POST">
                   <div class="form-group">
                     <label for="email">Username</label>
-                    <input type="email" class="form-control" id="username" name="username" placeholder="Masukan Username">
+                    <input type="text" class="form-control" id="username" name="username" placeholder="Masukan Username">
                   </div>
                   <div class="form-group">
                     <label for="password">Password</label>
