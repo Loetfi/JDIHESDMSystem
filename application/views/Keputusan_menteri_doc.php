@@ -115,13 +115,14 @@
 		'<option value="continue">Continues Page</option>'+
 		'<option value="newP">Next Page Portrait</option><option value="newL">Next Page Landscape</option>'+
 		'</select>'+
-		'<select name="subLevelTembusan[]" class="form-control" style="cursor:pointer; margin-top:10px;">'+
-		'<option value="0">SubLevel 0</option>'+
-		'<option value="1">SubLevel 1</option>'+
-		'<option value="2">SubLevel 2</option>'+
-		'<option value="3">SubLevel 3</option>'+
-		'<option value="4">SubLevel 4</option>'+
-		'</select>'+
+		'<input type="hidden" name="subLevelTembusan[]" value="0">'+
+		// '<select name="subLevelTembusan[]" class="form-control" style="cursor:pointer; margin-top:10px;">'+
+		// '<option value="0">SubLevel 0</option>'+
+		// '<option value="1">SubLevel 1</option>'+
+		// '<option value="2">SubLevel 2</option>'+
+		// '<option value="3">SubLevel 3</option>'+
+		// '<option value="4">SubLevel 4</option>'+
+		// '</select>'+
 		'</div>'+
 		'<div style="width:100%">'+
 		'<textarea type="text" name="Tembusan[]" class="form-control" placeholder="Tembusan" rows="6" style="float:left; margin-left:5px; width:75%;"></textarea>'+
@@ -410,13 +411,16 @@
 											<option value="continue">Continues Page</option>
 											<option value="newP">Next Page Portrait</option><option value="newL">Next Page Landscape</option>
 										</select>
-										<select name="subLevel<?php echo $namaTembusan; ?>[]" class="form-control" style="cursor:pointer; margin-top:10px;">
+
+										<input type="hidden" name="subLevel<?php echo $namaTembusan; ?>[]" value="0">
+
+										<!-- <select name="subLevel<?php echo $namaTembusan; ?>[]" class="form-control" style="cursor:pointer; margin-top:10px;">
 											<option value="0">SubLevel 0</option>
 											<option value="1">SubLevel 1</option>
 											<option value="2">SubLevel 2</option>
 											<option value="3">SubLevel 3</option>
 											<option value="4">SubLevel 4</option>
-										</select>
+										</select> -->
 									</div>
 									<div style="width:100%">
 										<textarea type="text" name="<?php echo $namaTembusan; ?>[]" class="form-control" placeholder="<?php echo $namaTembusan; ?>" rows="6" style="float:left; margin-left:5px; width:75%;" required></textarea>

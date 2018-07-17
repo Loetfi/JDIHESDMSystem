@@ -674,8 +674,9 @@
 		</div>
 	</fieldset>
 	<div class="form-group margin-top-5px">
-		<button type="submit" class="btn btn-success" id="view_doc">Lihat Dokumen</button>
-		<button type="submit" class="btn btn-success" id="save_doc">Simpan Dokumen</button>
+		<button type="submit" class="btn btn-success btn-sm " id="view_doc">Lihat Format</button>
+		<button type="submit" class="btn btn-primary btn-sm" id="save_doc">Simpan Saja</button>
+		<button type="submit" class="btn btn-warning btn-sm" id="save_doc_submit">Submit </button>
 	</div>
 </form>
 
@@ -686,6 +687,10 @@ $("#view_doc").click(function(e) {
 
 $("#save_doc").click(function(e) {
 	$("#form-keputusan").attr("action", "<?php echo site_url('keputusan_menteri_doc/update_document'); ?>");
+});
+
+$("#save_doc_submit").click(function(e) {
+	$("#form-keputusan").attr("action", "<?php echo site_url('keputusan_menteri_doc/submit_document'); ?>");
 });
 
 $('textarea[name="super_judul"]').keyup(function() {

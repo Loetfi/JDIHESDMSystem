@@ -78,6 +78,12 @@ class Dokumen extends CI_Controller {
 		$this->load->view('template/head', $data, FALSE);
 		// $this->load->view('dokumen/pilih', $data, FALSE);
 	}
+
+
+	public function submit($id_dokumen = '')
+	{	
+		 print_r($id_dokumen);
+	}
 	
 	// telaah
 	public function telaah()

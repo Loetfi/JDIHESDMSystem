@@ -2,9 +2,10 @@
 /* @property phpword_model $phpword_model */
 class Keputusan_menteri_doc extends CI_Controller {
 	function __construct(){
-	  parent::__construct();
+		parent::__construct();
 		// $this->load->model('phpword_model');
-    }
+		date_default_timezone_set('Asia/Jakarta');
+	}
 	function index()
 	{
 
@@ -1096,7 +1097,7 @@ class Keputusan_menteri_doc extends CI_Controller {
 		$alldata = $this->insert_detail_document($id, $idRevisi, $arrData);
 		// print_r($arrData);
 		// die();
-		echo $alldata;
+		return $alldata;
 	}
 
 	function insert_document() {
@@ -1115,11 +1116,11 @@ class Keputusan_menteri_doc extends CI_Controller {
 	}
 	function cek_revisi_document($id) {
 		$sql = "
-			SELECT
-				max(status_revisi) revisi,
-				count(*) terhitung
-			FROM dokumen_revisi dr
-			WHERE dr.id_dokumen = '$id'
+		SELECT
+		max(status_revisi) revisi,
+		count(*) terhitung
+		FROM dokumen_revisi dr
+		WHERE dr.id_dokumen = '$id'
 		";
 		$allRow = $this->db->query($sql)->row_array();
 		if (@$allRow['terhitung'] == 0){
@@ -1138,7 +1139,8 @@ class Keputusan_menteri_doc extends CI_Controller {
 			'status_revisi'	=> $revisi,
 			'cdate'			=> date('Y-m-d H:i:s'),
 			'appto'			=> null,
-			'namafile'		=> $namaFile
+			'namafile'		=> $namaFile,
+			'cuser'			=> !empty($this->session->userdata('login_id')) ? $this->session->userdata('login_id') : 2
 		);
 		$queryDokumen = $this->db->insert('dokumen_revisi', $dataDokumenRevisi);
 		return $this->db->insert_id();
@@ -1198,7 +1200,7 @@ class Keputusan_menteri_doc extends CI_Controller {
 				}
 			}
 		}
-		return "success insert data";
+		return ['id_dokumen' =>$id, 'id_revisi' => $idRevisi];
 	}
 
 	// function for cek the array key is associative or sequential
@@ -1214,41 +1216,71 @@ class Keputusan_menteri_doc extends CI_Controller {
 		);
 
 		if ($status_revisi == ''){
-			$sqlRevisi = $this->db->query("select max(status_revisi) status_revisi from dokumen_revisi where id_dokumen = '$id_dokumen'")->row_array();
+			$sqlRevisi = $this->db->query("SELECT max(status_revisi) status_revisi from dokumen_revisi where id_dokumen = '$id_dokumen'")->row_array();
 			$status_revisi = @$sqlRevisi['status_revisi'];
 		}
 
 		$groupField = array();
 		$sql = "SELECT *
-			FROM dokumen_detail dd
-			LEFT JOIN dokumen_revisi dr ON dr.id_revisi = dd.id_revisi
-			LEFT JOIN dokumen d ON d.id_dokumen = dr.id_dokumen
-			WHERE dr.id_dokumen = '$id_dokumen'
-				AND dr.status_revisi = '$status_revisi'
-			ORDER BY id_detail ASC
+		FROM dokumen_detail dd
+		LEFT JOIN dokumen_revisi dr ON dr.id_revisi = dd.id_revisi
+		LEFT JOIN dokumen d ON d.id_dokumen = dr.id_dokumen
+		WHERE dr.id_dokumen = '$id_dokumen'
+		AND dr.status_revisi = '$status_revisi'
+		ORDER BY id_detail ASC
 		";
 		$allRow = $this->db->query($sql)->result_array();
 
 		if (count(@$allRow) > 0)
-		foreach($allRow as $row){
-			$namaJenisField = $row['jenis_field'];
+			foreach($allRow as $row){
+				$namaJenisField = $row['jenis_field'];
 
-			if(!in_array($namaJenisField, $groupField))
-				$groupField[] = $namaJenisField;
+				if(!in_array($namaJenisField, $groupField))
+					$groupField[] = $namaJenisField;
 
-			$detail_dokumen[$namaJenisField][] = $row;
+				$detail_dokumen[$namaJenisField][] = $row;
+			}
+
+			$data['id_dokumen'] = $id_dokumen;
+			$data['detail_dokumen'] = @$detail_dokumen;
+
+			$this->load->view('backend/template/head', $data, FALSE);
 		}
 
-		$data['id_dokumen'] = $id_dokumen;
-		$data['detail_dokumen'] = @$detail_dokumen;
+		function update_document(){
+			$this->save_document();
+		}
 
-		$this->load->view('backend/template/head', $data, FALSE);
+		function submit_document()
+		{
+			if (empty($this->session->userdata('login_id'))) {
+				exit('anda belom login');
+			} else {
+				$res = '';
+				$login_id = $this->session->userdata('login_id');
+				$data = $this->save_document();
+				$id_revisi =  $data['id_revisi'];
+				$cari_revisi = $this->db->query("SELECT  b.direct_boss, a.* from dokumen_revisi a 
+					left join login b on a.cuser = b.login_id
+					where id_revisi = $id_revisi and cuser = $login_id")->row_array();
+
+				# ganti status jadi submit 
+				if (count($cari_revisi['direct_boss']) > 0) {
+					# update 
+					$update = array(
+						'appTo'			=> $cari_revisi['direct_boss'], 
+						'rilis_doc'		=> 1
+					);
+					$this->db->where('id_revisi', $id_revisi);
+					$this->db->where('cuser', $login_id);
+					$this->db->update('dokumen_revisi', $update);
+
+					$res = 'Berhasil';
+				} else { $res = 'Gagal'; }
+				// return $res;
+				redirect('backend/dokumen/detail/'.$data['id_dokumen'],'refresh');
+			}
+		}
 	}
-
-	function update_document(){
-		$this->save_document();
-
-	}
-}
-/* End of file dashboard.php */
-/* Location: ./system/application/modules/matchbox/controllers/dashboard.php */
+	/* End of file dashboard.php */
+	/* Location: ./system/application/modules/matchbox/controllers/dashboard.php */

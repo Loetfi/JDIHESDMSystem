@@ -10,7 +10,7 @@
 <br><br> 
 </div>	 
 
-Tandai sebagai finish dokumen <a href="" class="btn-xs btn-primary btn">Yes</a>
+<!-- Tandai sebagai finish dokumen <a href="" class="btn-xs btn-primary btn">Yes</a> -->
 
 </div>
 <div class="p-a-md b-b _600">Versioning Dokumen</div>
@@ -29,6 +29,7 @@ Tandai sebagai finish dokumen <a href="" class="btn-xs btn-primary btn">Yes</a>
 		<td>Pada Tgl</td>
 		<td>&nbsp;</td>
 		<td>&nbsp;</td>
+		<!-- <td>Submit Pada Versi</td> -->
 	</tr>
 <?php foreach($dok_versi as $dv){?>
 	<tr>
@@ -39,7 +40,11 @@ Tandai sebagai finish dokumen <a href="" class="btn-xs btn-primary btn">Yes</a>
 		<td><?php echo isset($dv['nama_atasan']) ? $dv['nama_atasan'] : '-';?></td>
 		<td><?php echo date('d F Y H:i:s', strtotime($dv['cdate']));?> </td>
 		<td><a href="<?php echo base_url($dv['namafile']);?>" class="btn btn-xs btn-primary">Download</a></td>
-		<td><a href="<?php echo site_url('Keputusan_menteri_doc/edit/'.$dv['id_dokumen'].'/'.$dv['status_revisi']);?>" class="btn btn-xs btn-success">Ubah</a>
+		<td><a href="<?php echo site_url('Keputusan_menteri_doc/edit/'.$dv['id_dokumen'].'/'.$dv['status_revisi']);?>" class="btn btn-xs btn-success">Ubah</a></td>
+		<!-- <td>
+			<a href="<?php echo site_url('backend/dokumen/submit/'.$dv['id_dokumen']) ?>" class="btn btn-warning btn-xs">Submit</a>
+			
+		</td> -->
 	</tr>
 <?php } ?>
 </table> 
