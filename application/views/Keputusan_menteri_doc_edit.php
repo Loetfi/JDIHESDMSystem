@@ -692,6 +692,25 @@ $('textarea[name="super_judul"]').keyup(function() {
 	$('textarea[name^="Memutuskan"]').text($(this).val());
 });
 
+$('textarea[name^="Menimbang"], textarea[name^="Mengingat"]').blur(function() {
+	var str = $(this).val(),
+			strcheck = (str === '') ? '' : str+';';
+	$(this).val(strcheck);
+})
+.focus(function() {
+	var str = $(this).val();
+	$(this).val(str.slice(0, -1));
+});
+
+$('textarea[name^="Memutuskan"]').blur(function() {
+	var str = $(this).val(),
+			strcheck = (str === '') ? '' : str+'.';
+	$(this).val(strcheck);
+}).focus(function() {
+	var str = $(this).val();
+	$(this).val(str.slice(0, -1));
+});
+
 $('input[name^="pointerDiktum"]').keyup(function() {
 	$(this).val(($(this).val()).toUpperCase());
 });
