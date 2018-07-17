@@ -172,15 +172,10 @@ class Keputusan_menteri_doc extends CI_Controller {
 		/* *********************************************************************************** */
 		## judul
 		$fontStyle['allCaps'] = TRUE;
-		$judul = 'KEPUTUSAN MENTERI ENERGI DAN SUMBER DAYA MINERAL
-		REPUBLIK INDONESIA
-		NOMOR :
-		TENTANG ' . $_POST['super_judul'] . '
-
-		DENGAN RAHMAT TUHAN YANG MAHA ESA
-
-		MENTERI ENERGI DAN SUMBER DAYA MINERAL REPUBLIK INDONESIA,';
+		$judul = "\r\n\r\n\r\n\r\n\r\n\r\n\r\nKEPUTUSAN MENTERI ENERGI DAN SUMBER DAYA MINERAL\r\nREPUBLIK INDONESIA\r\nNOMOR :_____________________\r\nTENTANG\r\n". $_POST['super_judul'] . "\r\nDENGAN RAHMAT TUHAN YANG MAHA ESA\r\n\r\nMENTERI ENERGI DAN SUMBER DAYA MINERAL REPUBLIK INDONESIA,\r\n\r\n";
 		$barisJudul = explode("\r\n",$judul);
+
+		// print_r($barisJudul); exit();
 		foreach($barisJudul as $row){
 			if ($row != ""){
 				$txtTitle = $row;
@@ -820,8 +815,8 @@ class Keputusan_menteri_doc extends CI_Controller {
 		$section->addTextBreak(1,$fontStyle);
 		/* *********************************************************************************** */
 
-
-
+		//debug
+		// print_r($arrData); exit();
 		// $subjudul = @$_POST['subjudul'];
 		// $widthMaxCol = 16000;
 		// $judultabel = @$_POST['judultabel'];

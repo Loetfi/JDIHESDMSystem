@@ -8,13 +8,15 @@
 		'<option value="continue">Continues Page</option>'+
 		'<option value="newP">Next Page Portrait</option><option value="newL">Next Page Landscape</option>'+
 		'</select>'+
-		'<select name="subLevelMenimbang[]" class="form-control" style="cursor:pointer; margin-top:10px;">'+
-		'<option value="0">SubLevel 0</option>'+
-		'<option value="1">SubLevel 1</option>'+
-		'<option value="2">SubLevel 2</option>'+
-		'<option value="3">SubLevel 3</option>'+
-		'<option value="4">SubLevel 4</option>'+
 		'</select>'+
+		'<input type="hidden" name="subLevelMenimbang[]" value="0">'+
+		// '<select name="subLevelMenimbang[]" class="form-control" style="cursor:pointer; margin-top:10px;">'+
+		// '<option value="0">SubLevel 0</option>'+
+		// '<option value="1">SubLevel 1</option>'+
+		// '<option value="2">SubLevel 2</option>'+
+		// '<option value="3">SubLevel 3</option>'+
+		// '<option value="4">SubLevel 4</option>'+
+		// '</select>'+
 		'</div>'+
 		'<div style="width:100%">'+
 		'<textarea type="text" name="Menimbang[]" class="form-control" placeholder="Menimbang" rows="6" style="float:left; margin-left:5px; width:75%;"></textarea>'+
@@ -294,13 +296,14 @@
 											<option value="continue">Continues Page</option>
 											<option value="newP">Next Page Portrait</option><option value="newL">Next Page Landscape</option>
 										</select>
-										<select name="subLevel<?php echo $namaMenimbang; ?>[]" class="form-control" style="cursor:pointer; margin-top:10px;">
+										<input type="hidden" name="subLevel<?php echo $namaMenimbang; ?>[]" value="0">
+										<!-- <select name="subLevel<?php echo $namaMenimbang; ?>[]" class="form-control" style="cursor:pointer; margin-top:10px;">
 											<option value="0">SubLevel 0</option>
 											<option value="1">SubLevel 1</option>
 											<option value="2">SubLevel 2</option>
 											<option value="3">SubLevel 3</option>
 											<option value="4">SubLevel 4</option>
-										</select>
+										</select> -->
 									</div>
 									<div style="width:100%">
 										<textarea type="text" name="<?php echo $namaMenimbang; ?>[]" class="form-control" placeholder="Menimbang" rows="6" style="float:left; margin-left:5px; width:75%;" required></textarea>
