@@ -64,6 +64,8 @@
                     <input type="password" class="form-control" id="password" name="password" placeholder="Masukan Password">
                   </div> 
                   <button type="submit" class="btn btn-success btn-block btn-lg mb-2">Masuk</button>
+                  <br>
+                  <a href="<?php echo site_url('front/landing/') ?>" class="btn btn-default btn-block mb-2">Mode Tamu</a>
                 </form>
               </div>
             </div>
