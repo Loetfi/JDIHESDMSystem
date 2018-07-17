@@ -120,6 +120,47 @@
         <div class="navbar-item pull-left h5" id="pageTitle"><?php echo @$title; ?></div>
         <!-- nabar right -->
         <ul class="nav navbar-nav pull-right"> 
+          <li class="nav-item dropdown pos-stc-xs">
+                    <a class="nav-link clear" data-toggle="dropdown" aria-expanded="false">
+                      <i class="ion-android-notifications-none w-24"></i>
+                      <span class="label up p-a-0 danger"></span>
+                    </a>
+                    <!-- dropdown -->
+                    <div class="dropdown-menu pull-right w-xl animated fadeIn no-bg no-border no-shadow">
+                        <div class="scrollable" style="max-height: 220px">
+                          <ul class="list-group list-group-gap m-a-0">
+                            <li class="list-group-item dark-white box-shadow-z0 b">
+                              <span class="pull-left m-r">
+                                <img src="https://pbs.twimg.com/profile_images/537640914689093633/38jBPuAv_400x400.jpeg" alt="..." class="w-40 img-circle">
+                              </span>
+                              <span class="clear block">
+                                <a href="" class="text-primary">Lutfi F H</a> , Mengirim Dokumen <a href="#" class="text-primary">Keputusan Menteri</a> kepada anda<br>
+                                <small class="text-muted">1 hari yang lalu</small>
+                              </span>
+                            </li>
+                            <li class="list-group-item dark-white box-shadow-z0 b">
+                              <span class="pull-left m-r">
+                                <img src="https://pbs.twimg.com/profile_images/537640914689093633/38jBPuAv_400x400.jpeg" alt="..." class="w-40 img-circle">
+                              </span>
+                              <span class="clear block">
+                                Dokumen  <a href="#" class="text-primary">Keputusan Menteri</a> anda berhasil di submit ke <a href="" class="text-primary">Atasan Anda</a><br>
+                                <small class="text-muted">1 hari yang lalu</small>
+                              </span>
+                            </li>
+                            <li class="list-group-item dark-white text-color box-shadow-z0 b">
+                              <span class="pull-left m-r">
+                                <img src="https://pbs.twimg.com/profile_images/537640914689093633/38jBPuAv_400x400.jpeg" alt="..." class="w-40 img-circle">
+                              </span>
+                              <span class="clear block">
+                                Dokumen  <a href="#" class="text-primary">Keputusan Menteri</a> anda berhasil di submit ke <a href="" class="text-primary">Atasan Anda</a><br> 
+                              </span>
+                            </li>
+                          </ul>
+                        </div>
+                    </div>
+                    <!-- / dropdown -->
+                  </li>
+
           <li class="nav-item dropdown">
             <a class="nav-link clear" data-toggle="dropdown">
               <?php echo @$name; ?>

@@ -33,7 +33,7 @@ class Dokumen extends CI_Controller {
 		$this->output->set_header('Access-Control-Allow-Methods: POST, GET'); 
 		$this->output->set_header('Access-Control-Allow-Headers: Origin');
 		$this->output->set_content_type('application/json');
-		$data =  $this->db->query("select id_dokumen, jenis_dokumen, nama_dokumen from dokumen order by id_dokumen")->result_array();
+		$data =  $this->db->query("SELECT id_dokumen, jenis_dokumen, nama_dokumen from dokumen order by id_dokumen")->result_array();
 		
 		foreach ($data as $row) {
 			$rows['id_dokumen'] = $row['id_dokumen'];
