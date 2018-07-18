@@ -1,5 +1,10 @@
 <div class="padding">
+
   <div class="box">
+    <div class="box-header light lt">
+      <h3>Daftar Database Rancangan dari Sektor <?php echo strtoupper(@$_GET['sektor']);?> </h3>
+      <small>Merupakan list database rancangan dari sub sektor yang telah dipilih.</small>
+    </div>
     <div class="table-responsive table" id="datatables">
     	<div class="padding">
         <table class="table table-striped table-bordered table-hover" id="tableadms" width="100%"> 
@@ -10,6 +15,7 @@
               <th>Nama Dokumen</th>
               <th>Dibuat pada</th>
               <th>Publish</th>
+              <th>Sektor</th>
               <th>Aksi</th>
             </tr> 
           </thead> 

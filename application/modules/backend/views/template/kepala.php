@@ -35,6 +35,12 @@
   <link rel="stylesheet" href="<?php echo base_url('assetnew/css/styles/font.css?v.1');?>" type="text/css" />
   
   <script type="text/javascript" src="<?=base_url('assetnew/scripts/jquery-2.1.1.min.js');?>"></script>
+
+  <style type="text/css">
+    html {
+      font-family: Bookman Old Style;
+    }
+  </style>
 </head>
 <body>
   <div class="app" id="app">

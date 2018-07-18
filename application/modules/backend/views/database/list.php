@@ -10,7 +10,7 @@
                 <p>Unit Sektor</p>
               </div>
               <div class="text-center">
-                <a href="<?php echo site_url('backend/database/master/surat/2') ?>" class="btn btn-primary"><h2 class="text-center _600">Migas</h2> </a>
+                <a href="<?php echo site_url('backend/database/master/rancangan/migas') ?>" class="btn btn-primary"><h2 class="text-center _600">Migas</h2> </a>
               </div>
             </div>
           </div>
@@ -23,7 +23,7 @@
                 <p>Unit Sektor</p>
               </div>
               <div class="text-center">
-                 <a href="<?php echo site_url('backend/database/master/surat/2') ?>" class="btn btn-primary"> <h2 class="text-center _600">Minerba</h2> </a>
+                 <a href="<?php echo site_url('backend/database/master/rancangan/minerba') ?>" class="btn btn-primary"> <h2 class="text-center _600">Minerba</h2> </a>
               </div>
             </div>
           </div>
@@ -36,7 +36,7 @@
                 <p>Unit Sektor</p>
               </div>
               <div class="text-center">
-                <a href="<?php echo site_url('backend/database/master/surat/2') ?>" class="btn btn-primary"><h2 class="text-center _600">EBTKE</h2> </a>
+                <a href="<?php echo site_url('backend/database/master/rancangan/ebtke') ?>" class="btn btn-primary"><h2 class="text-center _600">EBTKE</h2> </a>
               </div>
             </div>
           </div>

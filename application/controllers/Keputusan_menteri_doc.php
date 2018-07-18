@@ -11,7 +11,8 @@ class Keputusan_menteri_doc extends CI_Controller {
 
 		$data = array(
 			'contents'	=> 'Keputusan_menteri_doc',
-			'title'		=> 'Dashbord Sistem'
+			'title'		=> 'Buat Dokumen Rancangan Keputusan Menteri',
+			'name'		=> empty($this->session->userdata('name')) ? 'Tanpa Login' : $this->session->userdata('name')
 		);
 		$this->load->view('backend/template/head', $data, FALSE);
 		// $this->load->view('');
@@ -1022,7 +1023,14 @@ class Keputusan_menteri_doc extends CI_Controller {
 
 	}
 
-	function save_document() {
+	function save_document()
+	{
+		$this->save_doc();
+		$this->session->set_flashdata('message', '<div class="alert alert-info"> Dokumen berhasil dibuat.</div>');
+		redirect('backend/dokumen','refresh');
+	}
+
+	function save_doc() {
 		$arrData['judul'] = $_POST['super_judul'];
 		$Menimbang = $_POST['Menimbang'];
 		$pointerMenimbang = $_POST['pointerMenimbang'];
@@ -1102,8 +1110,8 @@ class Keputusan_menteri_doc extends CI_Controller {
 
 	function insert_document() {
 		$dataDokumen = array(
-			'jenis_dokumen'	=> 'Staff Buat Doc 1 Keputusan Menteri',
-			'nama_dokumen'	=> 'KM01/001/2018',
+			'jenis_dokumen'	=> 'Keputusan Menteri',
+			'nama_dokumen'	=> isset($_POST['nama_dokumen']) ? $_POST['nama_dokumen'] : '',
 			'login_id'		=> !empty($this->session->userdata('login_id')) ? $this->session->userdata('login_id') : 2, // 2 is admin
 			'cuser'			=> !empty($this->session->userdata('login_id')) ? $this->session->userdata('login_id') : 2, // 2 is admin
 			'cdate'			=> date('Y-m-d H:i:s'),
@@ -1210,9 +1218,25 @@ class Keputusan_menteri_doc extends CI_Controller {
 	}
 
 	function edit($id_dokumen = 0, $status_revisi = ''){
+		$login_id = !empty($this->session->userdata('login_id')) ? $this->session->userdata('login_id') : 0;
+		// exit();
+		##
+		$cek_atasan = $this->db->query("SELECT direct_boss from login where login_id = '$login_id' ")->row_array();
+		// print_r($cek_atasan); exit();
+		if ($cek_atasan['direct_boss'] == 0) {
+			$submit_hilang = true;
+			$publis_dok = 'backend/dokumen/publis?id_dokumen='.$id_dokumen.'&status_revisi='.$status_revisi;
+		} else {
+			$submit_hilang = false;
+			$publis_dok = '#';
+		}
+		##
 		$data = array(
+			'submit_hilang'	=> $submit_hilang,
+			'publis_dok'	=> $publis_dok,
 			'contents'	=> 'Keputusan_menteri_doc_edit',
-			'title'		=> 'Dashbord Sistem'
+			'title'		=> 'Ubah Rancangan',
+			'name'		=> empty($this->session->userdata('name')) ? 'Tanpa Login' : $this->session->userdata('name')
 		);
 
 		if ($status_revisi == ''){
@@ -1248,7 +1272,9 @@ class Keputusan_menteri_doc extends CI_Controller {
 		}
 
 		function update_document(){
-			$this->save_document();
+			$this->save_doc();
+			$this->session->set_flashdata('message', '<div class="alert alert-info"> Rancangan berhasil dirubah.</div>');
+			redirect('backend/dokumen','refresh');
 		}
 
 		function submit_document()
@@ -1258,7 +1284,7 @@ class Keputusan_menteri_doc extends CI_Controller {
 			} else {
 				$res = '';
 				$login_id = $this->session->userdata('login_id');
-				$data = $this->save_document();
+				$data = $this->save_doc();
 				$id_revisi =  $data['id_revisi'];
 				$cari_revisi = $this->db->query("SELECT  b.direct_boss, a.* from dokumen_revisi a 
 					left join login b on a.cuser = b.login_id

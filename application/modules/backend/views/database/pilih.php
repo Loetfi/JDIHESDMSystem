@@ -44,7 +44,7 @@
 								</div>
 								<div class="text-center">
 									<p class="text-muted m-b-md"></p> 
-									<a href="<?php echo site_url('backend/database/master/list_surat?sektor=2&surat=14');?>" class="btn btn-warning btn-xs">Pilih <i class="fa fa-chevron-right"></i></a>
+									<a href="<?php echo site_url('backend/database/master/list_surat?sektor=migas&surat=3');?>" class="btn btn-warning btn-xs">Pilih <i class="fa fa-chevron-right"></i></a>
 								</div>
 							</div>
 						</div>	

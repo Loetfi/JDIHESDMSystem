@@ -40,7 +40,7 @@
 
   <div class="intro py-8 bg-primary position-relative text-white">
     <div class="bg-overlay-primary">
-      <img src="https://robust.bootlab.io/img/photos/8.jpg" class="img-fluid img-cover" alt="Robust UI Kit" />
+      <img src="<?php echo base_url('background.png');?>" class="img-fluid img-cover" alt="Robust UI Kit" />
     </div>
     <div class="intro-content mt-5">
       <div class="container">

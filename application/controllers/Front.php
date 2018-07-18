@@ -76,7 +76,7 @@ class Front extends CI_Controller {
 
     public function landingnew()
     {  
-        $data['title'] = 'Beranda'; 
+        $data['title'] = 'Selamat Datang di Rannah Hukum - Kementerian Energi dan Sumber Daya Mineral'; 
         $this->load->view('front/landingnew', $data, FALSE);
     }
 

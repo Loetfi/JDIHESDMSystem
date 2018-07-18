@@ -3,24 +3,17 @@
 		var counts = count + 1;
 		var element =	'<div class="form-group" id="text-Menimbang'+counts+'" style="display:inline-block; margin-top:5px; width:100%;">'+
 		'<div style="float:left; width:20%">'+
-		'<input type="text" name="pointerMenimbang[]" class="form-control" placeholder="Pointer" />'+
+		'<input type="text" name="pointerMenimbang[]" class="form-control" placeholder="Pointer" data-toggle="tooltip" title="" data-original-title="contoh : a. ( menggunakan titik dibelakang )"/>'+
 		'<select name="nextPageMenimbang[]" class="form-control" style="cursor:pointer; margin-top:10px;">'+
 		'<option value="continue">Continues Page</option>'+
 		'<option value="newP">Next Page Portrait</option><option value="newL">Next Page Landscape</option>'+
 		'</select>'+
 		'</select>'+
-		'<input type="hidden" name="subLevelMenimbang[]" value="0">'+
-		// '<select name="subLevelMenimbang[]" class="form-control" style="cursor:pointer; margin-top:10px;">'+
-		// '<option value="0">SubLevel 0</option>'+
-		// '<option value="1">SubLevel 1</option>'+
-		// '<option value="2">SubLevel 2</option>'+
-		// '<option value="3">SubLevel 3</option>'+
-		// '<option value="4">SubLevel 4</option>'+
-		// '</select>'+
+		'<input type="hidden" name="subLevelMenimbang[]" value="0">'+ 
 		'</div>'+
 		'<div style="width:100%">'+
 		'<textarea type="text" name="Menimbang[]" class="form-control" placeholder="Menimbang" rows="6" style="float:left; margin-left:5px; width:75%;"></textarea>'+
-		'<a href="javascript:void(0)" onclick="addMenimbang(this, '+counts+')" style="position:absolute; right:5%;" title="Tambah Isi"><i class="fa fa-lg fa-plus"></i></a>'+
+		'<a href="javascript:void(0)" onclick="addMenimbang(this, '+counts+')" style="position:absolute; right:2%;" title="Tambah Isi" class="btn btn-success btn-xs"><i class="fa fa-lg fa-plus"></i></a>'+
 		'</div>'+
 		'</div>';
 		$(ele).children().toggleClass('fa-plus fa-minus');
@@ -46,7 +39,7 @@
 		'</div>'+
 		'<div style="width:100%">'+
 		'<textarea type="text" name="Mengingat[]" class="form-control" placeholder="Mengingat" rows="6" style="float:left; margin-left:5px; width:75%;"></textarea>'+
-		'<a href="javascript:void(0)" onclick="addMengingat(this, '+counts+')" style="position:absolute; right:5%;" title="Tambah Isi"><i class="fa fa-lg fa-plus"></i></a>'+
+		'<a href="javascript:void(0)" onclick="addMengingat(this, '+counts+')" style="position:absolute; right:2%;" title="Tambah Isi" class="btn btn-xs btn-success"><i class="fa fa-lg fa-plus"></i></a>'+
 		'</div>'+
 		'</div>';
 		$(ele).children().toggleClass('fa-plus fa-minus');
@@ -84,10 +77,11 @@
 		var element =	'<div class="form-group" id="text-Diktum'+counts+'" style="display:inline-block; margin-top:5px; width:100%;">'+
 		'<div style="float:left; width:20%">'+
 		'<input type="text" name="pointerDiktum[]" class="form-control" placeholder="Pointer" />'+
-		'<select name="nextDiktum[]" class="form-control" style="cursor:pointer; margin-top:10px;">'+
-		'<option value="continue">Continues Page</option>'+
-		'<option value="newP">Next Page Portrait</option><option value="newL">Next Page Landscape</option>'+
-		'</select>'+
+		// '<select name="nextDiktum[]" class="form-control" style="cursor:pointer; margin-top:10px;">'+
+		// '<option value="continue">Continues Page</option>'+
+		// '<option value="newP">Next Page Portrait</option><option value="newL">Next Page Landscape</option>'+
+		// '</select>'+
+		'<input type="hidden" name="nextDiktum[]" value="continue">'+ 
 		'<select name="subLevelDiktum[]" class="form-control" style="cursor:pointer; margin-top:10px;">'+
 		'<option value="0">SubLevel 0</option>'+
 		'<option value="1">SubLevel 1</option>'+
@@ -98,7 +92,7 @@
 		'</div>'+
 		'<div style="width:100%">'+
 		'<textarea type="text" name="Diktum[]" class="form-control" placeholder="Diktum" rows="6" style="float:left; margin-left:5px; width:75%;"></textarea>'+
-		'<a href="javascript:void(0)" onclick="addDiktum(this, '+counts+')" style="position:absolute; right:5%;" title="Tambah Isi"><i class="fa fa-lg fa-plus"></i></a>'+
+		'<a href="javascript:void(0)" onclick="addDiktum(this, '+counts+')" style="position:absolute; right:2%;" title="Tambah Isi" class="btn btn-xs btn-success"><i class="fa fa-lg fa-plus"></i></a>'+
 		'</div>'+
 		'</div>';
 		$(ele).children().toggleClass('fa-plus fa-minus');
@@ -126,7 +120,7 @@
 		'</div>'+
 		'<div style="width:100%">'+
 		'<textarea type="text" name="Tembusan[]" class="form-control" placeholder="Tembusan" rows="6" style="float:left; margin-left:5px; width:75%;"></textarea>'+
-		'<a href="javascript:void(0)" onclick="addTembusan(this, '+counts+')" style="position:absolute; right:5%;" title="Tambah Isi"><i class="fa fa-lg fa-plus"></i></a>'+
+		'<a href="javascript:void(0)" onclick="addTembusan(this, '+counts+')" style="position:absolute; right:2%;" title="Tambah Isi" class="btn btn-xs btn-success"><i class="fa fa-lg fa-plus"></i></a>'+
 		'</div>'+
 		'</div>';
 		$(ele).children().toggleClass('fa-plus fa-minus');
@@ -267,33 +261,66 @@
 		$('#form-keputusan').children('fieldset:last').after('<fieldset style="margin-top:30px">'+lampiran+'</fieldset>');
 	}
 </script>
+<style type="text/css">
+
+.form-control{
+	width: 100%;
+	padding: .5rem .75rem;
+	font-size: 1rem;
+	line-height: 1.25;
+	/*color: #000;*/
+	color: #55595c;
+	background-color: #fff;
+	background-image: none;
+	-webkit-background-clip: padding-box;
+	background-clip: padding-box;
+	border: 2px solid #55595c;
+	border-top-color: #55595c;/*rgb(0, 0, 0);*/
+	border-right-color:#55595c;/* rgb(0, 0, 0);*/
+	border-bottom-color:#55595c;/* rgb(0, 0, 0);*/
+	border-left-color: #55595c;/*rgb(0, 0, 0);*/ 
+}
+</style>
 <div class="row-col">
 	<div class="col-lg b-r">
 		<div class="padding">
 			<div class="box">
-				<div class="padding">
-					<legend>Rancangan Keputusan Menteri</legend>
+				<div class="box-header light lt">
+					<h3>Rancangan Keputusan Menteri</h3>
+					<small>Membuat sebuah dokumen Keputusan Menteri</small>
+				</div>
+				<div class="padding"> 
 					<form class="width-100p" method="POST" id="form-keputusan" target="_blank">
+						<fieldset> 
+							<div class="form-group">
+								<label for="">Nama Dokumen</label>
+								<input type="text" class="form-control" name="nama_dokumen" placeholder="Masukan nama inisial dari dokumen yang akan dibuat" required="" data-toggle="tooltip" title="Masukan nama inisial dari dokumen yang akan dibuat">
+							</div> 
+						</fieldset>
+						<hr>
 						<center><p>KEPUTUSAN MENTERI ENERGI DAN SUMBER DAYA MINERAL</p>
 							<p>REPUBLIK INDONESIA</p>
 							<p>NOMOR :</p>
 							<p>TENTANG</p>
 						</p></center>
 						<div class="form-group" style="margin-bottom:5px">
-							<textarea name="super_judul" class="form-control" autocomplete="off" placeholder="Judul Rancangan" rows="4" required><?php echo @$detail_dokumen['judul'][0]['teks']; ?></textarea>
+							<textarea name="super_judul" class="form-control" autocomplete="off" placeholder="Judul Rancangan" rows="4" required="" data-toggle="tooltip" title="Masukan Judul Rancangan Keputusan Menteri yang akan dibuat"><?php echo @$detail_dokumen['judul'][0]['teks']; ?></textarea>
 						</div>
 						<center>
 							<p>DENGAN RAHMAT TUHAN YANG MAHA ESA</p>
 							<p>MENTERI ENERGI DAN SUMBER DAYA MINERAL REPUBLIK INDONESIA,</p>
 						</center>
+						<hr>
 						<fieldset>
-							<legend>Menimbang</legend>
+							<h4>Menimbang </h4> 
+
+
 							<div>
 								<?php $namaMenimbang = 'Menimbang';?>
 								<div class="form-group" id="text-<?php echo $namaMenimbang; ?>1" style="display:inline-block; width:100%;">
-									<div style="float:left; width:20%">
-										<input type="text" name="pointer<?php echo $namaMenimbang; ?>[]" class="form-control" placeholder="Pointer" />
-										<select name="nextPage<?php echo $namaMenimbang; ?>[]" class="form-control" style="cursor:pointer; margin-top:10px;">
+									<div style="float:left; width:20%"> 
+										<input type="text" name="pointer<?php echo $namaMenimbang; ?>[]" class="form-control" placeholder="Pointer" data-toggle="tooltip" title="contoh : a. ( menggunakan titik dibelakang )"/>
+										<select name="nextPage<?php echo $namaMenimbang; ?>[]" class="form-control" style="cursor:pointer; margin-top:10px;" data-toggle="tooltip" title="Jika dalam kondisi dokumen harus menggunakan halaman baru ( potrait / lanskap ) gunakan fitur ini. Continues Page menjadi bagian default dari pengaturan ini.">
 											<option value="continue">Continues Page</option>
 											<option value="newP">Next Page Portrait</option><option value="newL">Next Page Landscape</option>
 										</select>
@@ -307,20 +334,21 @@
 										</select> -->
 									</div>
 									<div style="width:100%">
-										<textarea type="text" name="<?php echo $namaMenimbang; ?>[]" class="form-control" placeholder="Menimbang" rows="6" style="float:left; margin-left:5px; width:75%;" required></textarea>
-										<a href="javascript:void(0)" onclick="addMenimbang(this, 1)" style="position:absolute; right:5%;" title="Tambah Isi"><i class="fa fa-lg fa-plus"></i></a>
+										<textarea data-toggle="tooltip" title="sistem akan memberikan otomatis simbol ; ( titik koma) pada akhir paragraf, apabila sistem tidak memberi simbol ; maka kamu harus menambahkannya. " type="text" name="<?php echo $namaMenimbang; ?>[]" class="form-control" placeholder="Menimbang" rows="6" style="float:left; margin-left:5px; width:75%;" required></textarea>
+										<a href="javascript:void(0)" onclick="addMenimbang(this, 1)" style="position:absolute; right:2%;" title="Tambah Isi" class="btn btn-success btn-xs"><i class="fa fa-lg fa-plus"></i></a>
 									</div>
 								</div>
 							</div>
 						</fieldset>
+						<hr>
 						<fieldset>
 							<legend>Mengingat</legend>
 							<div>
 								<?php $namaMengingat = 'Mengingat'; ?>
 								<div class="form-group" id="text-<?php echo $namaMengingat; ?>1" style="display:inline-block; width:100%;">
 									<div style="float:left; width:20%">
-										<input type="text" name="pointer<?php echo $namaMengingat; ?>[]" class="form-control" placeholder="Pointer" />
-										<select name="nextPage<?php echo $namaMengingat; ?>[]" class="form-control" style="cursor:pointer; margin-top:10px;">
+										<input type="text" name="pointer<?php echo $namaMengingat; ?>[]" class="form-control" placeholder="Pointer"  data-toggle="tooltip" title="contoh : 1. ( menggunakan titik dibelakang )"/>
+										<select name="nextPage<?php echo $namaMengingat; ?>[]" class="form-control" style="cursor:pointer; margin-top:10px;" data-toggle="tooltip" title="Jika dalam kondisi dokumen harus menggunakan halaman baru ( potrait / lanskap ) gunakan fitur ini. Continues Page menjadi bagian default dari pengaturan ini.">
 											<option value="continue">Continues Page</option>
 											<option value="newP">Next Page Portrait</option><option value="newL">Next Page Landscape</option>
 										</select>
@@ -333,12 +361,13 @@
 										</select>
 									</div>
 									<div style="width:100%">
-										<textarea type="text" name="<?php echo $namaMengingat; ?>[]" class="form-control" placeholder="Mengingat" rows="6" style="float:left; margin-left:5px; width:75%;" required></textarea>
-										<a href="javascript:void(0)" onclick="addMengingat(this, 1)" style="position:absolute; right:5%;" title="Tambah Isi"><i class="fa fa-lg fa-plus"></i></a>
+										<textarea  data-toggle="tooltip" title="sistem akan memberikan otomatis simbol ; ( titik koma) pada akhir paragraf, apabila sistem tidak memberi simbol ; maka kamu harus menambahkannya. " type="text" name="<?php echo $namaMengingat; ?>[]" class="form-control" placeholder="Mengingat" rows="6" style="float:left; margin-left:5px; width:75%;" required></textarea>
+										<a href="javascript:void(0)" onclick="addMengingat(this, 1)" style="position:absolute; right:2%;" title="Tambah Isi" class="btn btn-xs btn-success"><i class="fa fa-lg fa-plus"></i></a>
 									</div>
 								</div>
 							</div>
 						</fieldset>
+						<hr>
 						<fieldset>
 							<!-- <legend>Menetapkan</legend> -->
 							<div>
@@ -361,24 +390,25 @@
 									</div>
 									<div style="width:100%">
 										<p style="margin-left:6px; float:left;">KEPUTUSAN MENTERI ENERGI DAN SUMBER DAYA MINERAL TENTANG</p>
-										<textarea type="text" name="<?php echo $namaMemutuskan; ?>[]" class="form-control" placeholder="Memutuskan/Menetapkan" rows="6" style="float:left; margin-left:5px; width:75%;" required></textarea>
-										<a href="javascript:void(0)" onclick="addMemutuskan(this, 1)" style="position:absolute; right:5%;" title="Tambah Isi"><i class="fa fa-lg fa-plus"></i></a>
+										<textarea type="text" name="<?php echo $namaMemutuskan; ?>[]" class="form-control" placeholder="Memutuskan/Menetapkan" rows="6" style="float:left; margin-left:5px; width:75%;" required="" data-toggle="tooltip" title="Isian ini akan otomatis terinput apabila bagian judul dokumen terisi, apabila dalam kesempatan lain tidak otomatis menyalin isi dari judul dokumen, maka kamu harus menyalin secara manual."></textarea>
+										<a href="javascript:void(0)" onclick="addMemutuskan(this, 1)" style="position:absolute; right:2%;" title="Tambah Isi" class="btn btn-success btn-xs"><i class="fa fa-lg fa-plus"></i></a>
 									</div>
 								</div>
 							</div>
 						</fieldset>
+						<hr>
 						<fieldset>
 							<legend>Diktum</legend>
 							<div>
 								<?php $namaDiktum = 'Diktum'; ?>
 								<div class="form-group" id="text-<?php echo $namaDiktum; ?>1" style="display:inline-block; width:100%;">
 									<div style="float:left; width:20%;">
-										<input type="text" name="pointer<?php echo $namaDiktum; ?>[]" class="form-control" placeholder="Pointer" />
+										<input type="text" name="pointer<?php echo $namaDiktum; ?>[]" class="form-control" placeholder="Pointer" data-toggle="tooltip" title="Isian ini akan otomatis membuat huruf menjadi kapital, contoh : KESATU"/>
 										<!-- <select name="nextPage<?php echo $namaDiktum; ?>[]" class="form-control" style="cursor:pointer; margin-top:10px;">
 											<option value="continue">Continues Page</option>
 											<option value="newP">Next Page Portrait</option><option value="newL">Next Page Landscape</option>
 										</select> -->
-										<select name="subLevel<?php echo $namaDiktum; ?>[]" class="form-control" style="cursor:pointer; margin-top:10px;">
+										<select name="subLevel<?php echo $namaDiktum; ?>[]" class="form-control" style="cursor:pointer; margin-top:10px;" data-toggle="tooltip" title="Ini adalah kedalaman dari poin-poin, biarkan di sublevel 0 jika tidak ada perubahan.">
 											<option value="0">SubLevel 0</option>
 											<option value="1">SubLevel 1</option>
 											<option value="2">SubLevel 2</option>
@@ -387,26 +417,27 @@
 										</select>
 									</div>
 									<div style="width:100%">
-										<textarea type="text" name="<?php echo $namaDiktum; ?>[]" class="form-control" placeholder="Diktum" rows="6" style="float:left; margin-left:5px; width:75%;" required></textarea>
-										<a href="javascript:void(0)" onclick="addDiktum(this, 1)" style="position:absolute; right:5%;" title="Tambah Isi"><i class="fa fa-lg fa-plus"></i></a>
+										<textarea data-toggle="tooltip" title="Isian ini harap diisi dengan sebagai mestinya." type="text" name="<?php echo $namaDiktum; ?>[]" class="form-control" placeholder="Diktum" rows="6" style="float:left; margin-left:5px; width:75%;" required></textarea>
+										<a href="javascript:void(0)" onclick="addDiktum(this, 1)" style="position:absolute; right:2%;" title="Tambah Isi" class="btn btn-success btn-xs"><i class="fa fa-lg fa-plus"></i></a>
 									</div>
 								</div>
 							</div>
 						</fieldset>
-
+						<hr>
 						<fieldset>
 							<legend>Pejabat Penanda Tangan</legend>
 							<div class="form-group">
 								<textarea name="ttd" class="form-control" autocomplete="off" placeholder="Tanda Tangan" rows="4" style="width:95%" required></textarea>
 							</div>
 						</fieldset>
+						<hr>
 						<fieldset>
 							<legend>Tembusan</legend>
 							<div>
 								<?php $namaTembusan = 'Tembusan'; ?>
 								<div class="form-group" id="text-<?php echo $namaTembusan; ?>1">
 									<div style="float:left; width:20%">
-										<input type="text" name="pointer<?php echo $namaTembusan; ?>[]" class="form-control" placeholder="Pointer" />
+										<input type="text" name="pointer<?php echo $namaTembusan; ?>[]" class="form-control" placeholder="Pointer" data-toggle="tooltip" title="contoh: 1. ( titik )"/>
 										<select class="form-control" style="cursor:pointer; margin-top:10px;">
 											<option value="continue">Continues Page</option>
 											<option value="newP">Next Page Portrait</option><option value="newL">Next Page Landscape</option>
@@ -423,12 +454,13 @@
 										</select> -->
 									</div>
 									<div style="width:100%">
-										<textarea type="text" name="<?php echo $namaTembusan; ?>[]" class="form-control" placeholder="<?php echo $namaTembusan; ?>" rows="6" style="float:left; margin-left:5px; width:75%;" required></textarea>
-										<a href="javascript:void(0)" onclick="addTembusan(this, 1)" style="position:absolute; right:5%;" title="Tambah Isi"><i class="fa fa-lg fa-plus"></i></a>
+										<textarea type="text" name="<?php echo $namaTembusan; ?>[]" class="form-control" placeholder="<?php echo $namaTembusan; ?>" rows="6" style="float:left; margin-left:5px; width:75%;" required="" data-toggle="tooltip" title="Isi bagian ini sebagai mestinya."></textarea>
+										<a href="javascript:void(0)" onclick="addTembusan(this, 1)" style="position:absolute; right:2%;" title="Tambah Isi" class="btn btn-xs btn-success"><i class="fa fa-lg fa-plus"></i></a>
 									</div>
 								</div>
 							</div>
 						</fieldset>
+						<hr>
 						<fieldset style="margin-top:30px;">
 							<legend>
 								Lampiran
@@ -492,9 +524,10 @@
 								</div>
 							</div>
 						</fieldset>
+						<hr>
 						<div class="form-group margin-top-5px">
-							<button type="submit" class="btn btn-success" id="view_doc">Lihat Dokumen</button>
-							<button type="submit" class="btn btn-success" id="save_doc">Simpan Dokumen</button>
+							<button type="submit" class="btn btn-success btn-xs" id="view_doc">Lihat Format</button>
+							<button type="submit" class="btn btn-primary btn-xs" id="save_doc">Simpan Dokumen</button>
 						</div>
 					</form>
 
@@ -513,7 +546,7 @@
 
 						$('textarea[name^="Menimbang"], textarea[name^="Mengingat"]').blur(function() {
 							var str = $(this).val(),
-									strcheck = (str === '') ? '' : str+';';
+							strcheck = (str === '') ? '' : str+';';
 							$(this).val(strcheck);
 						})
 						.focus(function() {
@@ -523,7 +556,7 @@
 
 						$('textarea[name^="Memutuskan"]').blur(function() {
 							var str = $(this).val(),
-									strcheck = (str === '') ? '' : str+'.';
+							strcheck = (str === '') ? '' : str+'.';
 							$(this).val(strcheck);
 						}).focus(function() {
 							var str = $(this).val();

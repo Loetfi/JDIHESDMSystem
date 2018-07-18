@@ -15,8 +15,9 @@ class Dokumen extends CI_Controller {
 	{ 
 		$data = array(
 			// 'data' 		=>  $this->db->query("SELECT id_dokumen, jenis_dokumen, nama_dokumen from dokumen order by id_dokumen")->result_array(),
+			'message'	=> $this->session->flashdata('message'),
 			'detail'	=> site_url('backend/dokumen/detail'),
-			'edit'	=> site_url('Keputusan_menteri_doc/edit'),
+			// 'edit'	=> site_url('Keputusan_menteri_doc/edit'),
 			'contents'	=> 'dokumen/data',
 			'url'		=> site_url('backend/service/dokumen/index/'.$this->session->userdata('login_id')),
 			'title'		=> 'Daftar Rancangan ',
@@ -60,15 +61,21 @@ class Dokumen extends CI_Controller {
 	}
 	
 	public function detail($id_dokumen = '')
-	{	
+	{
 		$ambil_data_dokumen = $this->db->query("SELECT * from dokumen where id_dokumen = $id_dokumen ")->row_array();
 		$ambil_data_dokumen_version = $this->db->query("SELECT c.name , a.*, b.jenis_dokumen, d.name as nama_atasan from dokumen_revisi  a 
 			inner join dokumen b on a.id_dokumen = b.id_dokumen
 			left join login c on a.cuser = c.login_id
 			left join login d on a.appTo = d.login_id
 			where a.id_dokumen = $id_dokumen ")->result_array();
+
+		##cek publis
+		$cek_publis = $this->db->query("SELECT id_dokumen from dokumen WHERE id_dokumen = $id_dokumen and submit_doc = 1")->row_array();
+		if ($cek_publis) { $publis = true; } else { $publis = false; }
+		##end 
 		
 		$data = array(
+			'publish'		=> $publis,
 			'detail_dok'	=> isset($ambil_data_dokumen) ? $ambil_data_dokumen : array(),
 			'dok_versi'		=> isset($ambil_data_dokumen_version) ? $ambil_data_dokumen_version : array(),
 			'contents'		=> 'dokumen/detail',
@@ -80,9 +87,19 @@ class Dokumen extends CI_Controller {
 	}
 
 
-	public function submit($id_dokumen = '')
+	public function publis()
 	{	
-		 print_r($id_dokumen);
+		 // print_r($_GET);
+		#submit dok
+		$update = array(
+			'submit_doc' => 1, 
+		);
+		$this->db->where('id_dokumen', $_GET['id_dokumen']);
+		$this->db->update('dokumen', $update);
+		####
+
+		$this->session->set_flashdata('message', '<div class="alert alert-info"> Rancangan berhasil di PUBLISH.</div>');
+		redirect('backend/dokumen','refresh');
 	}
 	
 	// telaah
