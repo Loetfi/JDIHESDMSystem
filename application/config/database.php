@@ -76,10 +76,10 @@ $query_builder = TRUE;
 $db['default'] = array(
 	'dsn'	=> '',
 	//
-	'hostname' => '173.194.231.148',
-	'username' => 'userdb',
-	'password' => 'm0v3lo0t',
-	'database' => 'project_jdih',
+	'hostname' => 'engine.awanesia.com',
+	'username' => 'admin_jdih',
+	'password' => 'telkomd2',
+	'database' => 'admin_jdih',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
