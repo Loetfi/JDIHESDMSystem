@@ -76,7 +76,7 @@ $query_builder = TRUE;
 $db['default'] = array(
 	'dsn'	=> '',
 	//
-	'hostname' => 'engine.awanesia.com',
+	'hostname' => 'localhost',
 	'username' => 'admin_jdih',
 	'password' => 'telkomd2',
 	'database' => 'admin_jdih',
