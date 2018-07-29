@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>JDIH ESDM</title> 
+	<title><?php echo $title; ?></title> 
 
 	<!-- for ios 7 style, multi-resolution icon of 152x152 -->
 	<meta name="apple-mobile-web-app-capable" content="yes">
@@ -92,7 +92,7 @@ body {
 					<a href="<?php echo site_url('backend/dokumen/');?>"><img src="<?php echo base_url(); ?>/assets/logo/icon-telaah-solid.png" width="100%"></a>
 				</div>
 				<div class="col-xs-3 col-sm-3 col-md-3">
-					<a href="<?php echo site_url('backend/database/') ?>"><img alt="database"  src="<?php echo base_url(); ?>/assets/logo/icon-database-solid.png" width="100%"></a>
+					<a href="<?php echo site_url('backend/database/master/') ?>"><img alt="database"  src="<?php echo base_url(); ?>/assets/logo/icon-database-solid.png" width="100%"></a>
 				</div>
 				<div class="col-xs-3 col-sm-3 col-md-3">
 					<a href="<?php echo site_url('backend/forum/') ?>"><img alt="forum" src="<?php echo base_url(); ?>/assets/logo/icon-forum-solid.png" width="100%"></a>
@@ -104,10 +104,10 @@ body {
 					<a href="#"><img src="<?php echo base_url(); ?>/assets/logo/icon-quick-format-solid.png" width="100%"></a>
 				</div>
 				<div class="col-xs-3 col-sm-3 col-md-3">
-					<a href="#"><img src="<?php echo base_url(); ?>/assets/logo/icon-regulasi.png" width="100%"></a>
+					<a href="<?php echo base_url('assetnew/regulasi.pdf');?>" target="_blank"><img src="<?php echo base_url(); ?>/assets/logo/icon-regulasi.png" width="100%"></a>
 				</div>
 				<div class="col-xs-3 col-sm-3 col-md-3">
-					<a href="#"><img src="<?php echo base_url(); ?>/assets/logo/icon-profil.png" width="100%"></a>
+					<a href="<?php echo base_url('assetnew/struktur-biro-hukum.pdf');?>" target="_blank"><img src="<?php echo base_url(); ?>/assets/logo/icon-profil.png" width="100%"></a>
 				</div>
 				
 				

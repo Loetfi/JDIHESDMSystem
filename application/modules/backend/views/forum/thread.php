@@ -17,12 +17,7 @@
         </a>
         <div class="list-body">
           <div><a href="#">Admin</a></div>
-          <small class="text-muted text-ellipsis"><a href="#">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-          quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-          cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-          proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</a></small>
+          <small class="text-muted text-ellipsis"><a href="#"></a></small>
           <small class="text-muted text-ellipsis"><a href="#"><?php echo date('d F Y'); ?> 13:00:00</a></small>
           <p><a href="" class="btn btn-outline b-primary text-primary btn-xs pull-right">0 Jawaban</a></p>
         </div>
@@ -35,12 +30,7 @@
         </a>
         <div class="list-body">
           <div><a href="#">Lutfi Fars , Staff</a></div>
-          <small class="text-muted text-ellipsis"><a href="#">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-          quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-          cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-          proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</a></small>
+          <small class="text-muted text-ellipsis"><a href="#"></a></small>
           <small class="text-muted text-ellipsis"><a href="#"><?php echo date('d F Y'); ?> 13:00:00</a></small>
           <p><a href="" class="btn btn-outline b-primary text-primary btn-xs pull-right">10 Jawaban</a></p>
         </div>
@@ -54,12 +44,7 @@
         </a>
         <div class="list-body">
           <div><a href="#">Hidayat, Staff</a></div>
-          <small class="text-muted text-ellipsis"><a href="#">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-          quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-          cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-          proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</a></small>
+          <small class="text-muted text-ellipsis"><a href="#"></a></small>
           <small class="text-muted text-ellipsis"><a href="#"><?php echo date('d F Y'); ?> 13:00:00</a></small> 
           <p><a href="" class="btn btn-outline b-primary text-primary btn-xs pull-right">22 Jawaban</a></p>
         </div>
@@ -73,12 +58,7 @@
         </a>
         <div class="list-body">
           <div><a href="#">Fars, Staff</a></div>
-           <small class="text-muted text-ellipsis"><a href="#">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-          quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-          cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-          proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</a></small>
+           <small class="text-muted text-ellipsis"><a href="#"></a></small>
           <p><a href="" class="btn btn-outline b-primary text-primary btn-xs pull-right">0 Jawaban</a></p>
         </div>
       </li>
@@ -91,12 +71,7 @@
         </a>
         <div class="list-body">
           <div><a href="#">Peter , Staff</a></div>
-           <small class="text-muted text-ellipsis"><a href="#">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-          quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-          cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-          proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</a></small>
+           <small class="text-muted text-ellipsis"><a href="#"></a></small>
           <p><a href="" class="btn btn-outline b-primary text-primary btn-xs pull-right">0 Jawaban</a></p>
         </div>
       </li>
@@ -119,12 +94,7 @@
         </a>
         <div class="list-body">
           <div><a href="#">Admin</a></div>
-          <small class="text-muted text-ellipsis"><a href="#">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-          quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-          cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-          proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</a></small>
+          <small class="text-muted text-ellipsis"><a href="#"></a></small>
           <small class="text-muted text-ellipsis"><a href="#"><?php echo date('d F Y'); ?> 13:00:00</a></small>
           <p><a href="" class="btn btn-outline b-primary text-primary btn-xs pull-right">0 Jawaban</a></p>
         </div>
@@ -137,12 +107,7 @@
         </a>
         <div class="list-body">
           <div><a href="#">Lutfi Fars , Staff</a></div>
-          <small class="text-muted text-ellipsis"><a href="#">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-          quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-          cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-          proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</a></small>
+          <small class="text-muted text-ellipsis"><a href="#"></a></small>
           <small class="text-muted text-ellipsis"><a href="#"><?php echo date('d F Y'); ?> 13:00:00</a></small>
           <p><a href="" class="btn btn-outline b-primary text-primary btn-xs pull-right">10 Jawaban</a></p>
         </div>
@@ -156,12 +121,7 @@
         </a>
         <div class="list-body">
           <div><a href="#">Hidayat, Staff</a></div>
-          <small class="text-muted text-ellipsis"><a href="#">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-          quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-          cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-          proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</a></small>
+          <small class="text-muted text-ellipsis"><a href="#"></a></small>
           <small class="text-muted text-ellipsis"><a href="#"><?php echo date('d F Y'); ?> 13:00:00</a></small> 
           <p><a href="" class="btn btn-outline b-primary text-primary btn-xs pull-right">22 Jawaban</a></p>
         </div>
@@ -175,12 +135,7 @@
         </a>
         <div class="list-body">
           <div><a href="#">Fars, Staff</a></div>
-           <small class="text-muted text-ellipsis"><a href="#">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-          quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-          cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-          proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</a></small>
+           <small class="text-muted text-ellipsis"><a href="#"></a></small>
           <p><a href="" class="btn btn-outline b-primary text-primary btn-xs pull-right">0 Jawaban</a></p>
         </div>
       </li>
@@ -193,12 +148,7 @@
         </a>
         <div class="list-body">
           <div><a href="#">Peter , Staff</a></div>
-           <small class="text-muted text-ellipsis"><a href="#">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-          quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-          cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-          proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</a></small>
+           <small class="text-muted text-ellipsis"><a href="#"></a></small>
           <p><a href="" class="btn btn-outline b-primary text-primary btn-xs pull-right">0 Jawaban</a></p>
         </div>
       </li>

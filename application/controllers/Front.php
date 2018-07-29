@@ -27,7 +27,7 @@ class Front extends CI_Controller {
 
     public function landing()
     {  
-        $data['title'] = 'Beranda'; 
+        $data['title'] = 'Beranda Rannah'; 
         $this->load->view('front/afterlogin', $data, FALSE);
     }
 
@@ -76,6 +76,13 @@ class Front extends CI_Controller {
 
     public function landingnew()
     {  
+        
+        if (!empty($this->session->userdata('login_id'))) {
+            redirect('front/landing','refresh');
+            exit();
+        }
+
+
         $data['title'] = 'Selamat Datang di Rannah Hukum - Kementerian Energi dan Sumber Daya Mineral'; 
         $this->load->view('front/landingnew', $data, FALSE);
     }

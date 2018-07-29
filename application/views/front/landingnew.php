@@ -27,11 +27,11 @@
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="#">Data Perancang PUU</a>
+            <a class="nav-link" href="<?php echo base_url('assetnew/data-perancang-peruu.pdf');?>" target="_blank">Data Perancang PUU</a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="#">Kontak</a>
+            <a class="nav-link" data-toggle="modal" href='#modal-id'>Kontak</a>
           </li>
         </ul>
       </div>
@@ -47,7 +47,7 @@
         <div class="row">
           <div class="col-md-6 align-self-center">
             <center><h1 class="display-4 mb-3">Selamat Datang di Rannah Hukum </h1>
-            <h1>Rancang Bangun Naskah Hukum</h1>
+              <h1>Rancang Bangun Naskah Hukum</h1>
             </center>
             <p class="lead mb-4">Rannah Hukum merupakan Aplikasi Perancangan Produk Hukum yang dikembangkan oleh Biro Hukum Kementerian Energi dan Sumber Daya Mineral sebagai fasilitas yang dapat digunakan untuk mewujudkan Produk Hukum secara efektif, efisien dan sesuai dengan teknik penyusunan peraturan perundang-undangan.</p>
           </div><!-- /.col-md-6 -->
@@ -81,7 +81,7 @@
       <div class="container">
 
         <div class="row mb-6">
-            <center><h2>Link Terkait </h2></center>
+          <center><h2>Link Terkait </h2></center>
         </div>
 
         <div class="row mt-5">
@@ -92,7 +92,7 @@
               </div>
               <div class="media-body">
                 <br>
-                <h3 class="h4">Kementerian ESDM </h3>
+                <h3 class="h4"><a href="https://www.esdm.go.id/" target="_blank">Kementerian ESDM</a> </h3>
               </div>
             </div>
           </div>
@@ -103,41 +103,66 @@
               </div>
               <div class="media-body">
                 <br>
-                <h3 class="h4">JDIH</h3>
+                <h3 class="h4"><a href="http://jdih.esdm.go.id/?page=home" target="_blank">JDIH</a></h3>
               </div>
             </div>
           </div> 
-           <div class="col-md-4">
+          <div class="col-md-4">
             <div class="media">
               <div class="icon mr-3 bg-success">
                 <img src="<?php echo base_url('logo-esdm-kuning.png');?>" width="70px">
               </div>
               <div class="media-body">
                 <br>
-                <h3 class="h4">SIMOLEG</h3>
+                <h3 class="h4"><a href="#">SIMOLEG</a></h3>
               </div>
             </div>
           </div>
         </div><!-- /.row -->
 
         <div class="row mt-5">
-
          
-          <div class="col-md-4">
-            <div class="media">
-              <div class="icon mr-3 bg-purple">
-                <img src="<?php echo base_url('sipekalogin.png');?>" width="70px">
-              </div>
-              <div class="media-body">
-                <h3 class="h4">SIPEKA</h3>
-              </div>
+         <div class="col-md-4">
+          <div class="media">
+            <div class="icon mr-3 bg-purple">
+              <img src="<?php echo base_url('sipekalogin.png');?>" width="70px">
             </div>
-          </div> 
-        </div><!-- /.row -->
+            <div class="media-body">
+              <h3 class="h4"><a href="http://sipeka.esdm.go.id/" target="_blank">SIPEKA</a></h3>
+            </div>
+          </div>
+        </div> 
+      </div><!-- /.row -->
+    </div>
+  </div> 
+
+  <div class="modal fade" id="modal-id">
+   <div class="modal-dialog">
+     <div class="modal-content"> 
+       <div class="modal-body">
+
+        <center>
+
+          <img src="<?php echo base_url('logo-esdm-kuning.png') ?>" width="100px">
+          <br><br>
+
+          <p>KEMENTERIAN ENERGI DAN SUMBER DAYA MINERAL </p>
+          <p>JL. MEDAN MERDEKA SELATAN NO. 18 </p>
+          <p>JAKARTA PUSAT 10110 </p>
+          <p>TELP. 021 3804242 FAX. 021 3507210</p>
+          <p>EMAIL: <a href="mailto:regulasiesdm@esdm.go.id?subject=dariwebsiterannah">regulasiesdm@esdm.go.id</a> dan <a href="mailto:birohukum-sjh2@esdm.go.id?subject=dariwebsiterannah">birohukum-sjh2@esdm.go.id</a></p>
+
+        </center>
+
       </div>
-    </div> 
- 
-  </main> 
-  <script src="https://robust.bootlab.io/dist/js/bundle.js"></script>
+      <div class="modal-footer">
+       <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button> 
+     </div>
+   </div>
+ </div>
+</div>
+
+</main> 
+<script src="https://robust.bootlab.io/dist/js/bundle.js"></script>
 </body>
 </html>
