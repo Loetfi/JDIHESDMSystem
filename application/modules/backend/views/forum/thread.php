@@ -1,158 +1,33 @@
-<div class="padding">
+<div class="padding"> 
 
+  <?php echo @$message; ?>
 
   <div class="box">
     <div class="box-header light lt">
       <h3>Kategori : Pembahasan Keputusan Menteri</h3>
       <small>Terdapat 5 Topik</small> 
       <br>
-    <a href="" class="btn btn-primary btn-sm"><i class="fa fa-pencil"></i> Tulis Baru</a>
+      <a href="<?php echo site_url('backend/forum/thread/new/') ?>" class="btn btn-primary btn-sm"><i class="fa fa-pencil"></i> Tulis Baru</a>
     </div>
     <ul class="list inset m-a-0">
-      <li class="list-item">
-        <a href="#" class="list-left">
-          <span class="w-40 circle accent">
-            <i class="fa fa-envelope"></i>
-          </span>
-        </a>
-        <div class="list-body">
-          <div><a href="#">Admin</a></div>
-          <small class="text-muted text-ellipsis"><a href="#"></a></small>
-          <small class="text-muted text-ellipsis"><a href="#"><?php echo date('d F Y'); ?> 13:00:00</a></small>
-          <p><a href="" class="btn btn-outline b-primary text-primary btn-xs pull-right">0 Jawaban</a></p>
-        </div>
-      </li>
-      <li class="list-item">
-        <a href="#" class="list-left">
-          <span class="w-40 circle green">
-            <i class="fa fa-comment"></i>
-          </span>
-        </a>
-        <div class="list-body">
-          <div><a href="#">Lutfi Fars , Staff</a></div>
-          <small class="text-muted text-ellipsis"><a href="#"></a></small>
-          <small class="text-muted text-ellipsis"><a href="#"><?php echo date('d F Y'); ?> 13:00:00</a></small>
-          <p><a href="" class="btn btn-outline b-primary text-primary btn-xs pull-right">10 Jawaban</a></p>
-        </div>
-      </li>
-      <li class="list-item">
-        <a href="#" class="list-left">
-          <span class="w-40 circle purple avatar">
-            <span>J</span>
-            <i class="busy b-white"></i>
-          </span>
-        </a>
-        <div class="list-body">
-          <div><a href="#">Hidayat, Staff</a></div>
-          <small class="text-muted text-ellipsis"><a href="#"></a></small>
-          <small class="text-muted text-ellipsis"><a href="#"><?php echo date('d F Y'); ?> 13:00:00</a></small> 
-          <p><a href="" class="btn btn-outline b-primary text-primary btn-xs pull-right">22 Jawaban</a></p>
-        </div>
-      </li>
-      <li class="list-item">
-        <a href="#" class="list-left">
-          <span class="w-40 circle danger avatar">
-            <span>F</span>
-            <i class="off b-danger"></i>
-          </span>
-        </a>
-        <div class="list-body">
-          <div><a href="#">Fars, Staff</a></div>
-           <small class="text-muted text-ellipsis"><a href="#"></a></small>
-          <p><a href="" class="btn btn-outline b-primary text-primary btn-xs pull-right">0 Jawaban</a></p>
-        </div>
-      </li>
-      <li class="list-item">
-        <a href="#" class="list-left">
-          <span class="w-40 circle warning avatar">
-            <span>P</span>
-            <i class="on b-white"></i>
-          </span>
-        </a>
-        <div class="list-body">
-          <div><a href="#">Peter , Staff</a></div>
-           <small class="text-muted text-ellipsis"><a href="#"></a></small>
-          <p><a href="" class="btn btn-outline b-primary text-primary btn-xs pull-right">0 Jawaban</a></p>
-        </div>
-      </li>
-    </ul>
-  </div>
- 
+      <?php foreach ($forum as $fr) { ?> 
+        <li class="list-item">
+          <a href="#" class="list-left">
+            <span class="w-40 circle accent">
+              <i class="fa fa-envelope"></i>
+            </span>
+          </a>
+          <div class="list-body">
+            <div><a href="<?php echo site_url('backend/forum/thread/detail/'.$fr['id_thread']) ?>"><?php echo $fr['name'];?></a></div>
+            <small class="text-muted text-ellipsis"><a href="<?php echo site_url('backend/forum/thread/detail/'.$fr['id_thread']) ?>"><?php echo $fr['judul_thread'];?></a></small>
+            <small class="text-muted text-ellipsis"><a href="<?php echo site_url('backend/forum/thread/detail/'.$fr['id_thread']) ?>"><?php echo $fr['tanggal_thread']; ?></a></small>
+            <p><a href="" class="btn btn-outline b-primary text-primary btn-xs pull-right">0 Jawaban</a></p>
+          </div>
+        </li>
+      <?php } ?>
 
 
- <div class="box">
-    <div class="box-header light lt">
-      <h3>Kategori : Pembahasan Perancangan</h3>
-      <small>Terdapat 40 Topik</small> 
-    </div>
-    <ul class="list inset m-a-0">
-      <li class="list-item">
-        <a href="#" class="list-left">
-          <span class="w-40 circle accent">
-            <i class="fa fa-envelope"></i>
-          </span>
-        </a>
-        <div class="list-body">
-          <div><a href="#">Admin</a></div>
-          <small class="text-muted text-ellipsis"><a href="#"></a></small>
-          <small class="text-muted text-ellipsis"><a href="#"><?php echo date('d F Y'); ?> 13:00:00</a></small>
-          <p><a href="" class="btn btn-outline b-primary text-primary btn-xs pull-right">0 Jawaban</a></p>
-        </div>
-      </li>
-      <li class="list-item">
-        <a href="#" class="list-left">
-          <span class="w-40 circle green">
-            <i class="fa fa-comment"></i>
-          </span>
-        </a>
-        <div class="list-body">
-          <div><a href="#">Lutfi Fars , Staff</a></div>
-          <small class="text-muted text-ellipsis"><a href="#"></a></small>
-          <small class="text-muted text-ellipsis"><a href="#"><?php echo date('d F Y'); ?> 13:00:00</a></small>
-          <p><a href="" class="btn btn-outline b-primary text-primary btn-xs pull-right">10 Jawaban</a></p>
-        </div>
-      </li>
-      <li class="list-item">
-        <a href="#" class="list-left">
-          <span class="w-40 circle purple avatar">
-            <span>J</span>
-            <i class="busy b-white"></i>
-          </span>
-        </a>
-        <div class="list-body">
-          <div><a href="#">Hidayat, Staff</a></div>
-          <small class="text-muted text-ellipsis"><a href="#"></a></small>
-          <small class="text-muted text-ellipsis"><a href="#"><?php echo date('d F Y'); ?> 13:00:00</a></small> 
-          <p><a href="" class="btn btn-outline b-primary text-primary btn-xs pull-right">22 Jawaban</a></p>
-        </div>
-      </li>
-      <li class="list-item">
-        <a href="#" class="list-left">
-          <span class="w-40 circle danger avatar">
-            <span>F</span>
-            <i class="off b-danger"></i>
-          </span>
-        </a>
-        <div class="list-body">
-          <div><a href="#">Fars, Staff</a></div>
-           <small class="text-muted text-ellipsis"><a href="#"></a></small>
-          <p><a href="" class="btn btn-outline b-primary text-primary btn-xs pull-right">0 Jawaban</a></p>
-        </div>
-      </li>
-      <li class="list-item">
-        <a href="#" class="list-left">
-          <span class="w-40 circle warning avatar">
-            <span>P</span>
-            <i class="on b-white"></i>
-          </span>
-        </a>
-        <div class="list-body">
-          <div><a href="#">Peter , Staff</a></div>
-           <small class="text-muted text-ellipsis"><a href="#"></a></small>
-          <p><a href="" class="btn btn-outline b-primary text-primary btn-xs pull-right">0 Jawaban</a></p>
-        </div>
-      </li>
     </ul>
-  </div>
- 
+  </div> 
+
 </div>
