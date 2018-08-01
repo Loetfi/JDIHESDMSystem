@@ -13,6 +13,8 @@ class Auth extends CI_Controller {
 
 	public function index()
 	{ 
+		redirect('/','refresh');
+		exit();
 		$data = array(
 			'contents'	=> 'auth/login',
 			'title'		=> 'Login Sistem',
@@ -42,11 +44,11 @@ class Auth extends CI_Controller {
 				$referer = 'front/landing';
 			}
 
-			($this->auth->login($parameter)) ? redirect($referer,'refresh') : $this->index();
+			($this->auth->login($parameter)) ? redirect($referer,'refresh') : redirect('front/landingnew','refresh');
 
 		} else { 
 
-			$this->index(); 
+			redirect('front/landingnew','refresh');
 
 		}
 

@@ -11,8 +11,8 @@ class Dokumen extends CI_Controller {
 		// $this->cabang_model->get_datatables();
 
 		$table          = 'dokumen';
-    	$column_order   = ['b.id_dokumen' , 'b.jenis_dokumen', 'b.nama_dokumen']; //set column field database for datatable orderable
-    	$column_search  = ['b.id_dokumen' , 'b.jenis_dokumen', 'b.nama_dokumen'];
+    	$column_order   = ['b.id_dokumen' , 'b.jenis_dokumen', 'a.nama_dokumen']; //set column field database for datatable orderable
+    	$column_search  = ['b.id_dokumen' , 'b.jenis_dokumen', 'a.nama_dokumen'];
     	$orderin        = ['b.id_dokumen' => 'desc']; // default order  # 'id_website' => 'asc'
 
 

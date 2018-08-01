@@ -290,7 +290,7 @@
 					<small>Membuat sebuah dokumen Keputusan Menteri</small>
 				</div>
 				<div class="padding"> 
-					<form class="width-100p" method="POST" id="form-keputusan" target="_blank">
+					<form class="width-100p" method="POST" id="form-keputusan" target="_blank" enctype="multipart/form-data">
 						<fieldset> 
 							<div class="form-group">
 								<label for="">Nama Dokumen</label>
@@ -312,9 +312,7 @@
 						</center>
 						<hr>
 						<fieldset>
-							<h4>Menimbang </h4> 
-
-
+							<h4>Menimbang </h4>  
 							<div>
 								<?php $namaMenimbang = 'Menimbang';?>
 								<div class="form-group" id="text-<?php echo $namaMenimbang; ?>1" style="display:inline-block; width:100%;">
@@ -427,7 +425,7 @@
 						<fieldset>
 							<legend>Pejabat Penanda Tangan</legend>
 							<div class="form-group">
-								<textarea name="ttd" class="form-control" autocomplete="off" placeholder="Tanda Tangan" rows="4" style="width:95%" required></textarea>
+								<input name="ttd" class="form-control" autocomplete="off" placeholder="Nama Penanda Tangan" rows="4" style="width:95%" required> 
 							</div>
 						</fieldset>
 						<hr>
@@ -461,73 +459,22 @@
 							</div>
 						</fieldset>
 						<hr>
-						<fieldset style="margin-top:30px;">
-							<legend>
-								Lampiran
-								<a href="javascript:void(0)" style="font-size:12px; line-height:32px;" title="Hapus Lampiran" onclick=""><i class="fa fa-minus-square"></i></a>
-								<a href="javascript:void(0)" style="font-size:12px; line-height:32px;" title="Tambah Lampiran" onclick="addLampiran(this)"><i class="fa fa-plus-square"></i></a>
-							</legend>
-							<div>
-								<div class="form-group" id="text-lampiran1">
-									<div class="form-group">
-										<textarea name="perihal_lampiran[]" class="form-control margin-bottom-5px" autocomplete="off" placeholder="Perihal Lampiran" rows="4"></textarea>
-										<input type="text" name="judul_lampiran[]" class="form-control float-left margin-bottom-5px" placeholder="Judul Lampiran" />
-									</div>
-									<div class="margin-left-right-top70px width-90p">
-										<fieldset class="width-100p" id="fieldTabelLampiran">
-											<legend>
-												Tabel
-												<a href="javascript:void(0)" style="font-size:12px; line-height:32px;" title="Hapus Tabel" onclick="removeTabelLampiran(this)">
-													<i class="fa fa-minus-square"></i>
-												</a>
-												<a href="javascript:void(0)" style="font-size:12px; line-height:32px;" title="Tambah Tabel" onclick="addTabelLampiran(this, 1)" id="add_tabel">
-													<i class="fa fa-plus-square"></i>
-												</a>
-											</legend>
-											<div class="table1">
-												<input type="text" name="subjudul[][]" class="form-control float-left margin-bottom-3px" placeholder="Sub Judul Lampiran" />
-												<table class="tabel-lampiran1" border="1">
-													<thead>
-														<tr id="judul-tabel1">
-															<th colspan="2">
-																<input type="text" name="judultabel[][]" class="form-control form-control-sm float-left" placeholder="Judul Tabel" />
-															</th>
-															<th align="center">
-																<a href="javascript:void(0)" style="line-height:32px; margin:0 auto;" title="Hapus Kolom" onclick="rmKolomLampiran(this, 1, 1)" id="deleteTableLampiran1">
-																	<i class="fa fa-minus-square"></i>
-																</a>
-																<a href="javascript:void(0)" style="line-height:32px; margin:0 auto;" title="Tambah Kolom" onclick="addKolomLampiran(this, 1, 1, 1)" id="addTableLampiran1">
-																	<i class="fa fa-plus-square"></i>
-																</a>
-															</th>
-														</tr>
-													</thead>
-													<tbody id="tbody-tabel1">
-														<tr class="content-tabel1">
-															<td class="firstrow1" align="center" style="min-width:30px">
-																<input type="text" name="kolom[0][header][][]" value="NO" style="border:none; background:transparent; text-align:center;" size="2" disabled />
-															</td>
-															<td>
-																<input type="text" name="kolom[0][header][][]" class="form-control form-control-sm float-left" placeholder="Konten" />
-															</td>
-															<td class="lastrowheader1" align="center">
-																<a href="javascript:void(0)" style="line-height:32px; margin:0 5px;" title="Tambah Baris" onclick="addRowLampiran(this, 1, 0, 1, 1)" id="addTableRow1">
-																	<i class="fa fa-plus-square"></i>
-																</a>
-															</td>
-														</tr>
-													</tbody>
-												</table>
-											</div>
-										</fieldset>
-									</div>
-								</div>
-							</div>
-						</fieldset>
+						<fieldset> 
+							<legend>Unggah Lampiran</legend>
+							<input type="file" name="userfile">
+						</fieldset> 
 						<hr>
 						<div class="form-group margin-top-5px">
-							<button type="submit" class="btn btn-success btn-xs" id="view_doc">Lihat Format</button>
-							<button type="submit" class="btn btn-primary btn-xs" id="save_doc">Simpan Dokumen</button>
+							<button type="submit" class="btn btn-success btn-xs" id="view_doc">Generate Format</button>
+							
+							<?php 
+							if ($this->session->userdata('login_id')) {
+								echo '<button type="submit" class="btn btn-primary btn-xs" id="save_doc">Simpan Dokumen</button>';
+							}
+							?>
+
+
+
 						</div>
 					</form>
 

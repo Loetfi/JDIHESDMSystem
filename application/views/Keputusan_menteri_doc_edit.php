@@ -269,6 +269,30 @@ function addLampiran(ele) {
 	$('#form-keputusan').children('fieldset:last').after('<fieldset style="margin-top:30px">'+lampiran+'</fieldset>');
 }
 </script>
+
+
+<style type="text/css">
+
+.form-control{
+	width: 100%;
+	padding: .5rem .75rem;
+	font-size: 1rem;
+	line-height: 1.25;
+	/*color: #000;*/
+	color: #55595c;
+	background-color: #fff;
+	background-image: none;
+	-webkit-background-clip: padding-box;
+	background-clip: padding-box;
+	border: 2px solid #55595c;
+	border-top-color: #55595c;/*rgb(0, 0, 0);*/
+	border-right-color:#55595c;/* rgb(0, 0, 0);*/
+	border-bottom-color:#55595c;/* rgb(0, 0, 0);*/
+	border-left-color: #55595c;/*rgb(0, 0, 0);*/ 
+}
+</style>
+
+
 <div class="row-col">
 	<div class="col-lg b-r">
 		<div class="padding">
@@ -278,7 +302,7 @@ function addLampiran(ele) {
 					<small>Mengubah sebuah dokumen Keputusan Menteri</small>
 				</div>
 				<div class="padding">
-					<form class="width-100p" method="POST" id="form-keputusan" target="_blank">
+					<form class="width-100p" method="POST" id="form-keputusan" target="_blank" enctype="multipart/form-data">
 						<input type="hidden" name="id_dokumen" value="<?php echo @$id_dokumen; ?>">
 						<center><p>KEPUTUSAN MENTERI ENERGI DAN SUMBER DAYA MINERAL</p>
 							<p>REPUBLIK INDONESIA</p>
@@ -286,8 +310,9 @@ function addLampiran(ele) {
 							<p>TENTANG</p>
 						</center>
 						<div class="form-group" style="margin-bottom:5px">
-							<textarea name="super_judul" class="form-control" autocomplete="off" placeholder="Judul Dokumen" rows="4" required><?php echo @$detail_dokumen['judul'][0]['teks']; ?></textarea>
+							<textarea name="super_judul" class="form-control" autocomplete="off" placeholder="Judul Rancangan" rows="4" required="" data-toggle="tooltip" title="Masukan Judul Rancangan Keputusan Menteri yang akan dibuat"><?php echo @$detail_dokumen['judul'][0]['teks']; ?></textarea>
 						</div>
+
 						<center>
 							<p>DENGAN RAHMAT TUHAN YANG MAHA ESA</p>
 							<p>MENTERI ENERGI DAN SUMBER DAYA MINERAL REPUBLIK INDONESIA,</p>
@@ -320,8 +345,8 @@ function addLampiran(ele) {
 												<a href="javascript:void(0)" onclick="addMenimbang(this, <?php echo ($idxField +1); ?>)" style="position:absolute; right:5%;">
 													<i class="fa fa-lg fa-plus <?php echo ($idxField +1) < count(@$detail_dokumen[$namaJenisField]) ? 'fa-minus' : ''; ?>"></i>
 												</a>
-												<a href="javascript:void(0)" id="btnKomentar-<?php echo $namaJenisField.($idxField+1); ?>" targetKomentar="textKomentar-<?php echo $namaJenisField.($idxField+1); ?>" onclick="addKomentar(this.id)" style="position:absolute; right:4.7%; margin-top:25px;" title="Tambah Telaah">
-													<i class="fa fa-lg <?php echo ($idxField+1) < count(@$detail_dokumen[$namaJenisField]) ? 'fa-comments-o' : 'fa-comments'; ?>"></i>
+												<a href="javascript:void(0)" id="btnKomentar-<?php echo $namaJenisField.($idxField+1); ?>" targetKomentar="textKomentar-<?php echo $namaJenisField.($idxField+1); ?>" onclick="addKomentar(this.id)" style="position:absolute; right:4.7%; margin-top:25px;" title="Tambah Telaah" class="btn btn-xs btn-primary">
+													<i class="fa fa-lg <?php echo ($idxField+1) < count(@$detail_dokumen[$namaJenisField]) ? 'fa-comments-o' : 'fa-comments'; ?>" ></i>
 												</a>
 											</div>
 											<div class="form-group" style="width:100%; top:0px; position:relative;">
@@ -348,7 +373,7 @@ function addLampiran(ele) {
 										<div style="width:100%">
 											<textarea type="text" name="<?php echo $namaJenisField; ?>[]" class="form-control" placeholder="Menimbang" rows="6" style="float:left; margin-left:5px; width:75%;"></textarea>
 											<a href="javascript:void(0)" onclick="addMenimbang(this, 1)" style="position:absolute; right:5%;"><i class="fa fa-lg fa-plus"></i></a>
-											<a href="javascript:void(0)" style="position:absolute; right:4.7%; margin-top:25px;" title="Tambah Telaah"><i class="fa fa-lg fa-comments-o"></i></a>
+											<a href="javascript:void(0)" style="position:absolute; right:4.7%; margin-top:25px;" title="Tambah Telaah" class="btn btn-xs btn-primary"><i class="fa fa-lg fa-comments-o"></i></a>
 										</div>
 									</div>
 								<?php } ?>
@@ -545,13 +570,15 @@ function addLampiran(ele) {
 	</div>
 </fieldset>
 
+<hr>
 <fieldset>
 	<legend>Pejabat Penanda Tangan</legend>
 	<div class="form-group">
-		<textarea name="ttd" class="form-control" autocomplete="off" placeholder="Tanda Tangan" rows="4" style="width:95%"></textarea>
+		<input name="ttd" class="form-control" autocomplete="off" placeholder="Pejabat Penanda Tangan" rows="4" style="width:95%" value="<?php echo @$detail_dokumen['TTD'][0]['teks']  ? $detail_dokumen['TTD'][0]['teks'] : 'IGNASIUS JONAN';?>">
 		<a href="javascript:void(0)" style="position:absolute; right:4.7%; margin-top:-95px;" title="Tambah Telaah"><i class="fa fa-lg fa-comments-o"></i></a>
 	</div>
 </fieldset>
+<hr>
 <fieldset>
 	<legend>Tembusan</legend>
 	<div>
@@ -612,74 +639,21 @@ function addLampiran(ele) {
 			</div>
 		<?php } ?>
 	</div>
-</fieldset>
-<fieldset style="margin-top:30px">
-	<legend>
-		Lampiran
-		<a href="javascript:void(0)" style="font-size:12px; line-height:32px;" title="Hapus Lampiran" onclick=""><i class="fa fa-minus-square"></i></a>
-		<a href="javascript:void(0)" style="font-size:12px; line-height:32px;" title="Tambah Lampiran" onclick="addLampiran(this)"><i class="fa fa-plus-square"></i></a>
-	</legend>
-	<div>
-		<div class="form-group" id="text-lampiran1">
-			<div class="form-group">
-				<textarea name="perihal_lampiran[]" class="form-control margin-bottom-5px" autocomplete="off" placeholder="Perihal Lampiran" rows="4"></textarea>
-				<input type="text" name="judul_lampiran[]" class="form-control float-left margin-bottom-5px" placeholder="Judul Lampiran" />
-			</div>
-			<div class="margin-left-right-top70px width-90p">
-				<fieldset class="width-100p" id="fieldTabelLampiran">
-					<legend>
-						Tabel
-						<a href="javascript:void(0)" style="font-size:12px; line-height:32px;" title="Hapus Tabel" onclick="removeTabelLampiran(this)">
-							<i class="fa fa-minus-square"></i>
-						</a>
-						<a href="javascript:void(0)" style="font-size:12px; line-height:32px;" title="Tambah Tabel" onclick="addTabelLampiran(this, 1)" id="add_tabel">
-							<i class="fa fa-plus-square"></i>
-						</a>
-					</legend>
-					<div class="table1">
-						<input type="text" name="subjudul[][]" class="form-control float-left margin-bottom-3px" placeholder="Sub Judul Lampiran" />
-						<table class="tabel-lampiran1" border="1">
-							<thead>
-								<tr id="judul-tabel1">
-									<th colspan="2">
-										<input type="text" name="judultabel[][]" class="form-control form-control-sm float-left" placeholder="Judul Tabel" />
-									</th>
-									<th align="center">
-										<a href="javascript:void(0)" style="line-height:32px; margin:0 auto;" title="Hapus Kolom" onclick="rmKolomLampiran(this, 1, 1)" id="deleteTableLampiran1">
-											<i class="fa fa-minus-square"></i>
-										</a>
-										<a href="javascript:void(0)" style="line-height:32px; margin:0 auto;" title="Tambah Kolom" onclick="addKolomLampiran(this, 1, 1, 1)" id="addTableLampiran1">
-											<i class="fa fa-plus-square"></i>
-										</a>
-									</th>
-								</tr>
-							</thead>
-							<tbody id="tbody-tabel1">
-								<tr class="content-tabel1">
-									<td class="firstrow1" align="center" style="min-width:30px">
-										<input type="text" name="kolom[0][header][][]" value="NO" style="border:none; background:transparent; text-align:center;" size="2" disabled />
-									</td>
-									<td>
-										<input type="text" name="kolom[0][header][][]" class="form-control form-control-sm float-left" placeholder="Konten" />
-									</td>
-									<td class="lastrowheader1" align="center">
-										<a href="javascript:void(0)" style="line-height:32px; margin:0 5px;" title="Tambah Baris" onclick="addRowLampiran(this, 1, 0, 1, 1)" id="addTableRow1">
-											<i class="fa fa-plus-square"></i>
-										</a>
-									</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				</fieldset>
-			</div>
-		</div>
-	</div>
+</fieldset> 
+<hr>
+<fieldset>
+	<legend>Unggah Lampiran</legend>
+	<?php if (@$detail_dokumen['Upload'][0]['teks']) {
+		echo '<div class="alert alert-info">';
+		echo '<strong>Unggahan Versi Sebelumnya : </strong>'. anchor('../uploads/'.@$detail_dokumen['Upload'][0]['teks'], @$detail_dokumen['Upload'][0]['teks'], 'class="btn btn-xs btn-warning"');
+		echo '</div>';
+	} ?>
+	<input type="file" name="userfile">
 </fieldset>
 <hr>
 <div class="form-group margin-top-5px">
-	<button type="submit" class="btn btn-success btn-sm " id="view_doc">Lihat Format</button>
-	<button type="submit" class="btn btn-primary btn-sm" id="save_doc">Simpan Saja</button>
+	<button type="submit" class="btn btn-success btn-sm " id="view_doc">Generate Format</button>
+	<button type="submit" class="btn btn-primary btn-sm" id="save_doc">Simpan Dokumen</button>
 	<?php if ($submit_hilang==FALSE) { ?>
 		<button type="submit" class="btn btn-warning btn-sm" id="save_doc_submit">Submit </button>
 	<?php } else { ?>

@@ -53,6 +53,11 @@
           </div><!-- /.col-md-6 -->
           <div class="col-md-5 ml-auto">
             <div class="card">
+              <?php 
+              echo @$message;
+              echo form_error('username', '<div class="alert alert-danger">', '</div>');
+              echo form_error('password', '<div class="alert alert-danger">', '</div>');
+              ?>
               <div class="card-body text-dark">
                 <form action="<?php echo site_url('backend/auth/proses');?>" method="POST">
                   <div class="form-group">
@@ -121,7 +126,7 @@
         </div><!-- /.row -->
 
         <div class="row mt-5">
-         
+
          <div class="col-md-4">
           <div class="media">
             <div class="icon mr-3 bg-purple">

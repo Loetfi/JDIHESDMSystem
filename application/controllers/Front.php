@@ -7,7 +7,8 @@ class Front extends CI_Controller {
     {
         parent::__construct();
         $this->load->model('Home_model');
-        
+        $this->load->helper('url');
+        $this->load->library('form_validation');
     }
 
     public function index()
@@ -76,6 +77,7 @@ class Front extends CI_Controller {
 
     public function landingnew()
     {  
+        $data['message']   = $this->session->flashdata('message');
         
         if (!empty($this->session->userdata('login_id'))) {
             redirect('front/landing','refresh');

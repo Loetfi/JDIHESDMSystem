@@ -18,10 +18,10 @@ class Keputusan_menteri_doc extends CI_Controller {
 		// $this->load->view('');
 	}
 
-	function sanusi($thisDownload = 'benar') {
+	function sanusi($thisDownload = 'benar') { 
 
-		// print_r(@$_POST);
-		// die();
+		// print_r(@$_POST);die();
+
 		error_reporting(0);
 		$this->load->library('Phpword');
 		$phpWord = new \PhpOffice\PhpWord\PhpWord();
@@ -630,7 +630,7 @@ class Keputusan_menteri_doc extends CI_Controller {
 		);
 		$section->addTextBreak(3,$fontStyle);
 		$section->addText(
-			"IGNASIUS JONAN",
+			@$_POST['ttd'] ?  $_POST['ttd'] : "IGNASIUS JONAN",
 			$fontStyle,
 			$centerContents
 		);
@@ -738,20 +738,20 @@ class Keputusan_menteri_doc extends CI_Controller {
 		/* *********************************************************************************** */
 
 
-		$section = $phpWord->addSection($thisPageLandscape);
+		//$section = $phpWord->addSection($thisPageLandscape);
 
 
 		// header firstPage
-		$header = $section->addHeader();
-		$header->firstPage();
-		$table = $header->addTable();
-		$table->addRow();
-		$cell = $table->addCell(450);
-		$textrun = $cell->addTextRun();
-		$textrun->addText('');
+		// $header = $section->addHeader();
+		// $header->firstPage();
+		// $table = $header->addTable();
+		// $table->addRow();
+		// $cell = $table->addCell(450);
+		// $textrun = $cell->addTextRun();
+		// $textrun->addText('');
 		// Add header for all other pages
-		$subsequent = $section->addHeader();
-		$subsequent->addPreserveText('- {PAGE} -', $fontStyle, array('align' => 'center'));
+		// $subsequent = $section->addHeader();
+		// $subsequent->addPreserveText('- {PAGE} -', $fontStyle, array('align' => 'center'));
 
 		// $tabsDefault = array(
 			// new \PhpOffice\PhpWord\Style\Tab('left', \PhpOffice\PhpWord\Shared\Converter::cmToTwip(3)),
@@ -761,17 +761,17 @@ class Keputusan_menteri_doc extends CI_Controller {
 			// new \PhpOffice\PhpWord\Style\Tab('left', \PhpOffice\PhpWord\Shared\Converter::cmToTwip(6.5)),
 			// new \PhpOffice\PhpWord\Style\Tab('left', \PhpOffice\PhpWord\Shared\Converter::cmToTwip(7.5)),
 		// );
-		$phpWord->setDefaultParagraphStyle(
-			array(
-				'align'  => 'both',
-				'spacing' => 120,
-				'spaceAfter' => 0,
-				'tabs' => array(),
-			)
-		);
+		// $phpWord->setDefaultParagraphStyle(
+		// 	array(
+		// 		'align'  => 'both',
+		// 		'spacing' => 120,
+		// 		'spaceAfter' => 0,
+		// 		'tabs' => array(),
+		// 	)
+		// );
 
 		/* *********************************************************************************** */
-		$paragrafHeadLampiran = array(
+		/*$paragrafHeadLampiran = array(
 			'indentation' => array(
 				'left' => \PhpOffice\PhpWord\Shared\Converter::cmToTwip(14),
 			),
@@ -814,7 +814,7 @@ class Keputusan_menteri_doc extends CI_Controller {
 			"WILAYAH IZIN USAHA PERTAMBANGAN DAN WILAYAH IZIN USAHA PERTAMBANGAN KHUSUS YANG AKAN DITAWARKAN",
 			$fontStyle, array('align' => 'center')
 		);
-		$section->addTextBreak(1,$fontStyle);
+		$section->addTextBreak(1,$fontStyle); */
 		/* *********************************************************************************** */
 
 		//debug
@@ -830,13 +830,13 @@ class Keputusan_menteri_doc extends CI_Controller {
 
 
 
-		$section->addText(
+		/*$section->addText(
 			"A.	WILAYAH IZIN USAHA PERTAMBANGAN PERIODE I ",
 			$fontStyle, array('align' => 'left')
-		);
+		);*/
 		/* *********************************************************************************** */
 
-		$widthMaxCol = 16000;
+		/*$widthMaxCol = 16000;
 		$table = @$_POST['kolom'];
 		$judultabel = @$_POST['judultabel'];
 		$table = array();
@@ -890,7 +890,7 @@ class Keputusan_menteri_doc extends CI_Controller {
 			}
 
 
-		}
+		} */
 
 		/* *********************************************************************************** */
 
@@ -1031,6 +1031,30 @@ class Keputusan_menteri_doc extends CI_Controller {
 	}
 
 	function save_doc() {
+
+		$config['upload_path'] = './uploads/';
+		$config['allowed_types'] = '*';
+		$config['max_size']  = '10000';
+		$config['max_width']  = '1024';
+		$config['max_height']  = '768';
+		
+		$this->load->library('upload', $config);
+		
+		if (empty($this->upload->do_upload())){
+			if (strlen($this->upload->display_errors())==43) {
+				// echo(1);
+			} else {
+				$error = array('error' => $this->upload->display_errors());
+				print_r($error);
+				exit();
+			}
+		}
+		else{
+			$data = $this->upload->data();
+			$_POST['file_name'] = $data['file_name'];
+		}
+
+
 		$arrData['judul'] = $_POST['super_judul'];
 		$Menimbang = $_POST['Menimbang'];
 		$pointerMenimbang = $_POST['pointerMenimbang'];
@@ -1074,6 +1098,20 @@ class Keputusan_menteri_doc extends CI_Controller {
 			$arrData['Diktum']['text'][] = @$Diktum[$i];
 		}
 
+		$Tandatangan = @$_POST['ttd'] ?  $_POST['ttd'] : "IGNASIUS JONAN";
+		$arrData['TTD']['pointerTembusan'][] = @$pointerTembusan[$i];
+		$arrData['TTD']['nextPageTembusan'][] = @$nextPageTembusan[$i] == '' ? 'continue' : @$nextPageTembusan[$i];
+		$arrData['TTD']['subLevelTembusan'][] = @$subLevelTembusan[$i];
+		$arrData['TTD']['text'][] = $Tandatangan;
+
+		// upload lampiran 
+		$Upload = @$_POST['file_name'] ?  $_POST['file_name'] : "no-data";
+		$arrData['Upload']['pointerTembusan'][] = @$pointerTembusan[$i];
+		$arrData['Upload']['nextPageTembusan'][] = @$nextPageTembusan[$i] == '' ? 'continue' : @$nextPageTembusan[$i];
+		$arrData['Upload']['subLevelTembusan'][] = @$subLevelTembusan[$i];
+		$arrData['Upload']['text'][] = $Upload;
+		// upload 
+
 		$Tembusan = @$_POST['Tembusan'];
 		$pointerTembusan = @$_POST['pointerTembusan'];
 		$nextPageTembusan = @$_POST['nextPageTembusan'];
@@ -1085,7 +1123,10 @@ class Keputusan_menteri_doc extends CI_Controller {
 			$arrData['Tembusan']['text'][] = @$Tembusan[$i];
 		}
 
-		// print_r($Tembusan);
+		
+		// $arrData['TTD'] = $Tandatangan;
+
+		// print_r($arrData); die();
 		// print_r($pointerTembusan);
 		// print_r($nextPageTembusan);
 		// print_r($subLevelTembusan);

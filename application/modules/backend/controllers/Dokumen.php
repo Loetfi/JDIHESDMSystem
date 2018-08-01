@@ -8,7 +8,7 @@ class Dokumen extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->helper('backend');
-		check_login('backend/dokumen/pilih');
+		// check_login('backend/dokumen/pilih');
 	}
 	
 	public function index()
@@ -51,10 +51,12 @@ class Dokumen extends CI_Controller {
 	
 	public function pilih()
 	{
+		// echo(1); exit();
 		$data = array(
 			'contents'	=> 'dokumen/pilih',
 			'title'		=> 'Pilih Dokumen',
-			'name'		=> empty($this->session->userdata('name')) ? 'Tanpa Login' : $this->session->userdata('name')
+			'name'		=> empty($this->session->userdata('name')) ? 'Tanpa Login' : $this->session->userdata('name'),
+			'menu'		=> empty($this->session->userdata('name')) ? array() : $this->session->userdata('name')
 		);
 		$this->load->view('template/head', $data, FALSE);
 		// $this->load->view('dokumen/pilih', $data, FALSE);

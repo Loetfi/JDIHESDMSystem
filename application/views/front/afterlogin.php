@@ -72,8 +72,8 @@ body {
 				<img src="https://www.esdm.go.id/themes/v1/img/xlogo-esdm-web.png.pagespeed.ic.rpNW33_FYz.png" style="padding-top: 0px;" width="100%">
 			</div>
 			<div class="col-xs-12 col-sm-12 col-md-4"><br>
-				<button type="button" class="btn btn-primary pull-right" style="margin: 0 3px;">FAQ</button>
-				<button type="button" class="btn btn-info pull-right" style="margin: 0 3px;">Beranda</button>
+				<button onclick="location.href='<?=site_url()?>'" type="button" class="btn btn-primary pull-right" style="margin: 0 3px;">FAQ</button>
+				<button onclick="location.href='<?=site_url()?>'" class="btn btn-info pull-right" style="margin: 0 3px;">Beranda</button>
 			</div>
 		</div>
 		<!-- img src="https://www.esdm.go.id/themes/v1/img/xlogo-esdm-web.png.pagespeed.ic.rpNW33_FYz.png" style="padding-top: 0px;" -->
@@ -101,7 +101,7 @@ body {
 			</div>
 			<div class="col-md-8 allButton" >
 				<div class="col-xs-3 col-sm-3 col-md-3">
-					<a href="#"><img src="<?php echo base_url(); ?>/assets/logo/icon-quick-format-solid.png" width="100%"></a>
+					<a href="<?php echo site_url('backend/dokumen/pilih/');?>"><img src="<?php echo base_url(); ?>/assets/logo/icon-quick-format-solid.png" width="100%"></a>
 				</div>
 				<div class="col-xs-3 col-sm-3 col-md-3">
 					<a href="<?php echo base_url('assetnew/regulasi.pdf');?>" target="_blank"><img src="<?php echo base_url(); ?>/assets/logo/icon-regulasi.png" width="100%"></a>
