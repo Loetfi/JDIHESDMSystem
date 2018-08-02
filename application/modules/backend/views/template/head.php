@@ -24,14 +24,14 @@
             <span class="text-xs">Main</span>
           </li>
           
-          <li>
+         <!--  <li>
             <a href="<?php echo site_url('backend/dashboard/') ?>" class="b-danger">
               <span class="nav-icon text-white no-fade">
                 <i class="ion-filing"></i>
               </span>
               <span class="nav-text">Dashboard</span>
             </a>
-          </li> 
+          </li>  -->
 
           <li>
             <a href="<?php echo site_url('backend/dokumen/') ?>"> 
