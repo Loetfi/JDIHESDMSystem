@@ -37,10 +37,13 @@
   <script type="text/javascript" src="<?=base_url('assetnew/scripts/jquery-2.1.1.min.js');?>"></script>
 
   <style type="text/css">
-    html {
-      font-family: Bookman Old Style;
-    }
-  </style>
+  html {
+    font-family: Bookman Old Style;
+  }
+  .black .dk {
+    background-color: #2196f3;
+  }
+</style>
 </head>
 <body>
   <div class="app" id="app">

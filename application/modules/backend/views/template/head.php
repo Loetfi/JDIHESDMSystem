@@ -71,12 +71,12 @@
 
 
 
-          <li class="nav-header hidden-folded m-t">
+          <!-- <li class="nav-header hidden-folded m-t">
             <span class="text-xs">Manajemen Pengguna</span>
-          </li>  
+          </li>   -->
 
 
-          <li>
+         <!--  <li>
             <a href="<?php echo site_url('backend/dashboard/') ?>" class="">
               <span class="nav-icon text-white no-fade">
                 <i class="fa fa-user"></i>
@@ -91,7 +91,7 @@
               </span>
               <span class="nav-text">Hak Akses</span>
             </a>
-          </li>  
+          </li>   -->
         <?php } ?>
         
       </ul>
