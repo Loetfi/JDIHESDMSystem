@@ -10,6 +10,20 @@
   <title><?php echo @$title; ?></title>
 
   <link href="<?php echo base_url('assetnew/robust.css');?>" rel="stylesheet">
+
+  <style type="text/css">
+  .pt-8, .py-8 {
+    padding-top: 4.5rem !important;
+  }
+  .mb-6, .my-6 {
+    margin-bottom: -2.5rem !important;
+  }
+  .pt-6, .py-6 {
+
+    padding-top: 1.5rem !important;
+
+}
+</style>
 </head>
 <body>
 
@@ -44,12 +58,12 @@
     </div>
     <div class="intro-content mt-5">
       <div class="container">
-        <div class="row">
+        <div class="row" style="padding-top: -100px">
           <div class="col-md-6 align-self-center">
             <center><h1 class="display-4 mb-3">Selamat Datang di Rannah Hukum </h1>
-              <h1>Rancang Bangun Naskah Hukum</h1>
+              <h2>Rancang Bangun Naskah Hukum</h2>
             </center>
-            <p class="lead mb-4">Rannah Hukum merupakan Aplikasi Perancangan Produk Hukum yang dikembangkan oleh Biro Hukum Kementerian Energi dan Sumber Daya Mineral sebagai fasilitas yang dapat digunakan untuk mewujudkan Produk Hukum secara efektif, efisien dan sesuai dengan teknik penyusunan peraturan perundang-undangan.</p>
+            <p class="lead mb-4" style="text-align: justify;">Rannah Hukum merupakan Aplikasi Perancangan Produk Hukum yang dikembangkan oleh Biro Hukum Kementerian Energi dan Sumber Daya Mineral sebagai fasilitas yang dapat digunakan untuk mewujudkan Produk Hukum secara efektif, efisien dan sesuai dengan teknik penyusunan peraturan perundang-undangan.</p>
           </div><!-- /.col-md-6 -->
           <div class="col-md-5 ml-auto">
             <div class="card">
@@ -90,7 +104,7 @@
         </div>
 
         <div class="row mt-5">
-          <div class="col-md-4">
+          <div class="col-md-3">
             <div class="media">
               <div class="icon mr-3">
                 <img src="<?php echo base_url('logo-esdm-kuning.png');?>" width="70px">
@@ -101,7 +115,7 @@
               </div>
             </div>
           </div>
-          <div class="col-md-4">
+          <div class="col-md-3">
             <div class="media">
               <div class="icon mr-3 bg-warning">
                 <img src="<?php echo base_url('JDIH-logo.jpg');?>" width="100px">
@@ -112,7 +126,7 @@
               </div>
             </div>
           </div> 
-          <div class="col-md-4">
+          <div class="col-md-3">
             <div class="media">
               <div class="icon mr-3 bg-success">
                 <img src="<?php echo base_url('logo-esdm-kuning.png');?>" width="70px">
@@ -123,21 +137,22 @@
               </div>
             </div>
           </div>
+          <div class="row mt-3">
+
+           <div class="col-md-4">
+            <div class="media">
+              <div class="">
+                <img src="<?php echo base_url('sipekalogin.png');?>" width="70px">
+              </div>
+              <div class="media-body">
+                <h3 class="h4"><a href="http://sipeka.esdm.go.id/" target="_blank">SIPEKA</a></h3>
+              </div>
+            </div>
+          </div> 
         </div><!-- /.row -->
-
-        <div class="row mt-5">
-
-         <div class="col-md-4">
-          <div class="media">
-            <div class="icon mr-3 bg-purple">
-              <img src="<?php echo base_url('sipekalogin.png');?>" width="70px">
-            </div>
-            <div class="media-body">
-              <h3 class="h4"><a href="http://sipeka.esdm.go.id/" target="_blank">SIPEKA</a></h3>
-            </div>
-          </div>
-        </div> 
       </div><!-- /.row -->
+
+
     </div>
   </div> 
 
