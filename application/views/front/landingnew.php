@@ -37,7 +37,7 @@
       <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a class="nav-link" href="#">Panduan</a>
+            <a class="nav-link" href="#">Tentang Rannah Hukum</a>
           </li>
           <!-- assetnew/data-perancang-peruu.pdf -->
           <li class="nav-item">

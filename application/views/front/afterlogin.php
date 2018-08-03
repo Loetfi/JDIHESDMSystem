@@ -34,6 +34,9 @@
 	<script type="text/javascript" src="<?php echo base_url(); ?>/assetnew/scripts/jquery-2.1.1.min.js"></script>
 
 <style>
+html {
+	background-color: #0275d8; 
+}
 body {
 	font-family: 'Arial' , sans-serif;
 	background: url(<?=base_url('background.png')?>);

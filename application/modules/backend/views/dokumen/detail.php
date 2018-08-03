@@ -13,7 +13,7 @@
 							<!-- Tandai sebagai finish dokumen <a href="" class="btn-xs btn-primary btn">Yes</a> -->
 
 						</div>
-						<div class="p-a-md b-b _600">Versioning Dokumen</div>
+						<div class="p-a-md b-b _600">Riwayat Dokumen</div>
 						<div class="padding"> 
 							<?php //echo "<pre>"; print_r($dok_versi); echo "</pre>";?>
 							<div class="alert alert-info">
