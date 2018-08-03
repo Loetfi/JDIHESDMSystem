@@ -39,9 +39,9 @@
           <li class="nav-item">
             <a class="nav-link" href="#">Panduan</a>
           </li>
-
+          <!-- assetnew/data-perancang-peruu.pdf -->
           <li class="nav-item">
-            <a class="nav-link" href="<?php echo base_url('assetnew/data-perancang-peruu.pdf');?>" target="_blank">Data Perancang PUU</a>
+            <a class="nav-link" href="<?php echo site_url('backend/perancang');?>" target="_blank">Data Perancang PUU</a>
           </li>
 
           <li class="nav-item">

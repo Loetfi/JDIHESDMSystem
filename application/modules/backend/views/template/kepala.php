@@ -43,9 +43,15 @@
   .black .dk {
     background-color: #0275d8;
   }
+  
+
   .box-shadow-z2, .box-shadow-z2 .box, .box-shadow-z2 .box-color {
-    box-shadow: 0 1px 1px rgba(0, 0, 0, 1), 0 -1px 0px rgba(0, 0, 0, 0.5);
-}
+    box-shadow: 0 2px 4px #55595c, 0 0px 0px #55595c;
+  }
+  .blue {
+    background-color: #0275d8;
+    color: rgba(255, 255, 255, 0.87);
+  }
   /*.box-shadow-z2 .box-color {
     box-shadow: 0 1px 2px rgba(0, 0, 0, 2), 0 -1px 0px rgba(0, 0, 0, 2);
 }*/

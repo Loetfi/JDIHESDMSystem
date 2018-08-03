@@ -3,6 +3,8 @@
 <!-- ############ LAYOUT START-->
 
 <!-- aside -->
+<?php if (@$sidbear=='no') { ?>
+
 <div id="aside" class="app-aside fade nav-dropdown black">
   <!-- fluid app aside -->
   <div class="navside dk" data-layout="column">
@@ -22,17 +24,7 @@
         <?php if ($this->session->userdata('login_id')) { ?>
           <li class="nav-header hidden-folded">
             <span class="text-xs">Main</span>
-          </li>
-          
-         <!--  <li>
-            <a href="<?php echo site_url('backend/dashboard/') ?>" class="b-danger">
-              <span class="nav-icon text-white no-fade">
-                <i class="ion-filing"></i>
-              </span>
-              <span class="nav-text">Dashboard</span>
-            </a>
-          </li>  -->
-
+          </li> 
           <li>
             <a href="<?php echo site_url('backend/dokumen/') ?>"> 
               <span class="nav-icon">
@@ -40,12 +32,10 @@
               </span>
               <span class="nav-text">Dokumen</span>
             </a> 
-          </li>
-
+          </li> 
           <li class="nav-header hidden-folded m-t">
             <span class="text-xs">Database</span>
-          </li>  
-
+          </li>   
           <li>
             <a href="<?php echo site_url('backend/database/master/') ?>"> 
               <span class="nav-icon">
@@ -53,13 +43,10 @@
               </span>
               <span class="nav-text">List Data</span>
             </a>
-          </li>
-
-
+          </li> 
           <li class="nav-header hidden-folded m-t">
             <span class="text-xs">Forum</span>
-          </li>  
-
+          </li>   
           <li>
             <a href="<?php echo site_url('backend/forum/thread/') ?>"> 
               <span class="nav-icon">
@@ -67,31 +54,7 @@
               </span>
               <span class="nav-text">Forum</span>
             </a>
-          </li>
-
-
-
-          <!-- <li class="nav-header hidden-folded m-t">
-            <span class="text-xs">Manajemen Pengguna</span>
-          </li>   -->
-
-
-         <!--  <li>
-            <a href="<?php echo site_url('backend/dashboard/') ?>" class="">
-              <span class="nav-icon text-white no-fade">
-                <i class="fa fa-user"></i>
-              </span>
-              <span class="nav-text">Pengguna</span>
-            </a>
-          </li>  
-          <li>
-            <a href="<?php echo site_url('backend/dashboard/') ?>" class="">
-              <span class="nav-icon text-white no-fade">
-                <i class="fa fa-group"></i>
-              </span>
-              <span class="nav-text">Hak Akses</span>
-            </a>
-          </li>   -->
+          </li> 
         <?php } ?>
         
       </ul>
@@ -99,6 +62,7 @@
   </div> 
 </div>
 </div>
+<?php } ?>
 <!-- / -->
 
 <!-- content -->

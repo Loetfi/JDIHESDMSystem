@@ -10,9 +10,43 @@
 
 	<div class="col-lg b-r"> 
 		<div class="padding">
+			
 			<div class="row">
+      <!-- <div class="box">
+        <div class="box-header blue">
+          <h3>Forma</h3>
+          <small>Sub title goes here with small font</small>
+          <div class="box-tool">
+            <ul class="nav">
+              <li class="nav-item inline">
+                <a class="nav-link">
+                  <i class="fa fa-fw fa-refresh"></i>
+                </a>
+              </li>
+              <li class="nav-item inline dropdown">
+                <a class="nav-link" data-toggle="dropdown">
+                  <i class="fa fa-fw fa-ellipsis-v"></i>
+                </a>
+                <div class="dropdown-menu dropdown-menu-scale pull-right">
+                  <a class="dropdown-item" href="#">Action</a>
+                  <a class="dropdown-item" href="#">Another action</a>
+                  <a class="dropdown-item" href="#">Something else here</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item">Separated link</a>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="box-body">
+          <p class="m-a-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi id neque quam. Aliquam-a-0 m-b-smitudin egestas dui nec, fermentum diam. Vivamus vel tincidunt libero, vitae elementu</p>
+        </div>
+      </div> -->
+
+
 				<div class="box display-inline-block">
-					<div class="box-header b-b">
+					<!-- <div class="box-header b-b"> -->
+						<div class="box-header blue">
 						<h3>Format</h3>
 					</div>
 					<div class="box-body">
@@ -50,6 +84,7 @@
 								<div class="text-center">
 									<p class="text-muted m-b-md"></p> 
 									<a href="<?php echo site_url('Keputusan_menteri_doc');?>" class="btn btn-primary btn-xs">Pilih <i class="fa fa-chevron-right"></i></a>
+									<br><br>
 								</div>
 							</div>
 						</div>	
@@ -64,6 +99,7 @@
 								<div class="text-center">
 									<p class="text-muted m-b-md"></p> 
 									<a href="<?php echo site_url('#');?>" class="btn btn-primary btn-xs disabled">Pilih <i class="fa fa-chevron-right"></i></a>
+									<br><br>
 								</div>
 							</div>
 						</div>	
