@@ -1136,8 +1136,10 @@ class Keputusan_menteri_doc extends CI_Controller {
 
 		
 		// $arrData['TTD'] = $Tandatangan;
-
+		// print_r([$id, $revisi, @$namaFile]);
+		// print_r($_POST['assign']);
 		// print_r($arrData); die();
+
 		// print_r($pointerTembusan);
 		// print_r($nextPageTembusan);
 		// print_r($subLevelTembusan);
@@ -1150,6 +1152,7 @@ class Keputusan_menteri_doc extends CI_Controller {
 			$id = $this->insert_document();
 		else
 			$id = $_POST['id_dokumen'];
+
 
 		$namaFile = $this->sanusi('salah');
 		$revisi = $this->cek_revisi_document($id);
@@ -1331,6 +1334,7 @@ class Keputusan_menteri_doc extends CI_Controller {
 
 		function submit_document()
 		{
+			// print_r($_POST);
 			if (empty($this->session->userdata('login_id'))) {
 				exit('anda belom login');
 			} else {
@@ -1346,9 +1350,14 @@ class Keputusan_menteri_doc extends CI_Controller {
 				if (count($cari_revisi['direct_boss']) > 0) {
 					# update 
 					$update = array(
-						'appTo'			=> $cari_revisi['direct_boss'], 
-						'rilis_doc'		=> 1
+						'appTo'			=> @$_POST['assign'] ? @$_POST['assign'] : $cari_revisi['direct_boss'], 
+						'rilis_doc'		=> 1,
+						'catatan_submit'=> @$_POST['catatan_submit'] ? nl2br($_POST['catatan_submit']) : '-'
 					);
+					// print_r($update);
+					// print_r($data);
+					// exit();
+
 					$this->db->where('id_revisi', $id_revisi);
 					$this->db->where('cuser', $login_id);
 					$this->db->update('dokumen_revisi', $update);

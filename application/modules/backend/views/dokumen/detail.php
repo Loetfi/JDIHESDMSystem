@@ -42,6 +42,7 @@
 		<td>ID Dok</td>
 		<td>Status Revisi</td>
 		<td>Nama Bagian</td>
+		<td>Catatan</td>
 		<td>Pada Tgl</td>
 		<td>&nbsp;</td>
 		<td>&nbsp;</td>
@@ -54,6 +55,7 @@
 			<td><?php echo $dv['id_dokumen'];?> </td>
 			<td><?php echo $dv['status_revisi'];?> </td>
 			<td><?php echo isset($dv['nama_atasan']) ? $dv['nama_atasan'] : '-';?></td>
+			<td><?php echo $dv['catatan_submit']; ?></td>
 			<td><?php echo date('d F Y H:i:s', strtotime($dv['cdate']));?> </td>
 			<td><a href="<?php echo base_url($dv['namafile']);?>" class="btn btn-xs btn-primary" data-toggle="tooltip" title="Download, jika ingin men-download rancangan format versi ini.">Download</a></td>
 			<td>

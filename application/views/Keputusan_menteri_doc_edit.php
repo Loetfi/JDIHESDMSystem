@@ -653,8 +653,26 @@ function addLampiran(ele) {
 <hr>
 <div class="form-group margin-top-5px">
 	<button type="submit" class="btn btn-success btn-sm " id="view_doc">Generate Format</button>
+	<?php //print_r($this->session->all_userdata()); ?>
 	<button type="submit" class="btn btn-primary btn-sm" id="save_doc">Simpan Dokumen</button>
 	<?php if ($submit_hilang==FALSE) { ?>
+		<br><br><br>
+		<?php if (@$this->session->userdata('login_id')==35) { ?>
+			<select class="form-control" name="assign">
+				<option value="25">kasjh2</option>
+				<option value="37">kasjh2_3</option>
+			</select>
+			<br>
+			<textarea class="form-control" rows="4" name="catatan_submit">Masukan Catatan</textarea>
+		<?php } elseif (@$this->session->userdata('login_id')==37) { ?>
+		<select class="form-control" name="assign">
+				<option value="35">staffsjh2_3</option>
+				<option value="25">kasjh2</option>
+			</select>
+			<br>
+			<textarea class="form-control" rows="4" name="catatan_submit">Masukan Catatan</textarea>
+		<?php } ?>
+		<br>
 		<button type="submit" class="btn btn-warning btn-sm" id="save_doc_submit">Submit </button>
 	<?php } else { ?>
 		<hr>

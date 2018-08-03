@@ -3,7 +3,7 @@
 <!-- ############ LAYOUT START-->
 
 <!-- aside -->
-<?php if (@$sidbear=='no') { ?>
+<?php if (@$sidbear=='no') { } else { ?>
 
 <div id="aside" class="app-aside fade nav-dropdown black">
   <!-- fluid app aside -->
