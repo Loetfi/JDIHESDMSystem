@@ -465,7 +465,7 @@
 						</fieldset> 
 						<hr>
 						<div class="form-group margin-top-5px">
-							<button type="submit" class="btn btn-success btn-xs" id="view_doc">Generate Format</button>
+							<button type="submit" class="btn btn-success btn-xs" id="view_doc">Lihat Format</button>
 							
 							<?php 
 							if ($this->session->userdata('login_id')) {

@@ -4,6 +4,8 @@
 	}
 </style>
 
+
+
 <div class="row-col">
 
 	<div class="col-lg b-r"> 
@@ -29,11 +31,11 @@
 			}">
 			<ul class="nav nav-pills clearfix m-b">
 				<li class="nav-item"><a class="nav-link" href="#tab2" data-toggle="tab">Undang-Undang</a></li>
-				<li class="nav-item"><a class="nav-link" href="#tab3" data-toggle="tab">P.Pemerintah</a></li>
+				<li class="nav-item"><a class="nav-link" href="#tab3" data-toggle="tab">Peraturan Pemerintah</a></li>
+				<li class="nav-item"><a class="nav-link" href="#tab4" data-toggle="tab">Peraturan Presiden</a></li>
+				<li class="nav-item"><a class="nav-link" href="#tab5" data-toggle="tab">Peraturan Menteri</a></li>
 				<li class="nav-item"><a class="nav-link active" href="#tab1" data-toggle="tab">Keputusan</a></li>
-				<li class="nav-item"><a class="nav-link" href="#tab4" data-toggle="tab">P. Presiden</a></li>
-				<li class="nav-item"><a class="nav-link" href="#tab5" data-toggle="tab">P. Menteri</a></li>
-				<li class="nav-item"><a class="nav-link" href="#tab6" data-toggle="tab">Ins. Menteri</a></li>
+				<li class="nav-item"><a class="nav-link" href="#tab6" data-toggle="tab">Instruksi Menteri</a></li>
 				<li class="nav-item"><a class="nav-link" href="#tab7" data-toggle="tab">Surat Perintah</a></li>
 				<li class="nav-item"><a class="nav-link" href="#tab8" data-toggle="tab">Surat Edaran</a></li>
 			</ul>
@@ -66,12 +68,12 @@
 							</div>
 						</div>	
 					</div>
-
+ 
 					<div class="col-sm-3">
 						<div class="box"> 
 							<div class="padding">
 								<div> 
-									<p><b>Keputusan Pejabat Pimipinan Tinggi Madya</b></p>
+									<p><b>Keputusan Pejabat Pimpinan Tinggi Madya</b></p>
 								</div>
 								<div class="text-center">
 									<p class="text-muted m-b-md"></p> 
@@ -85,21 +87,7 @@
 						<div class="box"> 
 							<div class="padding">
 								<div> 
-									<p><b>Keputusan Pejabat Pimipinan Tinggi Madya</b></p>
-								</div>
-								<div class="text-center">
-									<p class="text-muted m-b-md"></p> 
-									<a href="<?php echo site_url('#');?>" class="btn btn-primary btn-xs disabled">Pilih <i class="fa fa-chevron-right"></i></a>
-								</div>
-							</div>
-						</div>	
-					</div>
-
-					<div class="col-sm-3">
-						<div class="box"> 
-							<div class="padding">
-								<div> 
-									<p><b>Keputusan Pejabat Pimipinan Tinggi Pratama</b></p>
+									<p><b>Keputusan Pejabat Pimpinan Tinggi Pratama</b></p>
 								</div>
 								<div class="text-center">
 									<p class="text-muted m-b-md"></p> 
@@ -144,7 +132,7 @@
 						<div class="box"> 
 							<div class="padding">
 								<div> 
-									<p><b>Undang - Undang</b></p>
+									<p><b>Undang-Undang</b></p>
 								</div>
 								<div class="text-center">
 									<p class="text-muted m-b-md"></p> 
@@ -159,7 +147,7 @@
 						<div class="box"> 
 							<div class="padding">
 								<div> 
-									<p><b>P.Pemerintah</b></p>
+									<p><b>Peraturan Pemerintah</b></p>
 								</div>
 								<div class="text-center">
 									<p class="text-muted m-b-md"></p> 
@@ -175,7 +163,7 @@
 						<div class="box"> 
 							<div class="padding">
 								<div> 
-									<p><b>P.Presiden</b></p>
+									<p><b>Peraturan Presiden</b></p>
 								</div>
 								<div class="text-center">
 									<p class="text-muted m-b-md"></p> 
@@ -191,7 +179,7 @@
 						<div class="box"> 
 							<div class="padding">
 								<div> 
-									<p><b>P.Menteri</b></p>
+									<p><b>Peraturan Menteri</b></p>
 								</div>
 								<div class="text-center">
 									<p class="text-muted m-b-md"></p> 
@@ -207,7 +195,7 @@
 						<div class="box"> 
 							<div class="padding">
 								<div> 
-									<p><b>Ins. Menteri</b></p>
+									<p><b>Instruksi Menteri</b></p>
 								</div>
 								<div class="text-center">
 									<p class="text-muted m-b-md"></p> 

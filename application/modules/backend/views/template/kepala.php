@@ -41,8 +41,14 @@
     font-family: Bookman Old Style;
   }
   .black .dk {
-    background-color: #2196f3;
+    background-color: #0275d8;
   }
+  .box-shadow-z2, .box-shadow-z2 .box, .box-shadow-z2 .box-color {
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 1), 0 -1px 0px rgba(0, 0, 0, 0.5);
+}
+  /*.box-shadow-z2 .box-color {
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 2), 0 -1px 0px rgba(0, 0, 0, 2);
+}*/
 </style>
 </head>
 <body>

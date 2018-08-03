@@ -17,7 +17,7 @@
 						<div class="padding"> 
 							<?php //echo "<pre>"; print_r($dok_versi); echo "</pre>";?>
 							<div class="alert alert-info">
-								<p>Kolom Nama Atasan terisi karena dokumen di submit untuk ke atasan</p>
+								<p>Kolom Nama bagian terisi karena dokumen di submit untuk ke bagian</p>
 							</div>
 							<?php if ($publish): ?>
 								<div class="alert alert-info">
@@ -41,7 +41,7 @@
 		<td>ID Revisi</td>
 		<td>ID Dok</td>
 		<td>Status Revisi</td>
-		<td>Nama Atasan</td>
+		<td>Nama Bagian</td>
 		<td>Pada Tgl</td>
 		<td>&nbsp;</td>
 		<td>&nbsp;</td>

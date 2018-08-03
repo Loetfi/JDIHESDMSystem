@@ -18,7 +18,7 @@
     <nav class="scroll nav-stacked nav-stacked-rounded nav-color">
 
       <ul class="nav" data-ui-nav>
-        
+
         <?php if ($this->session->userdata('login_id')) { ?>
           <li class="nav-header hidden-folded">
             <span class="text-xs">Main</span>
@@ -111,6 +111,7 @@
       <div class="navbar-item pull-left h5" id="pageTitle"><?php echo @$title; ?></div>
       <!-- nabar right -->
       <ul class="nav navbar-nav pull-right"> 
+        <?php if (!empty($this->session->userdata('login_id'))) { ?>
         <li class="nav-item dropdown pos-stc-xs">
           <a class="nav-link clear" data-toggle="dropdown" aria-expanded="false">
             <span class="label info">3</span>
@@ -152,19 +153,21 @@
           <!-- / dropdown -->
         </li>
 
-        <li class="nav-item dropdown">
-          <a class="nav-link clear" data-toggle="dropdown">
-            | 
-            <?php echo @$name; ?>
-            <span class="avatar w-32">
-              <img src="<?php echo base_url('assetnew/images/a2.jpg');?>" class="w-full rounded" alt="...">
-            </span>
-          </a>
-          <div class="dropdown-menu w dropdown-menu-scale pull-right">
+        
+          <li class="nav-item dropdown">
+            <a class="nav-link clear" data-toggle="dropdown">
+              | 
+              <?php echo @$name; ?>
+              <span class="avatar w-32">
+                <img src="<?php echo base_url('assetnew/images/a2.jpg');?>" class="w-full rounded" alt="...">
+              </span>
+            </a>
+            <div class="dropdown-menu w dropdown-menu-scale pull-right">
 
-            <a class="dropdown-item" href="<?php echo site_url('backend/auth/logout?true') ?>">Sign out</a>
-          </div>
-        </li>
+              <a class="dropdown-item" href="<?php echo site_url('backend/auth/logout?true') ?>">Sign out</a>
+            </div>
+          </li>
+        <?php } ?>
       </ul>
       <!-- / navbar right -->
     </div>
