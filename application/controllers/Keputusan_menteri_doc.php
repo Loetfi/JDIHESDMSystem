@@ -1253,11 +1253,20 @@ class Keputusan_menteri_doc extends CI_Controller {
 							'sublevel'		=> $valPivot[2],
 							'teks'			=> $valPivot[3],
 							'cdate'			=> date('Y-m-d H:i:s'),
-							'status'		=> 0,
-							'komentar'		=> @$_POST['Komentar_'.$valKeys][$idxKomentar],
+							'status'		=> 0
+							//'komentar'	=> @$_POST['Komentar_'.$valKeys][$idxKomentar],
 						);
 						// // // // print_r($dataDetailDokumen);
 						$queryDetailDokumen = $this->db->insert('dokumen_detail', $dataDetailDokumen);
+						
+						// add komentar to tabel komentar_doc
+						$dataKomentar = array(
+							'id_detail'	=> $this->db->insert_id(),
+							'pesan'		=> @$_POST['Komentar_'.$valKeys][$idxKomentar],
+							'cdate'		=> date("Y-m-d H:i:s"),
+							'user_id'	=> @$this->session->userdata('login_id')
+						);
+						$this->db->insert('komentar_doc', $dataKomentar);
 					}
 					$idxKomentar++;
 				}
