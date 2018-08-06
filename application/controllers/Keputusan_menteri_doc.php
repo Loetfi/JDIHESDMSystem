@@ -1260,13 +1260,15 @@ class Keputusan_menteri_doc extends CI_Controller {
 						$queryDetailDokumen = $this->db->insert('dokumen_detail', $dataDetailDokumen);
 						
 						// add komentar to tabel komentar_doc
-						$dataKomentar = array(
-							'id_detail'	=> $this->db->insert_id(),
-							'pesan'		=> @$_POST['Komentar_'.$valKeys][$idxKomentar],
-							'cdate'		=> date("Y-m-d H:i:s"),
-							'user_id'	=> @$this->session->userdata('login_id')
-						);
-						$this->db->insert('komentar_doc', $dataKomentar);
+						if(@$_POST['Komentar_'.$valKeys][$idxKomentar]) {
+							$dataKomentar = array(
+								'id_detail'	=> $this->db->insert_id(),
+								'pesan'		=> @$_POST['Komentar_'.$valKeys][$idxKomentar],
+								'cdate'		=> date("Y-m-d H:i:s"),
+								'user_id'	=> @$this->session->userdata('login_id')
+							);
+							$this->db->insert('komentar_doc', $dataKomentar);
+						}
 					}
 					$idxKomentar++;
 				}
