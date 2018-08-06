@@ -39,7 +39,7 @@ html {
 }
 body {
 	font-family: 'Arial' , sans-serif;
-	background: url(<?=base_url('background.png')?>);
+	background: url(<?=base_url('assetnew/bg-landing.png')?>);
 	background-repeat: no-repeat;
 	background-position: center; 
 	background-attachment: fixed;
@@ -53,11 +53,11 @@ body {
 .allButton a > img{
 	border-radius: 0 30px 0 10px; 
 	border: 1px #efefef solid;
-	box-shadow: 3px 3px 3px 3px #888888;
+	/*box-shadow: 3px 3px 3px 3px #fff;*/
 	margin-bottom: 10px;
 }
 .allButton a > img:hover{
-	box-shadow: 3px 3px 3px 3px orange;
+	box-shadow: 3px 3px 3px 3px #fff000;
 }
 </style>
 </head>
@@ -72,7 +72,7 @@ body {
 				<h4>Rancang Bangun Naskah Hukum</h4>
 			</div -->
 			<div class="col-xs-12 col-sm-12 col-md-8">
-				<img src="https://www.esdm.go.id/themes/v1/img/xlogo-esdm-web.png.pagespeed.ic.rpNW33_FYz.png" style="padding-top: 0px;" width="100%">
+				<img src="<?php echo base_url('assetnew/logo-tagline.png');?>" style="padding-top: 0px;" width="100%">
 			</div>
 			<div class="col-xs-12 col-sm-12 col-md-4"><br>
 				<button onclick="location.href='<?=site_url()?>'" type="button" class="btn btn-primary pull-right" style="margin: 0 3px;">FAQ</button>
