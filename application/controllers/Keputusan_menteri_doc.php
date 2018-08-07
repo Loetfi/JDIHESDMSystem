@@ -1283,7 +1283,7 @@ class Keputusan_menteri_doc extends CI_Controller {
 		return array_keys($arr) !== range(0, count($arr) - 1);
 	}
 
-	function edit($id_dokumen = 0, $status_revisi = ''){
+	function edit($id_dokumen = 0, $status_revisi = '') {
 		$login_id = !empty($this->session->userdata('login_id')) ? $this->session->userdata('login_id') : 0;
 		// exit();
 		##
@@ -1320,9 +1320,11 @@ class Keputusan_menteri_doc extends CI_Controller {
 			'cari_dispo'	=> $cari_dispo,
 			'submit_hilang'	=> $submit_hilang,
 			'publis_dok'	=> $publis_dok,
-			'contents'	=> 'Keputusan_menteri_doc_edit',
-			'title'		=> 'Ubah Rancangan',
-			'name'		=> empty($this->session->userdata('name')) ? 'Tanpa Login' : $this->session->userdata('name')
+			'contents'		=> 'Keputusan_menteri_doc_edit',
+			'title'			=> 'Ubah Rancangan',
+			'name'			=> empty($this->session->userdata('name')) ? 'Tanpa Login' : $this->session->userdata('name'),
+			'id_dokumen'	=> $id_dokumen,
+			'stat_revisi'	=> $status_revisi
 		);
 
 		if ($status_revisi == ''){
@@ -1355,51 +1357,66 @@ class Keputusan_menteri_doc extends CI_Controller {
 			$data['detail_dokumen'] = @$detail_dokumen;
 
 			$this->load->view('backend/template/head', $data, FALSE);
-		}
+	}
 
-		function update_document(){
+	function update_document(){
+		$this->save_doc();
+		$this->session->set_flashdata('message', '<div class="alert alert-info"> Rancangan berhasil dirubah.</div>');
+		redirect('backend/dokumen','refresh');
+	}
 
-			$this->save_doc();
-			$this->session->set_flashdata('message', '<div class="alert alert-info"> Rancangan berhasil dirubah.</div>');
-			redirect('backend/dokumen','refresh');
-		}
+	function submit_document()
+	{
+		// print_r($_POST);
+		if (empty($this->session->userdata('login_id'))) {
+			exit('anda belom login');
+		} else {
+			$res = '';
+			$login_id = $this->session->userdata('login_id');
+			$data = $this->save_doc();
+			$id_revisi =  $data['id_revisi'];
+			$cari_revisi = $this->db->query("SELECT  b.direct_boss, a.* from dokumen_revisi a 
+				left join login b on a.cuser = b.login_id
+				where id_revisi = $id_revisi and cuser = $login_id")->row_array();
 
-		function submit_document()
-		{
-			// print_r($_POST);
-			if (empty($this->session->userdata('login_id'))) {
-				exit('anda belom login');
-			} else {
-				$res = '';
-				$login_id = $this->session->userdata('login_id');
-				$data = $this->save_doc();
-				$id_revisi =  $data['id_revisi'];
-				$cari_revisi = $this->db->query("SELECT  b.direct_boss, a.* from dokumen_revisi a 
-					left join login b on a.cuser = b.login_id
-					where id_revisi = $id_revisi and cuser = $login_id")->row_array();
+			# ganti status jadi submit 
+			if (count($cari_revisi['direct_boss']) > 0) {
+				# update 
+				$update = array(
+					'appTo'			=> @$_POST['assign'] ? @$_POST['assign'] : $cari_revisi['direct_boss'], 
+					'rilis_doc'		=> 1,
+					'catatan_submit'=> @$_POST['catatan_submit'] ? nl2br($_POST['catatan_submit']) : '-'
+				);
+				// print_r($update);
+				// print_r($data);
+				// exit();
 
-				# ganti status jadi submit 
-				if (count($cari_revisi['direct_boss']) > 0) {
-					# update 
-					$update = array(
-						'appTo'			=> @$_POST['assign'] ? @$_POST['assign'] : $cari_revisi['direct_boss'], 
-						'rilis_doc'		=> 1,
-						'catatan_submit'=> @$_POST['catatan_submit'] ? nl2br($_POST['catatan_submit']) : '-'
-					);
-					// print_r($update);
-					// print_r($data);
-					// exit();
+				$this->db->where('id_revisi', $id_revisi);
+				$this->db->where('cuser', $login_id);
+				$this->db->update('dokumen_revisi', $update);
 
-					$this->db->where('id_revisi', $id_revisi);
-					$this->db->where('cuser', $login_id);
-					$this->db->update('dokumen_revisi', $update);
-
-					$res = 'Berhasil';
-				} else { $res = 'Gagal'; }
-				// return $res;
-				redirect('backend/dokumen/detail/'.$data['id_dokumen'],'refresh');
-			}
+				$res = 'Berhasil';
+			} else { $res = 'Gagal'; }
+			// return $res;
+			redirect('backend/dokumen/detail/'.$data['id_dokumen'],'refresh');
 		}
 	}
-	/* End of file dashboard.php */
-	/* Location: ./system/application/modules/matchbox/controllers/dashboard.php */
+	
+	function getKomentarHistory() {
+		$id = $this->input->get('id');
+		$rev = $this->input->get('stat');
+		$type = $this->input->get('jenis');
+		$query = $this->db->query("SELECT * FROM komentar_doc a
+						LEFT JOIN dokumen_detail b ON b.id_detail = a.id_detail 
+						LEFT JOIN (
+							SELECT a.id_dokumen, a.cuser, a.login_id FROM dokumen a
+							JOIN dokumen_revisi b ON b.id_dokumen = a.id_dokumen
+							WHERE a.id_dokumen = $id AND b.status_revisi = '$rev'
+						) c ON c.id_dokumen = b.id_dokumen
+						LEFT JOIN login d ON d.login_id = c.login_id
+						where b.jenis_field = '$type'");
+		echo json_encode($query->result());
+	}
+}
+/* End of file dashboard.php */
+/* Location: ./system/application/modules/matchbox/controllers/dashboard.php */

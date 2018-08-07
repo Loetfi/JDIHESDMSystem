@@ -342,15 +342,26 @@ function addLampiran(ele) {
 											</div>
 											<div style="width:100%">
 												<textarea type="text" name="<?php echo $namaJenisField; ?>[]" class="form-control" placeholder="Menimbang" rows="6" style="float:left; margin-left:5px; width:75%;"><?php echo @$detail_dokumen[$namaJenisField][$idxField]['teks']; ?></textarea>
-												<a href="javascript:void(0)" onclick="addMenimbang(this, <?php echo ($idxField +1); ?>)" style="position:absolute; right:5%;">
+												<a href="javascript:void(0)" 
+												   onclick="addMenimbang(this, <?php echo ($idxField +1); ?>)" 
+												   style="position:absolute; right:5%;">
 													<i class="fa fa-lg fa-plus <?php echo ($idxField +1) < count(@$detail_dokumen[$namaJenisField]) ? 'fa-minus' : ''; ?>"></i>
 												</a>
-												<a href="javascript:void(0)" id="btnKomentar-<?php echo $namaJenisField.($idxField+1); ?>" targetKomentar="textKomentar-<?php echo $namaJenisField.($idxField+1); ?>" onclick="addKomentar(this.id)" style="position:absolute; right:4.7%; margin-top:25px;" title="Tambah Telaah" class="btn btn-xs btn-primary">
+												<a href="javascript:void(0)" 
+												   id="btnKomentar-<?php echo $namaJenisField.($idxField+1); ?>" 
+												   targetKomentar="textKomentar-<?php echo $namaJenisField.($idxField+1); ?>" 
+												   onclick="addKomentarModal(this.id, <?php echo $id_dokumen; ?>, '<?php echo $stat_revisi; ?>')" 
+												   style="position:absolute; right:4.3%; margin-top:25px; padding:2px;" title="Tambah Telaah" class="btn btn-xs btn-primary">
 													<i class="fa fa-lg <?php echo ($idxField+1) < count(@$detail_dokumen[$namaJenisField]) ? 'fa-comments-o' : 'fa-comments'; ?>" ></i>
 												</a>
 											</div>
-											<div class="form-group" style="width:100%; top:0px; position:relative;">
-												<textarea type="text" name="Komentar_<?php echo $namaJenisField; ?>[]" class="form-control" rows="2" id="textKomentar-<?php echo $namaJenisField.($idxField+1); ?>" style="display:none; width:95%;" placeholder="Komentar <?php echo $namaJenisField.($idxField+1); ?>"><?php echo @$detail_dokumen[$namaJenisField][$idxField]['komentar']."\n"; ?></textarea>
+											<div class="form-group" style="width:100%; top:0px; position:relative; display:none;">
+												<textarea type="text" 
+														  name="Komentar_<?php echo $namaJenisField; ?>[]" 
+														  class="form-control" 
+														  rows="2" 
+														  id="textKomentar-<?php echo $namaJenisField.($idxField+1); ?>" 
+														  placeholder="Komentar <?php echo $namaJenisField.($idxField+1); ?>"><?php echo @$detail_dokumen[$namaJenisField][$idxField]['komentar']."\n"; ?></textarea>
 											</div>
 										</div>
 									<?php }
@@ -685,6 +696,32 @@ function addLampiran(ele) {
 	<?php } ?>
 </div>
 </form>
+				
+<!-- Modal Open Action -->
+<div id="modal-comment" class="modal fade animate" data-backdrop="true" aria-hidden="true" style="display:none;">
+  <div class="modal-dialog" id="animate" data-ui-class="bounce">
+    <div class="modal-content">
+      <div class="modal-header">
+      	<h5 class="modal-title">Jelajah Komentar</h5>
+      </div>
+      <div id="textarea-komentar" class="modal-body text-center p-lg">
+		  <textarea style="font-family:Verdana; height:200px; width:100%;" disabled></textarea>
+		  <input type="hidden" id="hiddenEleComment" />
+      </div>
+      <div class="modal-footer">
+		<div style="margin-bottom:5px"><input id="chatKomentar" type="text" name="write-comment" style="width:100%" /></div>
+		<button type="button" class="btn btn-primary p-x-md" onclick="btnSubmitModal(this)">Submit</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div>
+</div>
+				
+<button id="btn-modal" class="btn white active" style="display:none"
+		data-toggle="modal" 
+		data-target="#modal-comment" 
+		data-ui-toggle-class="bounce" 
+		data-ui-target="#animate">Bounce</button>
+<!-- Modal Close Action -->
 
 <script>
 	$("#view_doc").click(function(e) {
@@ -729,6 +766,56 @@ function addLampiran(ele) {
 	$('input[name^="pointerDiktum"]').keyup(function() {
 		$(this).val(($(this).val()).toUpperCase());
 	});
+	
+	// modal dialog for commentar
+	$("#modal-comment").dialog({
+      autoOpen: false,
+      show: {
+        effect: "blind",
+        duration: 300
+      },
+      hide: {
+        effect: "explode",
+        duration: 300
+      }
+    });
+	
+	function addKomentarModal(thisId, id_doc, stat) {
+		$('#btn-modal').click();
+		var split = thisId.split('-');
+		var getHiddenKomen = $('#textKomentar-'+split[1]).text();
+		var type = split[1].substring(0, split[1].length - 1);
+		$.ajax({
+			url: '<?php echo site_url(); ?>Keputusan_menteri_doc/getKomentarHistory?id='+id_doc+'&stat='+stat+'&jenis='+type,
+			type: 'GET',
+			beforeSend: function() {
+				$('#textarea-komentar').html('Loading...');
+			},
+			success: function(data) {
+				// &#13;&#10;
+				$('#textarea-komentar').html('<textarea style="font-family:Verdana; height:200px; width:100%;" disabled></textarea><input type="hidden" id="hiddenEleComment" />');
+				var datax = JSON.parse(data);
+				var str = '';
+				for(var i = 0; i < datax.length; i++) {
+					str += datax[i].name+' : '+datax[i].pesan+'\r';
+				}
+				str += '<?php print_r($this->session->all_userdata()['username']); ?> : '+getHiddenKomen;
+				$('#textarea-komentar').children().text(str);
+				$('#chatKomentar').val(getHiddenKomen);
+				$('#hiddenEleComment').val('textKomentar-'+split[1]);
+			}
+		});
+	}
+												
+	function btnSubmitModal(ele) {
+		var r = confirm("Anda Yakin?");
+		if(r === true) {
+			var chatting = $('#chatKomentar').val();
+			var eleComment = $('#hiddenEleComment').val(); console.log(eleComment);
+			$('#'+eleComment).text(chatting);
+			$(ele).attr("data-dismiss", "modal");
+		}
+	}
 
 	function addKomentar(thisId) {
 		idTarget  = $('#'+thisId).attr('targetKomentar');
