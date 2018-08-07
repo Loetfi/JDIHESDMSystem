@@ -1,62 +1,62 @@
-<div class="padding">  
-
-  <div class="modal fade" id="modal-id">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <h4 class="modal-title">Modal title</h4>
-        </div>
-        <div class="modal-body">
-          
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
-        </div>
-      </div>
-    </div>
-  </div>
+<div class="padding">   
 
   <div class="box">
     <div class="box-header light lt">
       <h3>Data Perancang PUU</h3> 
     </div>
     <!-- Madya , Muda, Pertama -->
-    <div class="row">
-      <div class="col-sm-4">
-         <table class="table table-striped table-hover table-bordered">
-         <tr><td>Madya<a href="<?php echo site_url('backend/perancang/detail?nama=1') ?>" target="iframe_a"class="btn pull-right"><i class="fa fa-chevron-right"></i></a></td></tr>
-         <tr><td>Muda<a href="<?php echo site_url('backend/perancang/detail?nama=2') ?>" target="iframe_a"class="btn pull-right"><i class="fa fa-chevron-right"></i></a></td></tr> 
-         <tr><td>Pertama <a href="https://www.esdm.go.id" target="iframe_a"class="btn pull-right"><i class="fa fa-chevron-right"></i></a></td></tr>
-         </table>
-      </div>
-      <div class="col-sm-8">
+    <div class="row"> 
+     <div class="col-sm-4"> 
+
        <table class="table table-striped table-hover table-bordered">
-         <th>Nama Perancang</th>
-         <tr><td>Gigir Wicaksono, S.H., M.H  <a data-toggle="modal" href='#modal-id' href="<?php echo site_url('backend/perancang/detail?nama=1') ?>"  class="btn pull-right"><i class="fa fa-chevron-right"></i></a></td></tr>
-         <tr><td>Kurniastuti Putri Fikdiani, S.H.M.H <a href="<?php echo site_url('backend/perancang/detail?nama=2') ?>" target="iframe_a"class="btn pull-right"><i class="fa fa-chevron-right"></i></a></td></tr> 
-         <tr><td>Kurniastuti Putri Fikdiani, S.H.M.H<a href="https://www.esdm.go.id" target="iframe_a"class="btn pull-right"><i class="fa fa-chevron-right"></i></a></td></tr>
-         <tr><td>Kurniastuti Putri Fikdiani, S.H.M.H <a href="https://www.esdm.go.id" target="iframe_a"class="btn pull-right"><i class="fa fa-chevron-right"></i></a></td></tr>
-         <tr><td>Kurniastuti Putri Fikdiani, S.H.M.H <a href="https://www.esdm.go.id" target="iframe_a"class="btn pull-right"><i class="fa fa-chevron-right"></i></a></td></tr>
-         <tr><td>Kurniastuti Putri Fikdiani, S.H.M.H <a href="https://www.esdm.go.id" target="iframe_a"class="btn pull-right"><i class="fa fa-chevron-right"></i></a></td></tr>
-         <tr><td>Kurniastuti Putri Fikdiani, S.H.M.H <a href="https://www.esdm.go.id" target="iframe_a"class="btn pull-right"><i class="fa fa-chevron-right"></i></a></td></tr>
-         <tr><td>Kurniastuti Putri Fikdiani, S.H.M.H <a href="https://www.esdm.go.id" target="iframe_a"class="btn pull-right"><i class="fa fa-chevron-right"></i></a></td></tr>
-         <tr><td>Kurniastuti Putri Fikdiani, S.H.M.H <a href="https://www.esdm.go.id" target="iframe_a"class="btn pull-right"><i class="fa fa-chevron-right"></i></a></td></tr>
-         <tr><td>Kurniastuti Putri Fikdiani, S.H.M.H <a href="https://www.esdm.go.id" target="iframe_a"class="btn pull-right"><i class="fa fa-chevron-right"></i></a></td></tr>
-         <tr><td>Kurniastuti Putri Fikdiani, S.H.M.H <a href="https://www.esdm.go.id" target="iframe_a"class="btn pull-right"><i class="fa fa-chevron-right"></i></a></td></tr>
-         <tr><td>Kurniastuti Putri Fikdiani, S.H.M.H <a href="https://www.esdm.go.id" target="iframe_a"class="btn pull-right"><i class="fa fa-chevron-right"></i></a></td></tr>
-       </table>
-     </div>
-     <div class="col-sm-8">
-
-      <iframe src="#" name="iframe_a" style="position:fixed;  width:60%; height:100%; border:none; margin:0; padding:0; "></iframe>
-
-      <!-- <a >W3Schools.com</a>  -->
+        <th colspan="2">Jabatan</th>
+        <?php foreach ($jabatan_perancang as $jp) { ?>
+          <tr>
+            <td><?php echo $jp['jabatan'];?></td>
+            <td><a class="view_data_perancang" id="<?php echo $jp['jabatan'];?>"><i class="fa fa-chevron-right "></i></a></td>
+          </tr>
+        <?php } ?>
+      </table> 
 
     </div>
-  </div>
+    <div class="col-sm-8">
 
-</div> 
+     <div id="show_data_perancang"></div>
 
-</div>
+   </div>
+   <div class="col-sm-8">
+
+    <iframe src="#" name="iframe_a" style="position:fixed;  width:60%; height:100%; border:none; margin:0; padding:0; "></iframe>
+
+    <!-- <a >W3Schools.com</a>  -->
+    <script type="text/javascript"> 
+
+         // Start jQuery function after page is loaded
+         $(document).ready(function(){
+         // Start jQuery click function to view Bootstrap modal when view info button is clicked
+         $('.view_data_perancang').click(function(){
+             // Get the id of selected phone and assign it in a variable called phoneData
+             var phoneData = $(this).attr('id');
+                // Start AJAX function
+                $.ajax({
+                 // Path for controller function which fetches selected phone data
+                 url: "<?php echo site_url('backend/perancang/list/')?>",
+                    // Method of getting data
+                    method: "GET",
+                    // Data is sent to the server
+                    data: {id_jabatan:phoneData},
+                    // Callback function that is executed after data is successfully sent and recieved
+                    success: function(data){
+                     // Print the fetched data of the selected phone in the section called #phone_result 
+                     // within the Bootstrap modal
+                     $('#show_data_perancang').html(data);
+                        // Display the Bootstrap modal
+                        // $('#phoneModal').modal('show');
+                      }
+                    });
+             // End AJAX function
+           });
+       });  
+     </script>
+   </div>
+ </div> 
