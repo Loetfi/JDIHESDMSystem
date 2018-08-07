@@ -1297,7 +1297,27 @@ class Keputusan_menteri_doc extends CI_Controller {
 			$publis_dok = '#';
 		}
 		##
+
+		## cek dokumen dari jalur kuning/biru/abu2
+		$cari_jalur_dok = $this->db->query("SELECT c.jalur_flow from dokumen a
+			inner join login b on a.login_id = b.login_id
+			left join flow c on b.id_flow = c.id_flow
+			where a.id_dokumen = $id_dokumen")->row_array();
+		$cari_jalur_dok_res = count($cari_jalur_dok['jalur_flow'])>0 ? $cari_jalur_dok['jalur_flow'] : 0;
+		## end cek dokumen dari jalur kuning/biru/abu2
+
+		## cari disposisi
+		$id_flow = @$this->session->userdata('id_flow') ? $this->session->userdata('id_flow') : 0;
+		$cari_dispo = $this->db->query("SELECT b.id_flow_role,c.nama_flow from flow a
+			inner join flow_detail b on a.id_flow = b.id_flow
+			inner join flow c on b.id_flow_role = c.id_flow
+			where a.id_flow = $id_flow and ( c.jalur_flow like '%$cari_jalur_dok_res%' )")->result_array();
+		## end cari disposisi
+
+		
+
 		$data = array(
+			'cari_dispo'	=> $cari_dispo,
 			'submit_hilang'	=> $submit_hilang,
 			'publis_dok'	=> $publis_dok,
 			'contents'	=> 'Keputusan_menteri_doc_edit',
@@ -1338,6 +1358,7 @@ class Keputusan_menteri_doc extends CI_Controller {
 		}
 
 		function update_document(){
+
 			$this->save_doc();
 			$this->session->set_flashdata('message', '<div class="alert alert-info"> Rancangan berhasil dirubah.</div>');
 			redirect('backend/dokumen','refresh');

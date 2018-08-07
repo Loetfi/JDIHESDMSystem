@@ -19,7 +19,7 @@ class Dokumen extends CI_Controller {
 			'detail'	=> site_url('backend/dokumen/detail'),
 			// 'edit'	=> site_url('Keputusan_menteri_doc/edit'),
 			'contents'	=> 'dokumen/data',
-			'url'		=> site_url('backend/service/dokumen/index/'.$this->session->userdata('login_id')),
+			'url'		=> site_url('backend/service/dokumen/index/'.$this->session->userdata('id_flow')),
 			'title'		=> 'Daftar Rancangan ',
 			'name'		=> empty($this->session->userdata('name')) ? 'Tanpa Login' : $this->session->userdata('name')
 		);
@@ -51,6 +51,8 @@ class Dokumen extends CI_Controller {
 	
 	public function pilih()
 	{
+
+
 		// echo(1); exit();
 		$data = array(
 			'contents'	=> 'dokumen/pilih',
@@ -65,10 +67,10 @@ class Dokumen extends CI_Controller {
 	public function detail($id_dokumen = '')
 	{
 		$ambil_data_dokumen = $this->db->query("SELECT * from dokumen where id_dokumen = $id_dokumen ")->row_array();
-		$ambil_data_dokumen_version = $this->db->query("SELECT c.name , a.*, b.jenis_dokumen, d.name as nama_atasan from dokumen_revisi  a 
+		$ambil_data_dokumen_version = $this->db->query("SELECT c.name , a.*, b.jenis_dokumen, d.nama_flow as disposisi from dokumen_revisi  a 
 			inner join dokumen b on a.id_dokumen = b.id_dokumen
 			left join login c on a.cuser = c.login_id
-			left join login d on a.appTo = d.login_id
+			left join flow d on a.appTo = d.id_flow
 			where a.id_dokumen = $id_dokumen ")->result_array();
 
 		##cek publis
