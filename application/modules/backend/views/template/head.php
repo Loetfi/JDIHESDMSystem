@@ -10,10 +10,10 @@
   <div class="navside dk" data-layout="column">
     <div class="navbar no-radius">
       <!-- brand -->
-      <!-- <a href="#" class="navbar-brand">
+      <a href="#" class="navbar-brand">
        <img src="<?php echo base_url('assets/logo/logo-esdm.png');?>" alt=".">
        <span class="hidden-folded inline">Biro Hukum</span>
-     </a>  -->
+     </a> 
      <!-- / brand -->
    </div>
    <div data-flex class="hide-scroll">
