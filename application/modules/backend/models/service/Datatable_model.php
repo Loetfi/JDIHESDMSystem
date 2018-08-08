@@ -2,82 +2,75 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Datatable_model extends CI_Model { 
-    
-    // _get_datatables_query
-    public function datatable($table , $column_order = array() , $column_search = array() , $orderin = array(), $login_id)
-    { 
-        // setting lutfi database schema lain 
-        // menggunakan tambahan settingan di database.php  
-        /*
-        * SELECT a.id_dokumen, a.jenis_dokumen , a.nama_dokumen, a.cuser, b.appTo,
-        b.rilis_doc
-        from dokumen a 
-        left join dokumen_revisi b on a.id_dokumen = b.id_dokumen
-        where a.cuser = 7 or ( appTo = 7 and rilis_doc = 1 )
-        GROUP BY a.id_dokumen
-        */
 
-        // SELECT * FROM dokumen_revisi WHERE FIND_IN_SET('3', appTo) <> 0
+    // _get_datatables_query
+    public function datatable($table , $column_order = array() , $column_search = array() , $orderin = array(), $id_flow, $login_id)
+    {  
+        // $this->db->select('a.id_dokumen, a.jenis_dokumen , a.nama_dokumen, a.cuser, b.appTo,b.rilis_doc,b.cdate');
+        // $this->db->from('dokumen a');
+        // $this->db->join('dokumen_revisi b','a.id_dokumen = b.id_dokumen','left');
+        // $this->db->where('a.cuser = '.$login_id.' or (FIND_IN_SET('.$login_id.', appTo) <> 0 and b.rilis_doc = 1)');
+        // $this->db->group_by('a.id_dokumen');
+
+
+        // #1 SubQueries no.1 -------------------------------------------
 
         $this->db->select('a.id_dokumen, a.jenis_dokumen , a.nama_dokumen, a.cuser, b.appTo,b.rilis_doc,b.cdate');
         $this->db->from('dokumen a');
         $this->db->join('dokumen_revisi b','a.id_dokumen = b.id_dokumen','left');
-        $this->db->where('a.cuser = '.$login_id.' or (FIND_IN_SET('.$login_id.', appTo) <> 0 and b.rilis_doc = 1)');
+        $this->db->where('a.cuser = '.$id_flow.' or (FIND_IN_SET('.$id_flow.', appTo) <> 0 and b.rilis_doc = 1)');
+        // $this->db->group_by('a.id_dokumen');
+        // $this->db->select('title, content, date');
+        // $this->db->from('mytable');
+        $query = $this->db->get();
+        $subQuery1 = $this->db->last_query(); //$this->db->_compile_select();
+
+        // $this->db->_reset_select();
+
+// #2 SubQueries no.2 -------------------------------------------
+        $this->db->select('a.id_dokumen, a.jenis_dokumen , a.nama_dokumen, a.cuser, b.appTo,b.rilis_doc,b.cdate');
+        $this->db->from('dokumen a');
+        $this->db->join('dokumen_revisi b','a.id_dokumen = b.id_dokumen','left');
+        $this->db->where('a.cuser = '.$login_id);
+        // SELECT `a`.`id_dokumen`, `a`.`jenis_dokumen`, `a`.`nama_dokumen`, `a`.`cuser`, `b`.`appTo`, `b`.`rilis_doc`, `b`.`cdate`  from dokumen a 
+        //    left join dokumen_revisi b on a.id_dokumen = b.id_dokumen
+        //    where a.cuser = $login_id
+        // $this->db->select('title, content, date');
+        // $this->db->from('mytable2');
+        $query = $this->db->get();
+        $subQuery2 = $this->db->last_query();; //$this->db->_compile_select();
+
+        // $this->db->_reset_select();
+
+// #3 Union with Simple Manual Queries --------------------------
+
+        // $this->db->query("select * from ($subQuery1 UNION $subQuery2) as unionTable");
+
+// #3 (alternative) Union with another Active Record ------------
+
+        $this->db->from("($subQuery1 UNION $subQuery2) a");
         $this->db->group_by('a.id_dokumen');
-        
-        // $this->db->distinct("d.id_dokumen ,
-        //     d.jenis_dokumen , 
-        //     d.nama_dokumen , 
-        //     d.cdate ,
-        //     d.status , 
-        //     d.submit_doc , 
-        //     d.relasi_doc , 
-        //     l.direct_boss");
-        // $this->db->select("d.id_dokumen ,
-        //     d.jenis_dokumen , 
-        //     d.nama_dokumen , 
-        //     d.cdate ,
-        //     d.status , 
-        //     d.submit_doc , 
-        //     d.relasi_doc , 
-        //     l.direct_boss");
-        // $this->db->from("dokumen d");
-        // $this->db->join("login l ","d.cuser = l.login_id","left");
-        // $this->db->join("dokumen_revisi dr ","dr.id_dokumen = d.id_dokumen","left");
-        // $this->db->where("d.cuser = $login_id  or dr.appTo = $login_id ");
-        // $this->db->group_by("d.id_dokumen ,
-        //     d.jenis_dokumen , 
-        //     d.nama_dokumen , 
-        //     d.cdate ,
-        //     d.status , 
-        //     d.submit_doc , 
-        //     d.relasi_doc , 
-        //     l.direct_boss");
-        // a.cuser = $login_id or (a.submit_doc = 1 and b.direct_boss = $login_id )
-        /*
-        select distinct d.*, l.direct_boss 
-        from dokumen d
-        left join login l on d.cuser = l.login_id
-        left join dokumen_revisi dr
-        on dr.id_dokumen = d.id_dokumen
-        where
-        d.cuser = 6
-        or dr.appTo = 6
-        order by d.id_dokumen, status_revisi
-        *
-        */
-        // $this->db->query("SELECT a.*,b.direct_boss from dokumen a 
-        //     left join login b on a.cuser = b.login_id 
-        //     where a.cuser = $login_id or (a.submit_doc = 1 and b.direct_boss = $login_id ) ");   
-        // $this->db->where('cuser' , $login_id);
-        // $this->db->order_by('d.id_dokumen, status_revisi' , 'DESC');
+        // $this->db->get();
+
+        // $this->db->query("SELECT * from (
+        //    SELECT `a`.`id_dokumen`, `a`.`jenis_dokumen`, `a`.`nama_dokumen`, `a`.`cuser`, `b`.`appTo`, `b`.`rilis_doc`, `b`.`cdate` 
+        //    FROM `dokumen` `a` LEFT JOIN `dokumen_revisi` `b` ON `a`.`id_dokumen` = `b`.`id_dokumen` 
+        //    WHERE `a`.`cuser` = $id_flow or (FIND_IN_SET($id_flow, appTo) <>0 and `b`.`rilis_doc` = 1) 
+        //    union all 
+        //    SELECT `a`.`id_dokumen`, `a`.`jenis_dokumen`, `a`.`nama_dokumen`, `a`.`cuser`, `b`.`appTo`, `b`.`rilis_doc`, `b`.`cdate`  from dokumen a 
+        //    left join dokumen_revisi b on a.id_dokumen = b.id_dokumen
+        //    where a.cuser = $login_id
+        //    ) a
+        //    GROUP BY a.`id_dokumen`
+        //    ");
+        //  ORDER BY `tbl_dokumen`.`id_dokumen` DESC LIMIT 10
         
         $i = 0;
         foreach ($column_search as $item) // loop column
         {
             if($_POST['search']['value']) // if datatable send POST for search
             {
-                
+
                 if($i===0) // first loop
                 {
                     $this->db->group_start(); // open bracket. query Where with OR clause better with bracket. because maybe can combine with other WHERE with AND.
@@ -106,15 +99,15 @@ class Datatable_model extends CI_Model {
         }
     }
     
-    function get_datatables($table , $column_order = array() , $column_search = array() , $orderin = array(),$login_id){
-        $this->datatable($table , $column_order , $column_search  , $orderin ,$login_id );
+    function get_datatables($table , $column_order = array() , $column_search = array() , $orderin = array(),$id_flow , $login_id){
+        $this->datatable($table , $column_order , $column_search  , $orderin ,$id_flow , $login_id );
         if($_POST['length'] != -1)
-        $this->db->limit($_POST['length'], $_POST['start']);
+            $this->db->limit($_POST['length'], $_POST['start']);
         $query = $this->db->get();
         return $query->result();
     }
-    function count_filtered($table , $column_order = array() , $column_search = array() , $orderin = array(), $login_id){
-        $this->datatable($table , $column_order , $column_search  , $orderin , $login_id);
+    function count_filtered($table , $column_order = array() , $column_search = array() , $orderin = array(), $id_flow , $login_id){
+        $this->datatable($table , $column_order , $column_search  , $orderin , $id_flow , $login_id);
         $query = $this->db->get();
         return $query->num_rows();
     }

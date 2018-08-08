@@ -1369,10 +1369,13 @@ class Keputusan_menteri_doc extends CI_Controller {
 
 		function submit_document()
 		{
-		// print_r($_POST);
+			// print_r($_POST);exit();
 			if (empty($this->session->userdata('login_id'))) {
 				exit('anda belom login');
 			} else {
+				#join assign multiple 
+				$join_assign = @$_POST['assign'] ? implode(',', $_POST['assign']) : 0;
+				#end
 				$res = '';
 				$login_id = $this->session->userdata('login_id');
 				$data = $this->save_doc();
@@ -1385,7 +1388,7 @@ class Keputusan_menteri_doc extends CI_Controller {
 				if (count($cari_revisi['direct_boss']) > 0) {
 				# update 
 					$update = array(
-						'appTo'			=> @$_POST['assign'] ? @$_POST['assign'] : $cari_revisi['direct_boss'], 
+						'appTo'			=> @$join_assign ? @$join_assign : $cari_revisi['direct_boss'], 
 						'rilis_doc'		=> 1,
 						'catatan_submit'=> @$_POST['catatan_submit'] ? nl2br($_POST['catatan_submit']) : '-'
 					);

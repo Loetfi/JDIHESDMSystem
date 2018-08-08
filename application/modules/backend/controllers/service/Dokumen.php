@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Dokumen extends CI_Controller {
 
-	public function index($login_id)
+	public function index($id_flow , $login_id)
 	{
 		$this->load->helper('backend');
 
@@ -11,13 +11,13 @@ class Dokumen extends CI_Controller {
 		// $this->cabang_model->get_datatables();
 
 		$table          = 'dokumen';
-    	$column_order   = ['b.id_dokumen' , 'b.jenis_dokumen', 'a.nama_dokumen']; //set column field database for datatable orderable
-    	$column_search  = ['b.id_dokumen' , 'b.jenis_dokumen', 'a.nama_dokumen'];
-    	$orderin        = ['b.id_dokumen' => 'desc']; // default order  # 'id_website' => 'asc'
+    	$column_order   = ['a.id_dokumen' , 'a.jenis_dokumen', 'a.nama_dokumen']; //set column field database for datatable orderable
+    	$column_search  = ['a.id_dokumen' , 'a.jenis_dokumen', 'a.nama_dokumen'];
+    	$orderin        = ['a.id_dokumen' => 'desc']; // default order  # 'id_website' => 'asc'
 
 
 
-    	$list 	= $this->lists->get_datatables($table , $column_order , $column_search , $orderin, $login_id);
+    	$list 	= $this->lists->get_datatables($table , $column_order , $column_search , $orderin, $id_flow , $login_id);
  
 		// CRUDS Action Role
 		$detail 	= @urldecode($this->input->input_stream('detail'));
@@ -47,8 +47,8 @@ class Dokumen extends CI_Controller {
 
 		$output = array(
 			"draw" => $_POST['draw'],
-			"recordsTotal" => $this->lists->count_all($table, $login_id),
-			"recordsFiltered" => $this->lists->count_filtered($table , $column_order , $column_search , $orderin, $login_id),
+			"recordsTotal" => $this->lists->count_all($table, $id_flow , $login_id),
+			"recordsFiltered" => $this->lists->count_filtered($table , $column_order , $column_search , $orderin, $id_flow , $login_id),
 			"data" => $data,
 			);
    		//output to json format 
@@ -56,7 +56,7 @@ class Dokumen extends CI_Controller {
 		
 	}
 
-	function status_dok(int $id_dokumen)
+	function status_dok($id_dokumen)
 	{
 		$cek = $this->db->query("SELECT submit_doc from dokumen where id_dokumen = $id_dokumen ")->row_array();
 

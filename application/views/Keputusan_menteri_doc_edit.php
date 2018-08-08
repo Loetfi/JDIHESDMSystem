@@ -670,12 +670,15 @@ function addLampiran(ele) {
 	<br><br><br> 
 	<div class="form-group">
 		<label for="">Disposisi ke :</label>
-		<!-- <select class="select2 form-control" name="assign" data-toggle="tooltip" title="Disposisi ideal digunakan saat dokumen rancangan dianggap layak untuk submit / disposisi ke bagian yang dipilih."> -->
 			<?php foreach ($cari_dispo as $cd) { ?>
-				<input type="checkbox" name="assign[]" value="<?php echo $cd['id_flow_role']?>"> <?php echo $cd['nama_flow'];?>
+				<input type="checkbox" name="assign[]" value="<?php echo $cd['id_flow_role']?>"> <?php echo $cd['nama_flow'];?> &nbsp;&nbsp;&nbsp;
 			<?php } ?>
-		<!-- </select> -->
 	</div> 
+	<div class="form-group">
+		<label>Masuk Catatan : </label>
+			<textarea class="form-control" rows="4" name="catatan_submit"></textarea>
+	</div>
+	<br>
 	<button type="submit" class="btn btn-warning btn-sm" id="save_doc_submit">Submit </button>
 
 	<?php if ($submit_hilang==FALSE) { ?>
@@ -685,8 +688,7 @@ function addLampiran(ele) {
 				<option value="25">kasjh2</option>
 				<option value="37">kasjh2_3</option>
 			</select>
-			<br>
-			<textarea class="form-control" rows="4" name="catatan_submit">Masukan Catatan</textarea>
+			
 		<?php } elseif (@$this->session->userdata('login_id')==37) { ?>
 		<select class="form-control" name="assign">
 				<option value="35">staffsjh2_3</option>
@@ -696,7 +698,6 @@ function addLampiran(ele) {
 			<textarea class="form-control" rows="4" name="catatan_submit">Masukan Catatan</textarea>
 		<?php } ?>
 		<br>
-		<button type="submit" class="btn btn-warning btn-sm" id="save_doc_submit">Submit </button>
 	<?php } else { ?>
 		<hr>
 		<div class="alert ">

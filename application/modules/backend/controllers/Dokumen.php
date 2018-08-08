@@ -12,14 +12,20 @@ class Dokumen extends CI_Controller {
 	}
 	
 	public function index()
-	{ 
+	{ 	
+
+		# cek apakah dokumen belum tersubmit / disposisi karena hal tsb masih versi A.
+		# dan mengambil versi login id 
+		$login_id = @$this->session->userdata('login_id') ? $this->session->userdata('login_id') : 0;
+		$id_flow  = @$this->session->userdata('id_flow') ? $this->session->userdata('id_flow') : 0; 
+
 		$data = array(
 			// 'data' 		=>  $this->db->query("SELECT id_dokumen, jenis_dokumen, nama_dokumen from dokumen order by id_dokumen")->result_array(),
 			'message'	=> $this->session->flashdata('message'),
 			'detail'	=> site_url('backend/dokumen/detail'),
 			// 'edit'	=> site_url('Keputusan_menteri_doc/edit'),
 			'contents'	=> 'dokumen/data',
-			'url'		=> site_url('backend/service/dokumen/index/'.$this->session->userdata('id_flow')),
+			'url'		=> site_url('backend/service/dokumen/index/'.$id_flow.'/'.$login_id),
 			'title'		=> 'Daftar Rancangan ',
 			'name'		=> empty($this->session->userdata('name')) ? 'Tanpa Login' : $this->session->userdata('name')
 		);
@@ -60,17 +66,54 @@ class Dokumen extends CI_Controller {
 		);
 		$this->load->view('template/head', $data, FALSE);
 	}
+
+	public function bagian($key='')
+	{
+		if (count($key)>0) {
+			for ($i=0; $i < count($key); $i++) { 
+
+				$cari_flow = $this->db->query("SELECT nama_flow from flow where id_flow = '$key[$i]'")->row_array();
+				$response[] = $cari_flow['nama_flow'];
+
+			}
+		} else {
+			$response = array();
+		}
+
+		return $response; 
+	}
 	
 	public function detail($id_dokumen = '')
 	{
 		$ambil_data_dokumen = $this->db->query("SELECT * from dokumen where id_dokumen = $id_dokumen ")->row_array();
-		$ambil_data_dokumen_version = $this->db->query("SELECT c.name , a.*, b.jenis_dokumen, d.nama_flow as disposisi from dokumen_revisi  a 
+
+
+
+		$ambil_data_dokumen_version = $this->db->query("SELECT c.name , a.*, b.jenis_dokumen, d.nama_flow,e.nama_flow as nama_flow_pengguna  from dokumen_revisi  a 
 			inner join dokumen b on a.id_dokumen = b.id_dokumen
 			left join login c on a.cuser = c.login_id
 			left join flow d on a.appTo = d.id_flow
+			left join flow e on c.id_flow = e.id_flow
 			where a.id_dokumen = $id_dokumen ")->result_array();
 
-		##cek publis
+		foreach ($ambil_data_dokumen_version as $ad) {
+			$res['name'] = $ad['name']; 
+			$res['nama_flow_pengguna'] = $ad['nama_flow_pengguna'];
+			$res['id_revisi'] = $ad['id_revisi'];
+			$res['id_dokumen'] = $ad['id_dokumen'];
+			$res['status_revisi'] = $ad['status_revisi'];
+			$res['cuser'] = $ad['cuser']; 
+			$res['cdate'] = $ad['cdate']; 
+			$res['rilis_doc'] = $ad['rilis_doc'];
+			$res['namafile'] = $ad['namafile'];
+			$res['catatan_submit'] = $ad['catatan_submit'];
+			$res['jenis_dokumen'] = $ad['jenis_dokumen'];
+
+			$res['disposisi'] = $this->bagian(explode(',', $ad['appTo']));
+ 
+			$respon_disposi[] = $res;
+		}
+ 		##cek publis
 		$cek_publis = $this->db->query("SELECT id_dokumen from dokumen WHERE id_dokumen = $id_dokumen and submit_doc = 1")->row_array();
 		if ($cek_publis) { $publis = true; } else { $publis = false; }
 		##end 
@@ -78,7 +121,7 @@ class Dokumen extends CI_Controller {
 		$data = array(
 			'publish'		=> $publis,
 			'detail_dok'	=> isset($ambil_data_dokumen) ? $ambil_data_dokumen : array(),
-			'dok_versi'		=> isset($ambil_data_dokumen_version) ? $ambil_data_dokumen_version : array(),
+			'dok_versi'		=> isset($respon_disposi) ? $respon_disposi : array(),
 			'contents'		=> 'dokumen/detail',
 			'title'			=> 'Detail Dokumen ',
 			'name'			=> empty($this->session->userdata('name')) ? 'Tanpa Login' : $this->session->userdata('name')
