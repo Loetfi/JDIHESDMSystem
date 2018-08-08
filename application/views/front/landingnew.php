@@ -19,9 +19,12 @@
     margin-bottom: -2.5rem !important;
   }
   .pt-6, .py-6 {
-
     padding-top: 1.5rem !important;
-
+}
+.intro-content {
+    z-index: 2;
+    position: relative;
+    margin-bottom: -100px;
 }
 </style>
 </head>
@@ -58,12 +61,12 @@
     </div>
     <div class="intro-content mt-5">
       <div class="container">
-        <div class="row" style="padding-top: -100px">
+        <div class="row" style="padding-top: -100px;">
           <div class="col-md-6 align-self-center">
-            <center><h1 class="display-4 mb-3">Selamat Datang di Rannah Hukum </h1>
-              <h2>Rancang Bangun Naskah Hukum</h2>
+            <center><h1 class="">Selamat Datang di <br> Rannah Hukum </h1>
+              <h4>Rancang Bangun Naskah Hukum</h4>
             </center>
-            <p class="lead mb-4" style="text-align: justify;">Rannah Hukum merupakan Aplikasi Perancangan Produk Hukum yang dikembangkan oleh Biro Hukum Kementerian Energi dan Sumber Daya Mineral sebagai fasilitas yang dapat digunakan untuk mewujudkan Produk Hukum secara efektif, efisien dan sesuai dengan teknik penyusunan peraturan perundang-undangan.</p>
+            <p class="mb-4" style="text-align: justify;">Rannah Hukum merupakan Aplikasi Perancangan Produk Hukum yang dikembangkan oleh Biro Hukum Kementerian Energi dan Sumber Daya Mineral sebagai fasilitas yang dapat digunakan untuk mewujudkan Produk Hukum secara efektif, efisien dan sesuai dengan teknik penyusunan peraturan perundang-undangan.</p>
           </div><!-- /.col-md-6 -->
           <div class="col-md-5 ml-auto">
             <div class="card">
@@ -100,7 +103,7 @@
       <div class="container">
 
         <div class="row mb-6">
-          <center><h2>Link Terkait </h2></center>
+          <center><h6>Link Terkait </h6></center>
         </div>
 
         <div class="row mt-5">
@@ -111,44 +114,55 @@
               </div>
               <div class="media-body">
                 <br>
-                <h3 class="h4"><a href="https://www.esdm.go.id/" target="_blank">Kementerian ESDM</a> </h3>
+                <h3 class="h6"><a href="https://www.esdm.go.id/" target="_blank">Kementerian ESDM</a> </h3>
               </div>
             </div>
           </div>
           <div class="col-md-3">
             <div class="media">
               <div class="icon mr-3 bg-warning">
-                <img src="<?php echo base_url('JDIH-logo.jpg');?>" width="100px">
+                <img src="<?php echo base_url('JDIH-logo.jpg');?>" width="100px" style="margin-bottom: 20px">
               </div>
               <div class="media-body">
                 <br>
-                <h3 class="h4"><a href="http://jdih.esdm.go.id/?page=home" target="_blank">JDIH</a></h3>
+                <h3 class="h6"><a href="http://jdih.esdm.go.id/?page=home" target="_blank">JDIH</a></h3>
               </div>
             </div>
           </div> 
           <div class="col-md-3">
             <div class="media">
               <div class="icon mr-3 bg-success">
-                <img src="<?php echo base_url('logo-esdm-kuning.png');?>" width="70px">
+                <img src="<?php echo base_url('logo-esdm-kuning.png');?>" width="70px" >
               </div>
               <div class="media-body">
                 <br>
-                <h3 class="h4"><a href="#">SIMOLEG</a></h3>
+                <h3 class="h6"><a href="#">SIMOLEG</a></h3>
               </div>
             </div>
           </div>
-          <div class="row mt-3">
-
-           <div class="col-md-4">
+          <div class="row md-3">
             <div class="media">
+              <div class="icon mr-3 bg-success">
+                <img src="<?php echo base_url('sipekalogin.png');?>" width="70px">
+              </div>
+              <div class="media-body">
+                <br>
+                <h3 class="h6"><a href="http://sipeka.esdm.go.id/" target="_blank">SIPEKA</a></h3>
+              </div>
+            </div>
+          </div>
+
+           <!-- <div class="col-md-4"> -->
+           <!--  <div class="media">
               <div class="">
                 <img src="<?php echo base_url('sipekalogin.png');?>" width="70px">
               </div>
               <div class="media-body">
-                <h3 class="h4"><a href="http://sipeka.esdm.go.id/" target="_blank">SIPEKA</a></h3>
+                <br>
+                <h3 class="h6"><a >SIPEKA</a></h3>
               </div>
-            </div>
-          </div> 
+            </div> -->
+          <!-- </div>  -->
         </div><!-- /.row -->
       </div><!-- /.row -->
 
