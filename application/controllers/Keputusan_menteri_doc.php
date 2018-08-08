@@ -1260,7 +1260,7 @@ class Keputusan_menteri_doc extends CI_Controller {
 						$queryDetailDokumen = $this->db->insert('dokumen_detail', $dataDetailDokumen);
 						
 						// add komentar to tabel komentar_doc
-						if(@$_POST['Komentar_'.$valKeys][$idxKomentar]) {
+						/*if(@$_POST['Komentar_'.$valKeys][$idxKomentar]) {
 							$dataKomentar = array(
 								'id_detail'	=> $this->db->insert_id(),
 								'pesan'		=> @$_POST['Komentar_'.$valKeys][$idxKomentar],
@@ -1268,7 +1268,7 @@ class Keputusan_menteri_doc extends CI_Controller {
 								'user_id'	=> @$this->session->userdata('login_id')
 							);
 							$this->db->insert('komentar_doc', $dataKomentar);
-						}
+						}*/
 					}
 					$idxKomentar++;
 				}
@@ -1411,7 +1411,7 @@ class Keputusan_menteri_doc extends CI_Controller {
 			$id = $this->input->get('id');
 			$rev = $this->input->get('stat');
 			$type = $this->input->get('jenis');
-			$query = $this->db->query("SELECT * FROM komentar_doc a
+			$query = $this->db->query("SELECT *, a.cdate as comm_date FROM komentar_doc a
 				INNER JOIN dokumen_detail b ON b.id_detail = a.id_detail 
 				INNER JOIN (
 					SELECT a.id_dokumen, a.cuser, a.login_id FROM dokumen a
@@ -1421,6 +1421,17 @@ class Keputusan_menteri_doc extends CI_Controller {
 				INNER JOIN login d ON d.login_id = c.login_id
 				where b.jenis_field = '$type'");
 			echo json_encode($query->result());
+		}
+	
+		function submitKomentarHistory() {
+			$post = $this->input->post();
+			$dataKomentar = array(
+				'id_detail'	=> $post['id_detail'],
+				'pesan'		=> $post['pesan'],
+				'cdate'		=> date("Y-m-d H:i:s"),
+				'user_id'	=> @$this->session->userdata('login_id')
+			);
+			$this->db->insert('komentar_doc', $dataKomentar);
 		}
 	}
 	/* End of file dashboard.php */

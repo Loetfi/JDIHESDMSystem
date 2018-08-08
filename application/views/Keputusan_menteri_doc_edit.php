@@ -110,7 +110,7 @@
 	}
 	function addTembusan(ele, count) {
 		var counts = count + 1;
-		var element =	'<div class="form-group" id="text-tembusan'+counts+'" style="display:inline-block; margin-top:5px; width:100%;">'+
+		var element = '<div class="form-group" id="text-tembusan'+counts+'" style="display:inline-block; margin-top:5px; width:100%;">'+
 		'<div style="float:left; width:20%">'+
 		'<input type="text" name="pointerTembusan[]" class="form-control" placeholder="Pointer" />'+
 		'<select class="form-control" style="cursor:pointer; margin-top:10px;">'+
@@ -350,7 +350,7 @@ function addLampiran(ele) {
 												<a href="javascript:void(0)" 
 												   id="btnKomentar-<?php echo $namaJenisField.($idxField+1); ?>" 
 												   targetKomentar="textKomentar-<?php echo $namaJenisField.($idxField+1); ?>" 
-												   onclick="addKomentarModal(this.id, <?php echo $id_dokumen; ?>, '<?php echo $stat_revisi; ?>')" 
+												   onclick="addKomentarModal(this.id, <?php echo $id_dokumen; ?>, '<?php echo $stat_revisi; ?>', <?php echo $detail_dokumen[$namaJenisField][$idxField]['id_detail']; ?>)" 
 												   style="position:absolute; right:4.3%; margin-top:25px; padding:2px;" title="Tambah Telaah" class="btn btn-xs btn-primary">
 													<i class="fa fa-lg <?php echo ($idxField+1) < count(@$detail_dokumen[$namaJenisField]) ? 'fa-comments-o' : 'fa-comments'; ?>" ></i>
 												</a>
@@ -718,8 +718,11 @@ function addLampiran(ele) {
       	<h5 class="modal-title">Jelajah Komentar</h5>
       </div>
       <div id="textarea-komentar" class="modal-body text-center p-lg">
-		  <textarea style="font-family:Verdana; height:200px; width:100%;" disabled></textarea>
-		  <input type="hidden" id="hiddenEleComment" />
+		  <div id="showTextArea"></div>
+		  <input type="hidden" id="hiddenIdTextChat" />
+		  <input type="hidden" id="hiddenIdDoc" />
+		  <input type="hidden" id="hiddenStat" />
+		  <input type="hidden" id="hiddenIdDetail" />
       </div>
       <div class="modal-footer">
 		<div style="margin-bottom:5px"><input id="chatKomentar" type="text" name="write-comment" style="width:100%" /></div>
@@ -793,7 +796,7 @@ function addLampiran(ele) {
       }
     });
 	
-	function addKomentarModal(thisId, id_doc, stat) {
+	function addKomentarModal(thisId, id_doc, stat, id_detail) {
 		$('#btn-modal').click();
 		var split = thisId.split('-');
 		var getHiddenKomen = $('#textKomentar-'+split[1]).text();
@@ -806,27 +809,47 @@ function addLampiran(ele) {
 			},
 			success: function(data) {
 				// &#13;&#10;
-				$('#textarea-komentar').html('<textarea style="font-family:Verdana; height:200px; width:100%;" disabled></textarea><input type="hidden" id="hiddenEleComment" />');
+				var reEle = '<div id="showTextArea"></div>'+
+							'<input type="hidden" id="hiddenIdTextChat" />'+
+							'<input type="hidden" id="hiddenIdDoc" />'+
+							'<input type="hidden" id="hiddenStat" />'+
+							'<input type="hidden" id="hiddenIdDetail" />';
+				$('#textarea-komentar').html(reEle);
 				var datax = JSON.parse(data);
 				var str = '';
 				for(var i = 0; i < datax.length; i++) {
-					str += datax[i].name+' : '+datax[i].pesan+'\r';
+					var usr = datax[i].name !== null ? datax[i].name : 'Unknown';
+					str += '<textarea style="font-family:Verdana; width:100%;" disabled>'+usr+' '+datax[i].comm_date+' \r'+datax[i].pesan+'</textarea>';
 				}
-				str += '<?php print_r($this->session->all_userdata()['username']); ?> : '+getHiddenKomen;
-				$('#textarea-komentar').children().text(str);
+				
+				$('#showTextArea').html(str);
 				$('#chatKomentar').val(getHiddenKomen);
-				$('#hiddenEleComment').val('textKomentar-'+split[1]);
+				$('#hiddenIdTextChat').val('#textKomentar-'+split[1]);
+				$('#hiddenIdDoc').val(id_doc);
+				$('#hiddenStat').val(stat);
+				$('#hiddenIdDetail').val(id_detail);
 			}
 		});
 	}
 												
 	function btnSubmitModal(ele) {
 		var r = confirm("Anda Yakin?");
+		var chatting = $('#chatKomentar').val();
+		var id_detail = $('#hiddenIdDetail').val();
 		if(r === true) {
-			var chatting = $('#chatKomentar').val();
-			var eleComment = $('#hiddenEleComment').val(); console.log(eleComment);
-			$('#'+eleComment).text(chatting);
-			$(ele).attr("data-dismiss", "modal");
+			$.ajax({
+				url: '<?php echo site_url(); ?>/Keputusan_menteri_doc/submitKomentarHistory',
+				type: 'POST',
+				data: 'id_detail='+id_detail+'&pesan='+chatting,
+				beforeSend: function() {},
+				success: function(data) {
+					var eleComment = $('#hiddenIdTextChat').val();
+					var id_doc = $('#hiddenIdDoc').val(id_doc);
+					var stat = $('#hiddenStat').val(stat);
+					$(eleComment).text(chatting);
+					$(ele).attr("data-dismiss", "modal");
+				}
+			});
 		}
 	}
 
