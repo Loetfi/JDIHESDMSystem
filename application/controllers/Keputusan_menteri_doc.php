@@ -1431,7 +1431,13 @@ class Keputusan_menteri_doc extends CI_Controller {
 				'cdate'		=> date("Y-m-d H:i:s"),
 				'user_id'	=> @$this->session->userdata('login_id')
 			);
-			$this->db->insert('komentar_doc', $dataKomentar);
+			$query = $this->db->insert('komentar_doc', $dataKomentar);
+			if(@$query) {
+				echo json_encode(array('status' => 1));
+			}
+			else {
+				echo json_encode(array('status' => 0));
+			}
 		}
 	}
 	/* End of file dashboard.php */
