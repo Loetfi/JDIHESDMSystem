@@ -1411,15 +1411,11 @@ class Keputusan_menteri_doc extends CI_Controller {
 			$id = $this->input->get('id');
 			$rev = $this->input->get('stat');
 			$type = $this->input->get('jenis');
-			$query = $this->db->query("SELECT *, a.cdate as comm_date FROM komentar_doc a
-				INNER JOIN dokumen_detail b ON b.id_detail = a.id_detail 
-				INNER JOIN (
-					SELECT a.id_dokumen, a.cuser, a.login_id FROM dokumen a
-					JOIN dokumen_revisi b ON b.id_dokumen = a.id_dokumen
-					WHERE a.id_dokumen = $id AND b.status_revisi = '$rev'
-				) c ON c.id_dokumen = b.id_dokumen
-				INNER JOIN login d ON d.login_id = c.login_id
-				where b.jenis_field = '$type'");
+			$query = $this->db->query("
+						SELECT * FROM komentar_doc a
+						INNER JOIN dokumen_detail b ON b.id_detail = a.id_detail
+						INNER JOIN dokumen_revisi c ON c.id_revisi = b.id_revisi
+						WHERE c.status_revisi = '$rev' AND b.id_dokumen = $id");
 			echo json_encode($query->result());
 		}
 	
