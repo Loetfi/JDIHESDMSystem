@@ -16,13 +16,13 @@ class Undang2 extends CI_Controller {
 		$this->load->view('backend/template/head', $data, FALSE);
 		// $this->load->view('');
 	}
-	function coba(){
-		$this->sanusi('benar');
+	function save_document()
+	{
+		$this->save_doc();
+		$this->session->set_flashdata('message', '<div class="alert alert-info"> Dokumen berhasil dibuat.</div>');
+		redirect('backend/dokumen','refresh');
 	}
-	function sanusi($thisDownload = 'benar') { 
-
-		// print_r(@$_POST);die();
-
+	function sanusi($thisDownload = 'benar') {
 		error_reporting(0);
 		$this->load->library('Phpword');
 		$phpWord = new \PhpOffice\PhpWord\PhpWord();
@@ -522,7 +522,17 @@ class Undang2 extends CI_Controller {
 		$arrPointPasal = @$_POST['BabPasal'];
 		$subLevelBabPasal = @$_POST['subLevelBabPasal'];
 		$pointerBabPasal = @$_POST['pointerBabPasal'];
+		$arrPageBabPasal = @$_POST['nextPageBabPasal'];
 		foreach($pointerBab as $key => $val){
+			
+			$babPasalAll[] = array('id_dokumen' => $idDokumen, 'id_revisi' => $idRevisi,
+				'jenis_field' => 'Bab',
+				'pointer' => '',
+				'layout' => '',
+				'subLevel' => '',
+				'teks' => $val,
+				'cdate' => $cdate,
+			);
 			
 			$fontStyle['allCaps'] = true;
 			$barisBab = explode("\r\n",$val);
@@ -541,6 +551,23 @@ class Undang2 extends CI_Controller {
 			$keyPasal = $key + 1;
 			$pasal = $arrPasal[$keyPasal];
 			foreach($pasal as $pasalKey => $pasalVal){
+				
+				$babPasalAll[] = array('id_dokumen' => $idDokumen, 'id_revisi' => $idRevisi,
+					'jenis_field' => 'Pasal',
+					'pointer' => '',
+					'layout' => '',
+					'subLevel' => '',
+					'teks' => @$pasalVal,
+					'cdate' => $cdate,
+				);
+				$babPasalAll[] = array('id_dokumen' => $idDokumen, 'id_revisi' => $idRevisi,
+					'jenis_field' => 'PasalKet',
+					'pointer' => '',
+					'layout' => '',
+					'subLevel' => '',
+					'teks' => @$arrKeteranganPasal[$keyPasal][$key],
+					'cdate' => $cdate,
+				);
 				if ($pasalVal != ''){
 					$barisPasal = explode("\r\n",$pasalVal);
 					$thisParagraf = $babTitle;
@@ -563,13 +590,20 @@ class Undang2 extends CI_Controller {
 				$keyPointPasal = $pasalKey + 1;
 				$pointPasal = $arrPointPasal[$keyPasal][$keyPointPasal];
 				foreach($pointPasal as $pointPasalKey => $pointPasalVal){
+					
+					$idxSubLevel = $subLevelBabPasal[$keyPasal][$keyPointPasal][$pointPasalKey];
+					$pointerPointPasal = @$pointerBabPasal[$keyPasal][$keyPointPasal][$pointPasalKey];
+					$nextPageBabPasal = @$arrPageBabPasal[$keyPasal][$keyPointPasal][$pointPasalKey];
 					$barisPointPasal = explode("\r\n",$pointPasalVal);
 					foreach($barisPointPasal as $row){
 						if ($row != ""){
 							$txtPointPasal = $row;
-							$idxSubLevel = $subLevelBabPasal[$keyPasal][$keyPointPasal][$pointPasalKey];
-							$pointerPointPasal = @$pointerBabPasal[$keyPasal][$keyPointPasal][$pointPasalKey];
 							// $section->addText($txtPointPasal, $fontStyle, $subLevel[$idxSubLevel]['pointer']);
+							
+							if (@$nextPageBabPasal == 'newP')
+								$section = $phpWord->addSection($thisPage);
+							else if (@$nextPageBabPasal == 'newL')
+								$section = $phpWord->addSection($thisPageLandscape);
 							
 							if ($pointerPointPasal == ''){ // tanpa pointer
 								$section->addText(
@@ -593,278 +627,35 @@ class Undang2 extends CI_Controller {
 							$section->addTextBreak(1,$fontStyle);
 						}
 					}
+					
+					
+					$babPasalAll[] = array('id_dokumen' => $idDokumen, 'id_revisi' => $idRevisi,
+						'jenis_field' => 'PasalPoint',
+						'pointer' => @$pointerPointPasal,
+						'layout' => @$nextPageBabPasal,
+						'subLevel' => $idxSubLevel,
+						'teks' => @$pointPasalVal,
+						'cdate' => $cdate,
+					);
 				}
 			}
 			
 			$section->addTextBreak(1,$fontStyle);
 		}
 		
-		
-		
-		/* *********************************************************************************** */
-		/* *********************************************************************************** */
-		/* *********************************************************************************** */
-		/* *********************************************************************************** */
-		/* *********************************************************************************** */
-		/* *********************************************************************************** */
-		/* *********************************************************************************** */
-
-
-		//$section = $phpWord->addSection($thisPageLandscape);
-
-
-		// header firstPage
-		// $header = $section->addHeader();
-		// $header->firstPage();
-		// $table = $header->addTable();
-		// $table->addRow();
-		// $cell = $table->addCell(450);
-		// $textrun = $cell->addTextRun();
-		// $textrun->addText('');
-		// Add header for all other pages
-		// $subsequent = $section->addHeader();
-		// $subsequent->addPreserveText('- {PAGE} -', $fontStyle, array('align' => 'center'));
-
-		// $tabsDefault = array(
-			// new \PhpOffice\PhpWord\Style\Tab('left', \PhpOffice\PhpWord\Shared\Converter::cmToTwip(3)),
-			// new \PhpOffice\PhpWord\Style\Tab('left', \PhpOffice\PhpWord\Shared\Converter::cmToTwip(3.5)),
-			// new \PhpOffice\PhpWord\Style\Tab('left', \PhpOffice\PhpWord\Shared\Converter::cmToTwip(4.5)),
-			// new \PhpOffice\PhpWord\Style\Tab('left', \PhpOffice\PhpWord\Shared\Converter::cmToTwip(5.5)),
-			// new \PhpOffice\PhpWord\Style\Tab('left', \PhpOffice\PhpWord\Shared\Converter::cmToTwip(6.5)),
-			// new \PhpOffice\PhpWord\Style\Tab('left', \PhpOffice\PhpWord\Shared\Converter::cmToTwip(7.5)),
-		// );
-		// $phpWord->setDefaultParagraphStyle(
-		// 	array(
-		// 		'align'  => 'both',
-		// 		'spacing' => 120,
-		// 		'spaceAfter' => 0,
-		// 		'tabs' => array(),
-		// 	)
-		// );
-
-		/* *********************************************************************************** */
-		/*$paragrafHeadLampiran = array(
-			'indentation' => array(
-				'left' => \PhpOffice\PhpWord\Shared\Converter::cmToTwip(14),
-			),
-			'tabs' => array(
-				new \PhpOffice\PhpWord\Style\Tab('left', \PhpOffice\PhpWord\Shared\Converter::cmToTwip(16.5)),
-			),
-		);
-
-		$section->addText(
-			"LAMPIRAN I",
-			$fontStyle, $paragrafHeadLampiran
-		);
-		$section->addText(
-			"KEPUTUSAN MENTERI ENERGI DAN SUMBER DAYA MINERAL",
-			$fontStyle, $paragrafHeadLampiran
-		);
-		$section->addText(
-			"REPUBLIK INDONESIA",
-			$fontStyle, $paragrafHeadLampiran
-		);
-		$section->addText(
-			"NOMOR\t:",
-			$fontStyle, $paragrafHeadLampiran
-		);
-		$section->addText(
-			"TANGGAL\t:",
-			$fontStyle, $paragrafHeadLampiran
-		);
-		$section->addText(
-			"TENTANG",
-			$fontStyle, $paragrafHeadLampiran
-		);
-		$section->addText(
-			"PENETAPAN WILAYAH IZIN USAHA PERTAMBANGAN DAN WILAYAH IZIN USAHA PERTAMBANGAN KHUSUS YANG AKAN DITAWARKAN DAN/ATAU DILELANG PADA PERIODE TAHUN 2018.",
-			$fontStyle, $paragrafHeadLampiran
-		);
-		$section->addTextBreak(1,$fontStyle);
-
-		$section->addText(
-			"WILAYAH IZIN USAHA PERTAMBANGAN DAN WILAYAH IZIN USAHA PERTAMBANGAN KHUSUS YANG AKAN DITAWARKAN",
-			$fontStyle, array('align' => 'center')
-		);
-		$section->addTextBreak(1,$fontStyle); */
-		/* *********************************************************************************** */
-
-		//debug
-		// print_r($arrData); exit();
-		// $subjudul = @$_POST['subjudul'];
-		// $widthMaxCol = 16000;
-		// $judultabel = @$_POST['judultabel'];
-		// $table = @$_POST['kolom'];
-
-		// if (count($subjudul) > 0 && count($judultabel) > 0 && count($kolom) > 0){
-			// for($idxTable=0 $idxTable<count())
-		// }
-
-
-
-		/*$section->addText(
-			"A.	WILAYAH IZIN USAHA PERTAMBANGAN PERIODE I ",
-			$fontStyle, array('align' => 'left')
-		);*/
-		/* *********************************************************************************** */
-
-		/*$widthMaxCol = 16000;
-		$table = @$_POST['kolom'];
-		$judultabel = @$_POST['judultabel'];
-		$table = array();
-		if (count($table) > 0){
-			$idxTable = 0;
-
-
-
-			$headerTable 	= $table[$idxTable]['header'];
-			$contentTable 	= $table[$idxTable]['content'];
-
-			$rows = count($contentTable) + 1;
-			$cols = count($headerTable);
-
-			// $section->addText('Basic table', $header);
-
-			$cellHCentered = array('alignment' => \PhpOffice\PhpWord\SimpleType\JcTable::CENTER);
-			$borderTableStyle = array('borderSize' => 1, 'borderColor' => '000000');
-			$spanTableStyleName = 'BorderAll';
-			$phpWord->addTableStyle($spanTableStyleName, $borderTableStyle);
-			$thisTable = $section->addTable($spanTableStyleName);
-
-			$thisTable->addRow();
-			$cellColSpan = array('gridSpan' => $cols+1, 'valign' => 'center');
-			$cell2 = $thisTable->addCell($widthMaxCol, $cellColSpan);
-			$textrun2 = $cell2->addTextRun($cellHCentered);
-			$textrun2->addText($judultabel[$idxTable][0]);
-
-			$thisTable->addRow();
-			$thisTable->addCell(600)->addText("NO", null, $cellHCentered);
-			for ($idxHeader = 0; $idxHeader < count($headerTable); $idxHeader++) {
-				$textHeader = $headerTable[$idxHeader];
-				$thisWidth = ($widthMaxCol - 600)/($cols - 1);
-				$thisTable->addCell($thisWidth)->addText($textHeader, null, $cellHCentered);
-			}
-
-
-			for ($r = 1; $r < $rows; $r++) {
-				$thisTable->addRow();
-				for ($c = 0; $c <= $cols; $c++) {
-					if ($c == 0) {
-						$thisWidth = 600;
-						$thisTable->addCell($thisWidth)->addText($r, null, $cellHCentered);
-					}
-					else {
-						$thisWidth = ($widthMaxCol - 600)/($cols - 1);
-						$thisTable->addCell($thisWidth)->addText($contentTable[$r][$c-1], null, $cellHCentered);
-					}
-
-				}
-			}
-
-
-		} */
-
-		/* *********************************************************************************** */
-
-
-
-
-
-		/* *********************************************************************************** */
-		// all content bab dan pasal
-		/*
-		$numberBab = 1;
-		for($numberBab=1; $numberBab<4; $numberBab++){
-			@$judulBab = @$_POST['judulBab'.@$numberBab];
-			@$contentPasal = @$_POST['contentPasal'.@$numberBab];
-			@$pointerPasal = @$_POST['pointerPasal'.@$numberBab];
-
-			@$nextPagePasal = @$_POST['nextPagePasal'.@$numberBab];
-			@$subLevelPasal = @$_POST['subLevelPasal'.@$numberBab];
-
-			$barisJudulBab = explode("\r\n",$judulBab);
-			foreach($barisJudulBab as $row){
-				if ($row != ""){
-					$txtTitle = $row;
-					$section->addText(
-						@$txtTitle,
-						@$fontStyle,
-						$centerContent
-					);
-				} else {
-					$section->addTextBreak(1,$fontStyle);
-				}
-			}
-
-
-			for($i=0; $i<count(@$contentPasal); $i++){
-
-				if (@$contentPasal[$i] != ''){
-					@$barisContentPasal = explode("\r\n",@$contentPasal[$i]);
-
-					if (@$nextPagecontentPasal[$i] == 1)
-						$section = $phpWord->addSection($thisPage);
-
-					for($j=0; $j<count(@$barisContentPasal); $j++){
-
-						@$idxSubLevel = @$subLevelPasal[$i];
-
-						if (@$j==0){ // awal body baris contentPasal
-							if (@$pointerPasal[$i] == ''){ // awal body contentPasal tanpa pointer
-								$section->addText(
-									@$barisContentPasal[@$j],
-									@$fontStyle,
-									@$subLevel[@$idxSubLevel]['default']
-								);
-							}
-							else { // awal body contentPasal ada pointer
-								$section->addText(
-									@$pointerPasal[$i]."\t".@$barisContentPasal[$j],
-									$fontStyle,
-									@$subLevel[@$idxSubLevel]['pointer']
-								);
-
-							}
-						}
-						else {
-							$section->addText(
-								$barisContentPasal[$j],
-								$fontStyle,
-								$subLevel[$idxSubLevel]['default']
-							);
-						}
-
-
-					}
-				}
-
-			}
-
-
-		}
-		*/
-		/* *********************************************************************************** */
-
-		/* *********************************************************************************** */
-		// footer tanda tangan
-		// echo "<pre>";
-		// print_r($arrData);
-		// $this->insert_detail_document(3, $arrData);
+		// $alldata = $this->insert_detail_document($idDokumen, $idRevisi, $arrData);
+		// $this->insert_pasal($babPasalAll);
+		// print_r($babPasalAll);
 		// die();
+		
+		/* *********************************************************************************** */
+		/* *********************************************************************************** */
+		/* *********************************************************************************** */
+		/* *********************************************************************************** */
+		/* *********************************************************************************** */
+		/* *********************************************************************************** */
+		/* *********************************************************************************** */
 
-		/* Insert Into DB */
-		// if (@$_POST['id_dokumen'] == '')
-			// $id = $this->insert_document();
-		// else
-			// $id = $_POST['id_dokumen'];
-
-		// $revisi = $this->cek_revisi_document($id);
-		// $idRevisi = $this->insert_revisi_document($id, $revisi);
-		// $alldata = $this->insert_detail_document($id, $idRevisi, $arrData);
-
-
-		// echo $alldata;
-		// exit;
 
 		$objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'Word2007');
 		$filename = @$id.'_'.time().'_undang-undang_doc.docx';
@@ -890,9 +681,240 @@ class Undang2 extends CI_Controller {
 			return $filename;
 		}
 
-
-
-
 	}
 
+	function insert_document() {
+		$dataDokumen = array(
+			'jenis_dokumen'	=> 'Undang-undang',
+			'nama_dokumen'	=> isset($_POST['nama_dokumen']) ? $_POST['nama_dokumen'] : '',
+			'login_id'		=> !empty($this->session->userdata('login_id')) ? $this->session->userdata('login_id') : 2, // 2 is admin
+			'cuser'			=> !empty($this->session->userdata('login_id')) ? $this->session->userdata('login_id') : 2, // 2 is admin
+			'cdate'			=> date('Y-m-d H:i:s'),
+			'status'		=> 1,
+			'submit_doc'	=> 0,
+			'relasi_doc'	=> 0
+		);
+		$queryDokumen = $this->db->insert('dokumen', $dataDokumen);
+		return $this->db->insert_id();
+	}
+	function cek_revisi_document($id) {
+		$sql = "
+		SELECT
+		max(status_revisi) revisi,
+		count(*) terhitung
+		FROM dokumen_revisi dr
+		WHERE dr.id_dokumen = '$id'
+		";
+		$allRow = $this->db->query($sql)->row_array();
+		if (@$allRow['terhitung'] == 0){
+			$revisi = 'A';
+		} else if (@$allRow['terhitung'] > 0){
+			$revisi = $allRow['revisi'];
+			$revisi++;
+		}
+		return $revisi;
+	}
+	function insert_revisi_document($id, $revisi, $namaFile) {
+
+
+		$dataDokumenRevisi = array(
+			'id_dokumen'	=> $id,
+			'status_revisi'	=> $revisi,
+			'cdate'			=> date('Y-m-d H:i:s'),
+			'appto'			=> null,
+			'namafile'		=> $namaFile,
+			'cuser'			=> !empty($this->session->userdata('login_id')) ? $this->session->userdata('login_id') : 2
+		);
+		$queryDokumen = $this->db->insert('dokumen_revisi', $dataDokumenRevisi);
+		return $this->db->insert_id();
+	}
+
+	function insert_detail_document($id, $idRevisi, $insertArray) {
+		foreach(array_keys($insertArray) as $valKeys) {
+			if(is_string($insertArray[$valKeys])) {
+				//echo "String <b>[".$valKeys."]</b>";
+				$dataDetailDokumen = array(
+					'id_dokumen'	=> $id,
+					'id_revisi'		=> $idRevisi,
+					'jenis_field'	=> $valKeys,
+					'pointer'		=> 0,
+					'layout'		=> '',
+					'sublevel'		=> 0,
+					'teks'			=> $insertArray[$valKeys],
+					'cdate'			=> date('Y-m-d H:i:s'),
+					'status'		=> 0
+				);
+				// // // // print_r($dataDetailDokumen);
+				$queryDetailDokumen = $this->db->insert('dokumen_detail', $dataDetailDokumen);
+			}
+			else if(is_array($insertArray[$valKeys])) {
+				//echo "Array <b>[".$valKeys."]</b>";
+				$arrPivot = array();
+				$jenis_field = str_replace('pointer', '', array_keys($insertArray[$valKeys])[0]);
+				foreach(array_keys($insertArray[$valKeys]) as $key => $valDetailKeys) {
+					//echo "Ada Nilai";
+					for($loop = 0; $loop < count($insertArray[$valKeys][$valDetailKeys]); $loop++) {
+						$arrPivot[$loop][$key] = $insertArray[$valKeys][$valDetailKeys][$loop];
+						if($key === count(array_keys($insertArray[$valKeys]))) {
+							$arrPivot[$loop][count($insertArray[$valKeys][$valDetailKeys])] = $jenis_field;
+						}
+					}
+				}
+
+				$idxKomentar=0;
+				foreach($arrPivot as $valPivot) {
+					if (@$valPivot[3] != ""){
+						$dataDetailDokumen = array(
+							'id_dokumen'	=> $id,
+							'id_revisi'		=> $idRevisi,
+							'jenis_field'	=> $valKeys, //$valPivot[4],
+							'pointer'		=> $valPivot[0],
+							'layout'		=> $valPivot[1],
+							'sublevel'		=> $valPivot[2],
+							'teks'			=> $valPivot[3],
+							'cdate'			=> date('Y-m-d H:i:s'),
+							'status'		=> 0
+							//'komentar'	=> @$_POST['Komentar_'.$valKeys][$idxKomentar],
+						);
+						// // // // print_r($dataDetailDokumen);
+						$queryDetailDokumen = $this->db->insert('dokumen_detail', $dataDetailDokumen);
+						
+						// add komentar to tabel komentar_doc
+						if(@$_POST['Komentar_'.$valKeys][$idxKomentar]) {
+							$dataKomentar = array(
+								'id_detail'	=> $this->db->insert_id(),
+								'pesan'		=> @$_POST['Komentar_'.$valKeys][$idxKomentar],
+								'cdate'		=> date("Y-m-d H:i:s"),
+								'user_id'	=> @$this->session->userdata('login_id')
+							);
+							$this->db->insert('komentar_doc', $dataKomentar);
+						}
+					}
+					$idxKomentar++;
+				}
+			}
+		}
+		return ['id_dokumen' =>$id, 'id_revisi' => $idRevisi];
+	}
+	function insert_pasal($insertArray) {
+		foreach($insertArray as $row){
+			$queryDetailDokumen = $this->db->insert('dokumen_detail', $row);
+		}
+	}
+	
+	function save_doc() {
+		$cdate = date('Y-m-d H:i:s');
+		
+		$arrData['judul'] = $_POST['super_judul'];
+		$Menimbang = $_POST['Menimbang'];
+		$pointerMenimbang = $_POST['pointerMenimbang'];
+		$nextPageMenimbang = @$_POST['nextPageMenimbang'];
+		$subLevelMenimbang = @$_POST['subLevelMenimbang'];
+		for($i=0; $i<count($Menimbang); $i++) {
+			$arrData['Menimbang']['pointerMenimbang'][] = $pointerMenimbang[$i];
+			$arrData['Menimbang']['nextPageMenimbang'][] = $nextPageMenimbang[$i];
+			$arrData['Menimbang']['subLevelMenimbang'][] = $subLevelMenimbang[$i];
+			$arrData['Menimbang']['text'][] = $Menimbang[$i];
+		}
+		$Mengingat = $_POST['Mengingat'];
+		$pointerMengingat = $_POST['pointerMengingat'];
+		$nextPageMengingat = @$_POST['nextPageMengingat'];
+		$subLevelMengingat = @$_POST['subLevelMengingat'];
+		for($i=0; $i<count($Mengingat); $i++) {
+			$arrData['Mengingat']['pointerMengingat'][] = $pointerMengingat[$i];
+			$arrData['Mengingat']['nextPageMengingat'][] = $nextPageMengingat[$i];
+			$arrData['Mengingat']['subLevelMengingat'][] = $subLevelMengingat[$i];
+			$arrData['Mengingat']['text'][] = $Mengingat[$i];
+		}
+		$Memutuskan = $_POST['Memutuskan'];
+		$pointerMemutuskan = @$_POST['pointerMemutuskan'];
+		$nextPageMemutuskan = @$_POST['nextPageMemutuskan'];
+		$subLevelMemutuskan = @$_POST['subLevelMemutuskan'];
+		for($i=0; $i<count($Memutuskan); $i++) {
+			$arrData['Memutuskan']['pointerMemutuskan'][] = @$pointerMemutuskan[$i];
+			$arrData['Memutuskan']['nextPageMemutuskan'][] = @$nextPageMemutuskan[$i] == '' ? 'continue' : @$nextPageMemutuskan[$i];
+			$arrData['Memutuskan']['subLevelMemutuskan'][] = @$subLevelMemutuskan[$i];
+			$arrData['Memutuskan']['text'][] = @$Memutuskan[$i];
+		}
+		
+		
+		if (@$_POST['id_dokumen'] == '')
+			$id = $this->insert_document();
+		else
+			$id = $_POST['id_dokumen'];
+
+		$namaFile = $this->sanusi('salah');
+		$revisi = $this->cek_revisi_document($id);
+		$idRevisi = $this->insert_revisi_document($id, $revisi, $namaFile);
+		$alldata = $this->insert_detail_document($id, $idRevisi, $arrData);
+		
+		$idDokumen = $id;
+		## BAB cobaSanusi
+		$pointerBab = @$_POST['pointerBab'];
+		$arrPasal = @$_POST['pasal'];
+		$arrKeteranganPasal = @$_POST['keteranganPasal'];
+		
+		$arrPointPasal = @$_POST['BabPasal'];
+		$subLevelBabPasal = @$_POST['subLevelBabPasal'];
+		$pointerBabPasal = @$_POST['pointerBabPasal'];
+		$arrPageBabPasal = @$_POST['nextPageBabPasal'];
+		foreach($pointerBab as $key => $val){
+			
+			$babPasalAll[] = array('id_dokumen' => $idDokumen, 'id_revisi' => $idRevisi,
+				'jenis_field' => 'Bab',
+				'pointer' => '',
+				'layout' => '',
+				'subLevel' => '',
+				'teks' => $val,
+				'cdate' => $cdate,
+			);
+			
+			## pasal
+			$keyPasal = $key + 1;
+			$pasal = $arrPasal[$keyPasal];
+			foreach($pasal as $pasalKey => $pasalVal){
+				
+				$babPasalAll[] = array('id_dokumen' => $idDokumen, 'id_revisi' => $idRevisi,
+					'jenis_field' => 'Pasal',
+					'pointer' => '',
+					'layout' => '',
+					'subLevel' => '',
+					'teks' => @$pasalVal,
+					'cdate' => $cdate,
+				);
+				$babPasalAll[] = array('id_dokumen' => $idDokumen, 'id_revisi' => $idRevisi,
+					'jenis_field' => 'PasalKet',
+					'pointer' => '',
+					'layout' => '',
+					'subLevel' => '',
+					'teks' => @$arrKeteranganPasal[$keyPasal][$key],
+					'cdate' => $cdate,
+				);
+				
+				## point pasal
+				$keyPointPasal = $pasalKey + 1;
+				$pointPasal = $arrPointPasal[$keyPasal][$keyPointPasal];
+				foreach($pointPasal as $pointPasalKey => $pointPasalVal){
+					
+					$idxSubLevel = $subLevelBabPasal[$keyPasal][$keyPointPasal][$pointPasalKey];
+					$pointerPointPasal = @$pointerBabPasal[$keyPasal][$keyPointPasal][$pointPasalKey];
+					$nextPageBabPasal = @$arrPageBabPasal[$keyPasal][$keyPointPasal][$pointPasalKey];
+					
+					$babPasalAll[] = array('id_dokumen' => $idDokumen, 'id_revisi' => $idRevisi,
+						'jenis_field' => 'PasalPoint',
+						'pointer' => @$pointerPointPasal,
+						'layout' => @$nextPageBabPasal,
+						'subLevel' => $idxSubLevel,
+						'teks' => @$pointPasalVal,
+						'cdate' => $cdate,
+					);
+				}
+			}
+		}
+		
+		$this->insert_pasal($babPasalAll);
+		
+		return $alldata;
+	}
+	
 }

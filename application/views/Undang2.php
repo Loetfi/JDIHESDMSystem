@@ -4,7 +4,7 @@
 			<div class="box">
 				<div class="padding">
 					<legend>Buat Dokumen Peraturan Presiden</legend>
-					<form action="<?php echo site_url('undang2/coba'); ?>" method="POST" target="_blank" >
+					<form action="<?php echo site_url('undang2/save_document'); ?>" method="POST" target="_blank" >
 						<div class="form-group" style="margin-bottom:5px">
 							<textarea name="super_judul" 
 									  class="form-control" 
