@@ -110,7 +110,7 @@
 	}
 	function addTembusan(ele, count) {
 		var counts = count + 1;
-		var element = '<div class="form-group" id="text-tembusan'+counts+'" style="display:inline-block; margin-top:5px; width:100%;">'+
+		var element = '<div class="form-group" id="text-Tembusan'+counts+'" style="display:inline-block; margin-top:5px; width:100%;">'+
 		'<div style="float:left; width:20%">'+
 		'<input type="text" name="pointerTembusan[]" class="form-control" placeholder="Pointer" />'+
 		'<select class="form-control" style="cursor:pointer; margin-top:10px;">'+
@@ -133,7 +133,7 @@
 		'</div>';
 		$(ele).children().toggleClass('fa-plus fa-minus');
 		$(ele).children().attr("onclick","remove(this)").attr('title', 'Hapus Isi');
-		$(element).last().insertAfter($("#text-tembusan"+count));
+		$(element).last().insertAfter($("#text-Tembusan"+count));
 	}
 	function remove(ele) {
 		$(ele).parent().parent().parent().remove();
@@ -627,7 +627,7 @@ function addLampiran(ele) {
 				</div>
 			<?php }
 		} else { ?>
-			<div class="form-group" id="text-tembusan1">
+			<div class="form-group" id="text-<?php echo $namaJenisField.($idxField +1); ?>1">
 				<div style="float:left; width:20%">
 					<input type="text" name="pointerTembusan[]" class="form-control" placeholder="Pointer" />
 					<select class="form-control" style="cursor:pointer; margin-top:10px;">
