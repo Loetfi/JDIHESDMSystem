@@ -17,10 +17,12 @@ class Datatable_model extends CI_Model {
         GROUP BY a.id_dokumen
         */
 
+        // SELECT * FROM dokumen_revisi WHERE FIND_IN_SET('3', appTo) <> 0
+
         $this->db->select('a.id_dokumen, a.jenis_dokumen , a.nama_dokumen, a.cuser, b.appTo,b.rilis_doc,b.cdate');
         $this->db->from('dokumen a');
         $this->db->join('dokumen_revisi b','a.id_dokumen = b.id_dokumen','left');
-        $this->db->where('a.cuser = '.$login_id.' or (appTo = '.$login_id.' and b.rilis_doc = 1)');
+        $this->db->where('a.cuser = '.$login_id.' or (FIND_IN_SET('.$login_id.', appTo) <> 0 and b.rilis_doc = 1)');
         $this->db->group_by('a.id_dokumen');
         
         // $this->db->distinct("d.id_dokumen ,

@@ -666,6 +666,18 @@ function addLampiran(ele) {
 	<button type="submit" class="btn btn-success btn-sm " id="view_doc">Generate Format</button>
 	<?php //print_r($this->session->all_userdata()); ?>
 	<button type="submit" class="btn btn-primary btn-sm" id="save_doc">Simpan Dokumen</button>
+
+	<br><br><br> 
+	<div class="form-group">
+		<label for="">Disposisi ke :</label>
+		<!-- <select class="select2 form-control" name="assign" data-toggle="tooltip" title="Disposisi ideal digunakan saat dokumen rancangan dianggap layak untuk submit / disposisi ke bagian yang dipilih."> -->
+			<?php foreach ($cari_dispo as $cd) { ?>
+				<input type="checkbox" name="assign[]" value="<?php echo $cd['id_flow_role']?>"> <?php echo $cd['nama_flow'];?>
+			<?php } ?>
+		<!-- </select> -->
+	</div> 
+	<button type="submit" class="btn btn-warning btn-sm" id="save_doc_submit">Submit </button>
+
 	<?php if ($submit_hilang==FALSE) { ?>
 		<br><br><br>
 		<?php if (@$this->session->userdata('login_id')==35) { ?>
@@ -786,7 +798,7 @@ function addLampiran(ele) {
 		var getHiddenKomen = $('#textKomentar-'+split[1]).text();
 		var type = split[1].substring(0, split[1].length - 1);
 		$.ajax({
-			url: '<?php echo site_url(); ?>Keputusan_menteri_doc/getKomentarHistory?id='+id_doc+'&stat='+stat+'&jenis='+type,
+			url: '<?php echo site_url(); ?>/Keputusan_menteri_doc/getKomentarHistory?id='+id_doc+'&stat='+stat+'&jenis='+type,
 			type: 'GET',
 			beforeSend: function() {
 				$('#textarea-komentar').html('Loading...');

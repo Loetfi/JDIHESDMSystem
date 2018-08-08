@@ -50,10 +50,8 @@ class Dokumen extends CI_Controller {
 	}
 	
 	public function pilih()
-	{
-
-
-		// echo(1); exit();
+	{ 
+		
 		$data = array(
 			'contents'	=> 'dokumen/pilih',
 			'title'		=> 'Pilih Dokumen',
@@ -61,7 +59,6 @@ class Dokumen extends CI_Controller {
 			'menu'		=> empty($this->session->userdata('name')) ? array() : $this->session->userdata('name')
 		);
 		$this->load->view('template/head', $data, FALSE);
-		// $this->load->view('dokumen/pilih', $data, FALSE);
 	}
 	
 	public function detail($id_dokumen = '')
