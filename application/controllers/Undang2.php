@@ -16,12 +16,22 @@ class Undang2 extends CI_Controller {
 		$this->load->view('backend/template/head', $data, FALSE);
 		// $this->load->view('');
 	}
+
+	function edit() {
+		$data = array(
+			'contents'	=> 'Undang2_edit', 
+			'title'		=> 'Dashbord Sistem'
+		);
+		$this->load->view('backend/template/head', $data, FALSE);
+	}
+
 	function save_document()
 	{
 		$this->save_doc();
 		$this->session->set_flashdata('message', '<div class="alert alert-info"> Dokumen berhasil dibuat.</div>');
 		redirect('backend/dokumen','refresh');
 	}
+	
 	function sanusi($thisDownload = 'benar') {
 		error_reporting(0);
 		$this->load->library('Phpword');

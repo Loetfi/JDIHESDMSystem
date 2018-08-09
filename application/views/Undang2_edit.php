@@ -3,26 +3,36 @@
 		<div class="padding">
 			<div class="box">
 				<div class="padding">
-					<legend>Buat Dokumen Undang-Undang</legend>
+					<legend>Buat Dokumen Peraturan Presiden</legend>
 					<form action="<?php echo site_url('undang2/save_document'); ?>" method="POST" target="_blank" >
 						<div class="form-group" style="margin-bottom:5px">
 							<textarea name="super_judul" 
 									  class="form-control" 
 									  autocomplete="off" 
 									  placeholder="Judul Dokumen" 
-									  rows="4" required><?php echo @$detail_dokumen['judul'][0]['teks']; ?></textarea>
+									  rows="4" required><?php echo @$detail_dokumen['judul'][0]['teks']; ?>
+PERATURAN PEMERINTAH REPUBLIK INDONESIA
+NOMOR … TAHUN …
+TENTANG
+PELAKSANAAN ATAS UNDANG-UNDANG NOMOR 8 TAHUN 2016 
+TENTANG PENYANDANG DISABILITAS
+	
+DENGAN RAHMAT TUHAN YANG MAHA ESA
+
+PRESIDEN REPUBLIK INDONESIA,</textarea>
 						</div>
 						<fieldset>
 							<legend>Menimbang</legend>
 							<div>
-								<div class="form-group" id="text-Menimbang1" style="display:inline-block; width:100%;">
+								<?php $namaMenimbang = 'Menimbang';?>
+								<div class="form-group" id="text-<?php echo $namaMenimbang; ?>1" style="display:inline-block; width:100%;">
 									<div style="float:left; width:20%">
-										<input type="text" name="pointerMenimbang[]" class="form-control" placeholder="Pointer" />
-										<select name="nextPageMenimbang[]" class="form-control" style="cursor:pointer; margin-top:10px;">
+										<input type="text" name="pointer<?php echo $namaMenimbang; ?>[]" class="form-control" placeholder="Pointer" />
+										<select name="nextPage<?php echo $namaMenimbang; ?>[]" class="form-control" style="cursor:pointer; margin-top:10px;">
 											<option value="continue">Continues Page</option>
 											<option value="newP">Next Page Portrait</option><option value="newL">Next Page Landscape</option>
 										</select>
-										<select name="subLevelMenimbang[]" class="form-control" style="cursor:pointer; margin-top:10px;">
+										<select name="subLevel<?php echo $namaMenimbang; ?>[]" class="form-control" style="cursor:pointer; margin-top:10px;">
 											<option value="0">SubLevel 0</option>
 											<option value="1">SubLevel 1</option>
 											<option value="2">SubLevel 2</option>
@@ -31,12 +41,14 @@
 										</select>
 									</div>
 									<div style="width:100%">
-										<textarea name="Menimbang[]" 
+										<textarea name="<?php echo $namaMenimbang; ?>[]" 
 												  type="text" 
 												  class="form-control" 
 												  placeholder="Menimbang" 
 												  rows="6" 
-												  style="float:left; margin-left:5px; width:75%;" required></textarea>
+												  style="float:left; margin-left:5px; width:75%;" required>
+bahwa untuk melaksanakan ketentuan Pasal 27 ayat (3), Pasal 36 ayat (2), Pasal 42 ayat (8), Pasal 43 ayat (2) dan ayat (4), Pasal 54 ayat (2), Pasal 55 ayat (4), Pasal 86 ayat (2), Pasal 96, Pasal 104 ayat (4), Pasal 108, Pasal 109 ayat (4), Pasal 113, Pasal 114 ayat (2),  dan Pasal 116 ayat (2)  Undang-Undang Nomor 8 Tahun 2016 tentang Penyandang Disabilitas, perlu menetapkan Peraturan Pemerintah tentang Pelaksanaan atas Undang-Undang Nomor 8 Tahun 2016 tentang Penyandang Disabilitas;
+												  </textarea>
 										<a href="javascript:void(0)" 
 										   onclick="addMenimbang(this, 1)" 
 										   style="position:absolute; right:5%;" 
@@ -70,7 +82,9 @@
 												  class="form-control" 
 												  placeholder="Mengingat" 
 												  rows="6" 
-												  style="float:left; margin-left:5px; width:75%;" required></textarea>
+												  style="float:left; margin-left:5px; width:75%;" required>
+Pasal 5 ayat (2) Undang-Undang Dasar Negara Republik Indonesia Tahun 1945;
+												  </textarea>
 										<a href="javascript:void(0)" 
 										   onclick="addMengingat(this, 1)" 
 										   style="position:absolute; right:5%;" 
@@ -98,7 +112,9 @@
 												  class="form-control" 
 												  placeholder="Mengingat" 
 												  rows="6" 
-												  style="float:left; margin-left:5px; width:75%;" required></textarea>
+												  style="float:left; margin-left:5px; width:75%;" required>
+Undang-Undang Nomor 8 Tahun 2016 tentang Penyandang Disabilitas (Lembaran  Negara Republik Indonesia Tahun 2016  Nomor 69, Tambahan Lembaran  Negara Republik Indonesia Nomor 5871);
+												  </textarea>
 										<a href="javascript:void(0)" 
 										   onclick="addMengingat(this, 1)" 
 										   style="position:absolute; right:5%;" 
@@ -132,7 +148,9 @@
 												  class="form-control" 
 												  placeholder="Mengingat" 
 												  rows="6" 
-												  style="float:left; margin-left:5px; width:75%;" required></textarea>
+												  style="float:left; margin-left:5px; width:75%;" required>
+PERATURAN PEMERINTAH TENTANG PELAKSANAAN ATAS UNDANG-UNDANG NOMOR 8 TAHUN 2016 TENTANG PENYANDANG DISABILITAS.
+												  </textarea>
 										<a href="javascript:void(0)" 
 										   onclick="addMemutuskan(this, 1)" 
 										   style="position:absolute; right:5%;" 
@@ -150,7 +168,8 @@
 								?>
 								<div class="form-group" id="text-<?php echo $namaBabPasal; ?>-<?php echo $noBab; ?>" style="display:inline-block; width:100%;">
 									<div>
-										<textarea type="text" name="pointerBab[]" class="form-control" placeholder="Bab <?php echo $noBab; ?>" style="width:93%" >BAB I</textarea>
+										<textarea type="text" name="pointerBab[]" class="form-control" placeholder="Bab <?php echo $noBab; ?>" style="width:93%" >BAB I
+KETENTUAN UMUM</textarea>
 										<a href="javascript:void(0)" 
 										   onclick="addMenetapkanBab(this, 1)" 
 										   style="position:absolute; right:5%; margin-top:-35px;" 
@@ -196,7 +215,8 @@
 															  class="form-control" 
 															  placeholder="Point Pasal <?php echo $noPasal; ?> Bab <?php echo $noBab; ?>" 
 															  rows="6" 
-															  style="float:left; margin-left:5px; width:95%; margin-bottom: 20px;" ></textarea>
+															  style="float:left; margin-left:5px; width:95%; margin-bottom: 20px;" >
+Penyandang Disabilitas adalah setiap orang yang mengalami keterbatasan fisik, intelektual, mental, dan/atau sensorik dalam jangka waktu lama yang dalam berinteraksi dengan lingkungan dapat mengalami hambatan dan kesulitan untuk berpartisipasi secara penuh dan efektif dengan warga Negara lainnya berdasarkan kesamaan hak.</textarea>
 													<a href="javascript:void(0)" 
 													   onclick="addMenetapkan(this, 1)" 
 													   style="position:absolute; right:5%;" 
@@ -228,7 +248,8 @@
 															  class="form-control" 
 															  placeholder="Point Pasal <?php echo $noPasal; ?> Bab <?php echo $noBab; ?>" 
 															  rows="6" 
-															  style="float:left; margin-left:5px; width:95%; margin-bottom: 20px;" ></textarea>
+															  style="float:left; margin-left:5px; width:95%; margin-bottom: 20px;" >
+Penghormatan adalah sikap menghargai atau menerima keberadaan Penyandang Disabilitas dengan segala hak yang melekat tanpa berkurang.</textarea>
 													<a href="javascript:void(0)" 
 													   onclick="addMenetapkan(this, 1)" 
 													   style="position:absolute; right:5%;" 
@@ -260,7 +281,8 @@
 															  class="form-control" 
 															  placeholder="Point Pasal <?php echo $noPasal; ?> Bab <?php echo $noBab; ?>" 
 															  rows="6" 
-															  style="float:left; margin-left:5px; width:95%; margin-bottom: 20px;" ></textarea>
+															  style="float:left; margin-left:5px; width:95%; margin-bottom: 20px;" >
+Pelindungan adalah upaya yang dilakukan secara sadar untuk melindungi, mengayomi, dan memperkuat hak Penyandang Disabilitas.</textarea>
 													<a href="javascript:void(0)" 
 													   onclick="addMenetapkan(this, 1)" 
 													   style="position:absolute; right:5%;" 
@@ -275,7 +297,9 @@
 								<?php $noBab = '2'; ?>
 								<div class="form-group" id="text-<?php echo $namaBabPasal; ?>-<?php echo $noBab; ?>" style="display:inline-block; width:100%;">
 									<div>
-										<textarea type="text" name="pointerBab[]" class="form-control" placeholder="Bab <?php echo $noBab; ?>" style="width:93%" ></textarea>
+										<textarea type="text" name="pointerBab[]" class="form-control" placeholder="Bab <?php echo $noBab; ?>" style="width:93%" >
+BAB II
+PERENCANAAN, PENYELENGGARAAN, DAN EVALUASI TERHADAP PELAKSANAAN PENGHORMATAN, PELINDUNGAN, DAN PEMENUHAN HAK PENYANDANG DISABILITAS</textarea>
 										<a href="javascript:void(0)" 
 										   onclick="addMenetapkanBab(this, 1)" 
 										   style="position:absolute; right:5%; margin-top:-35px;" 
@@ -285,7 +309,11 @@
 									
 									<?php $noPasal = '1'; ?>
 									<div style="margin-top:10px; margin-left:25px;">
-										<textarea type="text" name="pasal[<?php echo $noBab; ?>][]" class="form-control" placeholder="Pasal <?php echo $noPasal; ?> Bab <?php echo $noBab; ?>" style="width:93%" ></textarea>
+										<textarea type="text" name="pasal[<?php echo $noBab; ?>][]" class="form-control" placeholder="Pasal <?php echo $noPasal; ?> Bab <?php echo $noBab; ?>" style="width:93%" >
+Bagian Kesatu
+Umum
+
+Pasal 2</textarea>
 										<a href="javascript:void(0)" 
 										   onclick="addMenetapkanPasal(this, 1)" 
 										   style="position:absolute; right:5%; margin-top:-35px;" 
@@ -321,7 +349,8 @@
 															  class="form-control" 
 															  placeholder="Point Pasal <?php echo $noPasal; ?> Bab <?php echo $noBab; ?>" 
 															  rows="6" 
-															  style="float:left; margin-left:5px; width:95%; margin-bottom: 20px;"></textarea>
+															  style="float:left; margin-left:5px; width:95%; margin-bottom: 20px;" >
+Pemerintah dan Pemerintah Daerah wajib melakukan perencanaan, penyelenggaraan, dan evaluasi terhadap pelaksanaan Penghormatan, Pelindungan, dan Pemenuhan hak Penyandang Disabilitas.</textarea>
 													<a href="javascript:void(0)" 
 													   onclick="addMenetapkan(this, 1)" 
 													   style="position:absolute; right:5%;" 
@@ -333,7 +362,11 @@
 								
 									<?php $noPasal = '2'; ?>
 									<div style="margin-top:10px; margin-left:25px;">
-										<textarea type="text" name="pasal[<?php echo $noBab; ?>][]" class="form-control" placeholder="Pasal <?php echo $noPasal; ?> Bab <?php echo $noBab; ?>" style="width:93%" ></textarea>
+										<textarea type="text" name="pasal[<?php echo $noBab; ?>][]" class="form-control" placeholder="Pasal <?php echo $noPasal; ?> Bab <?php echo $noBab; ?>" style="width:93%" >
+Bagian Kedua
+Perencanaan
+
+Pasal 3</textarea>
 										<a href="javascript:void(0)" 
 										   onclick="addMenetapkanPasal(this, 1)" 
 										   style="position:absolute; right:5%; margin-top:-35px;" 
@@ -369,7 +402,8 @@
 															  class="form-control" 
 															  placeholder="Point Pasal <?php echo $noPasal; ?> Bab <?php echo $noBab; ?>" 
 															  rows="6" 
-															  style="float:left; margin-left:5px; width:95%; margin-bottom: 20px;" ></textarea>
+															  style="float:left; margin-left:5px; width:95%; margin-bottom: 20px;" >
+Perencanaan terhadap pelaksanaan Penghormatan, Pelindungan, dan Pemenuhan hak Penyandang Disabilitas dilaksanakan oleh Pemerintah dan Pemerintah Daerah dengan melibatkan masyarakat.</textarea>
 													<a href="javascript:void(0)" 
 													   onclick="addMenetapkan(this, 1)" 
 													   style="position:absolute; right:5%;" 
@@ -401,7 +435,8 @@
 															  class="form-control" 
 															  placeholder="Point Pasal <?php echo $noPasal; ?> Bab <?php echo $noBab; ?>" 
 															  rows="6" 
-															  style="float:left; margin-left:5px; width:95%; margin-bottom:20px;"></textarea>
+															  style="float:left; margin-left:5px; width:95%; margin-bottom: 20px;" >
+Perencanaan terhadap pelaksanaan Penghormatan, Pelindungan, dan Pemenuhan hak Penyandang Disabilitas sebagaimana dimaksud pada ayat (1) dibuat dalam suatu Rencana Induk dengan berpedoman pada rencana pembangunan nasional.</textarea>
 													<a href="javascript:void(0)" 
 													   onclick="addMenetapkan(this, 1)" 
 													   style="position:absolute; right:5%;" 
@@ -433,7 +468,8 @@
 															  class="form-control" 
 															  placeholder="Point Pasal <?php echo $noPasal; ?> Bab <?php echo $noBab; ?>" 
 															  rows="6" 
-															  style="float:left; margin-left:5px; width:95%; margin-bottom:20px;"></textarea>
+															  style="float:left; margin-left:5px; width:95%; margin-bottom: 20px;" >
+Rencana Induk sebagaimana dimaksud pada ayat (2) ditetapkan oleh Menteri atau gubernur sesuai dengan kewenangannya.</textarea>
 													<a href="javascript:void(0)" 
 													   onclick="addMenetapkan(this, 1)" 
 													   style="position:absolute; right:5%;" 
@@ -465,7 +501,8 @@
 															  class="form-control" 
 															  placeholder="Point Pasal <?php echo $noPasal; ?> Bab <?php echo $noBab; ?>" 
 															  rows="6" 
-															  style="float:left; margin-left:5px; width:95%; margin-bottom: 20px;"></textarea>
+															  style="float:left; margin-left:5px; width:95%; margin-bottom: 20px;" >
+Rencana Induk sebagaimana dimaksud pada ayat (3) dituangkan dalam bentuk rencana aksi nasional lima tahunan.</textarea>
 													<a href="javascript:void(0)" 
 													   onclick="addMenetapkan(this, 1)" 
 													   style="position:absolute; right:5%;" 
