@@ -3,7 +3,7 @@
 		<div class="padding">
 			<div class="box">
 				<div class="padding">
-					<legend>Buat Dokumen Peraturan Presiden</legend>
+					<legend>Buat Dokumen Undang-Undang</legend>
 					<form action="<?php echo site_url('undang2/save_document'); ?>" method="POST" target="_blank" >
 						<div class="form-group" style="margin-bottom:5px">
 							<textarea name="super_judul" 
