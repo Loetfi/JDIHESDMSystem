@@ -7,7 +7,7 @@ class Perancang_model extends CI_Model {
 	{
 		return $this->db->select('*')
 		->from('login')
-		->where('id_flow',1)
+		->where('id_flow',1000)
 		->where('login_id',$id_perancang)
 		->get()
 		->row_array();
@@ -17,7 +17,7 @@ class Perancang_model extends CI_Model {
 	{
 		return $this->db->select('*')
 		->from('login')
-		->where('id_flow',1)
+		->where('id_flow',1000)
 		->like('jabatan',$id_jabatan)
 		->get()
 		->result_array();
@@ -30,7 +30,7 @@ class Perancang_model extends CI_Model {
 
 		return $this->db->select('jabatan')
 		->from('login')
-		->where('id_flow',1)
+		->where('id_flow',1000)
 		->GROUP_by('jabatan')
 		->get()
 		->result_array();

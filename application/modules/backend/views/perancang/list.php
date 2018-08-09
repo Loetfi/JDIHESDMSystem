@@ -26,7 +26,6 @@
    </div>
    <div class="col-sm-8">
 
-    <iframe src="#" name="iframe_a" style="position:fixed;  width:60%; height:100%; border:none; margin:0; padding:0; "></iframe>
 
     <!-- <a >W3Schools.com</a>  -->
     <script type="text/javascript"> 
