@@ -27,6 +27,44 @@
     margin-bottom: -100px;
 }
 </style>
+<style type="text/css">
+  .modal-dialog {
+  position: relative;
+  width: auto;
+  max-width: 600px;
+  margin: 10px;
+} 
+.modal-lg {
+  max-width: 900px;
+}
+@media (min-width: 768px) {
+  .modal-dialog {
+    margin: 30px auto;
+  }
+}
+@media (min-width: 320px) {
+  .modal-sm {
+    margin-right: auto;
+    margin-left: auto;
+  }
+}
+@media (min-width: 620px) {
+  .modal-dialog {
+    margin-right: auto;
+    margin-left: auto;
+  }
+  .modal-lg {
+    margin-right: 10px;
+    margin-left: 10px;
+  }
+}
+@media (min-width: 920px) {
+  .modal-lg {
+    margin-right: auto;
+    margin-left: auto;
+  }
+}
+</style>
 </head>
 <body>
 
@@ -40,9 +78,8 @@
       <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a class="nav-link" href="#">Tentang Rannah Hukum</a>
+            <a class="nav-link" data-toggle="modal" href='#modal-id'>Tentang Rannah Hukum</a>
           </li>
-          <!-- assetnew/data-perancang-peruu.pdf -->
           <li class="nav-item">
             <a class="nav-link" href="<?php echo site_url('backend/perancang');?>" target="_blank">Data Perancang PUU</a>
           </li>
@@ -106,6 +143,23 @@
           <center><h6>Link Terkait </h6></center>
         </div>
 
+        
+        <div class="modal fade" id="modal-id">
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h6 class="modal-title">Tentang Rannah Hukum</h6>
+              </div>
+              <div class="modal-body">
+                <iframe src="<?php echo base_url('assetnew/tentang-rannah.pdf');?>" width="100%" height="400px"></iframe>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-xs btn-primary btn-default" data-dismiss="modal">Tutup</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <div class="row mt-5">
           <div class="col-md-3">
             <div class="media">
@@ -150,19 +204,7 @@
                 <h3 class="h6"><a href="http://sipeka.esdm.go.id/" target="_blank">SIPEKA</a></h3>
               </div>
             </div>
-          </div>
-
-           <!-- <div class="col-md-4"> -->
-           <!--  <div class="media">
-              <div class="">
-                <img src="<?php echo base_url('sipekalogin.png');?>" width="70px">
-              </div>
-              <div class="media-body">
-                <br>
-                <h3 class="h6"><a >SIPEKA</a></h3>
-              </div>
-            </div> -->
-          <!-- </div>  -->
+          </div> 
         </div><!-- /.row -->
       </div><!-- /.row -->
 
