@@ -700,10 +700,12 @@ class Peraturan_menteri extends CI_Controller {
 	function cek_revisi_document($id) {
 		$sql = "
 		SELECT
-		max(status_revisi) revisi,
-		count(*) terhitung
+			status_revisi AS revisi,
+			length(status_revisi) terhitung
 		FROM dokumen_revisi dr
 		WHERE dr.id_dokumen = '$id'
+		ORDER BY length(status_revisi) DESC, status_revisi DESC 
+		LIMIT 1
 		";
 		$allRow = $this->db->query($sql)->row_array();
 		if (@$allRow['terhitung'] == 0){

@@ -1180,10 +1180,12 @@ class Keputusan_menteri_doc extends CI_Controller {
 	function cek_revisi_document($id) {
 		$sql = "
 		SELECT
-		max(status_revisi) revisi,
-		count(*) terhitung
+			status_revisi AS revisi,
+			length(status_revisi) terhitung
 		FROM dokumen_revisi dr
 		WHERE dr.id_dokumen = '$id'
+		ORDER BY length(status_revisi) DESC, status_revisi DESC 
+		LIMIT 1
 		";
 		$allRow = $this->db->query($sql)->row_array();
 		if (@$allRow['terhitung'] == 0){
@@ -1344,7 +1346,7 @@ class Keputusan_menteri_doc extends CI_Controller {
 		";
 		$allRow = $this->db->query($sql)->result_array();
 
-		if (count(@$allRow) > 0)
+		if (count(@$allRow) > 0){
 			foreach($allRow as $row){
 				$namaJenisField = $row['jenis_field'];
 
@@ -1353,7 +1355,7 @@ class Keputusan_menteri_doc extends CI_Controller {
 
 				$detail_dokumen[$namaJenisField][] = $row;
 			}
-
+		}
 			$data['id_dokumen'] = $id_dokumen;
 			$data['detail_dokumen'] = @$detail_dokumen;
 
@@ -1385,7 +1387,7 @@ class Keputusan_menteri_doc extends CI_Controller {
 
 				#join assign multiple 
 				$join_assign = @$_POST['assign'] ? implode(',', $_POST['assign']) : 0;
-				#end
+				## end coba jaa
 				$res = '';
 				$login_id = $this->session->userdata('login_id');
 				$data = $this->save_doc();
