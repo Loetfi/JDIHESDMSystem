@@ -545,7 +545,7 @@ class Keputusan_menteri_doc extends CI_Controller {
 									$subLevel[0]['firstLine']
 								);
 							}
-							$section->addTextBreak(1,$fontStyle);
+							// $section->addTextBreak(1,$fontStyle);
 						}
 						else {
 							if ($pointerDiktum[$i] == ''){ // lanjutan tanpa pointer
@@ -577,11 +577,19 @@ class Keputusan_menteri_doc extends CI_Controller {
 							}
 							else { // awal body Diktum ada pointer
 								// echo $pointerDiktum[$i]."\t".$barisDiktum[$j];
-								$section->addText(
-									$pointerDiktum[$i]."\t".$barisDiktum[$j],
-									$fontStyle,
-									$subLevel[$idxSubLevel]['pointer']
-								);
+								if ($idxSubLevel == 0){
+									$section->addText(
+										$pointerDiktum[$i]."\t:\t".$barisDiktum[$j],
+										$fontStyle,
+										$subLevel[0]['firstLine']
+									);
+								} else {
+									$section->addText(
+										$pointerDiktum[$i]."\t".$barisDiktum[$j],
+										$fontStyle,
+										$subLevel[$idxSubLevel]['pointer']
+									);
+								}
 
 							}
 						}
