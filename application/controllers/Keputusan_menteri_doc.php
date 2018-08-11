@@ -1367,12 +1367,22 @@ class Keputusan_menteri_doc extends CI_Controller {
 			redirect('backend/dokumen','refresh');
 		}
 
+
+		function cari_email($login_id = '')
+		{
+			$cari = $this->db->query("SELECT email from login where id_flow = $login_id")->row_array();
+			return empty($cari['email']) ? '' : $cari['email']; 
+		}
+
 		function submit_document()
 		{
 			// print_r($_POST);exit();
 			if (empty($this->session->userdata('login_id'))) {
 				exit('anda belom login');
 			} else {
+				require_once(APPPATH.'modules/backend/helpers/sending_helper.php');
+				// $this->load->helper('backend/helpers/sending');
+
 				#join assign multiple 
 				$join_assign = @$_POST['assign'] ? implode(',', $_POST['assign']) : 0;
 				#end
@@ -1380,11 +1390,25 @@ class Keputusan_menteri_doc extends CI_Controller {
 				$login_id = $this->session->userdata('login_id');
 				$data = $this->save_doc();
 				$id_revisi =  $data['id_revisi'];
-				$cari_revisi = $this->db->query("SELECT  b.direct_boss, a.* from dokumen_revisi a 
+				$cari_revisi = $this->db->query("SELECT  b.direct_boss, b.name, b.email,  a.* from dokumen_revisi a 
 					left join login b on a.cuser = b.login_id
 					where id_revisi = $id_revisi and cuser = $login_id")->row_array();
 
-			# ganti status jadi submit 
+ 				## sending email
+				if (count($join_assign)>0) {
+					$_GET['subject'] = 'Kamu mendapat dokumen dari '.$cari_revisi['name'];
+					$_GET['message'] = 'Hai, Kamu mendapat dokumen untuk ditelaah dengan judul '.$_POST['super_judul'].' dengan menambahkan catatan : '.@$_POST['catatan_submit']; 
+
+					foreach ($_POST['assign'] as $assign_email) {
+						$to[] = $this->cari_email($assign_email);
+						$to_send = $to;
+					}
+					$_GET['to'] = implode(',', $to_send);
+					Notification::sending();  
+				}
+				## end sending email
+
+				# ganti status jadi submit 
 				if (count($cari_revisi['direct_boss']) > 0) {
 				# update 
 					$update = array(
@@ -1412,13 +1436,13 @@ class Keputusan_menteri_doc extends CI_Controller {
 			$rev = $this->input->get('stat');
 			$type = $this->input->get('jenis');
 			$query = $this->db->query("
-						SELECT * FROM komentar_doc a
-						INNER JOIN dokumen_detail b ON b.id_detail = a.id_detail
-						INNER JOIN dokumen_revisi c ON c.id_revisi = b.id_revisi
-						WHERE c.status_revisi = '$rev' AND b.id_dokumen = $id");
+				SELECT * FROM komentar_doc a
+				INNER JOIN dokumen_detail b ON b.id_detail = a.id_detail
+				INNER JOIN dokumen_revisi c ON c.id_revisi = b.id_revisi
+				WHERE c.status_revisi = '$rev' AND b.id_dokumen = $id");
 			echo json_encode($query->result());
 		}
-	
+
 		function submitKomentarHistory() {
 			$post = $this->input->post();
 			$dataKomentar = array(
