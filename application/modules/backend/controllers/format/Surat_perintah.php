@@ -519,36 +519,26 @@ class Surat_perintah extends CI_Controller {
 		$section->addTextBreak(1,$fontStyle);
 		/* *********************************************************************************** */
 
-		/* *********************************************************************************** */
+		 		/* *********************************************************************************** */
 		## Diktum
 		$Diktum = $_POST['Diktum'];
 		$pointerDiktum = $_POST['pointerDiktum'];
-
 		$nextPageDiktum = @$_POST['nextPageDiktum'];
 		$subLevelDiktum = @$_POST['subLevelDiktum'];
-		// print_r($subLevelDiktum);
 		$theFirst = true;
 		for($i=0; $i<count($Diktum); $i++){
-
 			if ($Diktum[$i] != ''){
 				$barisDiktum = explode("\r\n",$Diktum[$i]);
-
 				if (@$nextPageDiktum[$i] == 'newP')
 					$section = $phpWord->addSection($thisPage);
 				else if (@$nextPageDiktum[$i] == 'newL')
 					$section = $phpWord->addSection($thisPageLandscape);
-
 				// print_r($Diktum[$i]);
 				// print_r($barisDiktum);
 				for($j=0; $j<count($barisDiktum); $j++){
-
 					$idxSubLevel = @$subLevelDiktum[$i];
-
 					if ($theFirst==true){ // awal Diktum
-						if ($j==0 and $i==0){ // awal baris Diktum
-							// echo($pointerDiktum[$i]);
-							// echo "<br>";
-
+						if ($j==0){ // awal baris Diktum
 							if ($pointerDiktum[$i] == ''){ // awal tanpa pointer
 								$section->addText(
 									"Menetapkan\t:\t".$barisDiktum[$j],
@@ -557,7 +547,6 @@ class Surat_perintah extends CI_Controller {
 								);
 							}
 							else{ // awal ada pointer
-								// echo $i."\t:\t".$j.'<br>';
 								$section->addText(
 									$pointerDiktum[$i]."\t:\t".$barisDiktum[$j],
 									$fontStyle,
@@ -575,7 +564,6 @@ class Surat_perintah extends CI_Controller {
 								);
 							}
 							else { // lanjutan ada pointer
-								// echo $i."\t:\t".$j.'<br>';
 								$section->addText(
 									$barisDiktum[$j],
 									$fontStyle,
@@ -587,7 +575,6 @@ class Surat_perintah extends CI_Controller {
 					else { // body Diktum
 						if ($j==0){ // awal body baris Diktum
 							if ($pointerDiktum[$i] == ''){ // awal body Diktum tanpa pointer
-								// echo "4";
 								$section->addText(
 									$barisDiktum[$j],
 									$fontStyle,
@@ -595,17 +582,14 @@ class Surat_perintah extends CI_Controller {
 								);
 							}
 							else { // awal body Diktum ada pointer
-								// echo $pointerDiktum[$i]."\t".$barisDiktum[$j];
 								$section->addText(
 									$pointerDiktum[$i]."\t".$barisDiktum[$j],
 									$fontStyle,
 									$subLevel[$idxSubLevel]['pointer']
 								);
-
 							}
 						}
 						else {
-							// echo "5";
 							$section->addText(
 								$barisDiktum[$j],
 								$fontStyle,
@@ -613,17 +597,14 @@ class Surat_perintah extends CI_Controller {
 							);
 						}
 					}
-
 				}
-				$theFirst = false;
+				// $theFirst = false;
 			}
-
 			$arrData['Diktum']['pointerDiktum'][] = $pointerDiktum[$i];
 			$arrData['Diktum']['nextPageDiktum'][] = $nextPageDiktum[$i];
 			$arrData['Diktum']['subLevelDiktum'][] = $subLevelDiktum[$i];
 			$arrData['Diktum']['text'][] = $Diktum[$i];
 		}
-		// die();
 		/* *********************************************************************************** */
 
 		// print_r($arrData); die();
