@@ -107,10 +107,10 @@ body {
 					<a href="<?php echo site_url('backend/dokumen/pilih/');?>"><img src="<?php echo base_url(); ?>/assets/logo/icon-quick-format-solid.png" width="100%"></a>
 				</div>
 				<div class="col-xs-3 col-sm-3 col-md-3">
-					<a href="<?php echo base_url('assetnew/regulasi.pdf');?>" target="_blank"><img src="<?php echo base_url(); ?>/assets/logo/icon-regulasi.png" width="100%"></a>
+					<a data-toggle="modal" href='#modal-id'><img src="<?php echo base_url(); ?>/assets/logo/icon-regulasi.png" width="100%"></a>
 				</div>
 				<div class="col-xs-3 col-sm-3 col-md-3">
-					<a href="<?php echo base_url('assetnew/struktur-biro-hukum.pdf');?>" target="_blank"><img src="<?php echo base_url(); ?>/assets/logo/icon-profil.png" width="100%"></a>
+					<a data-toggle="modal" href='#modal-id2'><img src="<?php echo base_url(); ?>/assets/logo/icon-profil.png" width="100%"></a>
 				</div>
 				
 				
@@ -118,6 +118,89 @@ body {
 			<?php } ?>
 		</div>
 	</div>
+
+
+
+
+<!-- MODAL  -->
+
+  <div class="modal fade" id="modal-id">
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h6 class="modal-title">Regulasi</h6>
+              </div>
+              <div class="modal-body">
+                <iframe src="<?php echo base_url('assetnew/dasar-hukum-penyusunan.pdf');?>" width="100%" height="400px"></iframe>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-xs btn-primary btn-default" data-dismiss="modal">Tutup</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+         <div class="modal fade" id="modal-id2">
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h6 class="modal-title">Profil Biro Hukum</h6>
+              </div>
+              <div class="modal-body">
+                <iframe src="<?php echo base_url('assetnew/struktur-biro-hukum.pdf');?>" width="100%" height="400px"></iframe>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-xs btn-primary btn-default" data-dismiss="modal">Tutup</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+ 
+<script src="<?php echo base_url('assetnew/libs/tether/dist/js/tether.min.js');?> "></script>
+<script src="<?php echo base_url('assetnew/libs/bootstrap/dist/js/bootstrap.js');?> "></script>
+<!-- core -->
+<script src="<?php echo base_url('assetnew/libs/jQuery-Storage-API/jquery.storageapi.min.js');?> "></script>
+<script src="<?php echo base_url('assetnew/libs/PACE/pace.min.js');?>"></script>
+<script src="<?php echo base_url('assetnew/libs/jquery-pjax/jquery.pjax.js');?>"></script>
+<script src="<?php echo base_url('assetnew/libs/blockUI/jquery.blockUI.js');?>"></script>
+<script src="<?php echo base_url('assetnew/libs/jscroll/jquery.jscroll.min.js');?>"></script>
+
+
+<script src="<?=base_url('assetnew/libs/datatables/media/js/jquery.dataTables.min.js');?>"></script>
+<script src="<?=base_url('assetnew/libs/datatables/media/js/dataTables.bootstrap4.min.js');?>"></script>
+<script src="<?=base_url('assetnew/libs/datatables/extensions/buttons/dataTables.buttons.min.js');?>"></script>
+<script src="<?=base_url('assetnew/libs/datatables/extensions/buttons/buttons.bootstrap4.min.js');?>"></script>
+<script src="<?=base_url('assetnew/libs/datatables/extensions/buttons/jszip.min.js');?>"></script>
+
+<script src="<?=base_url('assetnew/libs/datatables/extensions/buttons/vfs_fonts.js');?>"></script>
+<script src="<?=base_url('assetnew/libs/datatables/extensions/buttons/buttons.html5.min.js');?>"></script>
+<script src="<?=base_url('assetnew/libs/datatables/extensions/buttons/buttons.print.min.js');?>"></script>
+<script src="<?=base_url('assetnew/libs/datatables/extensions/buttons/buttons.colVis.min.js');?>"></script>
+
+<script src="<?php echo base_url('assetnew/scripts/config.lazyload.js');?>"></script>
+<script src="<?php echo base_url('assetnew/scripts/ui-load.js');?>"></script>
+<script src="<?php echo base_url('assetnew/scripts/ui-jp.js');?>"></script>
+<script src="<?php echo base_url('assetnew/scripts/ui-include.js');?>"></script>
+<script src="<?php echo base_url('assetnew/scripts/ui-device.js');?>"></script>
+<script src="<?php echo base_url('assetnew/scripts/ui-form.js');?>"></script>
+<script src="<?php echo base_url('assetnew/scripts/ui-modal.js');?>"></script>
+<script src="<?php echo base_url('assetnew/scripts/ui-nav.js');?>"></script>
+<script src="<?php echo base_url('assetnew/scripts/ui-list.js');?>"></script>
+<script src="<?php echo base_url('assetnew/scripts/ui-screenfull.js');?>"></script>
+<script src="<?php echo base_url('assetnew/scripts/ui-scroll-to.js');?>"></script>
+<script src="<?php echo base_url('assetnew/scripts/ui-toggle-class.js');?>"></script>
+<script src="<?php echo base_url('assetnew/scripts/ui-taburl.js') ?>"></script>
+<script src="<?php echo base_url('assetnew/scripts/app.js') ?>"></script>
+<script src="<?php echo base_url('assetnew/scripts/ajax.js') ?>"></script>
+<!-- endbuild -->
+
+<script>
+	var getClassName = $('#aside').removeClass('folded');
+</script>
+</body>
+</html>
 
 </body>
 </html>
