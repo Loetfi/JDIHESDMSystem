@@ -25,7 +25,7 @@ function onFocused(ele) {
 	$(ele).addClass('focused');
 }
 function addAction() {
-	var element_value = $('#rootTable').find('.focused').children('input').val();
+	var element_value = $('#rootTable').find('.focused').children('input.pointer').val();
 	if(element_value === undefined) {
 		alert('Harap sorot elemen yang ingin ditambah');
 	}
@@ -43,15 +43,30 @@ function addAction() {
 	}
 }
 function minAction(ele) {
-	var element_value = $('#rootTable').find('.focused').children('input').val();
+	var element_value = $('#rootTable').find('.focused').children('input.pointer').val();
 	if(element_value === undefined) {
 		alert('Harap sorot elemen yang ingin dihapus');
 	}
 	else if(element_value === 'root') {
-		alert('Judul tidak dapat di hapus');
+		alert('Judul tidak dapat dihapus');
 	}
 	else {
 		$('.focused').parent().remove();
+	}
+}
+function editAction() {
+	var ele_value = $('#rootTable').find('.focused').children('input.namePointer').val();
+	var element_value = $('#rootTable').find('.focused').children('input.pointer').val();
+	if(element_value === undefined) {
+		alert('Harap sorot elemen yang ingin diubah');
+	}
+	else if(element_value === 'root') {
+		alert('Judul tidak dapat diubah');
+	}
+	else {
+		$('input[name="isi_text"]').val(ele_value);
+		$('input[name="editflag"]').val('true');
+		$('#modal-popup').click();
 	}
 }
 function saveFormat() {
@@ -77,48 +92,61 @@ function saveFormat() {
 }
 function modalBtn(ele, val) {
 	var getFocus = $('.focused').children().val();
-	if(val === 'yes') {
-		//console.log($('.focused').get()[0]);
-		var element_value = $('#rootTable').find('.focused').children('input').val();
-		var opt = $('#opt-child').val(), isi = $('input[name="isi_text"]').val();
-		var getStyle = $('.focused').attr('style');
-		var newEle;
-		if(element_value === 'root') {
-			newEle = '<div>'+
-					 '<div onclick="onFocused(this)" style="margin-left:10px">'+
-					 '<input type="hidden" class="pointer" value="subroot" />'+isi+
-					 '<input type="hidden" class="namePointer" value="'+isi+'" />'+
-					 '</div>'+
-					 '</div>';
-			$(newEle).insertAfter('.focused');
-		}
-		else {
-			var splitStyle = getStyle.split(':');
-			var getNum = splitStyle[1].match(/\d/g).join("");
-			var subNum = (element_value.match(/\d/g) === null) ? 1 : parseInt(element_value.match(/\d/g))+1;
-			if(opt === 'none') {
+	var editflag = $('input[name="editflag"]').val();
+	var editForm = $('input[name="isi_text"]').val();
+	if(editflag === 'true') {
+		$('#rootTable').find('.focused').contents().filter(function() {
+			return this.nodeType == Node.TEXT_NODE;
+		}).text(function() {
+			return $(this)[0].nodeValue = editForm;
+		});
+		$('#rootTable').find('.focused').children('input.namePointer').val(editForm);
+	}
+	else {
+		if(val === 'yes') {
+			//console.log($('.focused').get()[0]);
+			var element_value = $('#rootTable').find('.focused').children('input.pointer').val();
+			var opt = $('#opt-child').val(), isi = $('input[name="isi_text"]').val();
+			var getStyle = $('.focused').attr('style');
+			var newEle;
+			if(element_value === 'root') {
 				newEle = '<div>'+
-						 '<div onclick="onFocused(this)" style="'+getStyle+'">'+
-						 '<input type="hidden" class="pointer" value="'+getFocus+'" />'+isi+
+						 '<div onclick="onFocused(this)" style="margin-left:10px">'+
+						 '<input type="hidden" class="pointer" value="subroot" />'+isi+
 						 '<input type="hidden" class="namePointer" value="'+isi+'" />'+
 						 '</div>'+
 						 '</div>';
-				var focusParent = $('.focused').parent();
-				$(newEle).insertAfter(focusParent);
+				$(newEle).last().insertAfter('.focused');
 			}
-			else if(opt === 'child') {
-				newEle = '<div>'+
-						 '<div onclick="onFocused(this)" style="margin-left:'+(parseInt(getNum)+10)+'px">'+
-						 '<input type="hidden" class="pointer" value="subroot'+subNum+'" />'+isi+
-						 '<input type="hidden" class="namePointer" value="'+isi+'" />'+
-						 '</div>'+
-						 '</div>';
-				var focusParent = $('.focused').parent();
-				$(newEle).insertAfter(focusParent);
+			else {
+				var splitStyle = getStyle.split(':');
+				var getNum = splitStyle[1].match(/\d/g).join("");
+				var subNum = (element_value.match(/\d/g) === null) ? 1 : parseInt(element_value.match(/\d/g))+1;
+				if(opt === 'none') {
+					newEle = '<div>'+
+							 '<div onclick="onFocused(this)" style="'+getStyle+'">'+
+							 '<input type="hidden" class="pointer" value="'+getFocus+'" />'+isi+
+							 '<input type="hidden" class="namePointer" value="'+isi+'" />'+
+							 '</div>'+
+							 '</div>';
+					var focusParent = $('.focused').parent();
+					$(newEle).insertAfter(focusParent);
+				}
+				else if(opt === 'child') {
+					newEle = '<div>'+
+							 '<div onclick="onFocused(this)" style="margin-left:'+(parseInt(getNum)+10)+'px">'+
+							 '<input type="hidden" class="pointer" value="subroot'+subNum+'" />'+isi+
+							 '<input type="hidden" class="namePointer" value="'+isi+'" />'+
+							 '</div>'+
+							 '</div>';
+					var focusParent = $('.focused').parent();
+					$(newEle).last().insertAfter(focusParent);
+				}
 			}
 		}
 	}
-	$('input[name="isi_text"]').val('')
+	$('input[name="isi_text"]').val('');
+	$('input[name="editflag"]').val('false');
 	$(ele).attr("data-dismiss", "modal");
 }
 </script>
@@ -136,6 +164,7 @@ function modalBtn(ele, val) {
 					</span>
 					<span>
 						<i class="fa fa-save" title="Simpan Format" onclick="saveFormat()"></i>
+						<i class="fa fa-pencil" title="Ubah" onclick="editAction()"></i>
 						<i class="fa fa-plus-circle" title="Tambah" onclick="addAction()"></i>
 						<i class="fa fa-minus-circle" title="Hapus" onclick="minAction(this)"></i>
 					</span>
@@ -173,6 +202,7 @@ function modalBtn(ele, val) {
       </div>
       <div class="modal-body text-center" style="padding:10px">
         <input type="text" name="isi_text" style="width:100%" autofocus />
+        <input type="hidden" name="editflag" value="false" />
       </div>
       <div class="modal-footer">
         <button type="button" class="btn dark-white p-x-md" onclick="modalBtn(this, 'no')">No</button>
@@ -196,8 +226,8 @@ function loadSideFormat() {
 			var datax = JSON.parse(data), content = '';
 			if(datax.length === 0) {
 				content += '<div class="element" onclick="onFocused(this)">'+
-							'<input type="hidden" class="pointer" value="root" />'+datax[i].val+
-							'<input type="hidden" class="namePointer" value="'+datax[i].val+'" />'+
+							'<input type="hidden" class="pointer" value="root" />Judul'+
+							'<input type="hidden" class="namePointer" value="Judul" />'+
 							'</div>';
 			}
 			else {
