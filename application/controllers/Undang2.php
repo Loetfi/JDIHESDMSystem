@@ -10,7 +10,7 @@ class Undang2 extends CI_Controller {
 	
 	function index() {
 		$data = array(
-			'contents'	=> 'Undang2', 
+			'contents'	=> 'NewUndang2', 
 			'title'		=> 'Dashbord Sistem'
 		);
 		$this->load->view('backend/template/head', $data, FALSE);
