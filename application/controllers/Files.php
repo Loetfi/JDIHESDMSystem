@@ -16,12 +16,12 @@ class Files extends CI_Controller {
 		else {
 			$this->inputAction($post, $path);
 		}		
-		echo 'success create file';
+		echo 'success create file format';
 	}
 
 	function savefile() {
 		$post = $this->input->post();
-		$path = 'format/contentformat';
+		$path = 'format/contentformat/';
 		if(!file_exists($path)) {
 			echo exec('mkdir '.$path);
 			$this->inputAction($post, $path);
@@ -29,7 +29,7 @@ class Files extends CI_Controller {
 		else {
 			$this->inputAction($post, $path);
 		}		
-		echo 'success create file';
+		echo 'success create file content';
 	}
 
 	function inputAction($post, $path) {

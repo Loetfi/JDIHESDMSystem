@@ -107,6 +107,7 @@
 
 <script type="text/javascript">
 var filename = 'sideformat_undang2.json';
+var contentname = 'contentformat_undang2.json';
 
 loadSideFormat();
 function loadSideFormat() {
@@ -166,9 +167,23 @@ function onFocused(ele) {
 	$(ele).addClass('focused');
 }
 function loadRightPage(setPage='') {
-	console.log(setPage);
-	$('#rightPage').css('display', 'block');
-	$('#opt-mform').val(setPage).trigger('change');
+	setTimeout(function() {
+		var chval = $('.focused').children('.namePointer').val();
+		$('#rightPage').css('display', 'block');
+		$('#opt-mform').val(setPage).trigger('change');
+		if(localStorage.getItem('saveformatcontent') !== null) {
+			var localContent = JSON.parse(localStorage.getItem('saveformatcontent'));
+			for(var i = 0; i < localContent.length; i++) {
+				if(localContent[i].val === chval) {
+					displayContent(localContent[i].mform, localContent[i].content);
+				}
+			}
+			console.log(localContent);
+		}
+		else { 
+			console.log('else');
+		}
+	}, 100);
 }
 function addAction() {
 	var element_value = $('#rootTable').find('.focused').children('input.pointer').val();
@@ -254,11 +269,11 @@ function saveContentFormat() {
 			$(".pointer").each(function(num) {
 				if(chval === $(this).next().val()) {
 					arrFormat[num] = {pointer:$(this).val(), val:$(this).next().val(), type:right_opt};
-					arrContent[num] = {val:$(this).next().val(), content:''};
+					arrContent[num] = {val:$(this).next().val(), mform:right_opt, content:getContent(chval, right_opt)};
 				}
 				else {
 					arrFormat[num] = {pointer:$(this).val(), val:$(this).next().val(), type:''};
-					arrContent[num] = {val:$(this).next().val(), content:''};
+					arrContent[num] = {val:$(this).next().val(), mform:'', content:''};
 				}
 			});
 			localStorage.setItem("saveformat", JSON.stringify(arrFormat));
@@ -266,15 +281,19 @@ function saveContentFormat() {
 		}
 		else {
 			var jsonStr = JSON.parse(localStorage.getItem("saveformat"));
+			var jsonStrContent = JSON.parse(localStorage.getItem("saveformatcontent"));
 			for(var i = 0; i < jsonStr.length; i++) {
 				if(chval === jsonStr[i].val) {
 					arrFormat[i] = {pointer:jsonStr[i].pointer, val:jsonStr[i].val, type:right_opt};
+					arrContent[i] = {val:jsonStrContent[i].val, mform:right_opt, content:getContent(chval, right_opt)};
 				}
 				else {
 					arrFormat[i] = {pointer:jsonStr[i].pointer, val:jsonStr[i].val, type:jsonStr[i].type};
+					arrContent[i] = {val:jsonStrContent[i].val, mform:jsonStrContent[i].mform, content:jsonStrContent[i].content};
 				}
 			}
 			localStorage.setItem("saveformat", JSON.stringify(arrFormat));
+			localStorage.setItem("saveformatcontent", JSON.stringify(arrContent));
 		}
 		$.ajax({
 			url: '<?php base_url(); ?>files/saveformat',
@@ -285,7 +304,18 @@ function saveContentFormat() {
 			},
 			success: function(data) {
 				console.log(data);
-				location.reload();
+				$.ajax({
+					url: '<?php base_url(); ?>files/savefile',
+					type: 'POST',
+					data: 'namafile='+contentname+'&konten='+JSON.stringify(arrContent),
+					beforeSend: function() {
+						console.log('loading...');
+					},
+					success: function(data) {
+						console.log(data);
+						location.reload();
+					}
+				});
 			}
 		});
 	}
@@ -352,20 +382,57 @@ function modalBtn(ele, val) {
 	$('input[name="editflag"]').val('false');
 	$(ele).attr("data-dismiss", "modal");
 }
+function getContent(pointer, mform) {
+	switch(mform) {
+		case 'mform1': 
+			var textarea = $('textarea[name="textarea-mfrom1"]').val();
+			return {pointer:'', page:'', level:'', content:textarea};
+			break;
+		case 'mform2':
+			var textPointer = $('input[name="text-pointer"]').val();
+			var selectPage = $('select[name="select-page"]').val();
+			var selectLevel = $('select[name="select-level"]').val();
+			var textarea = $('textarea[name="textarea-mform2"]').val();
+			return {pointer:textPointer, page:selectPage, level:selectLevel, content:textarea};
+			break;
+		case 'mform3':
+			var fbaku = $('textarea[name="textarea_baku"]').val();
+			var textarea = $('textarea[name="textarea_mform3"]').val();
+			return {pointer:'', page:'', level:'', content:fbaku+'\r\r'+textarea};
+			break;
+	} 
+}
+function displayContent(mform, content) {console.log(content);
+	switch(mform) {
+		case 'mform1':
+			$('textarea[name="textarea-mfrom1"]').val(content.content);
+			break;
+		case 'mform2':
+			$('input[name="text-pointer"]').val(content.pointer);
+			$('select[name="select-page"]').val(content.page);
+			$('select[name="select-level"]').val(content.level);
+			$('textarea[name="textarea-mform2"]').val(content.content);
+			break;
+		case 'mform3':
+			$('textarea[name="textarea_baku"]').val();
+			$('textarea[name="textarea_mform3"]').val();
+			break;
+	}
+}
 function mform1() {
 	return '<textarea data-toggle="tooltip"'+
-			'title="title" type="text" name=""'+
+			'title="title" type="text" name="textarea-mfrom1"'+
 			'class="form-control" placeholder="Isi" rows="6" required></textarea>';
 }
 function mform2() {
 	return '<div style="display:inline-block; width:100%;">'+
 			'<div style="float:left; width:20%">'+
-			'<input type="text" name="" class="form-control" placeholder="Pointer" data-toggle="tooltip" title="" />'+
-			'<select name="" class="form-control" style="cursor:pointer; margin-top:10px;" data-toggle="tooltip" title="title">'+
+			'<input type="text" name="text-pointer" class="form-control" placeholder="Pointer" data-toggle="tooltip" title="" />'+
+			'<select name="select-page" class="form-control" style="cursor:pointer; margin-top:10px;" data-toggle="tooltip" title="title">'+
 			'<option value="continue">Continues Page</option>'+
 			'<option value="newP">Next Page Portrait</option><option value="newL">Next Page Landscape</option>'+
 			'</select>'+
-			'<select name="" class="form-control" style="cursor:pointer; margin-top:10px;">'+
+			'<select name="select-level" class="form-control" style="cursor:pointer; margin-top:10px;">'+
 			'<option value="0">SubLevel 0</option>'+
 			'<option value="1">SubLevel 1</option>'+
 			'<option value="2">SubLevel 2</option>'+
@@ -374,21 +441,17 @@ function mform2() {
 			'</select>'+
 			'</div>'+
 			'<div style="width:100%">'+
-			'<textarea data-toggle="tooltip" title="title" type="text" name="" class="form-control" placeholder="Isi" rows="6" style="float:left; margin-left:5px; width:75%;" required></textarea>'+
+			'<textarea data-toggle="tooltip" title="title" type="text" name="textarea-mform2" class="form-control" placeholder="Isi" rows="6" style="float:left; margin-left:5px; width:75%;" required></textarea>'+
 			'</div>'+
 			'</div>';
 }
 function mform3() {
 	return '<div style="display:inline-block; width:100%;">'+
 			'<div>'+
-			'<textarea data-toggle="tooltip"'+
-			'title="title" type="text" name=""'+
-			'class="form-control" placeholder="Format Baku" rows="3" required></textarea>'+
+			'<textarea data-toggle="tooltip" title="title" type="text" name="textarea_baku" class="form-control" placeholder="Format Baku" rows="3" required></textarea>'+
 			'</div>'+
 			'<div>'+
-			'<textarea data-toggle="tooltip"'+
-			'title="title" type="text" name=""'+
-			'class="form-control" placeholder="Isi" rows="6" required></textarea>'+
+			'<textarea data-toggle="tooltip" title="title" type="text" name="textarea_mform3" class="form-control" placeholder="Isi" rows="6" required></textarea>'+
 			'</div>'+
 			'</div>';
 }
