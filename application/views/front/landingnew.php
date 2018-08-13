@@ -151,7 +151,7 @@
                 <h6 class="modal-title">Tentang Rannah Hukum</h6>
               </div>
               <div class="modal-body">
-                <iframe src="<?php echo base_url('assetnew/tentang-rannah.pdf');?>" width="100%" height="400px"></iframe>
+                <img src="<?php echo base_url('assetnew/tentang-rannah.png');?>" width="100%">
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-xs btn-primary btn-default" data-dismiss="modal">Tutup</button>
