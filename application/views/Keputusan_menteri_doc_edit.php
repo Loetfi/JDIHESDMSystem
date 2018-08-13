@@ -708,23 +708,7 @@ function addLampiran(ele) {
 	<br>
 	<button type="submit" class="btn btn-warning btn-sm" id="save_doc_submit">Submit </button>
 
-	<?php if ($submit_hilang==FALSE) { ?>
-		<br><br><br>
-		<?php if (@$this->session->userdata('login_id')==35) { ?>
-			<select class="form-control" name="assign">
-				<option value="25">kasjh2</option>
-				<option value="37">kasjh2_3</option>
-			</select>
-			
-		<?php } elseif (@$this->session->userdata('login_id')==37) { ?>
-		<select class="form-control" name="assign">
-				<option value="35">staffsjh2_3</option>
-				<option value="25">kasjh2</option>
-			</select>
-			<br>
-			<textarea class="form-control" rows="4" name="catatan_submit">Masukan Catatan</textarea>
-		<?php } ?>
-		<br>
+	<?php if ($submit_hilang==FALSE) { ?> 
 	<?php } else { ?>
 		<hr>
 		<div class="alert ">

@@ -70,7 +70,7 @@
 
   <nav class="navbar navbar-lg navbar-expand-lg navbar-transparant navbar-dark navbar-absolute w-100">
     <div class="container">
-      <a class="navbar-brand" href="index.html"><img src="<?php echo base_url('logo-esdm-kuning.png');?>" width="70px"> Kementerian ESDM</a>
+      <a class="navbar-brand" href="<?php echo site_url() ?>"><img src="<?php echo base_url('logo-esdm-kuning.png');?>" width="70px"> Kementerian ESDM</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -151,7 +151,7 @@
                 <h6 class="modal-title">Tentang Rannah Hukum</h6>
               </div>
               <div class="modal-body">
-                <iframe src="<?php echo base_url('assetnew/tentang-rannah.pdf');?>" width="100%" height="400px"></iframe>
+                <img src="<?php echo base_url('assetnew/tentang-rannah.png');?>" width="100%">
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-xs btn-primary btn-default" data-dismiss="modal">Tutup</button>
