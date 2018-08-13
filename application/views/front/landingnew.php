@@ -70,7 +70,7 @@
 
   <nav class="navbar navbar-lg navbar-expand-lg navbar-transparant navbar-dark navbar-absolute w-100">
     <div class="container">
-      <a class="navbar-brand" href="index.html"><img src="<?php echo base_url('logo-esdm-kuning.png');?>" width="70px"> Kementerian ESDM</a>
+      <a class="navbar-brand" href="<?php echo site_url() ?>"><img src="<?php echo base_url('logo-esdm-kuning.png');?>" width="70px"> Kementerian ESDM</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
