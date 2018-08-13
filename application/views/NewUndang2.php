@@ -133,11 +133,12 @@ function loadSideFormat() {
 			}
 			else {
 				for(var i = 0; i < datax.length; i++) {
+					var typing = (datax[i].type === undefined) ? '' : datax[i].type;
 					if(datax[i].pointer === 'root') {
 						content += '<div class="element" onclick="onFocused(this)">'+
 									'<input type="hidden" class="pointer" value="root" />'+datax[i].val+
 									'<input type="hidden" class="namePointer" value="Judul" />'+
-									'<i class="fa fa-arrow-circle-right arrow-right" onclick="loadRightPage(\''+datax[i].type+'\')"></i>'+
+									'<i class="fa fa-arrow-circle-right arrow-right" onclick="loadRightPage(\''+typing+'\')"></i>'+
 									'</div>';
 					}
 					else {
@@ -155,7 +156,7 @@ function loadSideFormat() {
 									'<div onclick="onFocused(this)" style="margin-left:'+csscount+'px">'+
 									varcount+
 									'<input type="hidden" class="namePointer" value="'+datax[i].val+'" />'+
-									'<i class="fa fa-arrow-circle-right arrow-right" onclick="loadRightPage(\''+datax[i].type+'\')"></i>'+
+									'<i class="fa fa-arrow-circle-right arrow-right" onclick="loadRightPage(\''+typing+'\')"></i>'+
 									'</div>'+
 									'</div>';
 					}
@@ -259,6 +260,13 @@ function saveFormat() {
 			});
 			arrStr = JSON.stringify(arr);
 		}
+		else if(localStorage.getItem("saveformat") !== null) {
+			var getLocal = JSON.parse(localStorage.getItem("saveformat"));
+			$(".pointer").each(function(num) {
+				arr[num] = {pointer:$(this).val(), val:$(this).next().val(), type:getLocal[num].type};
+			});
+			arrStr = JSON.stringify(arr);
+		}
 		else {
 			arrStr = localStorage.getItem("saveformat");
 		}
@@ -271,7 +279,7 @@ function saveFormat() {
 				console.log('loading...');
 			},
 			success: function(data) {
-				console.log(data);
+				location.reload();
 			}
 		});
 	}
@@ -298,21 +306,40 @@ function saveContentFormat() {
 			localStorage.setItem("saveformat", JSON.stringify(arrFormat));
 			localStorage.setItem("saveformatcontent", JSON.stringify(arrContent));
 		}
+		else if(localStorage.getItem("saveformat") !== null) {
+			$(".pointer").each(function(num) {
+				if(chval === $(this).next().val()) {
+					arrFormat[num] = {pointer:$(this).val(), val:$(this).next().val(), type:right_opt};
+					arrContent[num] = {val:$(this).next().val(), pointer:$(this).val(), mform:right_opt, content:getContent(chval, right_opt)};
+				}
+				else {
+					arrFormat[num] = {pointer:$(this).val(), val:$(this).next().val(), type:''};
+					arrContent[num] = {val:$(this).next().val(), pointer:$(this).val(), mform:'', content:''};
+				}
+			});
+			localStorage.setItem("saveformat", JSON.stringify(arrFormat));
+			localStorage.setItem("saveformatcontent", JSON.stringify(arrContent));
+		}
 		else {
 			var jsonStr = JSON.parse(localStorage.getItem("saveformat"));
 			var jsonStrContent = JSON.parse(localStorage.getItem("saveformatcontent"));
-			for(var i = 0; i < jsonStr.length; i++) {
-				if(chval === jsonStr[i].val) {
-					arrFormat[i] = {pointer:jsonStr[i].pointer, val:jsonStr[i].val, type:right_opt};
-					arrContent[i] = {val:jsonStrContent[i].val, pointer:jsonStrContent[i].pointer, mform:right_opt, content:getContent(chval, right_opt)};
-				}
-				else {
-					arrFormat[i] = {pointer:jsonStr[i].pointer, val:jsonStr[i].val, type:jsonStr[i].type};
-					arrContent[i] = {val:jsonStrContent[i].val, pointer:jsonStrContent[i].pointer, mform:jsonStrContent[i].mform, content:jsonStrContent[i].content};
-				}
+			if(jsonStrContent === null) {
+				alert('Mohon buat hirarki isi dokumen');
 			}
-			localStorage.setItem("saveformat", JSON.stringify(arrFormat));
-			localStorage.setItem("saveformatcontent", JSON.stringify(arrContent));
+			else {
+				for(var i = 0; i < jsonStr.length; i++) {
+					if(chval === jsonStr[i].val) {
+						arrFormat[i] = {pointer:jsonStr[i].pointer, val:jsonStr[i].val, type:right_opt};
+						arrContent[i] = {val:jsonStrContent[i].val, pointer:jsonStrContent[i].pointer, mform:right_opt, content:getContent(chval, right_opt)};
+					}
+					else {
+						arrFormat[i] = {pointer:jsonStr[i].pointer, val:jsonStr[i].val, type:jsonStr[i].type};
+						arrContent[i] = {val:jsonStrContent[i].val, pointer:jsonStrContent[i].pointer, mform:jsonStrContent[i].mform, content:jsonStrContent[i].content};
+					}
+				}
+				localStorage.setItem("saveformat", JSON.stringify(arrFormat));
+				localStorage.setItem("saveformatcontent", JSON.stringify(arrContent));
+			}
 		}
 		$.ajax({
 			url: '<?php base_url(); ?>files/saveformat',
@@ -416,7 +443,7 @@ function getContent(pointer, mform) {
 		case 'mform3':
 			var fbaku = $('textarea[name="textarea_baku"]').val();
 			var textarea = $('textarea[name="textarea_mform3"]').val();
-			return {pointer:'', page:'', level:'', content:fbaku+'\r\r'+textarea};
+			return {pointer:'', page:'', level:'', content:fbaku+'&#13;'+textarea};
 			break;
 	} 
 }
@@ -432,8 +459,9 @@ function displayContent(mform, content) {
 			$('textarea[name="textarea-mform2"]').val(content.content);
 			break;
 		case 'mform3':
-			$('textarea[name="textarea_baku"]').val();
-			$('textarea[name="textarea_mform3"]').val();
+			var split = (content.content).split('&#13;');
+			$('textarea[name="textarea_baku"]').val(split[0]);
+			$('textarea[name="textarea_mform3"]').val(split[1]);
 			break;
 	}
 }
