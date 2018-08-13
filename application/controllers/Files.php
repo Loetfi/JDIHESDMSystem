@@ -8,7 +8,7 @@ class Files extends CI_Controller {
 
 	function saveformat() {
 		$post = $this->input->post();
-		$path = 'format/sideformat';
+		$path = 'format/sideformat/';
 		if(!file_exists($path)) {
 			echo exec('mkdir '.$path);
 			$this->inputAction($post, $path);

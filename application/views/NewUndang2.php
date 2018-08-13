@@ -67,7 +67,7 @@
 						</select>
 					</span>
 					<span>
-						<i class="fa fa-save" title="Simpan Lampiran" onclick="saveLampiran()"></i>
+						<i class="fa fa-save" title="Simpan Lampiran" onclick="saveContentFormat()"></i>
 					</span>
 				</div>
 				<div class="box-divider m-a-0"></div>
@@ -132,7 +132,7 @@ function loadSideFormat() {
 						content += '<div class="element" onclick="onFocused(this)">'+
 									'<input type="hidden" class="pointer" value="root" />'+datax[i].val+
 									'<input type="hidden" class="namePointer" value="Judul" />'+
-									'<i class="fa fa-arrow-circle-right arrow-right" onclick="loadRightPage()"></i>'+
+									'<i class="fa fa-arrow-circle-right arrow-right" onclick="loadRightPage(\''+datax[i].type+'\')"></i>'+
 									'</div>';
 					}
 					else {
@@ -150,7 +150,7 @@ function loadSideFormat() {
 									'<div onclick="onFocused(this)" style="margin-left:'+csscount+'px">'+
 									varcount+
 									'<input type="hidden" class="namePointer" value="'+datax[i].val+'" />'+
-									'<i class="fa fa-arrow-circle-right arrow-right" onclick="loadRightPage()"></i>'+
+									'<i class="fa fa-arrow-circle-right arrow-right" onclick="loadRightPage(\''+datax[i].type+'\')"></i>'+
 									'</div>'+
 									'</div>';
 					}
@@ -166,8 +166,9 @@ function onFocused(ele) {
 	$(ele).addClass('focused');
 }
 function loadRightPage(setPage='') {
+	console.log(setPage);
 	$('#rightPage').css('display', 'block');
-	$('#opt-mform').val('').trigger('change');
+	$('#opt-mform').val(setPage).trigger('change');
 }
 function addAction() {
 	var element_value = $('#rootTable').find('.focused').children('input.pointer').val();
@@ -216,21 +217,75 @@ function editAction() {
 }
 function saveFormat() {
 	var conf = confirm("Anda Yakin?");
-	var arr = new Array;
+	var arr = new Array, arrStr = '';
 	if(conf === true) {
-		$(".pointer").each(function(num) {
-			var val = $(this).val();
-			arr[num] = {pointer:$(this).val(), val:$(this).next().val()};
-		});
+		if(localStorage.getItem("saveformat") === null) {
+			$(".pointer").each(function(num) {
+				arr[num] = {pointer:$(this).val(), val:$(this).next().val()};
+			});
+			arrStr = JSON.stringify(arr);
+		}
+		else {
+			arrStr = localStorage.getItem("saveformat");
+		}
+
 		$.ajax({
 			url: '<?php base_url(); ?>files/saveformat',
 			type: 'POST',
-			data: 'namafile='+filename+'&konten='+JSON.stringify(arr),
+			data: 'namafile='+filename+'&konten='+arrStr,
 			beforeSend: function() {
 				console.log('loading...');
 			},
 			success: function(data) {
 				console.log(data);
+			}
+		});
+	}
+}
+function saveContentFormat() {
+	var right_opt = $('#opt-mform').val();
+	var chval = $('.focused').children('.namePointer').val();
+	var arrFormat = new Array, arrContent = new Array;
+	if(right_opt === '') {
+		alert('Harap pilih model form');
+	}
+	else {
+		if(localStorage.getItem("saveformat") === null) {
+			$(".pointer").each(function(num) {
+				if(chval === $(this).next().val()) {
+					arrFormat[num] = {pointer:$(this).val(), val:$(this).next().val(), type:right_opt};
+					arrContent[num] = {val:$(this).next().val(), content:''};
+				}
+				else {
+					arrFormat[num] = {pointer:$(this).val(), val:$(this).next().val(), type:''};
+					arrContent[num] = {val:$(this).next().val(), content:''};
+				}
+			});
+			localStorage.setItem("saveformat", JSON.stringify(arrFormat));
+			localStorage.setItem("saveformatcontent", JSON.stringify(arrContent));
+		}
+		else {
+			var jsonStr = JSON.parse(localStorage.getItem("saveformat"));
+			for(var i = 0; i < jsonStr.length; i++) {
+				if(chval === jsonStr[i].val) {
+					arrFormat[i] = {pointer:jsonStr[i].pointer, val:jsonStr[i].val, type:right_opt};
+				}
+				else {
+					arrFormat[i] = {pointer:jsonStr[i].pointer, val:jsonStr[i].val, type:jsonStr[i].type};
+				}
+			}
+			localStorage.setItem("saveformat", JSON.stringify(arrFormat));
+		}
+		$.ajax({
+			url: '<?php base_url(); ?>files/saveformat',
+			type: 'POST',
+			data: 'namafile='+filename+'&konten='+JSON.stringify(arrFormat),
+			beforeSend: function() {
+				console.log('loading...');
+			},
+			success: function(data) {
+				console.log(data);
+				location.reload();
 			}
 		});
 	}
