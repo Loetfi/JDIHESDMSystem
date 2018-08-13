@@ -13,6 +13,12 @@
 #left-menus span:nth-child(3) i {
 	cursor: pointer;
 }
+#right-menus span:nth-child(2) {
+	margin-left: 10px;
+}
+#right-menus span:nth-child(2) i {
+	cursor: pointer;
+}
 .focused {
 	background: blue;
 	color: #fff;
@@ -52,11 +58,17 @@
 		<div class="col-md-9" id="rightPage" style="display:none">
 			<div class="box">
 				<div id="right-menus" class="box-header">
-					<select id="opt-mform">
-						<option value="">Pilih Model Form</option>
-						<option value="mform1">Form Model 1</option>
-						<option value="mform2">Form Model 2</option>
-					</select>
+					<span>
+						<select id="opt-mform">
+							<option value="">Pilih Model Form</option>
+							<option value="mform1">Form Model 1</option>
+							<option value="mform2">Form Model 2</option>
+							<option value="mform3">Form Model 3</option>
+						</select>
+					</span>
+					<span>
+						<i class="fa fa-save" title="Simpan Lampiran" onclick="saveLampiran()"></i>
+					</span>
 				</div>
 				<div class="box-divider m-a-0"></div>
 				<div class="box-body">
@@ -288,7 +300,7 @@ function modalBtn(ele, val) {
 function mform1() {
 	return '<textarea data-toggle="tooltip"'+
 			'title="title" type="text" name=""'+
-			'class="form-control" placeholder="Menimbang" rows="6" required></textarea>';
+			'class="form-control" placeholder="Isi" rows="6" required></textarea>';
 }
 function mform2() {
 	return '<div style="display:inline-block; width:100%;">'+
@@ -307,7 +319,21 @@ function mform2() {
 			'</select>'+
 			'</div>'+
 			'<div style="width:100%">'+
-			'<textarea data-toggle="tooltip" title="title" type="text" name="" class="form-control" placeholder="place" rows="6" style="float:left; margin-left:5px; width:75%;" required></textarea>'+
+			'<textarea data-toggle="tooltip" title="title" type="text" name="" class="form-control" placeholder="Isi" rows="6" style="float:left; margin-left:5px; width:75%;" required></textarea>'+
+			'</div>'+
+			'</div>';
+}
+function mform3() {
+	return '<div style="display:inline-block; width:100%;">'+
+			'<div>'+
+			'<textarea data-toggle="tooltip"'+
+			'title="title" type="text" name=""'+
+			'class="form-control" placeholder="Format Baku" rows="3" required></textarea>'+
+			'</div>'+
+			'<div>'+
+			'<textarea data-toggle="tooltip"'+
+			'title="title" type="text" name=""'+
+			'class="form-control" placeholder="Isi" rows="6" required></textarea>'+
 			'</div>'+
 			'</div>';
 }
@@ -321,6 +347,9 @@ $('#opt-mform').change(function() {
 	}
 	else if($(this).val() === 'mform2') {
 		$('#rootForm').html(mform2());
+	}
+	else if($(this).val() === 'mform3') {
+		$('#rootForm').html(mform3());
 	}
 });
 
