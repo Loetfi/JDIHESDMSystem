@@ -8,27 +8,37 @@ class Files extends CI_Controller {
 
 	function saveformat() {
 		$post = $this->input->post();
-		if(!file_exists('format/sideformat')) {
-			echo exec('mkdir format/sideformat');
-			$this->inputAction($post);
+		$path = 'format/sideformat';
+		if(!file_exists($path)) {
+			echo exec('mkdir '.$path);
+			$this->inputAction($post, $path);
 		}
 		else {
-			$this->inputAction($post);
+			$this->inputAction($post, $path);
 		}		
 		echo 'success create file';
 	}
 
 	function savefile() {
-		echo 'tes';
+		$post = $this->input->post();
+		$path = 'format/contentformat';
+		if(!file_exists($path)) {
+			echo exec('mkdir '.$path);
+			$this->inputAction($post, $path);
+		}
+		else {
+			$this->inputAction($post, $path);
+		}		
+		echo 'success create file';
 	}
 
-	function inputAction($post) {
-		$myfile = fopen('format/sideformat/'.$post['namafile'], "wt") or die("Unable to open file!");
+	function inputAction($post, $path) {
+		$myfile = fopen($path.$post['namafile'], "wt") or die("Unable to open file!");
 		$txt = $post['konten'];
 		fwrite($myfile, $txt);
 		flock($myfile, LOCK_UN);
 		fclose($myfile);
-		chmod('format/sideformat/'.$post['namafile'], 0777);
+		chmod($path.$post['namafile'], 0777);
 	}
 
 	function loadformat() {
