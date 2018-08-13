@@ -59,5 +59,24 @@ class Files extends CI_Controller {
 			}
 		}
 	}
+
+	function loadContent() {
+		$postfile = $this->input->post('filename');
+		if($postfile === null) {
+			echo 'variable false';
+		}
+		else {
+			$filename = "format/contentformat/".$postfile;
+			if(!file_exists('format/contentformat/'.$postfile)) {
+				echo '[]';
+			}
+			else {
+				$handle = fopen($filename, "r");
+				$contents = fread($handle, filesize($filename));
+				fclose($handle);
+				echo $contents;
+			}
+		}
+	}
 }
 ?>

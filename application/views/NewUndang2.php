@@ -19,6 +19,9 @@
 #right-menus span:nth-child(2) i {
 	cursor: pointer;
 }
+#waiting {
+	margin-left: 5px;
+}
 .focused {
 	background: blue;
 	color: #fff;
@@ -69,6 +72,7 @@
 					<span>
 						<i class="fa fa-save" title="Simpan Lampiran" onclick="saveContentFormat()"></i>
 					</span>
+					<span id="waiting"></span>
 				</div>
 				<div class="box-divider m-a-0"></div>
 				<div class="box-body">
@@ -178,10 +182,25 @@ function loadRightPage(setPage='') {
 					displayContent(localContent[i].mform, localContent[i].content);
 				}
 			}
-			console.log(localContent);
 		}
-		else { 
-			console.log('else');
+		else {
+			$.ajax({
+				url: '<?php base_url(); ?>files/loadContent',
+				type: 'POST',
+				data: 'filename='+contentname,
+				beforeSend: function() {
+					$('#waiting').html('loading...');
+				},
+				success: function(data) {
+					$('#waiting').html('');
+					var datax = JSON.parse(data);
+					for(var i = 0; i < datax.length; i++) {
+						if(datax[i].val === chval) {
+							displayContent(datax[i].mform, datax[i].content);
+						}
+					}
+				}
+			});
 		}
 	}, 100);
 }
@@ -269,11 +288,11 @@ function saveContentFormat() {
 			$(".pointer").each(function(num) {
 				if(chval === $(this).next().val()) {
 					arrFormat[num] = {pointer:$(this).val(), val:$(this).next().val(), type:right_opt};
-					arrContent[num] = {val:$(this).next().val(), mform:right_opt, content:getContent(chval, right_opt)};
+					arrContent[num] = {val:$(this).next().val(), pointer:$(this).val(), mform:right_opt, content:getContent(chval, right_opt)};
 				}
 				else {
 					arrFormat[num] = {pointer:$(this).val(), val:$(this).next().val(), type:''};
-					arrContent[num] = {val:$(this).next().val(), mform:'', content:''};
+					arrContent[num] = {val:$(this).next().val(), pointer:$(this).val(), mform:'', content:''};
 				}
 			});
 			localStorage.setItem("saveformat", JSON.stringify(arrFormat));
@@ -285,11 +304,11 @@ function saveContentFormat() {
 			for(var i = 0; i < jsonStr.length; i++) {
 				if(chval === jsonStr[i].val) {
 					arrFormat[i] = {pointer:jsonStr[i].pointer, val:jsonStr[i].val, type:right_opt};
-					arrContent[i] = {val:jsonStrContent[i].val, mform:right_opt, content:getContent(chval, right_opt)};
+					arrContent[i] = {val:jsonStrContent[i].val, pointer:jsonStrContent[i].pointer, mform:right_opt, content:getContent(chval, right_opt)};
 				}
 				else {
 					arrFormat[i] = {pointer:jsonStr[i].pointer, val:jsonStr[i].val, type:jsonStr[i].type};
-					arrContent[i] = {val:jsonStrContent[i].val, mform:jsonStrContent[i].mform, content:jsonStrContent[i].content};
+					arrContent[i] = {val:jsonStrContent[i].val, pointer:jsonStrContent[i].pointer, mform:jsonStrContent[i].mform, content:jsonStrContent[i].content};
 				}
 			}
 			localStorage.setItem("saveformat", JSON.stringify(arrFormat));
@@ -334,7 +353,6 @@ function modalBtn(ele, val) {
 	}
 	else {
 		if(val === 'yes') {
-			//console.log($('.focused').get()[0]);
 			var element_value = $('#rootTable').find('.focused').children('input.pointer').val();
 			var opt = $('#opt-child').val(), isi = $('input[name="isi_text"]').val();
 			var getStyle = $('.focused').attr('style');
@@ -402,7 +420,7 @@ function getContent(pointer, mform) {
 			break;
 	} 
 }
-function displayContent(mform, content) {console.log(content);
+function displayContent(mform, content) {
 	switch(mform) {
 		case 'mform1':
 			$('textarea[name="textarea-mfrom1"]').val(content.content);
