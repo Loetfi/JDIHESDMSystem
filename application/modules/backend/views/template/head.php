@@ -30,7 +30,7 @@
               <span class="nav-icon">
                 <i class="ion-filing"></i>
               </span>
-              <span class="nav-text">Dokumen</span>
+              <span class="nav-text text-white">Dokumen</span>
             </a> 
           </li> 
           <li class="nav-header hidden-folded m-t">
@@ -41,7 +41,7 @@
               <span class="nav-icon">
                 <i class="fa fa-book"></i>
               </span>
-              <span class="nav-text">List Data</span>
+              <span class="nav-text text-white">List Data</span>
             </a>
           </li> 
           <li class="nav-header hidden-folded m-t">
@@ -52,7 +52,7 @@
               <span class="nav-icon">
                 <i class="fa fa-book"></i>
               </span>
-              <span class="nav-text">Forum</span>
+              <span class="nav-text text-white">Forum</span>
             </a>
           </li> 
         <?php } ?>
@@ -65,18 +65,20 @@
   <div class="nav-fold dropup">
     <a data-toggle="dropdown">
       <div class="pull-left">
-        <div class="inline"><span class="avatar w-40 grey">JR</span></div>
-        <img src="images/a0.jpg" alt="..." class="w-40 img-circle hide">
+        <div class="inline"><span class="avatar w-40 white  ">C</span></div>
+        <img src="<?php echo base_url('assetnew/images/a2.jpg');?>" alt="..." class="w-40 img-circle hide">
       </div>
       <div class="clear hidden-folded p-x">
-        <span class="block _500 text-muted">Jean Reyes</span>
-        <div class="progress-xxs m-y-sm lt progress">
-          <div class="progress-bar info" style="width: 15%;">
+        <span class="block _500 text-white"><?php echo @$name; ?> </span>
+        <p class="text-muted"></p>
+        <span class="block _500 text-white"><?php echo date('d F Y'); ?> </span>
+        <!-- <div class="progress-xxs m-y-sm lt progress">
+          <div class="progress-bar info" style="width: 100%;">
           </div>
-        </div>
+        </div> -->
       </div>
     </a>
-    <div class="dropdown-menu w dropdown-menu-scale ">
+    <div class="dropdown-menu w dropdown-menu-scale">
       <a class="dropdown-item" href="profile.html">
         <span>Profile</span>
       </a>
@@ -93,7 +95,7 @@
       <a class="dropdown-item" href="docs.html">
         Need help?
       </a>
-      <a class="dropdown-item" href="signin.html">Sign out</a>
+      <a class="dropdown-item" href="<?php echo site_url('auth/logout?true') ?>">Sign out</a>
     </div>
   </div>
 </div> 
