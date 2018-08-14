@@ -315,42 +315,88 @@
 						<hr>
 						<fieldset>
 							<div class="form-group" style="margin-bottom:5px">
-							<textarea name="paragraf" class="form-control" autocomplete="off" placeholder="Paragraf" rows="4" required="" data-toggle="tooltip" title="Paragraf"><?php echo @$detail_dokumen['judul'][0]['teks']; ?></textarea>
+							<textarea name="paragraf" class="form-control" autocomplete="off" placeholder="Paragraf" rows="4" required="" data-toggle="tooltip" title="Paragraf"><?php echo @$detail_dokumen['paragraf'][0]['teks']; ?></textarea>
 						</div>
 						</fieldset>
 						<hr>
 						<fieldset>
 							<div>
 								<?php $namaMenimbang = 'Menimbang';?>
-								<div class="form-group" id="text-<?php echo $namaMenimbang; ?>1" style="display:inline-block; width:100%;">
+								<?php
+								$namaJenisField = 'Menimbang';
+								if (count(@$detail_dokumen[$namaJenisField]) > 0){
+									for($idxField=0; $idxField<count(@$detail_dokumen[$namaJenisField]); $idxField++){ ?>
+								<div class="form-group" id="text-<?php echo $namaJenisField.($idxField +1); ?>" style="display:inline-block; width:100%;">
 									<div style="float:left; width:20%"> 
-										<input type="text" name="pointer<?php echo $namaMenimbang; ?>[]" class="form-control" placeholder="Pointer" data-toggle="tooltip" title="contoh : a. ( menggunakan titik dibelakang )" value="Kepada"/>
-										<select name="nextPage<?php echo $namaMenimbang; ?>[]" class="form-control" style="cursor:pointer; margin-top:10px;" data-toggle="tooltip" title="Jika dalam kondisi dokumen harus menggunakan halaman baru ( potrait / lanskap ) gunakan fitur ini. Continues Page menjadi bagian default dari pengaturan ini.">
+										<input type="text" name="pointer<?php echo $namaJenisField; ?>[]" class="form-control" placeholder="Pointer" data-toggle="tooltip" title="contoh : a. ( menggunakan titik dibelakang )" value="<?php echo @$detail_dokumen[$namaJenisField][$idxField]['pointer']; ?>"/>
+										<select name="nextPage<?php echo $namaJenisField; ?>[]" class="form-control" style="cursor:pointer; margin-top:10px;" data-toggle="tooltip" title="Jika dalam kondisi dokumen harus menggunakan halaman baru ( potrait / lanskap ) gunakan fitur ini. Continues Page menjadi bagian default dari pengaturan ini.">
+											<option value="continue" <?php echo @$detail_dokumen[$namaJenisField][$idxField]['layout'] == 'continue' ? 'selected' : ''; ?>>Continues Page</option>
+											<option value="newP" <?php echo @$detail_dokumen[$namaJenisField][$idxField]['layout'] == 'newP' ? 'selected' : ''; ?> >Next Page Portrait</option>
+											<option value="newL" <?php echo @$detail_dokumen[$namaJenisField][$idxField]['layout'] == 'newL' ? 'selected' : ''; ?> >Next Page Landscape</option>
+										</select>
+										<input type="hidden" name="subLevel<?php echo $namaJenisField; ?>[]" value="0"> 
+									</div>
+									<div style="width:100%">
+										<textarea data-toggle="tooltip" title="sistem akan memberikan otomatis simbol ; ( titik koma) pada akhir paragraf, apabila sistem tidak memberi simbol ; maka kamu harus menambahkannya. " type="text" name="<?php echo $namaJenisField; ?>[]" class="form-control" placeholder="Text" rows="6" style="float:left; margin-left:5px; width:75%;"><?php echo @$detail_dokumen[$namaJenisField][$idxField]['teks']; ?></textarea>
+										<a href="javascript:void(0)" onclick="addMenimbang(this, <?php echo ($idxField +1); ?>)" style="position:absolute; right:2%;" title="Tambah Isi" class="btn btn-success btn-xs">
+											<i class="fa fa-lg fa-plus <?php echo ($idxField +1) < count(@$detail_dokumen[$namaJenisField]) ? 'fa-minus' : ''; ?>"></i>
+										</a>
+									</div>
+								</div>
+								<?php }
+								} else { ?>
+								<div class="form-group" id="text-<?php echo $namaJenisField; ?>1" style="display:inline-block; width:100%;">
+									<div style="float:left; width:20%"> 
+										<input type="text" name="pointer<?php echo $namaJenisField; ?>[]" class="form-control" placeholder="Pointer" data-toggle="tooltip" title="contoh : a. ( menggunakan titik dibelakang )" value="Kepada"/>
+										<select name="nextPage<?php echo $namaJenisField; ?>[]" class="form-control" style="cursor:pointer; margin-top:10px;" data-toggle="tooltip" title="Jika dalam kondisi dokumen harus menggunakan halaman baru ( potrait / lanskap ) gunakan fitur ini. Continues Page menjadi bagian default dari pengaturan ini.">
 											<option value="continue">Continues Page</option>
 											<option value="newP">Next Page Portrait</option><option value="newL">Next Page Landscape</option>
 										</select>
-										<input type="hidden" name="subLevel<?php echo $namaMenimbang; ?>[]" value="0"> 
+										<input type="hidden" name="subLevel<?php echo $namaJenisField; ?>[]" value="0"> 
 									</div>
 									<div style="width:100%">
-										<textarea data-toggle="tooltip" title="sistem akan memberikan otomatis simbol ; ( titik koma) pada akhir paragraf, apabila sistem tidak memberi simbol ; maka kamu harus menambahkannya. " type="text" name="<?php echo $namaMenimbang; ?>[]" class="form-control" placeholder="Text" rows="6" style="float:left; margin-left:5px; width:75%;"></textarea>
+										<textarea data-toggle="tooltip" title="sistem akan memberikan otomatis simbol ; ( titik koma) pada akhir paragraf, apabila sistem tidak memberi simbol ; maka kamu harus menambahkannya. " type="text" name="<?php echo $namaJenisField; ?>[]" class="form-control" placeholder="Text" rows="6" style="float:left; margin-left:5px; width:75%;">Kepala Satuan Kerja Khusus Pelaksana Kegiatan Usaha Hulu Minyak dan Gas Bumi.</textarea>
 										<a href="javascript:void(0)" onclick="addMenimbang(this, 1)" style="position:absolute; right:2%;" title="Tambah Isi" class="btn btn-success btn-xs"><i class="fa fa-lg fa-plus"></i></a>
 									</div>
 								</div>
+								<?php } ?>
 							</div>
 						</fieldset>
 						<hr>
 						<fieldset>
 							<p>Untuk : </p>
 							<div>
-								<?php $namaDiktum = 'Diktum'; ?>
-								<div class="form-group" id="text-<?php echo $namaDiktum; ?>1" style="display:inline-block; width:100%;">
+								<?php $namaJenisField = 'Diktum'; 
+								if (count(@$detail_dokumen[$namaJenisField]) > 0){
+									for($idxField=0; $idxField<count(@$detail_dokumen[$namaJenisField]); $idxField++){ ?>
+								<div class="form-group" id="text-<?php echo $namaJenisField.($idxField +1); ?>" style="display:inline-block; width:100%;">
 									<div style="float:left; width:20%;">
-										<input type="text" name="pointer<?php echo $namaDiktum; ?>[]" class="form-control" placeholder="Pointer" data-toggle="tooltip" title="Isian ini akan otomatis membuat huruf menjadi kapital, contoh : KESATU"/>
-										<!-- <select name="nextPage<?php echo $namaDiktum; ?>[]" class="form-control" style="cursor:pointer; margin-top:10px;">
+										<input type="text" name="pointer<?php echo $namaJenisField; ?>[]" class="form-control" placeholder="Pointer" data-toggle="tooltip" title="Isian ini akan otomatis membuat huruf menjadi kapital, contoh : KESATU" value="<?php echo @$detail_dokumen[$namaJenisField][$idxField]['pointer']; ?>" />
+										<select name="subLevel<?php echo $namaJenisField; ?>[]" class="form-control" style="cursor:pointer; margin-top:10px;" data-toggle="tooltip" title="Ini adalah kedalaman dari poin-poin, biarkan di sublevel 0 jika tidak ada perubahan.">
+											<option value="0" <?php echo @$detail_dokumen[$namaJenisField][$idxField]['sublevel'] == '0' ? 'selected' : ''; ?>>SubLevel 0</option>
+											<option value="1" <?php echo @$detail_dokumen[$namaJenisField][$idxField]['sublevel'] == '1' ? 'selected' : ''; ?>>SubLevel 1</option>
+											<option value="2" <?php echo @$detail_dokumen[$namaJenisField][$idxField]['sublevel'] == '2' ? 'selected' : ''; ?>>SubLevel 2</option>
+											<option value="3" <?php echo @$detail_dokumen[$namaJenisField][$idxField]['sublevel'] == '3' ? 'selected' : ''; ?>>SubLevel 3</option>
+											<option value="4" <?php echo @$detail_dokumen[$namaJenisField][$idxField]['sublevel'] == '4' ? 'selected' : ''; ?>>SubLevel 4</option>
+										</select>
+									</div>
+									<div style="width:100%">
+										<textarea data-toggle="tooltip" title="Isian ini harap diisi dengan sebagai mestinya." type="text" name="<?php echo $namaJenisField; ?>[]" class="form-control" placeholder="Diktum" rows="6" style="float:left; margin-left:5px; width:75%;" required><?php echo @$detail_dokumen[$namaJenisField][$idxField]['teks']; ?></textarea>
+										<a href="javascript:void(0)" onclick="addDiktum(this, <?php echo ($idxField +1); ?>)" style="position:absolute; right:2%;" title="Tambah Isi" class="btn btn-success btn-xs">
+											<i class="fa fa-lg fa-plus <?php echo ($idxField +1) < count(@$detail_dokumen[$namaJenisField]) ? 'fa-minus' : ''; ?>"></i>
+										</a>
+									</div>
+								</div>
+								<?php }
+								} else { ?>
+								<div class="form-group" id="text-<?php echo $namaJenisField; ?>1" style="display:inline-block; width:100%;">
+									<div style="float:left; width:20%;">
+										<input type="text" name="pointer<?php echo $namaJenisField; ?>[]" class="form-control" placeholder="Pointer" data-toggle="tooltip" title="Isian ini akan otomatis membuat huruf menjadi kapital, contoh : KESATU"/>
+										<!-- <select name="nextPage<?php echo $namaJenisField; ?>[]" class="form-control" style="cursor:pointer; margin-top:10px;">
 											<option value="continue">Continues Page</option>
 											<option value="newP">Next Page Portrait</option><option value="newL">Next Page Landscape</option>
 										</select> -->
-										<select name="subLevel<?php echo $namaDiktum; ?>[]" class="form-control" style="cursor:pointer; margin-top:10px;" data-toggle="tooltip" title="Ini adalah kedalaman dari poin-poin, biarkan di sublevel 0 jika tidak ada perubahan.">
+										<select name="subLevel<?php echo $namaJenisField; ?>[]" class="form-control" style="cursor:pointer; margin-top:10px;" data-toggle="tooltip" title="Ini adalah kedalaman dari poin-poin, biarkan di sublevel 0 jika tidak ada perubahan.">
 											<option value="0">SubLevel 0</option>
 											<option value="1">SubLevel 1</option>
 											<option value="2">SubLevel 2</option>
@@ -359,10 +405,11 @@
 										</select>
 									</div>
 									<div style="width:100%">
-										<textarea data-toggle="tooltip" title="Isian ini harap diisi dengan sebagai mestinya." type="text" name="<?php echo $namaDiktum; ?>[]" class="form-control" placeholder="Text" rows="6" style="float:left; margin-left:5px; width:75%;" required></textarea>
+										<textarea data-toggle="tooltip" title="Isian ini harap diisi dengan sebagai mestinya." type="text" name="<?php echo $namaJenisField; ?>[]" class="form-control" placeholder="Diktum" rows="6" style="float:left; margin-left:5px; width:75%;" required></textarea>
 										<a href="javascript:void(0)" onclick="addDiktum(this, 1)" style="position:absolute; right:2%;" title="Tambah Isi" class="btn btn-success btn-xs"><i class="fa fa-lg fa-plus"></i></a>
 									</div>
 								</div>
+								<?php } ?>
 							</div>
 						</fieldset>
 						 
@@ -370,7 +417,7 @@
 						<fieldset>
 							<legend>Pejabat Penanda Tangan</legend>
 							<div class="form-group">
-								<input name="ttd" class="form-control" autocomplete="off" placeholder="Nama Penanda Tangan" rows="4" style="width:95%" required> 
+								<input name="ttd" class="form-control" autocomplete="off" placeholder="Nama Penanda Tangan" rows="4" style="width:95%" required value="<?php echo @$detail_dokumen['TTD'][0]['teks']; ?>"> 
 							</div>
 						</fieldset> 
 						<hr>
@@ -408,7 +455,7 @@
 
 						$('textarea[name^="Menimbang"], textarea[name^="Mengingat"]').blur(function() {
 							var str = $(this).val(),
-							strcheck = (str === '') ? '' : str+'';
+							strcheck = (str === '') ? '' : str+';';
 							$(this).val(strcheck);
 						})
 						.focus(function() {

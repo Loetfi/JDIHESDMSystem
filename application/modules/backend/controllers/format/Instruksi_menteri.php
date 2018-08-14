@@ -875,8 +875,8 @@ class Instruksi_menteri extends CI_Controller {
 	}
 
 	function save_doc() {
-		echo '<pre>';
-		print_r($_POST); exit();
+		// echo '<pre>';
+		// print_r($_POST); exit();
 		$config['upload_path'] = './uploads/';
 		$config['allowed_types'] = '*';
 		$config['max_size']  = '10000';
@@ -901,8 +901,9 @@ class Instruksi_menteri extends CI_Controller {
 
 
 		$arrData['judul'] = $_POST['super_judul'];
-		$Menimbang = $_POST['Menimbang'];
-		$pointerMenimbang = $_POST['pointerMenimbang'];
+		$arrData['paragraf'] = $paragraf =  $_POST['paragraf'];
+		$Menimbang = @$_POST['Menimbang'];
+		$pointerMenimbang = @$_POST['pointerMenimbang'];
 		$nextPageMenimbang = @$_POST['nextPageMenimbang'];
 		$subLevelMenimbang = @$_POST['subLevelMenimbang'];
 		for($i=0; $i<count($Menimbang); $i++) {
@@ -1014,10 +1015,12 @@ class Instruksi_menteri extends CI_Controller {
 	function cek_revisi_document($id) {
 		$sql = "
 		SELECT
-		max(status_revisi) revisi,
-		count(*) terhitung
+			status_revisi AS revisi,
+			length(status_revisi) terhitung
 		FROM dokumen_revisi dr
 		WHERE dr.id_dokumen = '$id'
+		ORDER BY length(status_revisi) DESC, status_revisi DESC 
+		LIMIT 1
 		";
 		$allRow = $this->db->query($sql)->row_array();
 		if (@$allRow['terhitung'] == 0){
@@ -1155,7 +1158,7 @@ class Instruksi_menteri extends CI_Controller {
 			'cari_dispo'	=> $cari_dispo,
 			'submit_hilang'	=> $submit_hilang,
 			'publis_dok'	=> $publis_dok,
-			'contents'	=> 'Keputusan_menteri_doc_edit',
+			'contents'	=> 'format/instruksi_menteri_edit',
 			'title'		=> 'Ubah Rancangan',
 			'name'		=> empty($this->session->userdata('name')) ? 'Tanpa Login' : $this->session->userdata('name'),
 			'id_dokumen'	=> $id_dokumen,
