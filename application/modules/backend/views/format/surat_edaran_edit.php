@@ -190,6 +190,7 @@
 				</div>
 				<div class="padding"> 
 					<form class="width-100p" method="POST" id="form-keputusan" target="_blank" enctype="multipart/form-data">
+						<input type="hidden" name="id_dokumen" value="<?php echo @$detail_dokumen['yang_terhormat'][0]['id_dokumen']; ?>">
 						<fieldset> 
 							<div class="form-group">
 								<label for="">Nama Dokumen</label>
@@ -200,7 +201,7 @@
 						<fieldset> 
 							<div class="form-group">
 								<label for="">Yang terhormat</label>
-								<input type="text" class="form-control" name="yang_terhormat" placeholder="Masukan nama instansi" required="" data-toggle="tooltip" title="Masukan nama instansi">
+								<input type="text" class="form-control" name="yang_terhormat" placeholder="Masukan nama instansi" required="" data-toggle="tooltip" title="Masukan nama instansi" value="<?php echo @$detail_dokumen['yang_terhormat'][0]['teks']; ?>">
 							</div> 
 						</fieldset>
 						<hr>
@@ -215,7 +216,35 @@
 						<fieldset>
 							<h4>Isi Surat Edaran </h4>  
 							<div>
-								<?php $namaJenisField = 'Paragraf'; ?>
+								<?php $namaJenisField = 'Paragraf';
+								if (count(@$detail_dokumen[$namaJenisField]) > 0){
+									for($idxField=0; $idxField<count(@$detail_dokumen[$namaJenisField]); $idxField++){ ?>
+								<div class="form-group" id="text-<?php echo $namaJenisField.($idxField +1); ?>" style="display:inline-block; width:100%;">
+									<div style="float:left; width:20%"> 
+										<input type="text" name="pointer<?php echo $namaJenisField; ?>[]" class="form-control" placeholder="Pointer" data-toggle="tooltip" title="contoh : a. ( menggunakan titik dibelakang )" value="<?php echo @$detail_dokumen[$namaJenisField][$idxField]['pointer']; ?>" />
+										<select name="nextPage<?php echo $namaJenisField; ?>[]" class="form-control" style="cursor:pointer; margin-top:10px;" data-toggle="tooltip" title="Jika dalam kondisi dokumen harus menggunakan halaman baru ( potrait / lanskap ) gunakan fitur ini. Continues Page menjadi bagian default dari pengaturan ini.">
+											<option value="continue" <?php echo @$detail_dokumen[$namaJenisField][$idxField]['layout'] == 'continue' ? 'selected' : ''; ?>>Continues Page</option>
+											<option value="newP" <?php echo @$detail_dokumen[$namaJenisField][$idxField]['layout'] == 'newP' ? 'selected' : ''; ?> >Next Page Portrait</option>
+											<option value="newL" <?php echo @$detail_dokumen[$namaJenisField][$idxField]['layout'] == 'newL' ? 'selected' : ''; ?> >Next Page Landscape</option>
+										</select>
+										<select name="subLevel<?php echo $namaJenisField; ?>[]" class="form-control" style="cursor:pointer; margin-top:10px;">
+											<option value="paragraf" <?php echo @$detail_dokumen[$namaJenisField][$idxField]['sublevel'] == 'paragraf' ? 'selected' : ''; ?>>Paragraf</option>
+											<option value="0" <?php echo @$detail_dokumen[$namaJenisField][$idxField]['sublevel'] == '0' ? 'selected' : ''; ?>>SubLevel 0</option>
+											<option value="1" <?php echo @$detail_dokumen[$namaJenisField][$idxField]['sublevel'] == '1' ? 'selected' : ''; ?>>SubLevel 1</option>
+											<option value="2" <?php echo @$detail_dokumen[$namaJenisField][$idxField]['sublevel'] == '2' ? 'selected' : ''; ?>>SubLevel 2</option>
+											<option value="3" <?php echo @$detail_dokumen[$namaJenisField][$idxField]['sublevel'] == '3' ? 'selected' : ''; ?>>SubLevel 3</option>
+											<option value="4" <?php echo @$detail_dokumen[$namaJenisField][$idxField]['sublevel'] == '4' ? 'selected' : ''; ?>>SubLevel 4</option>
+										</select>
+									</div>
+									<div style="width:100%">
+										<textarea data-toggle="tooltip" title="sistem akan memberikan otomatis simbol ; ( titik koma) pada akhir paragraf, apabila sistem tidak memberi simbol ; maka kamu harus menambahkannya. " type="text" name="<?php echo $namaJenisField; ?>[]" class="form-control" placeholder="Menimbang" rows="6" style="float:left; margin-left:5px; width:75%;" required><?php echo @$detail_dokumen[$namaJenisField][$idxField]['teks']; ?></textarea>
+										<a href="javascript:void(0)" onclick="addParagraf(this, <?php echo ($idxField +1); ?>)" style="position:absolute; right:2%;" title="Tambah Isi" class="btn btn-success btn-xs">
+											<i class="fa fa-lg fa-plus <?php echo ($idxField +1) < count(@$detail_dokumen[$namaJenisField]) ? 'fa-minus' : ''; ?>"></i>
+										</a>
+									</div>
+								</div>
+								<?php }
+								} else { ?>
 								<div class="form-group" id="text-<?php echo $namaJenisField; ?>1" style="display:inline-block; width:100%;">
 									<div style="float:left; width:20%"> 
 										<input type="text" name="pointer<?php echo $namaJenisField; ?>[]" class="form-control" placeholder="Pointer" data-toggle="tooltip" title="contoh : a. ( menggunakan titik dibelakang )"/>
@@ -238,6 +267,7 @@
 										<a href="javascript:void(0)" onclick="addParagraf(this, 1)" style="position:absolute; right:2%;" title="Tambah Isi" class="btn btn-success btn-xs"><i class="fa fa-lg fa-plus"></i></a>
 									</div>
 								</div>
+								<?php } ?>
 							</div>
 						</fieldset>
 						<hr>

@@ -52,12 +52,12 @@ class Surat_edaran extends CI_Controller {
 
 		// setting paragraf global
 		$tabsDefault = array(
+			new \PhpOffice\PhpWord\Style\Tab('left', \PhpOffice\PhpWord\Shared\Converter::cmToTwip(1)),
+			new \PhpOffice\PhpWord\Style\Tab('left', \PhpOffice\PhpWord\Shared\Converter::cmToTwip(2)),
 			new \PhpOffice\PhpWord\Style\Tab('left', \PhpOffice\PhpWord\Shared\Converter::cmToTwip(3)),
-			new \PhpOffice\PhpWord\Style\Tab('left', \PhpOffice\PhpWord\Shared\Converter::cmToTwip(3.5)),
-			new \PhpOffice\PhpWord\Style\Tab('left', \PhpOffice\PhpWord\Shared\Converter::cmToTwip(4.5)),
-			new \PhpOffice\PhpWord\Style\Tab('left', \PhpOffice\PhpWord\Shared\Converter::cmToTwip(5.5)),
-			new \PhpOffice\PhpWord\Style\Tab('left', \PhpOffice\PhpWord\Shared\Converter::cmToTwip(6.5)),
-			new \PhpOffice\PhpWord\Style\Tab('left', \PhpOffice\PhpWord\Shared\Converter::cmToTwip(7.5)),
+			new \PhpOffice\PhpWord\Style\Tab('left', \PhpOffice\PhpWord\Shared\Converter::cmToTwip(4)),
+			new \PhpOffice\PhpWord\Style\Tab('left', \PhpOffice\PhpWord\Shared\Converter::cmToTwip(5)),
+			new \PhpOffice\PhpWord\Style\Tab('left', \PhpOffice\PhpWord\Shared\Converter::cmToTwip(6)),
 		);
 		$phpWord->setDefaultParagraphStyle(
 			array(
@@ -75,61 +75,58 @@ class Surat_edaran extends CI_Controller {
 			'align' => 'center',
 		);
 
+		$subLevel['paragraf']['default']['indentation'] = array(
+			'firstLine' => \PhpOffice\PhpWord\Shared\Converter::cmToTwip(1.25),
+			'left' => \PhpOffice\PhpWord\Shared\Converter::cmToTwip(0),
+		);
+		
 		// setting subLevel 0
 		$subLevel[0]['default']['indentation'] = array(
-			'left' => \PhpOffice\PhpWord\Shared\Converter::cmToTwip(3.5),
-		);
-		$subLevel[0]['firstLine']['indentation'] = array(
-			'firstLine' => \PhpOffice\PhpWord\Shared\Converter::cmToTwip(3.5) * -1,
-			'left' => \PhpOffice\PhpWord\Shared\Converter::cmToTwip(3.5),
+			'left' => \PhpOffice\PhpWord\Shared\Converter::cmToTwip(1),
 		);
 		$subLevel[0]['pointer']['indentation'] = array(
 			'firstLine' => \PhpOffice\PhpWord\Shared\Converter::cmToTwip(1) * -1,
-			'left' => \PhpOffice\PhpWord\Shared\Converter::cmToTwip(4.5),
+			'left' => \PhpOffice\PhpWord\Shared\Converter::cmToTwip(1),
 		);
 
 		// setting subLevel 1
 		$subLevel[1]['default']['indentation'] = array(
-			'left' => \PhpOffice\PhpWord\Shared\Converter::cmToTwip(4.5),
+			'left' => \PhpOffice\PhpWord\Shared\Converter::cmToTwip(2),
 		);
 		// setting subLevel 1 pointer
 		$subLevel[1]['pointer']['indentation'] = array(
 			'firstLine' => \PhpOffice\PhpWord\Shared\Converter::cmToTwip(1) * -1,
-			'left' => \PhpOffice\PhpWord\Shared\Converter::cmToTwip(4.5),
-		);
-		// setting subLevel 1 pointer body
-		$subLevel[1]['firstLine']['indentation'] = array(
-			'firstLine' => \PhpOffice\PhpWord\Shared\Converter::cmToTwip(4.5) * -1,
-			'left' => \PhpOffice\PhpWord\Shared\Converter::cmToTwip(4.5),
+			'left' => \PhpOffice\PhpWord\Shared\Converter::cmToTwip(2),
 		);
 
 		// setting subLevel 2
 		$subLevel[2]['default']['indentation'] = array(
-			'left' => \PhpOffice\PhpWord\Shared\Converter::cmToTwip(5.5),
+			'left' => \PhpOffice\PhpWord\Shared\Converter::cmToTwip(3),
 		);
 		// setting subLevel 2 pointer
 		$subLevel[2]['pointer']['indentation'] = array(
 			'firstLine' => \PhpOffice\PhpWord\Shared\Converter::cmToTwip(1) * -1,
-			'left' => \PhpOffice\PhpWord\Shared\Converter::cmToTwip(5.5),
+			'left' => \PhpOffice\PhpWord\Shared\Converter::cmToTwip(3),
 		);
-
+		
 		// setting subLevel 3
 		$subLevel[3]['default']['indentation'] = array(
-			'left' => \PhpOffice\PhpWord\Shared\Converter::cmToTwip(6.5),
+			'left' => \PhpOffice\PhpWord\Shared\Converter::cmToTwip(4),
 		);
 		// setting subLevel 3 pointer
 		$subLevel[3]['pointer']['indentation'] = array(
 			'firstLine' => \PhpOffice\PhpWord\Shared\Converter::cmToTwip(1) * -1,
-			'left' => \PhpOffice\PhpWord\Shared\Converter::cmToTwip(6.5),
+			'left' => \PhpOffice\PhpWord\Shared\Converter::cmToTwip(4),
 		);
+		
 		// setting subLevel 4
 		$subLevel[4]['default']['indentation'] = array(
-			'left' => \PhpOffice\PhpWord\Shared\Converter::cmToTwip(7.5),
+			'left' => \PhpOffice\PhpWord\Shared\Converter::cmToTwip(5),
 		);
-		// setting subLevel 3 pointer
+		// setting subLevel 4 pointer
 		$subLevel[4]['pointer']['indentation'] = array(
 			'firstLine' => \PhpOffice\PhpWord\Shared\Converter::cmToTwip(1) * -1,
-			'left' => \PhpOffice\PhpWord\Shared\Converter::cmToTwip(7.5),
+			'left' => \PhpOffice\PhpWord\Shared\Converter::cmToTwip(5),
 		);
 
 
@@ -172,9 +169,31 @@ class Surat_edaran extends CI_Controller {
 
 
 		/* *********************************************************************************** */
+		$section->addTextBreak(6,$fontStyle);
+		$section->addText("Yang terhormat", $fontStyle);
+		
+		## Kepada
+		$yang_terhormat = $_POST['yang_terhormat'];
+		$barisYangTerhormat = explode("\r\n",$yang_terhormat);
+		foreach($barisYangTerhormat as $row){
+			if ($row != ""){
+				$txtTitle = $row;
+				$section->addText($txtTitle, $fontStyle);
+			} else {
+				$section->addTextBreak(1,$fontStyle);
+			}
+		}
+		$section->addTextBreak(1,$fontStyle);
+		
+		/* *********************************************************************************** */
 		## judul
 		$fontStyle['allCaps'] = TRUE;
-		$judul = "\r\n\r\n\r\n\r\n\r\n\r\n\r\nKEPUTUSAN MENTERI ENERGI DAN SUMBER DAYA MINERAL\r\nREPUBLIK INDONESIA\r\nNOMOR :_____________________\r\nTENTANG\r\n". $_POST['super_judul'] . "\r\nDENGAN RAHMAT TUHAN YANG MAHA ESA\r\n\r\nMENTERI ENERGI DAN SUMBER DAYA MINERAL REPUBLIK INDONESIA,\r\n\r\n";
+		
+		$section->addText("SURAT EDARAN", $fontStyle, array('align' => 'center'));
+		$section->addText("NOMOR _____________________", $fontStyle, array('align' => 'center'));
+		$section->addText("TENTANG", $fontStyle, array('align' => 'center'));
+		
+		$judul = $_POST['super_judul'];
 		$barisJudul = explode("\r\n",$judul);
 
 		// print_r($barisJudul); exit();
@@ -196,427 +215,105 @@ class Surat_edaran extends CI_Controller {
 
 		$fontStyle['allCaps'] = false;
 		/* *********************************************************************************** */
-		## menimbang
-		$Menimbang = $_POST['Menimbang'];
-		$pointerMenimbang = $_POST['pointerMenimbang'];
+		$section->addTextBreak(2,$fontStyle);
+		
+		## Paragraf
+		$Paragraf = $_POST['Paragraf'];
+		$pointerParagraf = $_POST['pointerParagraf'];
 
-		$nextPageMenimbang = @$_POST['nextPageMenimbang'];
-		$subLevelMenimbang = @$_POST['subLevelMenimbang'];
-		$theFirst = true;
+		$nextPageParagraf = @$_POST['nextPageParagraf'];
+		$subLevelParagraf = @$_POST['subLevelParagraf'];
+		
 
-		// print_r($nextPageMenimbang); die();
-		for($i=0; $i<count($Menimbang); $i++){
+		// print_r($nextPageParagraf); die();
+		for($i=0; $i<count($Paragraf); $i++){
 
-			if ($Menimbang[$i] != ''){
-				$barisMenimbang = explode("\r\n",$Menimbang[$i]);
+			if ($Paragraf[$i] != ''){
+				$barisParagraf = explode("\r\n",$Paragraf[$i]);
 
-				if (@$nextPageMenimbang[$i] == 'newP')
+				if (@$nextPageParagraf[$i] == 'newP')
 					$section = $phpWord->addSection($thisPage);
-				else if (@$nextPageMenimbang[$i] == 'newL')
+				else if (@$nextPageParagraf[$i] == 'newL')
 					$section = $phpWord->addSection($thisPageLandscape);
 
-				// print_r($Menimbang[$i]);
-				// print_r($barisMenimbang);
-				for($j=0; $j<count($barisMenimbang); $j++){
+				// print_r($Paragraf[$i]);
+				// print_r($barisParagraf);
+				$theFirst = true;
+				for($j=0; $j<count($barisParagraf); $j++){
 
-					$idxSubLevel = @$subLevelMenimbang[$i];
-
-					if ($theFirst==true){ // awal Menimbang
-						if ($j==0){ // awal baris menimbang
-
-							if ($pointerMenimbang[$i] == ''){ // awal tanpa pointer
-								$section->addText(
-									"Menimbang\t:\t".$barisMenimbang[$j],
-									$fontStyle,
-									$subLevel[0]['firstLine']
-								);
-							}
-							else{ // awal ada pointer
-								$section->addText(
-									"Menimbang\t:\t".$pointerMenimbang[$i]."\t".$barisMenimbang[$j],
-									$fontStyle,
-									$subLevel[1]['firstLine']
-								);
-							}
-						}
-						else {
-							if ($pointerMenimbang[$i] == ''){ // lanjutan tanpa pointer
-								$section->addText(
-									$barisMenimbang[$j],
-									$fontStyle,
-									$subLevel[0]['default']
-								);
-							}
-							else { // lanjutan ada pointer
-								$section->addText(
-									$barisMenimbang[$j],
-									$fontStyle,
-									$subLevel[1]['default']
-								);
-							}
-						}
-					}
-					else { // body Menimbang
-						if ($j==0){ // awal body baris menimbang
-							if ($pointerMenimbang[$i] == ''){ // awal body menimbang tanpa pointer
-								$section->addText(
-									$barisMenimbang[$j],
-									$fontStyle,
-									$subLevel[$idxSubLevel]['default']
-								);
-							}
-							else { // awal body menimbang ada pointer
-								$section->addText(
-									$pointerMenimbang[$i]."\t".$barisMenimbang[$j],
-									$fontStyle,
-									$subLevel[$idxSubLevel]['pointer']
-								);
-
-							}
-						}
-						else {
+					$idxSubLevel = @$subLevelParagraf[$i];
+					if ($theFirst==true){
+						
+						if ($idxSubLevel == 'paragraf'){
 							$section->addText(
-								$barisMenimbang[$j],
+								$barisParagraf[$j],
 								$fontStyle,
 								$subLevel[$idxSubLevel]['default']
 							);
-						}
-					}
-
-				}
-				$theFirst = false;
-			}
-
-			$arrData['Menimbang']['pointerMenimbang'][] = $pointerMenimbang[$i];
-			$arrData['Menimbang']['nextPageMenimbang'][] = $nextPageMenimbang[$i];
-			$arrData['Menimbang']['subLevelMenimbang'][] = $subLevelMenimbang[$i];
-			$arrData['Menimbang']['text'][] = $Menimbang[$i];
-		}
-
-		/* *********************************************************************************** */
-
-		/* *********************************************************************************** */
-		## Mengingat
-		$Mengingat = $_POST['Mengingat'];
-		$pointerMengingat = $_POST['pointerMengingat'];
-
-		$nextPageMengingat = @$_POST['nextPageMengingat'];
-		$subLevelMengingat = @$_POST['subLevelMengingat'];
-		$theFirst = true;
-		for($i=0; $i<count($Mengingat); $i++){
-
-			if ($Mengingat[$i] != ''){
-				$barisMengingat = explode("\r\n",$Mengingat[$i]);
-
-				if (@$nextPageMengingat[$i] == 'newP')
-					$section = $phpWord->addSection($thisPage);
-				else if (@$nextPageMengingat[$i] == 'newL')
-					$section = $phpWord->addSection($thisPageLandscape);
-
-
-				// print_r($Mengingat[$i]);
-				// print_r($barisMengingat);
-				for($j=0; $j<count($barisMengingat); $j++){
-
-					$idxSubLevel = @$subLevelMengingat[$i];
-
-					if ($theFirst==true){ // awal Mengingat
-						if ($j==0){ // awal baris Mengingat
-
-							if ($pointerMengingat[$i] == ''){ // awal tanpa pointer
-								$section->addText(
-									"Mengingat\t:\t".$barisMengingat[$j],
-									$fontStyle,
-									$subLevel[0]['firstLine']
-								);
-							}
-							else{ // awal ada pointer
-								$section->addText(
-									"Mengingat\t:\t".$pointerMengingat[$i]."\t".$barisMengingat[$j],
-									$fontStyle,
-									$subLevel[1]['firstLine']
-								);
-							}
-						}
-						else {
-							if ($pointerMengingat[$i] == ''){ // lanjutan tanpa pointer
-								$section->addText(
-									$barisMengingat[$j],
-									$fontStyle,
-									$subLevel[0]['default']
-								);
-							}
-							else { // lanjutan ada pointer
-								$section->addText(
-									$barisMengingat[$j],
-									$fontStyle,
-									$subLevel[1]['default']
-								);
-							}
-						}
-					}
-					else { // body Mengingat
-						if ($j==0){ // awal body baris Mengingat
-							if ($pointerMengingat[$i] == ''){ // awal body Mengingat tanpa pointer
-								$section->addText(
-									$barisMengingat[$j],
-									$fontStyle,
-									$subLevel[$idxSubLevel]['default']
-								);
-							}
-							else { // awal body Mengingat ada pointer
-								$section->addText(
-									$pointerMengingat[$i]."\t".$barisMengingat[$j],
-									$fontStyle,
-									$subLevel[$idxSubLevel]['pointer']
-								);
-
-							}
-						}
-						else {
-							$section->addText(
-								$barisMengingat[$j],
-								$fontStyle,
-								$subLevel[$idxSubLevel]['default']
-							);
-						}
-					}
-
-				}
-				$theFirst = false;
-			}
-
-			$arrData['Mengingat']['pointerMengingat'][] = $pointerMengingat[$i];
-			$arrData['Mengingat']['nextPageMengingat'][] = $nextPageMengingat[$i];
-			$arrData['Mengingat']['subLevelMengingat'][] = $subLevelMengingat[$i];
-			$arrData['Mengingat']['text'][] = $Mengingat[$i];
-		}
-		/* *********************************************************************************** */
-
-		/* *********************************************************************************** */
-
-		$section->addTextBreak(1,$fontStyle);
-		$section->addText(
-			"MEMUTUSKAN:",
-			$fontStyle,
-			$centerContent
-		);
-
-
-		## Memutuskan
-		$Memutuskan = $_POST['Memutuskan'];
-		$pointerMemutuskan = @$_POST['pointerMemutuskan'];
-
-		$nextPageMemutuskan = @$_POST['nextPageMemutuskan'];
-		$subLevelMemutuskan = @$_POST['subLevelMemutuskan'];
-		$theFirst = true;
-		for($i=0; $i<count($Memutuskan); $i++){
-
-			if ($Memutuskan[$i] != ''){
-				$barisMemutuskan = explode("\r\n",$Memutuskan[$i]);
-
-				if (@$nextPageMemutuskan[$i] == 'newP')
-					$section = $phpWord->addSection($thisPage);
-				else if (@$nextPageMemutuskan[$i] == 'newL')
-					$section = $phpWord->addSection($thisPageLandscape);
-
-				// print_r($Memutuskan[$i]);
-				// print_r($barisMemutuskan);
-				for($j=0; $j<count($barisMemutuskan); $j++){
-
-					$idxSubLevel = @$subLevelMemutuskan[$i];
-
-					if ($theFirst==true){ // awal Memutuskan
-						if ($j==0){ // awal baris Memutuskan
-
-							if ($pointerMemutuskan[$i] == ''){ // awal tanpa pointer
-								$section->addText(
-									"Menetapkan\t:\t".$barisMemutuskan[$j],
-									$fontStyle,
-									$subLevel[0]['firstLine']
-								);
-							}
-							else{ // awal ada pointer
-								$section->addText(
-									$pointerMemutuskan[$i]."\t:\t KEPUTUSAN MENTERI ENERGI DAN SUMBER DAYA MINERAL TENTANG ".$barisMemutuskan[$j],
-									$fontStyle,
-									$subLevel[0]['firstLine']
-								);
-							}
 							$section->addTextBreak(1,$fontStyle);
 						}
 						else {
-							if ($pointerMemutuskan[$i] == ''){ // lanjutan tanpa pointer
+							
+							if ($pointerParagraf[$i] == ''){ // awal tanpa pointer
 								$section->addText(
-									$barisMemutuskan[$j],
-									$fontStyle,
-									$subLevel[0]['default']
-								);
-							}
-							else { // lanjutan ada pointer
-								$section->addText(
-									$barisMemutuskan[$j],
-									$fontStyle,
-									$subLevel[1]['default']
-								);
-							}
-						}
-					}
-					else { // body Memutuskan
-						if ($j==0){ // awal body baris Memutuskan
-							if ($pointerMemutuskan[$i] == ''){ // awal body Memutuskan tanpa pointer
-								$section->addText(
-									$barisMemutuskan[$j],
+									$barisParagraf[$j],
 									$fontStyle,
 									$subLevel[$idxSubLevel]['default']
-								);
-							}
-							else { // awal body Memutuskan ada pointer
-								$section->addText(
-									$pointerMemutuskan[$i]."\t".$barisMemutuskan[$j],
-									$fontStyle,
-									$subLevel[$idxSubLevel]['pointer']
-								);
-
-							}
-						}
-						else {
-							$section->addText(
-								$barisMemutuskan[$j],
-								$fontStyle,
-								$subLevel[$idxSubLevel]['default']
-							);
-						}
-					}
-
-				}
-				// $theFirst = false;
-			}
-
-			$arrData['Memutuskan']['pointerMemutuskan'][] = $pointerMemutuskan[$i];
-			$arrData['Memutuskan']['nextPageMemutuskan'][] = $nextPageMemutuskan[$i];
-			$arrData['Memutuskan']['subLevelMemutuskan'][] = $subLevelMemutuskan[$i];
-			$arrData['Memutuskan']['text'][] = $Memutuskan[$i];
-		}
-		/* *********************************************************************************** */
-
-		/* *********************************************************************************** */
-		## Diktum
-		$Diktum = $_POST['Diktum'];
-		$pointerDiktum = $_POST['pointerDiktum'];
-
-		$nextPageDiktum = @$_POST['nextPageDiktum'];
-		$subLevelDiktum = @$_POST['subLevelDiktum'];
-		// print_r($subLevelDiktum);
-		$theFirst = true;
-		for($i=0; $i<count($Diktum); $i++){
-
-			if ($Diktum[$i] != ''){
-				$barisDiktum = explode("\r\n",$Diktum[$i]);
-
-				if (@$nextPageDiktum[$i] == 'newP')
-					$section = $phpWord->addSection($thisPage);
-				else if (@$nextPageDiktum[$i] == 'newL')
-					$section = $phpWord->addSection($thisPageLandscape);
-
-				// print_r($Diktum[$i]);
-				// print_r($barisDiktum);
-				for($j=0; $j<count($barisDiktum); $j++){
-
-					$idxSubLevel = @$subLevelDiktum[$i];
-
-					if ($theFirst==true){ // awal Diktum
-						if ($j==0 and $i==0){ // awal baris Diktum
-							// echo($pointerDiktum[$i]);
-							// echo "<br>";
-
-							if ($pointerDiktum[$i] == ''){ // awal tanpa pointer
-								$section->addText(
-									"Menetapkan\t:\t".$barisDiktum[$j],
-									$fontStyle,
-									$subLevel[0]['firstLine']
 								);
 							}
 							else{ // awal ada pointer
-								// echo $i."\t:\t".$j.'<br>';
 								$section->addText(
-									$pointerDiktum[$i]."\t:\t".$barisDiktum[$j],
+									$pointerParagraf[$i]."\t".$barisParagraf[$j],
 									$fontStyle,
-									$subLevel[0]['firstLine']
+									$subLevel[$idxSubLevel]['pointer']
 								);
 							}
-							// $section->addTextBreak(1,$fontStyle);
+							
+						}
+						$theFirst = false;
+					}
+					else {
+						if ($idxSubLevel == 'paragraf'){
+							$section->addText(
+								$barisParagraf[$j],
+								$fontStyle,
+								$subLevel[$idxSubLevel]['default']
+							);
+							$section->addTextBreak(1,$fontStyle);
 						}
 						else {
-							if ($pointerDiktum[$i] == ''){ // lanjutan tanpa pointer
+							
+							if ($pointerParagraf[$i] == ''){ // awal tanpa pointer
 								$section->addText(
-									$barisDiktum[$j],
-									$fontStyle,
-									$subLevel[0]['default']
-								);
-							}
-							else { // lanjutan ada pointer
-								// echo $i."\t:\t".$j.'<br>';
-								$section->addText(
-									$barisDiktum[$j],
-									$fontStyle,
-									$subLevel[1]['default']
-								);
-							}
-						}
-					}
-					else { // body Diktum
-						if ($j==0){ // awal body baris Diktum
-							if ($pointerDiktum[$i] == ''){ // awal body Diktum tanpa pointer
-								// echo "4";
-								$section->addText(
-									$barisDiktum[$j],
+									$barisParagraf[$j],
 									$fontStyle,
 									$subLevel[$idxSubLevel]['default']
 								);
 							}
-							else { // awal body Diktum ada pointer
-								// echo $pointerDiktum[$i]."\t".$barisDiktum[$j];
-								if ($idxSubLevel == 0){
-									$section->addText(
-										$pointerDiktum[$i]."\t:\t".$barisDiktum[$j],
-										$fontStyle,
-										$subLevel[0]['firstLine']
-									);
-								} else {
-									$section->addText(
-										$pointerDiktum[$i]."\t".$barisDiktum[$j],
-										$fontStyle,
-										$subLevel[$idxSubLevel]['pointer']
-									);
-								}
-
+							else{ // awal ada pointer
+								$section->addText(
+									$barisParagraf[$j],
+									$fontStyle,
+									$subLevel[$idxSubLevel]['default']
+								);
 							}
+							
 						}
-						else {
-							// echo "5";
-							$section->addText(
-								$barisDiktum[$j],
-								$fontStyle,
-								$subLevel[$idxSubLevel]['default']
-							);
-						}
+						
 					}
-
+					
 				}
-				$theFirst = false;
+				
 			}
 
-			$arrData['Diktum']['pointerDiktum'][] = $pointerDiktum[$i];
-			$arrData['Diktum']['nextPageDiktum'][] = $nextPageDiktum[$i];
-			$arrData['Diktum']['subLevelDiktum'][] = $subLevelDiktum[$i];
-			$arrData['Diktum']['text'][] = $Diktum[$i];
+			$arrData['Paragraf']['pointerParagraf'][] = $pointerParagraf[$i];
+			$arrData['Paragraf']['nextPageParagraf'][] = $nextPageParagraf[$i];
+			$arrData['Paragraf']['subLevelParagraf'][] = $subLevelParagraf[$i];
+			$arrData['Paragraf']['text'][] = $Paragraf[$i];
 		}
+// print_r(@$_POST);
 		// die();
 		/* *********************************************************************************** */
-
-		// print_r($arrData); die();
-
 
 		/* *********************************************************************************** */
 
@@ -756,266 +453,9 @@ class Surat_edaran extends CI_Controller {
 		/* *********************************************************************************** */
 		/* *********************************************************************************** */
 
-
-		//$section = $phpWord->addSection($thisPageLandscape);
-
-
-		// header firstPage
-		// $header = $section->addHeader();
-		// $header->firstPage();
-		// $table = $header->addTable();
-		// $table->addRow();
-		// $cell = $table->addCell(450);
-		// $textrun = $cell->addTextRun();
-		// $textrun->addText('');
-		// Add header for all other pages
-		// $subsequent = $section->addHeader();
-		// $subsequent->addPreserveText('- {PAGE} -', $fontStyle, array('align' => 'center'));
-
-		// $tabsDefault = array(
-			// new \PhpOffice\PhpWord\Style\Tab('left', \PhpOffice\PhpWord\Shared\Converter::cmToTwip(3)),
-			// new \PhpOffice\PhpWord\Style\Tab('left', \PhpOffice\PhpWord\Shared\Converter::cmToTwip(3.5)),
-			// new \PhpOffice\PhpWord\Style\Tab('left', \PhpOffice\PhpWord\Shared\Converter::cmToTwip(4.5)),
-			// new \PhpOffice\PhpWord\Style\Tab('left', \PhpOffice\PhpWord\Shared\Converter::cmToTwip(5.5)),
-			// new \PhpOffice\PhpWord\Style\Tab('left', \PhpOffice\PhpWord\Shared\Converter::cmToTwip(6.5)),
-			// new \PhpOffice\PhpWord\Style\Tab('left', \PhpOffice\PhpWord\Shared\Converter::cmToTwip(7.5)),
-		// );
-		// $phpWord->setDefaultParagraphStyle(
-		// 	array(
-		// 		'align'  => 'both',
-		// 		'spacing' => 120,
-		// 		'spaceAfter' => 0,
-		// 		'tabs' => array(),
-		// 	)
-		// );
-
-		/* *********************************************************************************** */
-		/*$paragrafHeadLampiran = array(
-			'indentation' => array(
-				'left' => \PhpOffice\PhpWord\Shared\Converter::cmToTwip(14),
-			),
-			'tabs' => array(
-				new \PhpOffice\PhpWord\Style\Tab('left', \PhpOffice\PhpWord\Shared\Converter::cmToTwip(16.5)),
-			),
-		);
-
-		$section->addText(
-			"LAMPIRAN I",
-			$fontStyle, $paragrafHeadLampiran
-		);
-		$section->addText(
-			"KEPUTUSAN MENTERI ENERGI DAN SUMBER DAYA MINERAL",
-			$fontStyle, $paragrafHeadLampiran
-		);
-		$section->addText(
-			"REPUBLIK INDONESIA",
-			$fontStyle, $paragrafHeadLampiran
-		);
-		$section->addText(
-			"NOMOR\t:",
-			$fontStyle, $paragrafHeadLampiran
-		);
-		$section->addText(
-			"TANGGAL\t:",
-			$fontStyle, $paragrafHeadLampiran
-		);
-		$section->addText(
-			"TENTANG",
-			$fontStyle, $paragrafHeadLampiran
-		);
-		$section->addText(
-			"PENETAPAN WILAYAH IZIN USAHA PERTAMBANGAN DAN WILAYAH IZIN USAHA PERTAMBANGAN KHUSUS YANG AKAN DITAWARKAN DAN/ATAU DILELANG PADA PERIODE TAHUN 2018.",
-			$fontStyle, $paragrafHeadLampiran
-		);
-		$section->addTextBreak(1,$fontStyle);
-
-		$section->addText(
-			"WILAYAH IZIN USAHA PERTAMBANGAN DAN WILAYAH IZIN USAHA PERTAMBANGAN KHUSUS YANG AKAN DITAWARKAN",
-			$fontStyle, array('align' => 'center')
-		);
-		$section->addTextBreak(1,$fontStyle); */
-		/* *********************************************************************************** */
-
-		//debug
-		// print_r($arrData); exit();
-		// $subjudul = @$_POST['subjudul'];
-		// $widthMaxCol = 16000;
-		// $judultabel = @$_POST['judultabel'];
-		// $table = @$_POST['kolom'];
-
-		// if (count($subjudul) > 0 && count($judultabel) > 0 && count($kolom) > 0){
-			// for($idxTable=0 $idxTable<count())
-		// }
-
-
-
-		/*$section->addText(
-			"A.	WILAYAH IZIN USAHA PERTAMBANGAN PERIODE I ",
-			$fontStyle, array('align' => 'left')
-		);*/
-		/* *********************************************************************************** */
-
-		/*$widthMaxCol = 16000;
-		$table = @$_POST['kolom'];
-		$judultabel = @$_POST['judultabel'];
-		$table = array();
-		if (count($table) > 0){
-			$idxTable = 0;
-
-
-
-			$headerTable 	= $table[$idxTable]['header'];
-			$contentTable 	= $table[$idxTable]['content'];
-
-			$rows = count($contentTable) + 1;
-			$cols = count($headerTable);
-
-			// $section->addText('Basic table', $header);
-
-			$cellHCentered = array('alignment' => \PhpOffice\PhpWord\SimpleType\JcTable::CENTER);
-			$borderTableStyle = array('borderSize' => 1, 'borderColor' => '000000');
-			$spanTableStyleName = 'BorderAll';
-			$phpWord->addTableStyle($spanTableStyleName, $borderTableStyle);
-			$thisTable = $section->addTable($spanTableStyleName);
-
-			$thisTable->addRow();
-			$cellColSpan = array('gridSpan' => $cols+1, 'valign' => 'center');
-			$cell2 = $thisTable->addCell($widthMaxCol, $cellColSpan);
-			$textrun2 = $cell2->addTextRun($cellHCentered);
-			$textrun2->addText($judultabel[$idxTable][0]);
-
-			$thisTable->addRow();
-			$thisTable->addCell(600)->addText("NO", null, $cellHCentered);
-			for ($idxHeader = 0; $idxHeader < count($headerTable); $idxHeader++) {
-				$textHeader = $headerTable[$idxHeader];
-				$thisWidth = ($widthMaxCol - 600)/($cols - 1);
-				$thisTable->addCell($thisWidth)->addText($textHeader, null, $cellHCentered);
-			}
-
-
-			for ($r = 1; $r < $rows; $r++) {
-				$thisTable->addRow();
-				for ($c = 0; $c <= $cols; $c++) {
-					if ($c == 0) {
-						$thisWidth = 600;
-						$thisTable->addCell($thisWidth)->addText($r, null, $cellHCentered);
-					}
-					else {
-						$thisWidth = ($widthMaxCol - 600)/($cols - 1);
-						$thisTable->addCell($thisWidth)->addText($contentTable[$r][$c-1], null, $cellHCentered);
-					}
-
-				}
-			}
-
-
-		} */
-
-		/* *********************************************************************************** */
-
-
-
-
-
-		/* *********************************************************************************** */
-		// all content bab dan pasal
-		/*
-		$numberBab = 1;
-		for($numberBab=1; $numberBab<4; $numberBab++){
-			@$judulBab = @$_POST['judulBab'.@$numberBab];
-			@$contentPasal = @$_POST['contentPasal'.@$numberBab];
-			@$pointerPasal = @$_POST['pointerPasal'.@$numberBab];
-
-			@$nextPagePasal = @$_POST['nextPagePasal'.@$numberBab];
-			@$subLevelPasal = @$_POST['subLevelPasal'.@$numberBab];
-
-			$barisJudulBab = explode("\r\n",$judulBab);
-			foreach($barisJudulBab as $row){
-				if ($row != ""){
-					$txtTitle = $row;
-					$section->addText(
-						@$txtTitle,
-						@$fontStyle,
-						$centerContent
-					);
-				} else {
-					$section->addTextBreak(1,$fontStyle);
-				}
-			}
-
-
-			for($i=0; $i<count(@$contentPasal); $i++){
-
-				if (@$contentPasal[$i] != ''){
-					@$barisContentPasal = explode("\r\n",@$contentPasal[$i]);
-
-					if (@$nextPagecontentPasal[$i] == 1)
-						$section = $phpWord->addSection($thisPage);
-
-					for($j=0; $j<count(@$barisContentPasal); $j++){
-
-						@$idxSubLevel = @$subLevelPasal[$i];
-
-						if (@$j==0){ // awal body baris contentPasal
-							if (@$pointerPasal[$i] == ''){ // awal body contentPasal tanpa pointer
-								$section->addText(
-									@$barisContentPasal[@$j],
-									@$fontStyle,
-									@$subLevel[@$idxSubLevel]['default']
-								);
-							}
-							else { // awal body contentPasal ada pointer
-								$section->addText(
-									@$pointerPasal[$i]."\t".@$barisContentPasal[$j],
-									$fontStyle,
-									@$subLevel[@$idxSubLevel]['pointer']
-								);
-
-							}
-						}
-						else {
-							$section->addText(
-								$barisContentPasal[$j],
-								$fontStyle,
-								$subLevel[$idxSubLevel]['default']
-							);
-						}
-
-
-					}
-				}
-
-			}
-
-
-		}
-		*/
-		/* *********************************************************************************** */
-
-		/* *********************************************************************************** */
-		// footer tanda tangan
-		// echo "<pre>";
-		// print_r($arrData);
-		// $this->insert_detail_document(3, $arrData);
-		// die();
-
-		/* Insert Into DB */
-		// if (@$_POST['id_dokumen'] == '')
-			// $id = $this->insert_document();
-		// else
-			// $id = $_POST['id_dokumen'];
-
-		// $revisi = $this->cek_revisi_document($id);
-		// $idRevisi = $this->insert_revisi_document($id, $revisi);
-		// $alldata = $this->insert_detail_document($id, $idRevisi, $arrData);
-
-
-		// echo $alldata;
-		// exit;
-
 		$objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'Word2007');
 		try {
-			$filename = @$id.'_'.time().'_keputusan_menteri_doc.docx';
+			$filename = @$id.'_'.time().'_surat_edaran.docx';
 			$fullPath = './'.$filename;
 			$objWriter->save($fullPath, 'Word2007');
 		} catch (Exception $e) {}
@@ -1074,48 +514,21 @@ class Surat_edaran extends CI_Controller {
 		}
 
 
+		$arrData['yang_terhormat'] = $_POST['yang_terhormat'];
 		$arrData['judul'] = $_POST['super_judul'];
-		$Menimbang = $_POST['Menimbang'];
-		$pointerMenimbang = $_POST['pointerMenimbang'];
-		$nextPageMenimbang = @$_POST['nextPageMenimbang'];
-		$subLevelMenimbang = @$_POST['subLevelMenimbang'];
-		for($i=0; $i<count($Menimbang); $i++) {
-			$arrData['Menimbang']['pointerMenimbang'][] = $pointerMenimbang[$i];
-			$arrData['Menimbang']['nextPageMenimbang'][] = $nextPageMenimbang[$i];
-			$arrData['Menimbang']['subLevelMenimbang'][] = $subLevelMenimbang[$i];
-			$arrData['Menimbang']['text'][] = $Menimbang[$i];
+		
+		## Paragraf
+		$Paragraf = $_POST['Paragraf'];
+		$pointerParagraf = @$_POST['pointerParagraf'];
+		$nextPageParagraf = @$_POST['nextPageParagraf'];
+		$subLevelParagraf = @$_POST['subLevelParagraf'];
+		for($i=0; $i<count($Paragraf); $i++){
+			$arrData['Paragraf']['pointerParagraf'][] = $pointerParagraf[$i];
+			$arrData['Paragraf']['nextPageParagraf'][] = $nextPageParagraf[$i];
+			$arrData['Paragraf']['subLevelParagraf'][] = $subLevelParagraf[$i];
+			$arrData['Paragraf']['text'][] = $Paragraf[$i];
 		}
-		$Mengingat = $_POST['Mengingat'];
-		$pointerMengingat = $_POST['pointerMengingat'];
-		$nextPageMengingat = @$_POST['nextPageMengingat'];
-		$subLevelMengingat = @$_POST['subLevelMengingat'];
-		for($i=0; $i<count($Mengingat); $i++) {
-			$arrData['Mengingat']['pointerMengingat'][] = $pointerMengingat[$i];
-			$arrData['Mengingat']['nextPageMengingat'][] = $nextPageMengingat[$i];
-			$arrData['Mengingat']['subLevelMengingat'][] = $subLevelMengingat[$i];
-			$arrData['Mengingat']['text'][] = $Mengingat[$i];
-		}
-		$Memutuskan = $_POST['Memutuskan'];
-		$pointerMemutuskan = @$_POST['pointerMemutuskan'];
-		$nextPageMemutuskan = @$_POST['nextPageMemutuskan'];
-		$subLevelMemutuskan = @$_POST['subLevelMemutuskan'];
-		for($i=0; $i<count($Memutuskan); $i++) {
-			$arrData['Memutuskan']['pointerMemutuskan'][] = @$pointerMemutuskan[$i];
-			$arrData['Memutuskan']['nextPageMemutuskan'][] = @$nextPageMemutuskan[$i] == '' ? 'continue' : @$nextPageMemutuskan[$i];
-			$arrData['Memutuskan']['subLevelMemutuskan'][] = @$subLevelMemutuskan[$i];
-			$arrData['Memutuskan']['text'][] = @$Memutuskan[$i];
-		}
-
-		$Diktum = $_POST['Diktum'];
-		$pointerDiktum = $_POST['pointerDiktum'];
-		$nextPageDiktum = @$_POST['nextPageDiktum'];
-		$subLevelDiktum = @$_POST['subLevelDiktum'];
-		for($i=0; $i<count($Diktum); $i++) {
-			$arrData['Diktum']['pointerDiktum'][] = @$pointerDiktum[$i];
-			$arrData['Diktum']['nextPageDiktum'][] = @$nextPageDiktum[$i] == '' ? 'continue' : @$nextPageDiktum[$i];
-			$arrData['Diktum']['subLevelDiktum'][] = @$subLevelDiktum[$i];
-			$arrData['Diktum']['text'][] = @$Diktum[$i];
-		}
+		
 
 		$Tandatangan = @$_POST['ttd'] ?  $_POST['ttd'] : "IGNASIUS JONAN";
 		$arrData['TTD']['pointerTembusan'][] = @$pointerTembusan[$i];
@@ -1131,18 +544,6 @@ class Surat_edaran extends CI_Controller {
 		$arrData['Upload']['text'][] = $Upload;
 		// upload 
 
-		$Tembusan = @$_POST['Tembusan'];
-		$pointerTembusan = @$_POST['pointerTembusan'];
-		$nextPageTembusan = @$_POST['nextPageTembusan'];
-		$subLevelTembusan = @$_POST['subLevelTembusan'];
-		for($i=0; $i<count($Tembusan); $i++) {
-			$arrData['Tembusan']['pointerTembusan'][] = @$pointerTembusan[$i];
-			$arrData['Tembusan']['nextPageTembusan'][] = @$nextPageTembusan[$i] == '' ? 'continue' : @$nextPageTembusan[$i];
-			$arrData['Tembusan']['subLevelTembusan'][] = @$subLevelTembusan[$i];
-			$arrData['Tembusan']['text'][] = @$Tembusan[$i];
-		}
-
-		
 		// $arrData['TTD'] = $Tandatangan;
 		// print_r([$id, $revisi, @$namaFile]);
 		// print_r($_POST['assign']);
@@ -1173,7 +574,7 @@ class Surat_edaran extends CI_Controller {
 
 	function insert_document() {
 		$dataDokumen = array(
-			'jenis_dokumen'	=> 'Keputusan Menteri',
+			'jenis_dokumen'	=> 'Surat Edaran',
 			'nama_dokumen'	=> isset($_POST['nama_dokumen']) ? $_POST['nama_dokumen'] : '',
 			'login_id'		=> !empty($this->session->userdata('login_id')) ? $this->session->userdata('login_id') : 2, // 2 is admin
 			'cuser'			=> !empty($this->session->userdata('login_id')) ? $this->session->userdata('login_id') : 2, // 2 is admin
@@ -1331,7 +732,7 @@ class Surat_edaran extends CI_Controller {
 			'cari_dispo'	=> $cari_dispo,
 			'submit_hilang'	=> $submit_hilang,
 			'publis_dok'	=> $publis_dok,
-			'contents'	=> 'Keputusan_menteri_doc_edit',
+			'contents'	=> 'format/surat_edaran_edit',
 			'title'		=> 'Ubah Rancangan',
 			'name'		=> empty($this->session->userdata('name')) ? 'Tanpa Login' : $this->session->userdata('name'),
 			'id_dokumen'	=> $id_dokumen,
