@@ -11,6 +11,8 @@
 
   <link href="<?php echo base_url('assetnew/robust.css');?>" rel="stylesheet">
 
+  <link rel="stylesheet" href="<?php echo base_url('assetnew/css/font-awesome/css/font-awesome.min.css') ?>" type="text/css" />
+
   <style type="text/css">
   .pt-8, .py-8 {
     padding-top: 4.5rem !important;
@@ -85,7 +87,7 @@
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" data-toggle="modal" href='#modal-id'>Kontak</a>
+            <a class="nav-link" data-toggle="modal" href='#kontak'>Kontak</a>
           </li>
         </ul>
       </div>
@@ -212,7 +214,7 @@
     </div>
   </div> 
 
-  <div class="modal fade" id="modal-id">
+  <div class="modal fade" id="kontak">
    <div class="modal-dialog">
      <div class="modal-content"> 
        <div class="modal-body">
@@ -222,11 +224,13 @@
           <img src="<?php echo base_url('logo-esdm-kuning.png') ?>" width="100px">
           <br><br>
 
-          <p>KEMENTERIAN ENERGI DAN SUMBER DAYA MINERAL </p>
+          <p><b>KEMENTERIAN ENERGI DAN SUMBER DAYA MINERAL </b></p>
+          <p>Lantai VII </p>
           <p>JL. MEDAN MERDEKA SELATAN NO. 18 </p>
           <p>JAKARTA PUSAT 10110 </p>
-          <p>TELP. 021 3804242 FAX. 021 3507210</p>
-          <p>EMAIL: <a href="mailto:regulasiesdm@esdm.go.id?subject=dariwebsiterannah">regulasiesdm@esdm.go.id</a> dan <a href="mailto:birohukum-sjh2@esdm.go.id?subject=dariwebsiterannah">birohukum-sjh2@esdm.go.id</a></p>
+          <p><i class="fa fa-envelope-square "></i> <a href="mailto:birohukum-sjh2@esdm.go.id?subject=dariwebsiterannah">birohukum-sjh2@esdm.go.id</a></p>
+          <p><i class="fa fa-phone"></i> 021 3804242 </p>
+          <p><i class="fa fa-fax"></i> 021 34831308</p> 
 
         </center>
 
@@ -239,6 +243,6 @@
 </div>
 
 </main> 
-<script src="https://robust.bootlab.io/dist/js/bundle.js"></script>
+<script src="<?php echo base_url('assetnew/robust.js');?>"></script>
 </body>
 </html>
