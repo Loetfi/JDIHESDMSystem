@@ -1,144 +1,148 @@
 <script>
-	function addMenimbang(ele, count) {
-		var counts = count + 1;
-		var element =	'<div class="form-group" id="text-Menimbang'+counts+'" style="display:inline-block; margin-top:5px; width:100%;">'+
-		'<div style="float:left; width:20%">'+
-		'<input type="text" name="pointerMenimbang[]" class="form-control" placeholder="Pointer" />'+
-		'<select name="nextPageMenimbang[]" class="form-control" style="cursor:pointer; margin-top:10px;">'+
-		'<option value="continue">Continues Page</option>'+
-		'<option value="newP">Next Page Portrait</option><option value="newL">Next Page Landscape</option>'+
-		'</select>'+
-		'<select name="subLevelMenimbang[]" class="form-control" style="cursor:pointer; margin-top:10px;">'+
-		'<option value="0">SubLevel 0</option>'+
-		'<option value="1">SubLevel 1</option>'+
-		'<option value="2">SubLevel 2</option>'+
-		'<option value="3">SubLevel 3</option>'+
-		'<option value="4">SubLevel 4</option>'+
-		'</select>'+
-		'</div>'+
-		'<div style="width:100%">'+
-		'<textarea type="text" name="Menimbang[]" class="form-control" placeholder="Menimbang" rows="6" style="float:left; margin-left:5px; width:75%;"></textarea>'+
-		'<a href="javascript:void(0)" onclick="addMenimbang(this, '+counts+')" style="position:absolute; right:5%;" title="Tambah Isi"><i class="fa fa-lg fa-plus"></i></a>'+
-		'<a href="javascript:void(0)" style="position:absolute; right:4.7%; margin-top:25px;" title="Tambah Telaah"><i class="fa fa-lg fa-comments-o"></i></a>'+
-		'</div>'+
-		'</div>';
-		$(ele).children().toggleClass('fa-plus fa-minus');
-		$(ele).children().attr("onclick","remove(this)").attr('title', 'Hapus Isi');
-		$(element).last().insertAfter($("#text-Menimbang"+count));
-	}
-	function addMengingat(ele, count) {
-		var counts = count + 1;
-		var element =	'<div class="form-group" id="text-Mengingat'+counts+'" style="display:inline-block; margin-top:5px; width:100%;">'+
-		'<div style="float:left; width:20%">'+
-		'<input type="text" name="pointerMengingat[]" class="form-control" placeholder="Pointer" />'+
-		'<select name="nextPageMengingat[]" class="form-control" style="cursor:pointer; margin-top:10px;">'+
-		'<option value="continue">Continues Page</option>'+
-		'<option value="newP">Next Page Portrait</option><option value="newL">Next Page Landscape</option>'+
-		'</select>'+
-		'<select name="subLevelMengingat[]" class="form-control" style="cursor:pointer; margin-top:10px;">'+
-		'<option value="0">SubLevel 0</option>'+
-		'<option value="1">SubLevel 1</option>'+
-		'<option value="2">SubLevel 2</option>'+
-		'<option value="3">SubLevel 3</option>'+
-		'<option value="4">SubLevel 4</option>'+
-		'</select>'+
-		'</div>'+
-		'<div style="width:100%">'+
-		'<textarea type="text" name="Mengingat[]" class="form-control" placeholder="Mengingat" rows="6" style="float:left; margin-left:5px; width:75%;"></textarea>'+
-		'<a href="javascript:void(0)" onclick="addMengingat(this, '+counts+')" style="position:absolute; right:5%;" title="Tambah Isi"><i class="fa fa-lg fa-plus"></i></a>'+
-		'<a href="javascript:void(0)" style="position:absolute; right:4.7%; margin-top:25px;" title="Tambah Telaah"><i class="fa fa-lg fa-comments-o"></i></a>'+
-		'</div>'+
-		'</div>';
-		$(ele).children().toggleClass('fa-plus fa-minus');
-		$(ele).children().attr("onclick","remove(this)").attr('title', 'Hapus Isi');
-		$(element).last().insertAfter($("#text-Mengingat"+count));
-	}
-	function addMemutuskan(ele, count) {
-		var counts = count + 1;
-		var element =	'<div class="form-group" id="text-Memutuskan'+counts+'" style="display:inline-block; margin-top:5px; width:100%;">'+
-		'<div style="float:left; width:20%">'+
-		'<input type="text" name="pointerMemutuskan[]" class="form-control" placeholder="Pointer" />'+
-		'<select name="nextMemutuskan[]" class="form-control" style="cursor:pointer; margin-top:10px;">'+
-		'<option value="continue">Continues Page</option>'+
-		'<option value="newP">Next Page Portrait</option><option value="newL">Next Page Landscape</option>'+
-		'</select>'+
-		'<select name="subLevelMemutuskan[]" class="form-control" style="cursor:pointer; margin-top:10px;">'+
-		'<option value="0">SubLevel 0</option>'+
-		'<option value="1">SubLevel 1</option>'+
-		'<option value="2">SubLevel 2</option>'+
-		'<option value="3">SubLevel 3</option>'+
-		'<option value="4">SubLevel 4</option>'+
-		'</select>'+
-		'</div>'+
-		'<div style="width:100%">'+
-		'<textarea type="text" name="Memutuskan[]" class="form-control" placeholder="Memutuskan/Menetapkan" rows="6" style="float:left; margin-left:5px; width:75%;"></textarea>'+
-		'<a href="javascript:void(0)" onclick="addMemutuskan(this, '+counts+')" style="position:absolute; right:5%;" title="Tambah Isi"><i class="fa fa-lg fa-plus"></i></a>'+
-		'<a href="javascript:void(0)" style="position:absolute; right:4.7%; margin-top:25px;" title="Tambah Telaah"><i class="fa fa-lg fa-comments-o"></i></a>'+
-		'</div>'+
-		'</div>';
-		$(ele).children().toggleClass('fa-plus fa-minus');
-		$(ele).children().attr("onclick","remove(this)").attr('title', 'Hapus Isi');
-		$(element).last().insertAfter($("#text-Memutuskan"+count));
-	}
-	function addDiktum(ele, count) {
-		var counts = count + 1;
-		var element =	'<div class="form-group" id="text-Diktum'+counts+'" style="display:inline-block; margin-top:5px; width:100%;">'+
-		'<div style="float:left; width:20%">'+
-		'<input type="text" name="pointerDiktum[]" class="form-control" placeholder="Pointer" />'+
-		'<select name="nextDiktum[]" class="form-control" style="cursor:pointer; margin-top:10px;">'+
-		'<option value="continue">Continues Page</option>'+
-		'<option value="newP">Next Page Portrait</option><option value="newL">Next Page Landscape</option>'+
-		'</select>'+
-		'<select name="subLevelDiktum[]" class="form-control" style="cursor:pointer; margin-top:10px;">'+
-		'<option value="0">SubLevel 0</option>'+
-		'<option value="1">SubLevel 1</option>'+
-		'<option value="2">SubLevel 2</option>'+
-		'<option value="3">SubLevel 3</option>'+
-		'<option value="4">SubLevel 4</option>'+
-		'</select>'+
-		'</div>'+
-		'<div style="width:100%">'+
-		'<textarea type="text" name="Diktum[]" class="form-control" placeholder="Diktum" rows="6" style="float:left; margin-left:5px; width:75%;"></textarea>'+
-		'<a href="javascript:void(0)" onclick="addDiktum(this, '+counts+')" style="position:absolute; right:5%;" title="Tambah Isi"><i class="fa fa-lg fa-plus"></i></a>'+
-		'<a href="javascript:void(0)" style="position:absolute; right:4.7%; margin-top:25px;" title="Tambah Telaah"><i class="fa fa-lg fa-comments-o"></i></a>'+
-		'</div>'+
-		'</div>';
-		$(ele).children().toggleClass('fa-plus fa-minus');
-		$(ele).children().attr("onclick","remove(this)").attr('title', 'Hapus Isi');
-		$(element).last().insertAfter($("#text-Diktum"+count));
+function addMenimbang(ele, count) {
+	var counts = count + 1;
+	var element =	'<div class="form-group" id="text-Menimbang'+counts+'" style="display:inline-block; margin-top:5px; width:100%;">'+
+	'<div style="float:left; width:20%">'+
+	'<input type="text" name="pointerMenimbang[]" class="form-control" placeholder="Pointer" />'+
+	'<select name="nextPageMenimbang[]" class="form-control" style="cursor:pointer; margin-top:10px;">'+
+	'<option value="continue">Continues Page</option>'+
+	'<option value="newP">Next Page Portrait</option><option value="newL">Next Page Landscape</option>'+
+	'</select>'+
+	'<select name="subLevelMenimbang[]" class="form-control" style="cursor:pointer; margin-top:10px;">'+
+	'<option value="0">SubLevel 0</option>'+
+	'<option value="1">SubLevel 1</option>'+
+	'<option value="2">SubLevel 2</option>'+
+	'<option value="3">SubLevel 3</option>'+
+	'<option value="4">SubLevel 4</option>'+
+	'</select>'+
+	'</div>'+
+	'<div style="width:100%">'+
+	'<textarea type="text" name="Menimbang[]" class="form-control" placeholder="Menimbang" rows="6" style="float:left; margin-left:5px; width:75%;"></textarea>'+
+	'<a href="javascript:void(0)" onclick="addMenimbang(this, '+counts+')" style="position:absolute; right:5%;" title="Tambah Isi"><i class="fa fa-lg fa-plus"></i></a>'+
+	'<a href="javascript:void(0)" style="position:absolute; right:4.7%; margin-top:25px;" title="Tambah Telaah"><i class="fa fa-lg fa-comments-o"></i></a>'+
+	'</div>'+
+	'</div>';
+	//$(ele).children().toggleClass('fa-plus fa-minus');
+	$(ele).children().removeClass('fa-plus');
+	$(element).last().insertAfter($("#text-Menimbang"+count));
+	$('#text-Menimbang'+counts).children('div:last').children('a:first').attr("onclick","remove(this)").attr('title', 'Hapus Isi');
+	$('#text-Menimbang'+counts).find('.fa-plus').toggleClass('fa-plus fa-minus');
+}
+function addMengingat(ele, count) {
+	var counts = count + 1;
+	var element =	'<div class="form-group" id="text-Mengingat'+counts+'" style="display:inline-block; margin-top:5px; width:100%;">'+
+	'<div style="float:left; width:20%">'+
+	'<input type="text" name="pointerMengingat[]" class="form-control" placeholder="Pointer" />'+
+	'<select name="nextPageMengingat[]" class="form-control" style="cursor:pointer; margin-top:10px;">'+
+	'<option value="continue">Continues Page</option>'+
+	'<option value="newP">Next Page Portrait</option><option value="newL">Next Page Landscape</option>'+
+	'</select>'+
+	'<select name="subLevelMengingat[]" class="form-control" style="cursor:pointer; margin-top:10px;">'+
+	'<option value="0">SubLevel 0</option>'+
+	'<option value="1">SubLevel 1</option>'+
+	'<option value="2">SubLevel 2</option>'+
+	'<option value="3">SubLevel 3</option>'+
+	'<option value="4">SubLevel 4</option>'+
+	'</select>'+
+	'</div>'+
+	'<div style="width:100%">'+
+	'<textarea type="text" name="Mengingat[]" class="form-control" placeholder="Mengingat" rows="6" style="float:left; margin-left:5px; width:75%;"></textarea>'+
+	'<a href="javascript:void(0)" onclick="addMengingat(this, '+counts+')" style="position:absolute; right:5%;" title="Tambah Isi"><i class="fa fa-lg fa-plus"></i></a>'+
+	'<a href="javascript:void(0)" style="position:absolute; right:4.7%; margin-top:25px;" title="Tambah Telaah"><i class="fa fa-lg fa-comments-o"></i></a>'+
+	'</div>'+
+	'</div>';
+	$(ele).children().toggleClass('fa-plus fa-minus');
+	$(ele).children().attr("onclick","remove(this)").attr('title', 'Hapus Isi');
+	$(element).last().insertAfter($("#text-Mengingat"+count));
+}
+function addMemutuskan(ele, count) {
+	var counts = count + 1;
+	var element =	'<div class="form-group" id="text-Memutuskan'+counts+'" style="display:inline-block; margin-top:5px; width:100%;">'+
+	'<div style="float:left; width:20%">'+
+	'<input type="text" name="pointerMemutuskan[]" class="form-control" placeholder="Pointer" />'+
+	'<select name="nextMemutuskan[]" class="form-control" style="cursor:pointer; margin-top:10px;">'+
+	'<option value="continue">Continues Page</option>'+
+	'<option value="newP">Next Page Portrait</option><option value="newL">Next Page Landscape</option>'+
+	'</select>'+
+	'<select name="subLevelMemutuskan[]" class="form-control" style="cursor:pointer; margin-top:10px;">'+
+	'<option value="0">SubLevel 0</option>'+
+	'<option value="1">SubLevel 1</option>'+
+	'<option value="2">SubLevel 2</option>'+
+	'<option value="3">SubLevel 3</option>'+
+	'<option value="4">SubLevel 4</option>'+
+	'</select>'+
+	'</div>'+
+	'<div style="width:100%">'+
+	'<textarea type="text" name="Memutuskan[]" class="form-control" placeholder="Memutuskan/Menetapkan" rows="6" style="float:left; margin-left:5px; width:75%;"></textarea>'+
+	'<a href="javascript:void(0)" onclick="addMemutuskan(this, '+counts+')" style="position:absolute; right:5%;" title="Tambah Isi"><i class="fa fa-lg fa-plus"></i></a>'+
+	'<a href="javascript:void(0)" style="position:absolute; right:4.7%; margin-top:25px;" title="Tambah Telaah"><i class="fa fa-lg fa-comments-o"></i></a>'+
+	'</div>'+
+	'</div>';
+	$(ele).children().toggleClass('fa-plus fa-minus');
+	$(ele).children().attr("onclick","remove(this)").attr('title', 'Hapus Isi');
+	$(element).last().insertAfter($("#text-Memutuskan"+count));
+}
+function addDiktum(ele, count) {
+	var counts = count + 1;
+	var element =	'<div class="form-group" id="text-Diktum'+counts+'" style="display:inline-block; margin-top:5px; width:100%;">'+
+	'<div style="float:left; width:20%">'+
+	'<input type="text" name="pointerDiktum[]" class="form-control" placeholder="Pointer" />'+
+	'<select name="nextDiktum[]" class="form-control" style="cursor:pointer; margin-top:10px;">'+
+	'<option value="continue">Continues Page</option>'+
+	'<option value="newP">Next Page Portrait</option><option value="newL">Next Page Landscape</option>'+
+	'</select>'+
+	'<select name="subLevelDiktum[]" class="form-control" style="cursor:pointer; margin-top:10px;">'+
+	'<option value="0">SubLevel 0</option>'+
+	'<option value="1">SubLevel 1</option>'+
+	'<option value="2">SubLevel 2</option>'+
+	'<option value="3">SubLevel 3</option>'+
+	'<option value="4">SubLevel 4</option>'+
+	'</select>'+
+	'</div>'+
+	'<div style="width:100%">'+
+	'<textarea type="text" name="Diktum[]" class="form-control" placeholder="Diktum" rows="6" style="float:left; margin-left:5px; width:75%;"></textarea>'+
+	'<a href="javascript:void(0)" onclick="addDiktum(this, '+counts+')" style="position:absolute; right:5%;" title="Tambah Isi"><i class="fa fa-lg fa-plus"></i></a>'+
+	'<a href="javascript:void(0)" style="position:absolute; right:4.7%; margin-top:25px;" title="Tambah Telaah"><i class="fa fa-lg fa-comments-o"></i></a>'+
+	'</div>'+
+	'</div>';
+	$(ele).children().toggleClass('fa-plus fa-minus');
+	$(ele).children().attr("onclick","remove(this)").attr('title', 'Hapus Isi');
+	$(element).last().insertAfter($("#text-Diktum"+count));
 
-	}
-	function addTembusan(ele, count) {
-		var counts = count + 1;
-		var element = '<div class="form-group" id="text-Tembusan'+counts+'" style="display:inline-block; margin-top:5px; width:100%;">'+
-		'<div style="float:left; width:20%">'+
-		'<input type="text" name="pointerTembusan[]" class="form-control" placeholder="Pointer" />'+
-		'<select class="form-control" style="cursor:pointer; margin-top:10px;">'+
-		'<option value="continue">Continues Page</option>'+
-		'<option value="newP">Next Page Portrait</option><option value="newL">Next Page Landscape</option>'+
-		'</select>'+
-		'<select class="form-control" style="cursor:pointer; margin-top:10px;">'+
-		'<option value="0">SubLevel 0</option>'+
-		'<option value="1">SubLevel 1</option>'+
-		'<option value="2">SubLevel 2</option>'+
-		'<option value="3">SubLevel 3</option>'+
-		'<option value="4">SubLevel 4</option>'+
-		'</select>'+
-		'</div>'+
-		'<div style="width:100%">'+
-		'<textarea type="text" name="tembusan[]" class="form-control" placeholder="Tembusan" rows="6" style="float:left; margin-left:5px; width:75%;"></textarea>'+
-		'<a href="javascript:void(0)" onclick="addTembusan(this, '+counts+')" style="position:absolute; right:5%;" title="Tambah Isi"><i class="fa fa-lg fa-plus"></i></a>'+
-		'<a href="javascript:void(0)" style="position:absolute; right:4.7%; margin-top:25px;" title="Tambah Telaah"><i class="fa fa-lg fa-comments-o"></i></a>'+
-		'</div>'+
-		'</div>';
-		$(ele).children().toggleClass('fa-plus fa-minus');
-		$(ele).children().attr("onclick","remove(this)").attr('title', 'Hapus Isi');
-		$(element).last().insertAfter($("#text-Tembusan"+count));
-	}
-	function remove(ele) {
-		$(ele).parent().parent().parent().remove();
-	}
-	function addKolomLampiran(ele, count) {console.log($(ele).parent().parent().parent().next().children('tr:first').next().children('td:last').hasClass('numrows'));
+}
+function addTembusan(ele, count) {
+	var counts = count + 1;
+	var element = '<div class="form-group" id="text-Tembusan'+counts+'" style="display:inline-block; margin-top:5px; width:100%;">'+
+	'<div style="float:left; width:20%">'+
+	'<input type="text" name="pointerTembusan[]" class="form-control" placeholder="Pointer" />'+
+	'<select class="form-control" style="cursor:pointer; margin-top:10px;">'+
+	'<option value="continue">Continues Page</option>'+
+	'<option value="newP">Next Page Portrait</option><option value="newL">Next Page Landscape</option>'+
+	'</select>'+
+	'<select class="form-control" style="cursor:pointer; margin-top:10px;">'+
+	'<option value="0">SubLevel 0</option>'+
+	'<option value="1">SubLevel 1</option>'+
+	'<option value="2">SubLevel 2</option>'+
+	'<option value="3">SubLevel 3</option>'+
+	'<option value="4">SubLevel 4</option>'+
+	'</select>'+
+	'</div>'+
+	'<div style="width:100%">'+
+	'<textarea type="text" name="tembusan[]" class="form-control" placeholder="Tembusan" rows="6" style="float:left; margin-left:5px; width:75%;"></textarea>'+
+	'<a href="javascript:void(0)" onclick="addTembusan(this, '+counts+')" style="position:absolute; right:5%;" title="Tambah Isi"><i class="fa fa-lg fa-plus"></i></a>'+
+	'<a href="javascript:void(0)" style="position:absolute; right:4.7%; margin-top:25px;" title="Tambah Telaah"><i class="fa fa-lg fa-comments-o"></i></a>'+
+	'</div>'+
+	'</div>';
+	$(ele).children().toggleClass('fa-plus fa-minus');
+	$(ele).children().attr("onclick","remove(this)").attr('title', 'Hapus Isi');
+	$(element).last().insertAfter($("#text-Tembusan"+count));
+}
+function remove(ele) {
+	//$(ele).parent().parent().parent().remove();
+	console.log($(ele).parent().parent());
+}
+function addKolomLampiran(ele, count) {
+	console.log($(ele).parent().parent().parent().next().children('tr:first').next().children('td:last').hasClass('numrows'));
 	var eleJudul = $(ele).parent().parent(),
 	countColspan = eleJudul.children().prop("colSpan") + 1;
 
@@ -794,19 +798,7 @@ function addLampiran(ele) {
 		$(this).val(($(this).val()).toUpperCase());
 	});
 	
-	// modal dialog for commentar
-	$("#modal-comment").dialog({
-      autoOpen: false,
-      show: {
-        effect: "blind",
-        duration: 300
-      },
-      hide: {
-        effect: "explode",
-        duration: 300
-      }
-    });
-	
+	// modal dialog for commentar	
 	function addKomentarModal(thisId, id_doc, stat, id_detail) {
 		$('#btn-modal').click();
 		var split = thisId.split('-');
@@ -826,12 +818,15 @@ function addLampiran(ele) {
 							'<input type="hidden" id="hiddenStat" />'+
 							'<input type="hidden" id="hiddenIdDetail" />';
 				$('#textarea-komentar').html(reEle);
+				var _month = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 				var datax = JSON.parse(data);
 				var str = '';
 				if(datax.length > 0) {
 					for(var i = 0; i < datax.length; i++) {
+						var d = new Date(datax[i].comm_date);
+						var convdate = d.getDate()+' '+_month[d.getMonth()]+' '+d.getFullYear()+' '+d.getHours()+':'+d.getMinutes();
 						var usr = datax[i].name !== null ? datax[i].name : 'Unknown';
-						str += '<textarea style="font-family:Verdana; width:100%;" disabled>'+usr+' '+datax[i].comm_date+' \r'+datax[i].pesan+'</textarea>';
+						str += '<textarea style="font-family:Verdana; width:100%;" disabled>'+usr+'&nbsp;&nbsp;&nbsp;('+convdate+') \r'+datax[i].pesan+'</textarea>';
 					}
 				}
 				else {
@@ -863,7 +858,7 @@ function addLampiran(ele) {
 					type: 'POST',
 					data: 'id_detail='+id_detail+'&pesan='+chatting,
 					beforeSend: function() {},
-					success: function(data) {console.log(data);
+					success: function(data) {
 						var datax = JSON.parse(data);
 						if(datax.status === 1) {
 							var eleComment = $('#hiddenIdTextChat').val();
