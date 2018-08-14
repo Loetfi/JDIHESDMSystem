@@ -1,3 +1,4 @@
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <style>
 /*#rootTable tbody tr:nth-child(2) td {
 	padding-left: 10px;
@@ -31,6 +32,12 @@
 	line-height: 20px;
 	position: absolute;
     right: 25px;
+}
+.fix-btn {
+	padding: 5px 10px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
 }
 </style>
 <div class="padding">
@@ -81,6 +88,11 @@
 			</div>
 		</div>
 	</div>
+</div>
+
+<div class="fix-btn">
+	<button type="submit" class="btn btn-primary btn-m">Submit</button>
+	<button type="submit" class="btn btn-info btn-m">Lihat Format</button>
 </div>
 
 <!-- button modal -->
@@ -262,8 +274,9 @@ function saveFormat() {
 		}
 		else if(localStorage.getItem("saveformat") !== null) {
 			var getLocal = JSON.parse(localStorage.getItem("saveformat"));
-			$(".pointer").each(function(num) {
-				arr[num] = {pointer:$(this).val(), val:$(this).next().val(), type:getLocal[num].type};
+			$(".pointer").each(function(num) {console.log(getLocal[num]);
+				var theType = (getLocal[num] === undefined) ? '' : getLocal[num].type;
+				arr[num] = {pointer:$(this).val(), val:$(this).next().val(), type:theType};
 			});
 			arrStr = JSON.stringify(arr);
 		}
@@ -410,15 +423,22 @@ function modalBtn(ele, val) {
 					$(newEle).insertAfter(focusParent);
 				}
 				else if(opt === 'child') {
-					newEle = '<div>'+
-							 '<div onclick="onFocused(this)" style="margin-left:'+(parseInt(getNum)+10)+'px">'+
-							 '<input type="hidden" class="pointer" value="subroot'+subNum+'" />'+isi+
-							 '<input type="hidden" class="namePointer" value="'+isi+'" />'+
-							 '<i class="fa fa-arrow-circle-right arrow-right" onclick="loadRightPage()"></i>'+
-							 '</div>'+
-							 '</div>';
-					var focusParent = $('.focused').parent();
-					$(newEle).last().insertAfter(focusParent);
+					var newisi = (isi.length > 12) ? isi.substring(0, 12)+'...' : isi;
+					if((parseInt(getNum)+10) >= 110) {
+						alert('Tidak dapat membuat turunan lagi!');
+						return false;
+					}
+					else {
+						newEle = '<div>'+
+								 '<div onclick="onFocused(this)" style="margin-left:'+(parseInt(getNum)+10)+'px">'+
+								 '<input type="hidden" class="pointer" value="subroot'+subNum+'" />'+newisi+
+								 '<input type="hidden" class="namePointer" value="'+isi+'" />'+
+								 '<i class="fa fa-arrow-circle-right arrow-right" onclick="loadRightPage()"></i>'+
+								 '</div>'+
+								 '</div>';
+						var focusParent = $('.focused').parent();
+						$(newEle).last().insertAfter(focusParent);
+					}
 				}
 			}
 		}
@@ -501,6 +521,9 @@ function mform3() {
 			'</div>'+
 			'</div>';
 }
+
+$("#rootTable").sortable();
+$("#rootTable").disableSelection();
 
 $('#opt-mform').change(function() {
 	if($(this).val() === '') {
