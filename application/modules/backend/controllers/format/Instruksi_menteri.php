@@ -53,8 +53,8 @@ class Instruksi_menteri extends CI_Controller {
 
 		// setting paragraf global
 		$tabsDefault = array(
-			new \PhpOffice\PhpWord\Style\Tab('left', \PhpOffice\PhpWord\Shared\Converter::cmToTwip(3)),
-			new \PhpOffice\PhpWord\Style\Tab('left', \PhpOffice\PhpWord\Shared\Converter::cmToTwip(3.5)),
+			new \PhpOffice\PhpWord\Style\Tab('left', \PhpOffice\PhpWord\Shared\Converter::cmToTwip(2.5)),
+			new \PhpOffice\PhpWord\Style\Tab('left', \PhpOffice\PhpWord\Shared\Converter::cmToTwip(3.25)),
 			new \PhpOffice\PhpWord\Style\Tab('left', \PhpOffice\PhpWord\Shared\Converter::cmToTwip(4.5)),
 			new \PhpOffice\PhpWord\Style\Tab('left', \PhpOffice\PhpWord\Shared\Converter::cmToTwip(5.5)),
 			new \PhpOffice\PhpWord\Style\Tab('left', \PhpOffice\PhpWord\Shared\Converter::cmToTwip(6.5)),
@@ -91,47 +91,47 @@ class Instruksi_menteri extends CI_Controller {
 
 		// setting subLevel 1
 		$subLevel[1]['default']['indentation'] = array(
-			'left' => \PhpOffice\PhpWord\Shared\Converter::cmToTwip(3.25),
+			'left' => \PhpOffice\PhpWord\Shared\Converter::cmToTwip(4.25),
 		);
 		// setting subLevel 1 pointer
 		$subLevel[1]['pointer']['indentation'] = array(
 			'firstLine' => \PhpOffice\PhpWord\Shared\Converter::cmToTwip(1) * -1,
-			'left' => \PhpOffice\PhpWord\Shared\Converter::cmToTwip(3.25),
+			'left' => \PhpOffice\PhpWord\Shared\Converter::cmToTwip(4.25),
 		);
 		// setting subLevel 1 pointer body
 		$subLevel[1]['firstLine']['indentation'] = array(
 			'firstLine' => \PhpOffice\PhpWord\Shared\Converter::cmToTwip(2.5) * -1,
-			'left' => \PhpOffice\PhpWord\Shared\Converter::cmToTwip(2.5),
+			'left' => \PhpOffice\PhpWord\Shared\Converter::cmToTwip(3.25),
 		);
 
-		// // setting subLevel 2
-		// $subLevel[2]['default']['indentation'] = array(
-		// 	'left' => \PhpOffice\PhpWord\Shared\Converter::cmToTwip(5.5),
-		// );
-		// // setting subLevel 2 pointer
-		// $subLevel[2]['pointer']['indentation'] = array(
-		// 	'firstLine' => \PhpOffice\PhpWord\Shared\Converter::cmToTwip(1) * -1,
-		// 	'left' => \PhpOffice\PhpWord\Shared\Converter::cmToTwip(5.5),
-		// );
+		// setting subLevel 2
+		$subLevel[2]['default']['indentation'] = array(
+			'left' => \PhpOffice\PhpWord\Shared\Converter::cmToTwip(5.25),
+		);
+		// setting subLevel 2 pointer
+		$subLevel[2]['pointer']['indentation'] = array(
+			'firstLine' => \PhpOffice\PhpWord\Shared\Converter::cmToTwip(1) * -1,
+			'left' => \PhpOffice\PhpWord\Shared\Converter::cmToTwip(5.25),
+		);
 
-		// // setting subLevel 3
-		// $subLevel[3]['default']['indentation'] = array(
-		// 	'left' => \PhpOffice\PhpWord\Shared\Converter::cmToTwip(6.5),
-		// );
-		// // setting subLevel 3 pointer
-		// $subLevel[3]['pointer']['indentation'] = array(
-		// 	'firstLine' => \PhpOffice\PhpWord\Shared\Converter::cmToTwip(1) * -1,
-		// 	'left' => \PhpOffice\PhpWord\Shared\Converter::cmToTwip(6.5),
-		// );
-		// // setting subLevel 4
-		// $subLevel[4]['default']['indentation'] = array(
-		// 	'left' => \PhpOffice\PhpWord\Shared\Converter::cmToTwip(7.5),
-		// );
-		// // setting subLevel 3 pointer
-		// $subLevel[4]['pointer']['indentation'] = array(
-		// 	'firstLine' => \PhpOffice\PhpWord\Shared\Converter::cmToTwip(1) * -1,
-		// 	'left' => \PhpOffice\PhpWord\Shared\Converter::cmToTwip(7.5),
-		// );
+		// setting subLevel 3
+		$subLevel[3]['default']['indentation'] = array(
+			'left' => \PhpOffice\PhpWord\Shared\Converter::cmToTwip(6.25),
+		);
+		// setting subLevel 3 pointer
+		$subLevel[3]['pointer']['indentation'] = array(
+			'firstLine' => \PhpOffice\PhpWord\Shared\Converter::cmToTwip(1) * -1,
+			'left' => \PhpOffice\PhpWord\Shared\Converter::cmToTwip(6.25),
+		);
+		// setting subLevel 4
+		$subLevel[4]['default']['indentation'] = array(
+			'left' => \PhpOffice\PhpWord\Shared\Converter::cmToTwip(7.25),
+		);
+		// setting subLevel 3 pointer
+		$subLevel[4]['pointer']['indentation'] = array(
+			'firstLine' => \PhpOffice\PhpWord\Shared\Converter::cmToTwip(1) * -1,
+			'left' => \PhpOffice\PhpWord\Shared\Converter::cmToTwip(7.25),
+		);
 
 
 		$subLevel['listing_1']['default']['indentation'] = array(
@@ -403,12 +403,19 @@ class Instruksi_menteri extends CI_Controller {
 							}
 							else { // awal body Diktum ada pointer
 								// echo $pointerDiktum[$i]."\t".$barisDiktum[$j];
-								$section->addText(
-									$pointerDiktum[$i]."\t".$barisDiktum[$j],
-									$fontStyle,
-									$subLevel[$idxSubLevel]['pointer']
-								);
-
+								if ($idxSubLevel == 0){
+									$section->addText(
+										$pointerDiktum[$i]."\t:\t".$barisDiktum[$j].' satu',
+										$fontStyle,
+										$subLevel[0]['firstLine']
+									);
+								} else {
+									$section->addText(
+										$pointerDiktum[$i]."\t".$barisDiktum[$j].' dua',
+										$fontStyle,
+										$subLevel[$idxSubLevel]['pointer']
+									);
+								}
 							}
 						}
 						else {
@@ -833,7 +840,7 @@ class Instruksi_menteri extends CI_Controller {
 
 		$objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'Word2007');
 		try {
-			$filename = @$id.'_'.time().'_keputusan_menteri_doc.docx';
+			$filename = @$id.'_'.time().'_instruksi_mentri.docx';
 			$fullPath = './'.$filename;
 			$objWriter->save($fullPath, 'Word2007');
 		} catch (Exception $e) {}
@@ -1200,9 +1207,9 @@ class Instruksi_menteri extends CI_Controller {
 			if (empty($this->session->userdata('login_id'))) {
 				exit('anda belom login');
 			} else {
-				#join assign multiple 
+				## join assign multiple 
 				$join_assign = @$_POST['assign'] ? implode(',', $_POST['assign']) : 0;
-				#end
+				## end
 				$res = '';
 				$login_id = $this->session->userdata('login_id');
 				$data = $this->save_doc();
@@ -1211,9 +1218,9 @@ class Instruksi_menteri extends CI_Controller {
 					left join login b on a.cuser = b.login_id
 					where id_revisi = $id_revisi and cuser = $login_id")->row_array();
 
-			# ganti status jadi submit 
+			## ganti status jadi submit 
 				if (count($cari_revisi['direct_boss']) > 0) {
-				# update 
+				## update 
 					$update = array(
 						'appTo'			=> @$join_assign ? @$join_assign : $cari_revisi['direct_boss'], 
 						'rilis_doc'		=> 1,
