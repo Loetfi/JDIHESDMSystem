@@ -293,13 +293,7 @@
 				</div>
 				<div class="padding"> 
 					<form class="width-100p" method="POST" id="form-keputusan" target="_blank" enctype="multipart/form-data">
-						<fieldset> 
-							<div class="form-group">
-								<label for="">Nama Dokumen</label>
-								<input type="text" class="form-control" name="nama_dokumen" placeholder="Masukan nama inisial dari dokumen yang akan dibuat" required="" data-toggle="tooltip" title="Masukan nama inisial dari dokumen yang akan dibuat">
-							</div> 
-						</fieldset>
-						<hr>
+						<input type="hidden" name="id_dokumen" value="<?php echo @$id_dokumen; ?>">
 						<center><p>INSTRUKSI</p>
 							<p>MENTERI ENERGI DAN SUMBER DAYA MINERAL</p>
 							<p>NOMOR :</p>
@@ -315,8 +309,8 @@
 						<hr>
 						<fieldset>
 							<div class="form-group" style="margin-bottom:5px">
-							<textarea name="paragraf" class="form-control" autocomplete="off" placeholder="Paragraf" rows="4" required="" data-toggle="tooltip" title="Paragraf"><?php echo @$detail_dokumen['paragraf'][0]['teks']; ?></textarea>
-						</div>
+								<textarea name="paragraf" class="form-control" autocomplete="off" placeholder="Paragraf" rows="4" required="" data-toggle="tooltip" title="Paragraf"><?php echo @$detail_dokumen['paragraf'][0]['teks']; ?></textarea>
+							</div>
 						</fieldset>
 						<hr>
 						<fieldset>
@@ -326,58 +320,58 @@
 								$namaJenisField = 'Menimbang';
 								if (count(@$detail_dokumen[$namaJenisField]) > 0){
 									for($idxField=0; $idxField<count(@$detail_dokumen[$namaJenisField]); $idxField++){ ?>
-								<div class="form-group" id="text-<?php echo $namaJenisField.($idxField +1); ?>" style="display:inline-block; width:100%;">
-									<div style="float:left; width:20%"> 
-										<input type="text" name="pointer<?php echo $namaJenisField; ?>[]" class="form-control" placeholder="Pointer" data-toggle="tooltip" title="contoh : a. ( menggunakan titik dibelakang )" value="<?php echo @$detail_dokumen[$namaJenisField][$idxField]['pointer']; ?>"/>
-										<select name="nextPage<?php echo $namaJenisField; ?>[]" class="form-control" style="cursor:pointer; margin-top:10px;" data-toggle="tooltip" title="Jika dalam kondisi dokumen harus menggunakan halaman baru ( potrait / lanskap ) gunakan fitur ini. Continues Page menjadi bagian default dari pengaturan ini.">
-											<option value="continue" <?php echo @$detail_dokumen[$namaJenisField][$idxField]['layout'] == 'continue' ? 'selected' : ''; ?>>Continues Page</option>
-											<option value="newP" <?php echo @$detail_dokumen[$namaJenisField][$idxField]['layout'] == 'newP' ? 'selected' : ''; ?> >Next Page Portrait</option>
-											<option value="newL" <?php echo @$detail_dokumen[$namaJenisField][$idxField]['layout'] == 'newL' ? 'selected' : ''; ?> >Next Page Landscape</option>
-										</select>
-										<input type="hidden" name="subLevel<?php echo $namaJenisField; ?>[]" value="0"> 
-									</div>
-									<div style="width:100%">
-										<textarea data-toggle="tooltip" title="sistem akan memberikan otomatis simbol ; ( titik koma) pada akhir paragraf, apabila sistem tidak memberi simbol ; maka kamu harus menambahkannya. " type="text" name="<?php echo $namaJenisField; ?>[]" class="form-control" placeholder="Text" rows="6" style="float:left; margin-left:5px; width:75%;"><?php echo @$detail_dokumen[$namaJenisField][$idxField]['teks']; ?></textarea>
-										<a href="javascript:void(0)" 
-										   onclick="addMenimbang(this, <?php echo ($idxField +1); ?>)" 
-										   style="position:absolute; right:4.4%; padding:3px;" class="btn btn-success btn-xs">
-											<i class="fa fa-lg fa-plus <?php echo ($idxField +1) < count(@$detail_dokumen[$namaJenisField]) ? 'fa-minus' : ''; ?>"></i>
-										</a>
-										<a href="javascript:void(0)" 
-										   id="btnKomentar-<?php echo $namaJenisField.($idxField+1); ?>" 
-										   targetKomentar="textKomentar-<?php echo $namaJenisField.($idxField+1); ?>" 
-										   onclick="addKomentarModal(this.id, <?php echo $id_dokumen; ?>, '<?php echo $stat_revisi; ?>', <?php echo $detail_dokumen[$namaJenisField][$idxField]['id_detail']; ?>)" 
-										   style="position:absolute; right:4.3%; margin-top:25px; padding:2px;" title="Tambah Telaah" class="btn btn-xs btn-primary">
+										<div class="form-group" id="text-<?php echo $namaJenisField.($idxField +1); ?>" style="display:inline-block; width:100%;">
+											<div style="float:left; width:20%"> 
+												<input type="text" name="pointer<?php echo $namaJenisField; ?>[]" class="form-control" placeholder="Pointer" data-toggle="tooltip" title="contoh : a. ( menggunakan titik dibelakang )" value="<?php echo @$detail_dokumen[$namaJenisField][$idxField]['pointer']; ?>"/>
+												<select name="nextPage<?php echo $namaJenisField; ?>[]" class="form-control" style="cursor:pointer; margin-top:10px;" data-toggle="tooltip" title="Jika dalam kondisi dokumen harus menggunakan halaman baru ( potrait / lanskap ) gunakan fitur ini. Continues Page menjadi bagian default dari pengaturan ini.">
+													<option value="continue" <?php echo @$detail_dokumen[$namaJenisField][$idxField]['layout'] == 'continue' ? 'selected' : ''; ?>>Continues Page</option>
+													<option value="newP" <?php echo @$detail_dokumen[$namaJenisField][$idxField]['layout'] == 'newP' ? 'selected' : ''; ?> >Next Page Portrait</option>
+													<option value="newL" <?php echo @$detail_dokumen[$namaJenisField][$idxField]['layout'] == 'newL' ? 'selected' : ''; ?> >Next Page Landscape</option>
+												</select>
+												<input type="hidden" name="subLevel<?php echo $namaJenisField; ?>[]" value="0"> 
+											</div>
+											<div style="width:100%">
+												<textarea data-toggle="tooltip" title="sistem akan memberikan otomatis simbol ; ( titik koma) pada akhir paragraf, apabila sistem tidak memberi simbol ; maka kamu harus menambahkannya. " type="text" name="<?php echo $namaJenisField; ?>[]" class="form-control" placeholder="Text" rows="6" style="float:left; margin-left:5px; width:75%;"><?php echo @$detail_dokumen[$namaJenisField][$idxField]['teks']; ?></textarea>
+												<a href="javascript:void(0)" 
+												onclick="addMenimbang(this, <?php echo ($idxField +1); ?>)" 
+												style="position:absolute; right:4.4%; padding:3px;" class="btn btn-success btn-xs">
+												<i class="fa fa-lg fa-plus <?php echo ($idxField +1) < count(@$detail_dokumen[$namaJenisField]) ? 'fa-minus' : ''; ?>"></i>
+											</a>
+											<a href="javascript:void(0)" 
+											id="btnKomentar-<?php echo $namaJenisField.($idxField+1); ?>" 
+											targetKomentar="textKomentar-<?php echo $namaJenisField.($idxField+1); ?>" 
+											onclick="addKomentarModal(this.id, <?php echo $id_dokumen; ?>, '<?php echo $stat_revisi; ?>', <?php echo $detail_dokumen[$namaJenisField][$idxField]['id_detail']; ?>)" 
+											style="position:absolute; right:4.3%; margin-top:25px; padding:2px;" title="Tambah Telaah" class="btn btn-xs btn-primary">
 											<i class="fa fa-lg <?php echo ($idxField+1) < count(@$detail_dokumen[$namaJenisField]) ? 'fa-comments-o' : 'fa-comments'; ?>" ></i>
 										</a>
 									</div>
 								</div>
-								<?php }
-								} else { ?>
-								<div class="form-group" id="text-<?php echo $namaJenisField; ?>1" style="display:inline-block; width:100%;">
-									<div style="float:left; width:20%"> 
-										<input type="text" name="pointer<?php echo $namaJenisField; ?>[]" class="form-control" placeholder="Pointer" data-toggle="tooltip" title="contoh : a. ( menggunakan titik dibelakang )" value="Kepada"/>
-										<select name="nextPage<?php echo $namaJenisField; ?>[]" class="form-control" style="cursor:pointer; margin-top:10px;" data-toggle="tooltip" title="Jika dalam kondisi dokumen harus menggunakan halaman baru ( potrait / lanskap ) gunakan fitur ini. Continues Page menjadi bagian default dari pengaturan ini.">
-											<option value="continue">Continues Page</option>
-											<option value="newP">Next Page Portrait</option><option value="newL">Next Page Landscape</option>
-										</select>
-										<input type="hidden" name="subLevel<?php echo $namaJenisField; ?>[]" value="0"> 
-									</div>
-									<div style="width:100%">
-										<textarea data-toggle="tooltip" title="sistem akan memberikan otomatis simbol ; ( titik koma) pada akhir paragraf, apabila sistem tidak memberi simbol ; maka kamu harus menambahkannya. " type="text" name="<?php echo $namaJenisField; ?>[]" class="form-control" placeholder="Text" rows="6" style="float:left; margin-left:5px; width:75%;">Kepala Satuan Kerja Khusus Pelaksana Kegiatan Usaha Hulu Minyak dan Gas Bumi.</textarea>
-										<a href="javascript:void(0)" onclick="addMenimbang(this, 1)" style="position:absolute; right:4.3%; padding:3px;" title="Tambah Isi" class="btn btn-success btn-xs"><i class="fa fa-lg fa-plus"></i></a>
-									</div>
+							<?php }
+						} else { ?>
+							<div class="form-group" id="text-<?php echo $namaJenisField; ?>1" style="display:inline-block; width:100%;">
+								<div style="float:left; width:20%"> 
+									<input type="text" name="pointer<?php echo $namaJenisField; ?>[]" class="form-control" placeholder="Pointer" data-toggle="tooltip" title="contoh : a. ( menggunakan titik dibelakang )" value="Kepada"/>
+									<select name="nextPage<?php echo $namaJenisField; ?>[]" class="form-control" style="cursor:pointer; margin-top:10px;" data-toggle="tooltip" title="Jika dalam kondisi dokumen harus menggunakan halaman baru ( potrait / lanskap ) gunakan fitur ini. Continues Page menjadi bagian default dari pengaturan ini.">
+										<option value="continue">Continues Page</option>
+										<option value="newP">Next Page Portrait</option><option value="newL">Next Page Landscape</option>
+									</select>
+									<input type="hidden" name="subLevel<?php echo $namaJenisField; ?>[]" value="0"> 
 								</div>
-								<?php } ?>
+								<div style="width:100%">
+									<textarea data-toggle="tooltip" title="sistem akan memberikan otomatis simbol ; ( titik koma) pada akhir paragraf, apabila sistem tidak memberi simbol ; maka kamu harus menambahkannya. " type="text" name="<?php echo $namaJenisField; ?>[]" class="form-control" placeholder="Text" rows="6" style="float:left; margin-left:5px; width:75%;">Kepala Satuan Kerja Khusus Pelaksana Kegiatan Usaha Hulu Minyak dan Gas Bumi.</textarea>
+									<a href="javascript:void(0)" onclick="addMenimbang(this, 1)" style="position:absolute; right:4.3%; padding:3px;" title="Tambah Isi" class="btn btn-success btn-xs"><i class="fa fa-lg fa-plus"></i></a>
+								</div>
 							</div>
-						</fieldset>
-						<hr>
-						<fieldset>
-							<p>Untuk : </p>
-							<div>
-								<?php $namaJenisField = 'Diktum'; 
-								if (count(@$detail_dokumen[$namaJenisField]) > 0){
-									for($idxField=0; $idxField<count(@$detail_dokumen[$namaJenisField]); $idxField++){ ?>
+						<?php } ?>
+					</div>
+				</fieldset>
+				<hr>
+				<fieldset>
+					<p>Untuk : </p>
+					<div>
+						<?php $namaJenisField = 'Diktum'; 
+						if (count(@$detail_dokumen[$namaJenisField]) > 0){
+							for($idxField=0; $idxField<count(@$detail_dokumen[$namaJenisField]); $idxField++){ ?>
 								<div class="form-group" id="text-<?php echo $namaJenisField.($idxField +1); ?>" style="display:inline-block; width:100%;">
 									<div style="float:left; width:20%;">
 										<input type="text" name="pointer<?php echo $namaJenisField; ?>[]" class="form-control" placeholder="Pointer" data-toggle="tooltip" title="Isian ini akan otomatis membuat huruf menjadi kapital, contoh : KESATU" value="<?php echo @$detail_dokumen[$namaJenisField][$idxField]['pointer']; ?>" />
@@ -397,19 +391,19 @@
 											<i class="fa fa-lg fa-plus <?php echo ($idxField +1) < count(@$detail_dokumen[$namaJenisField]) ? 'fa-minus' : ''; ?>"></i>
 										</a>
 										<a href="javascript:void(0)" 
-										   id="btnKomentar-<?php echo $namaJenisField.($idxField+1); ?>" 
-										   targetKomentar="textKomentar-<?php echo $namaJenisField.($idxField+1); ?>" 
-										   onclick="addKomentarModal(this.id, <?php echo $id_dokumen; ?>, '<?php echo $stat_revisi; ?>', <?php echo $detail_dokumen[$namaJenisField][$idxField]['id_detail']; ?>)" 
-										   style="position:absolute; right:4.3%; margin-top:25px; padding:2px;" title="Tambah Telaah" class="btn btn-xs btn-primary">
-											<i class="fa fa-lg <?php echo ($idxField+1) < count(@$detail_dokumen[$namaJenisField]) ? 'fa-comments-o' : 'fa-comments'; ?>" ></i>
-										</a>
-									</div>
+										id="btnKomentar-<?php echo $namaJenisField.($idxField+1); ?>" 
+										targetKomentar="textKomentar-<?php echo $namaJenisField.($idxField+1); ?>" 
+										onclick="addKomentarModal(this.id, <?php echo $id_dokumen; ?>, '<?php echo $stat_revisi; ?>', <?php echo $detail_dokumen[$namaJenisField][$idxField]['id_detail']; ?>)" 
+										style="position:absolute; right:4.3%; margin-top:25px; padding:2px;" title="Tambah Telaah" class="btn btn-xs btn-primary">
+										<i class="fa fa-lg <?php echo ($idxField+1) < count(@$detail_dokumen[$namaJenisField]) ? 'fa-comments-o' : 'fa-comments'; ?>" ></i>
+									</a>
 								</div>
-								<?php }
-								} else { ?>
-								<div class="form-group" id="text-<?php echo $namaJenisField; ?>1" style="display:inline-block; width:100%;">
-									<div style="float:left; width:20%;">
-										<input type="text" name="pointer<?php echo $namaJenisField; ?>[]" class="form-control" placeholder="Pointer" data-toggle="tooltip" title="Isian ini akan otomatis membuat huruf menjadi kapital, contoh : KESATU"/>
+							</div>
+						<?php }
+					} else { ?>
+						<div class="form-group" id="text-<?php echo $namaJenisField; ?>1" style="display:inline-block; width:100%;">
+							<div style="float:left; width:20%;">
+								<input type="text" name="pointer<?php echo $namaJenisField; ?>[]" class="form-control" placeholder="Pointer" data-toggle="tooltip" title="Isian ini akan otomatis membuat huruf menjadi kapital, contoh : KESATU"/>
 										<!-- <select name="nextPage<?php echo $namaJenisField; ?>[]" class="form-control" style="cursor:pointer; margin-top:10px;">
 											<option value="continue">Continues Page</option>
 											<option value="newP">Next Page Portrait</option><option value="newL">Next Page Landscape</option>
@@ -427,101 +421,124 @@
 										<a href="javascript:void(0)" onclick="addDiktum(this, 1)" style="position:absolute; right:4.3%; padding:3px;" title="Tambah Isi" class="btn btn-success btn-xs"><i class="fa fa-lg fa-plus"></i></a>
 									</div>
 								</div>
-								<?php } ?>
-							</div>
-						</fieldset>
-						 
-						<hr>
-						<fieldset>
-							<legend>Pejabat Penanda Tangan</legend>
-							<div class="form-group">
-								<input name="ttd" class="form-control" autocomplete="off" placeholder="Nama Penanda Tangan" rows="4" style="width:95%" required value="<?php echo @$detail_dokumen['TTD'][0]['teks']; ?>"> 
-							</div>
-						</fieldset> 
-						<hr>
-						<fieldset> 
-							<legend>Unggah Lampiran</legend>
-							<input type="file" name="userfile">
-						</fieldset> 
-						<hr>
-						<div class="form-group margin-top-5px">
-							<button type="submit" class="btn btn-success btn-xs" id="view_doc">Lihat Format</button>
-							
-							<?php 
-							if ($this->session->userdata('login_id')) {
-								echo '<button type="submit" class="btn btn-primary btn-xs" id="save_doc">Simpan Dokumen</button>';
-							}
-							?>
-
-
-
+							<?php } ?>
 						</div>
-					</form>
+					</fieldset>
 
-<!-- Modal Open Action -->
-<div id="modal-comment" class="modal fade animate" data-backdrop="true" aria-hidden="true" style="display:none;">
-  <div class="modal-dialog" id="animate" data-ui-class="bounce">
-    <div class="modal-content">
-      <div class="modal-header">
-      	<h5 class="modal-title">Jelajah Komentar</h5>
-      </div>
-      <div id="textarea-komentar" class="modal-body text-center p-lg">
-		  <div id="showTextArea"></div>
-		  <input type="hidden" id="hiddenIdTextChat" />
-		  <input type="hidden" id="hiddenIdDoc" />
-		  <input type="hidden" id="hiddenStat" />
-		  <input type="hidden" id="hiddenIdDetail" />
-      </div>
-      <div class="modal-footer">
-		<div style="margin-bottom:5px"><input id="chatKomentar" type="text" name="write-comment" style="width:100%" /></div>
-		<button type="button" class="btn btn-primary p-x-md" onclick="btnSubmitModal(this)">Submit</button>
-      </div>
-    </div><!-- /.modal-content -->
-  </div>
-</div>
+					<hr>
+					<fieldset>
+						<legend>Pejabat Penanda Tangan</legend>
+						<div class="form-group">
+							<input name="ttd" class="form-control" autocomplete="off" placeholder="Nama Penanda Tangan" rows="4" style="width:95%" required value="<?php echo @$detail_dokumen['TTD'][0]['teks']; ?>"> 
+						</div>
+					</fieldset> 
+					<hr>
+					<fieldset> 
+						<legend>Unggah Lampiran</legend>
+						<input type="file" name="userfile">
+					</fieldset> 
+					<hr>
+					<div class="form-group margin-top-5px">
+						<button type="submit" class="btn btn-success btn-sm " id="view_doc">Generate Format</button>
+						<?php //print_r($this->session->all_userdata()); ?>
+						<button type="submit" class="btn btn-primary btn-sm" id="save_doc">Simpan Dokumen</button>
+
+						<br><br><br> 
+						<div class="form-group">
+							<label for="">Disposisi ke :</label>
+							<?php foreach ($cari_dispo as $cd) { ?>
+								<input type="checkbox" name="assign[]" value="<?php echo $cd['id_flow_role']?>"> <?php echo $cd['nama_flow'];?> &nbsp;&nbsp;&nbsp;
+							<?php } ?>
+						</div> 
+						<div class="form-group">
+							<label>Masuk Catatan : </label>
+							<textarea class="form-control" rows="4" name="catatan_submit"></textarea>
+						</div>
+						<br>
+						<button type="submit" class="btn btn-warning btn-sm" id="save_doc_submit">Submit </button>
+
+						<?php if ($submit_hilang==FALSE) { ?> 
+						<?php } else { ?>
+							<hr>
+							<div class="alert ">
+								<strong>Peringatan !</strong> Dokumen bisa dinyatakan sebagai dokumen yang terpublis.
+								<p>Pilih tombol dibawah ini jika ingin mempublis dokumen</p>
+
+								<button class="md-btn md-raised m-b-sm w-xs orange" id="doc_publish">Publish !</button>
+							</div>
+						<?php } ?>
+					</div>
+
+				</form>
+
+				<!-- Modal Open Action -->
+				<div id="modal-comment" class="modal fade animate" data-backdrop="true" aria-hidden="true" style="display:none;">
+					<div class="modal-dialog" id="animate" data-ui-class="bounce">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title">Jelajah Komentar</h5>
+							</div>
+							<div id="textarea-komentar" class="modal-body text-center p-lg">
+								<div id="showTextArea"></div>
+								<input type="hidden" id="hiddenIdTextChat" />
+								<input type="hidden" id="hiddenIdDoc" />
+								<input type="hidden" id="hiddenStat" />
+								<input type="hidden" id="hiddenIdDetail" />
+							</div>
+							<div class="modal-footer">
+								<div style="margin-bottom:5px"><input id="chatKomentar" type="text" name="write-comment" style="width:100%" /></div>
+								<button type="button" class="btn btn-primary p-x-md" onclick="btnSubmitModal(this)">Submit</button>
+							</div>
+						</div><!-- /.modal-content -->
+					</div>
+				</div>
 				
-<button id="btn-modal" class="btn white active" style="display:none"
-		data-toggle="modal" 
-		data-target="#modal-comment" 
-		data-ui-toggle-class="bounce" 
-		data-ui-target="#animate">Bounce</button>
-<!-- Modal Close Action -->
+				<button id="btn-modal" class="btn white active" style="display:none"
+				data-toggle="modal" 
+				data-target="#modal-comment" 
+				data-ui-toggle-class="bounce" 
+				data-ui-target="#animate">Bounce</button>
+				<!-- Modal Close Action -->
 
-<script>
-	$("#view_doc").click(function(e) {
-		$("#form-keputusan").attr("action", "<?php echo site_url('backend/format/instruksi_menteri/sanusi'); ?>");
-	});
+				<script>
+					$("#view_doc").click(function(e) {
+						$("#form-keputusan").attr("action", "<?php echo site_url('backend/format/instruksi_menteri/sanusi'); ?>");
+					});
 
-	$("#save_doc").click(function(e) {
-		$("#form-keputusan").attr("action", "<?php echo site_url('backend/format/instruksi_menteri/save_document'); ?>");
-	});
+					$("#save_doc").click(function(e) {
+						$("#form-keputusan").attr("action", "<?php echo site_url('backend/format/instruksi_menteri/update_document'); ?>");
+					});
 
-	$('textarea[name="super_judul"]').keyup(function() {
-		$('textarea[name^="Memutuskan"]').text($(this).val());
-	});
+					$("#save_doc_submit").click(function(e) {
+						$("#form-keputusan").attr("action", "<?php echo site_url('backend/format/instruksi_menteri/submit_document'); ?>");
+					});
+					
+					$('textarea[name="super_judul"]').keyup(function() {
+						$('textarea[name^="Memutuskan"]').text($(this).val());
+					});
 
-	$('textarea[name^="Menimbang"], textarea[name^="Mengingat"]').blur(function() {
-		var str = $(this).val(),
-		strcheck = (str === '') ? '' : str+';';
-		$(this).val(strcheck);
-	})
-	.focus(function() {
-		var str = $(this).val();
-		$(this).val(str.slice(0, -1));
-	});
+					$('textarea[name^="Menimbang"], textarea[name^="Mengingat"]').blur(function() {
+						var str = $(this).val(),
+						strcheck = (str === '') ? '' : str+';';
+						$(this).val(strcheck);
+					})
+					.focus(function() {
+						var str = $(this).val();
+						$(this).val(str.slice(0, -1));
+					});
 
-	$('textarea[name^="Memutuskan"]').blur(function() {
-		var str = $(this).val(),
-		strcheck = (str === '') ? '' : str+'.';
-		$(this).val(strcheck);
-	}).focus(function() {
-		var str = $(this).val();
-		$(this).val(str.slice(0, -1));
-	});
+					$('textarea[name^="Memutuskan"]').blur(function() {
+						var str = $(this).val(),
+						strcheck = (str === '') ? '' : str+'.';
+						$(this).val(strcheck);
+					}).focus(function() {
+						var str = $(this).val();
+						$(this).val(str.slice(0, -1));
+					});
 
-	$('input[name^="pointerDiktum"]').keyup(function() {
-		$(this).val(($(this).val()).toUpperCase());
-	});
+					$('input[name^="pointerDiktum"]').keyup(function() {
+						$(this).val(($(this).val()).toUpperCase());
+					});
 
 	// modal dialog for commentar	
 	function addKomentarModal(thisId, id_doc, stat, id_detail) {
@@ -538,10 +555,10 @@
 			success: function(data) {
 				// &#13;&#10;
 				var reEle = '<div id="showTextArea"></div>'+
-							'<input type="hidden" id="hiddenIdTextChat" />'+
-							'<input type="hidden" id="hiddenIdDoc" />'+
-							'<input type="hidden" id="hiddenStat" />'+
-							'<input type="hidden" id="hiddenIdDetail" />';
+				'<input type="hidden" id="hiddenIdTextChat" />'+
+				'<input type="hidden" id="hiddenIdDoc" />'+
+				'<input type="hidden" id="hiddenStat" />'+
+				'<input type="hidden" id="hiddenIdDetail" />';
 				$('#textarea-komentar').html(reEle);
 				var _month = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 				var datax = JSON.parse(data);
@@ -567,7 +584,7 @@
 			}
 		});
 	}
-												
+
 	function btnSubmitModal(ele) {
 		var chatting = $('#chatKomentar').val();
 		var id_detail = $('#hiddenIdDetail').val();

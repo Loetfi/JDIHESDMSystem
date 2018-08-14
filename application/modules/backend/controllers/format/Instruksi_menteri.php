@@ -869,6 +869,7 @@ class Instruksi_menteri extends CI_Controller {
 
 	function save_document()
 	{
+		// print_r($_POST);die();
 		$this->save_doc();
 		$this->session->set_flashdata('message', '<div class="alert alert-info"> Dokumen berhasil dibuat.</div>');
 		redirect('backend/dokumen','refresh');
@@ -912,26 +913,26 @@ class Instruksi_menteri extends CI_Controller {
 			$arrData['Menimbang']['subLevelMenimbang'][] = $subLevelMenimbang[$i];
 			$arrData['Menimbang']['text'][] = $Menimbang[$i];
 		}
-		$Mengingat = $_POST['Mengingat'];
-		$pointerMengingat = $_POST['pointerMengingat'];
-		$nextPageMengingat = @$_POST['nextPageMengingat'];
-		$subLevelMengingat = @$_POST['subLevelMengingat'];
-		for($i=0; $i<count($Mengingat); $i++) {
-			$arrData['Mengingat']['pointerMengingat'][] = $pointerMengingat[$i];
-			$arrData['Mengingat']['nextPageMengingat'][] = $nextPageMengingat[$i];
-			$arrData['Mengingat']['subLevelMengingat'][] = $subLevelMengingat[$i];
-			$arrData['Mengingat']['text'][] = $Mengingat[$i];
-		}
-		$Memutuskan = $_POST['Memutuskan'];
-		$pointerMemutuskan = @$_POST['pointerMemutuskan'];
-		$nextPageMemutuskan = @$_POST['nextPageMemutuskan'];
-		$subLevelMemutuskan = @$_POST['subLevelMemutuskan'];
-		for($i=0; $i<count($Memutuskan); $i++) {
-			$arrData['Memutuskan']['pointerMemutuskan'][] = @$pointerMemutuskan[$i];
-			$arrData['Memutuskan']['nextPageMemutuskan'][] = @$nextPageMemutuskan[$i] == '' ? 'continue' : @$nextPageMemutuskan[$i];
-			$arrData['Memutuskan']['subLevelMemutuskan'][] = @$subLevelMemutuskan[$i];
-			$arrData['Memutuskan']['text'][] = @$Memutuskan[$i];
-		}
+		// $Mengingat = $_POST['Mengingat'];
+		// $pointerMengingat = $_POST['pointerMengingat'];
+		// $nextPageMengingat = @$_POST['nextPageMengingat'];
+		// $subLevelMengingat = @$_POST['subLevelMengingat'];
+		// for($i=0; $i<count($Mengingat); $i++) {
+		// 	$arrData['Mengingat']['pointerMengingat'][] = $pointerMengingat[$i];
+		// 	$arrData['Mengingat']['nextPageMengingat'][] = $nextPageMengingat[$i];
+		// 	$arrData['Mengingat']['subLevelMengingat'][] = $subLevelMengingat[$i];
+		// 	$arrData['Mengingat']['text'][] = $Mengingat[$i];
+		// }
+		// $Memutuskan = $_POST['Memutuskan'];
+		// $pointerMemutuskan = @$_POST['pointerMemutuskan'];
+		// $nextPageMemutuskan = @$_POST['nextPageMemutuskan'];
+		// $subLevelMemutuskan = @$_POST['subLevelMemutuskan'];
+		// for($i=0; $i<count($Memutuskan); $i++) {
+		// 	$arrData['Memutuskan']['pointerMemutuskan'][] = @$pointerMemutuskan[$i];
+		// 	$arrData['Memutuskan']['nextPageMemutuskan'][] = @$nextPageMemutuskan[$i] == '' ? 'continue' : @$nextPageMemutuskan[$i];
+		// 	$arrData['Memutuskan']['subLevelMemutuskan'][] = @$subLevelMemutuskan[$i];
+		// 	$arrData['Memutuskan']['text'][] = @$Memutuskan[$i];
+		// }
 
 		$Diktum = $_POST['Diktum'];
 		$pointerDiktum = $_POST['pointerDiktum'];
@@ -1199,9 +1200,16 @@ class Instruksi_menteri extends CI_Controller {
 
 
 		function update_document(){
+			// print_r($_POST); die();
 			$this->save_doc();
 			$this->session->set_flashdata('message', '<div class="alert alert-info"> Rancangan berhasil dirubah.</div>');
 			redirect('backend/dokumen','refresh');
+		}
+
+		function cari_email($login_id = '')
+		{
+			$cari = $this->db->query("SELECT email from login where id_flow = $login_id")->row_array();
+			return empty($cari['email']) ? '' : $cari['email']; 
 		}
 
 		function submit_document()
@@ -1210,20 +1218,37 @@ class Instruksi_menteri extends CI_Controller {
 			if (empty($this->session->userdata('login_id'))) {
 				exit('anda belom login');
 			} else {
-				## join assign multiple 
+				require_once(APPPATH.'modules/backend/helpers/sending_helper.php');
+				// $this->load->helper('backend/helpers/sending');
+
+				#join assign multiple 
 				$join_assign = @$_POST['assign'] ? implode(',', $_POST['assign']) : 0;
-				## end
+				## end coba jaa
 				$res = '';
 				$login_id = $this->session->userdata('login_id');
 				$data = $this->save_doc();
 				$id_revisi =  $data['id_revisi'];
-				$cari_revisi = $this->db->query("SELECT  b.direct_boss, a.* from dokumen_revisi a 
+				$cari_revisi = $this->db->query("SELECT  b.direct_boss, b.name, b.email,  a.* from dokumen_revisi a 
 					left join login b on a.cuser = b.login_id
 					where id_revisi = $id_revisi and cuser = $login_id")->row_array();
 
-			## ganti status jadi submit 
+ 				## sending email
+				if (count($join_assign)>0) {
+					$_GET['subject'] = 'Kamu mendapat dokumen dari '.$cari_revisi['name'];
+					$_GET['message'] = 'Hai, Kamu mendapat dokumen untuk ditelaah dengan judul '.$_POST['super_judul'].' dengan menambahkan catatan : '.@$_POST['catatan_submit']; 
+
+					foreach ($_POST['assign'] as $assign_email) {
+						$to[] = $this->cari_email($assign_email);
+						$to_send = $to;
+					}
+					$_GET['to'] = implode(',', $to_send);
+					Notification::sending();  
+				}
+				## end sending email
+
+				# ganti status jadi submit 
 				if (count($cari_revisi['direct_boss']) > 0) {
-				## update 
+				# update 
 					$update = array(
 						'appTo'			=> @$join_assign ? @$join_assign : $cari_revisi['direct_boss'], 
 						'rilis_doc'		=> 1,

@@ -694,7 +694,7 @@ function addLampiran(ele) {
 </fieldset>
 <hr>
 <div class="form-group margin-top-5px">
-	<button type="submit" class="btn btn-success btn-sm " id="view_doc">Generate Format</button>
+	<button type="submit" class="btn btn-success btn-sm " id="view_doc">Lihat Format</button>
 	<?php //print_r($this->session->all_userdata()); ?>
 	<button type="submit" class="btn btn-primary btn-sm" id="save_doc">Simpan Dokumen</button>
 
