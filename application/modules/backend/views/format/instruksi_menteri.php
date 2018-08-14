@@ -306,10 +306,7 @@
 							<p>TENTANG</p>
 						</p></center>
 						<div class="form-group" style="margin-bottom:5px">
-							<textarea name="super_judul" class="form-control" autocomplete="off" placeholder="Judul Rancangan" rows="4" required="" data-toggle="tooltip" title="Masukan Judul Rancangan Keputusan Menteri yang akan dibuat"><?php echo @$detail_dokumen['judul'][0]['teks']; ?>PENAGIHAN PEMBAYARAN BONUS TANDA TANGAN (SIGNATURE BONUS) DAN KOMITMEN PASTI EKSPLORASI 
-PADA KEGIATAN USAHA HULU MINYAK DAN GAS BUMI 
-KEPADA KONTRAKTOR KONTRAK KERJA SAMA MINYAK DAN GAS BUMI
-</textarea>
+							<textarea name="super_judul" class="form-control" autocomplete="off" placeholder="Judul Rancangan" rows="4" required="" data-toggle="tooltip" title="Masukan Judul Rancangan Keputusan Menteri yang akan dibuat"><?php echo @$detail_dokumen['judul'][0]['teks']; ?></textarea>
 						</div>
 						<center>
 							<p>MENTERI ENERGI DAN SUMBER DAYA MINERAL,</p>
@@ -318,7 +315,7 @@ KEPADA KONTRAKTOR KONTRAK KERJA SAMA MINYAK DAN GAS BUMI
 						<hr>
 						<fieldset>
 							<div class="form-group" style="margin-bottom:5px">
-							<textarea name="paragraf" class="form-control" autocomplete="off" placeholder="Paragraf" rows="4" required="" data-toggle="tooltip" title="Paragraf"><?php echo @$detail_dokumen['judul'][0]['teks']; ?>Dalam rangka mendorong percepatan pemenuhan kewajiban pembayaran bonus tanda tangan (signature bonus) dan kewajiban finansial atas pengakhiran kontrak kerja sama (terminasi) yang belum memenuhi komitmen pasti eksplorasi oleh beberapa Kontraktor Kontrak Kerja Sama Minyak dan Gas Bumi, dengan ini menginstruksikan:</textarea>
+							<textarea name="paragraf" class="form-control" autocomplete="off" placeholder="Paragraf" rows="4" required="" data-toggle="tooltip" title="Paragraf"><?php echo @$detail_dokumen['judul'][0]['teks']; ?></textarea>
 						</div>
 						</fieldset>
 						<hr>
@@ -335,7 +332,7 @@ KEPADA KONTRAKTOR KONTRAK KERJA SAMA MINYAK DAN GAS BUMI
 										<input type="hidden" name="subLevel<?php echo $namaMenimbang; ?>[]" value="0"> 
 									</div>
 									<div style="width:100%">
-										<textarea data-toggle="tooltip" title="sistem akan memberikan otomatis simbol ; ( titik koma) pada akhir paragraf, apabila sistem tidak memberi simbol ; maka kamu harus menambahkannya. " type="text" name="<?php echo $namaMenimbang; ?>[]" class="form-control" placeholder="Text" rows="6" style="float:left; margin-left:5px; width:75%;">Kepala Satuan Kerja Khusus Pelaksana Kegiatan Usaha Hulu Minyak dan Gas Bumi.</textarea>
+										<textarea data-toggle="tooltip" title="sistem akan memberikan otomatis simbol ; ( titik koma) pada akhir paragraf, apabila sistem tidak memberi simbol ; maka kamu harus menambahkannya. " type="text" name="<?php echo $namaMenimbang; ?>[]" class="form-control" placeholder="Text" rows="6" style="float:left; margin-left:5px; width:75%;"></textarea>
 										<a href="javascript:void(0)" onclick="addMenimbang(this, 1)" style="position:absolute; right:2%;" title="Tambah Isi" class="btn btn-success btn-xs"><i class="fa fa-lg fa-plus"></i></a>
 									</div>
 								</div>
@@ -411,7 +408,7 @@ KEPADA KONTRAKTOR KONTRAK KERJA SAMA MINYAK DAN GAS BUMI
 
 						$('textarea[name^="Menimbang"], textarea[name^="Mengingat"]').blur(function() {
 							var str = $(this).val(),
-							strcheck = (str === '') ? '' : str+';';
+							strcheck = (str === '') ? '' : str+'';
 							$(this).val(strcheck);
 						})
 						.focus(function() {
