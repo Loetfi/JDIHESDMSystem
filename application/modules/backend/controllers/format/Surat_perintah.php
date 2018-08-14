@@ -566,12 +566,13 @@ class Surat_perintah extends CI_Controller {
 						else {
 							if ($pointerDiktum[$i] == ''){ // lanjutan tanpa pointer
 								$section->addText(
-									$barisDiktum[$j].' tiga',
+									$barisDiktum[$j],
 									$fontStyle,
 									$subLevel[0]['default']
 								);
 							}
 							else { // lanjutan ada pointer
+
 								// echo $i."\t:\t".$j.'<br>';
 								if ($idxSubLevel == 0){
 									$section->addText(
@@ -586,6 +587,7 @@ class Surat_perintah extends CI_Controller {
 										$subLevel[$idxSubLevel]['pointer']
 									);
 								}
+
 							}
 						}
 					}
@@ -600,6 +602,7 @@ class Surat_perintah extends CI_Controller {
 								);
 							}
 							else { // awal body Diktum ada pointer
+
 								// echo $pointerDiktum[$i]."\t".$barisDiktum[$j];
 								if ($idxSubLevel == 0){
 									$section->addText(
@@ -1119,15 +1122,15 @@ class Surat_perintah extends CI_Controller {
 			$arrData['Mengingat']['subLevelMengingat'][] = $subLevelMengingat[$i];
 			$arrData['Mengingat']['text'][] = $Mengingat[$i];
 		}
-		$Memutuskan = $_POST['Memutuskan'];
-		$pointerMemutuskan = @$_POST['pointerMemutuskan'];
-		$nextPageMemutuskan = @$_POST['nextPageMemutuskan'];
-		$subLevelMemutuskan = @$_POST['subLevelMemutuskan'];
-		for($i=0; $i<count($Memutuskan); $i++) {
-			$arrData['Memutuskan']['pointerMemutuskan'][] = @$pointerMemutuskan[$i];
-			$arrData['Memutuskan']['nextPageMemutuskan'][] = @$nextPageMemutuskan[$i] == '' ? 'continue' : @$nextPageMemutuskan[$i];
-			$arrData['Memutuskan']['subLevelMemutuskan'][] = @$subLevelMemutuskan[$i];
-			$arrData['Memutuskan']['text'][] = @$Memutuskan[$i];
+		$Memerintahkan = $_POST['Memerintahkan'];
+		$pointerMemerintahkan = @$_POST['pointerMemerintahkan'];
+		$nextPageMemerintahkan = @$_POST['nextPageMemerintahkan'];
+		$subLevelMemerintahkan = @$_POST['subLevelMemerintahkan'];
+		for($i=0; $i<count($Memerintahkan); $i++) {
+			$arrData['Memerintahkan']['pointerMemerintahkan'][] = @$pointerMemerintahkan[$i];
+			$arrData['Memerintahkan']['nextPageMemerintahkan'][] = @$nextPageMemerintahkan[$i] == '' ? 'continue' : @$nextPageMemerintahkan[$i];
+			$arrData['Memerintahkan']['subLevelMemerintahkan'][] = @$subLevelMemerintahkan[$i];
+			$arrData['Memerintahkan']['text'][] = @$Memerintahkan[$i];
 		}
 
 		$Diktum = $_POST['Diktum'];
@@ -1212,10 +1215,12 @@ class Surat_perintah extends CI_Controller {
 	function cek_revisi_document($id) {
 		$sql = "
 		SELECT
-		max(status_revisi) revisi,
-		count(*) terhitung
+			status_revisi AS revisi,
+			length(status_revisi) terhitung
 		FROM dokumen_revisi dr
 		WHERE dr.id_dokumen = '$id'
+		ORDER BY length(status_revisi) DESC, status_revisi DESC 
+		LIMIT 1
 		";
 		$allRow = $this->db->query($sql)->row_array();
 		if (@$allRow['terhitung'] == 0){
@@ -1353,7 +1358,7 @@ class Surat_perintah extends CI_Controller {
 			'cari_dispo'	=> $cari_dispo,
 			'submit_hilang'	=> $submit_hilang,
 			'publis_dok'	=> $publis_dok,
-			'contents'	=> 'Keputusan_menteri_doc_edit',
+			'contents'	=> 'format/surat_perintah_edit',
 			'title'		=> 'Ubah Rancangan',
 			'name'		=> empty($this->session->userdata('name')) ? 'Tanpa Login' : $this->session->userdata('name'),
 			'id_dokumen'	=> $id_dokumen,
@@ -1388,6 +1393,7 @@ class Surat_perintah extends CI_Controller {
 
 			$data['id_dokumen'] = $id_dokumen;
 			$data['detail_dokumen'] = @$detail_dokumen;
+			// print_r($detail_dokumen);
 
 			$this->load->view('backend/template/head', $data, FALSE);
 		}
@@ -1415,9 +1421,9 @@ class Surat_perintah extends CI_Controller {
 				require_once(APPPATH.'modules/backend/helpers/sending_helper.php');
 				// $this->load->helper('backend/helpers/sending');
 
-				#join assign multiple 
+				## join assign multiple 
 				$join_assign = @$_POST['assign'] ? implode(',', $_POST['assign']) : 0;
-				#end
+				## end
 				$res = '';
 				$login_id = $this->session->userdata('login_id');
 				$data = $this->save_doc();
@@ -1440,9 +1446,9 @@ class Surat_perintah extends CI_Controller {
 				}
 				## end sending email
 
-				# ganti status jadi submit 
+				## ganti status jadi submit 
 				if (count($cari_revisi['direct_boss']) > 0) {
-				# update 
+				## update 
 					$update = array(
 						'appTo'			=> @$join_assign ? @$join_assign : $cari_revisi['direct_boss'], 
 						'rilis_doc'		=> 1,
