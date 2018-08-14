@@ -61,7 +61,14 @@
 										<td><a href="<?php echo base_url($dv['namafile']);?>" class="btn btn-xs btn-primary" data-toggle="tooltip" title="Download, jika ingin men-download rancangan format versi ini."><i class="fa fa-download"></i> Download</a></td>
 										<td>
 											<?php if ($publish==FALSE): ?>
-												<a href="<?php echo site_url('Keputusan_menteri_doc/edit/'.$dv['id_dokumen'].'/'.$dv['status_revisi']);?>" class="btn btn-xs btn-success" data-toggle="tooltip" title="Telaah, jika kamu ingin merubah dan melakukan submit rancangan."><i class="fa fa-pencil"></i> Telaah</a>
+												<?php if ($dv['jenis_dokumen']=='Instruksi Menteri') { ?>
+													
+													<a href="<?php echo site_url('backend/format/instruksi_menteri/edit/'.$dv['id_dokumen'].'/'.$dv['status_revisi']);?>" class="btn btn-xs btn-success" data-toggle="tooltip" title="Telaah, jika kamu ingin merubah dan melakukan submit rancangan."><i class="fa fa-pencil"></i> Telaah</a>
+
+												<?php } elseif ($dv['jenis_dokumen']=='Keputusan Menteri') { ?>
+													<a href="<?php echo site_url('Keputusan_menteri_doc/edit/'.$dv['id_dokumen'].'/'.$dv['status_revisi']);?>" class="btn btn-xs btn-success" data-toggle="tooltip" title="Telaah, jika kamu ingin merubah dan melakukan submit rancangan."><i class="fa fa-pencil"></i> Telaah</a>
+												<?php }?>
+												
 											<?php endif ?>
 										</td> 
 									</tr>
