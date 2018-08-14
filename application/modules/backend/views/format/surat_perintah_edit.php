@@ -354,7 +354,7 @@
 										<textarea data-toggle="tooltip" title="sistem akan memberikan otomatis simbol ; ( titik koma) pada akhir paragraf, apabila sistem tidak memberi simbol ; maka kamu harus menambahkannya. " type="text" name="<?php echo $namaJenisField; ?>[]" class="form-control" placeholder="Menimbang" rows="6" style="float:left; margin-left:5px; width:75%;" required><?php echo @$detail_dokumen[$namaJenisField][$idxField]['teks']; ?></textarea>
 										<a href="javascript:void(0)" 
 										   onclick="addMenimbang(this, <?php echo ($idxField +1); ?>)" 
-										   style="position:absolute; right:5%;">
+										   style="position:absolute; right:4.4%; padding:3px;" class="btn btn-success btn-xs">
 											<i class="fa fa-lg fa-plus <?php echo ($idxField +1) < count(@$detail_dokumen[$namaJenisField]) ? 'fa-minus' : ''; ?>"></i>
 										</a>
 										<a href="javascript:void(0)" 
@@ -379,9 +379,16 @@
 									</div>
 									<div style="width:100%">
 										<textarea data-toggle="tooltip" title="sistem akan memberikan otomatis simbol ; ( titik koma) pada akhir paragraf, apabila sistem tidak memberi simbol ; maka kamu harus menambahkannya. " type="text" name="<?php echo $namaJenisField; ?>[]" class="form-control" placeholder="Menimbang" rows="6" style="float:left; margin-left:5px; width:75%;" required><?php echo @$detail_dokumen[$namaJenisField][$idxField]['teks']; ?></textarea>
-										<a href="javascript:void(0)" onclick="addMenimbang(this, 1)" style="position:absolute; right:5%;"><i class="fa fa-lg fa-plus"></i></a>
-										<a href="javascript:void(0)" style="position:absolute; right:4.7%; margin-top:25px;" title="Tambah Telaah" class="btn btn-xs btn-primary"><i class="fa fa-lg fa-comments-o"></i></a>
+										<a href="javascript:void(0)" onclick="addMenimbang(this, 1)" style="position:absolute; right:4.3%; padding:3px;" class="btn btn-xs btn-success"><i class="fa fa-lg fa-plus"></i></a>
 									</div>
+									<div class="form-group" style="width:100%; top:0px; position:relative; display:none;">
+										<textarea type="text" 
+												  name="Komentar_<?php echo $namaJenisField; ?>[]" 
+												  class="form-control" 
+												  rows="2" 
+												  id="textKomentar-<?php echo $namaJenisField.($idxField+1); ?>" 
+												  placeholder="Komentar <?php echo $namaJenisField.($idxField+1); ?>"><?php echo @$detail_dokumen[$namaJenisField][$idxField]['komentar']."\n"; ?></textarea>
+									</div>	
 								</div>
 								<?php } ?>
 							</div>
@@ -407,7 +414,7 @@
 										<textarea data-toggle="tooltip" title="sistem akan memberikan otomatis simbol ; ( titik koma) pada akhir paragraf, apabila sistem tidak memberi simbol ; maka kamu harus menambahkannya. " type="text" name="<?php echo $namaJenisField; ?>[]" class="form-control" placeholder="Menimbang" rows="6" style="float:left; margin-left:5px; width:75%;" required><?php echo @$detail_dokumen[$namaJenisField][$idxField]['teks']; ?></textarea>
 										<a href="javascript:void(0)" 
 										   onclick="addMengingat(this, <?php echo ($idxField +1); ?>)" 
-										   style="position:absolute; right:5%;">
+										   style="position:absolute; right:4.4%; padding:3px;" class="btn btn-success btn-xs">
 											<i class="fa fa-lg fa-plus <?php echo ($idxField +1) < count(@$detail_dokumen[$namaJenisField]) ? 'fa-minus' : ''; ?>"></i>
 										</a>
 										<a href="javascript:void(0)" 
@@ -461,8 +468,15 @@
 										<textarea data-toggle="tooltip" title="sistem akan memberikan otomatis simbol ; ( titik koma) pada akhir paragraf, apabila sistem tidak memberi simbol ; maka kamu harus menambahkannya. " type="text" name="<?php echo $namaJenisField; ?>[]" class="form-control" placeholder="Memerintahkan" rows="6" style="float:left; margin-left:5px; width:75%;" required><?php echo @$detail_dokumen[$namaJenisField][$idxField]['teks']; ?></textarea>
 										<a href="javascript:void(0)" 
 										   onclick="addMemerintahkan(this, <?php echo ($idxField +1); ?>)" 
-										   style="position:absolute; right:5%;">
+										   style="position:absolute; right:4.4%; padding:3px;" class="btn btn-success btn-xs">
 											<i class="fa fa-lg fa-plus <?php echo ($idxField +1) < count(@$detail_dokumen[$namaJenisField]) ? 'fa-minus' : ''; ?>"></i>
+										</a>
+										<a href="javascript:void(0)" 
+										   id="btnKomentar-<?php echo $namaJenisField.($idxField+1); ?>" 
+										   targetKomentar="textKomentar-<?php echo $namaJenisField.($idxField+1); ?>" 
+										   onclick="addKomentarModal(this.id, <?php echo $id_dokumen; ?>, '<?php echo $stat_revisi; ?>', <?php echo $detail_dokumen[$namaJenisField][$idxField]['id_detail']; ?>)" 
+										   style="position:absolute; right:4.3%; margin-top:25px; padding:2px;" title="Tambah Telaah" class="btn btn-xs btn-primary">
+											<i class="fa fa-lg <?php echo ($idxField+1) < count(@$detail_dokumen[$namaJenisField]) ? 'fa-comments-o' : 'fa-comments'; ?>" ></i>
 										</a>
 									</div>
 								</div>
@@ -479,7 +493,7 @@
 									</div>
 									<div style="width:100%">
 										<textarea data-toggle="tooltip" title="sistem akan memberikan otomatis simbol ; ( titik koma) pada akhir paragraf, apabila sistem tidak memberi simbol ; maka kamu harus menambahkannya. " type="text" name="<?php echo $namaJenisField; ?>[]" class="form-control" placeholder="Memerintahkan" rows="6" style="float:left; margin-left:5px; width:75%;" required></textarea>
-										<a href="javascript:void(0)" onclick="addMemerintahkan(this, 1)" style="position:absolute; right:2%;" title="Tambah Isi" class="btn btn-success btn-xs"><i class="fa fa-lg fa-plus"></i></a>
+										<a href="javascript:void(0)" onclick="addMemerintahkan(this, 1)" style="position:absolute; right:4.4%; padding:3px;" title="Tambah Isi" class="btn btn-success btn-xs"><i class="fa fa-lg fa-plus"></i></a>
 									</div>
 								</div>
 								<?php } ?>
@@ -505,8 +519,17 @@
 									</div>
 									<div style="width:100%">
 										<textarea data-toggle="tooltip" title="Isian ini harap diisi dengan sebagai mestinya." type="text" name="<?php echo $namaJenisField; ?>[]" class="form-control" placeholder="Diktum" rows="6" style="float:left; margin-left:5px; width:75%;" required><?php echo @$detail_dokumen[$namaJenisField][$idxField]['teks']; ?></textarea>
-										<a href="javascript:void(0)" onclick="addDiktum(this, <?php echo ($idxField +1); ?>)" style="position:absolute; right:2%;" title="Tambah Isi" class="btn btn-success btn-xs">
+										<a href="javascript:void(0)" 
+										   onclick="addDiktum(this, <?php echo ($idxField +1); ?>)" 
+										   style="position:absolute; right:4.4%; padding:3px;" class="btn btn-success btn-xs">
 											<i class="fa fa-lg fa-plus <?php echo ($idxField +1) < count(@$detail_dokumen[$namaJenisField]) ? 'fa-minus' : ''; ?>"></i>
+										</a>
+										<a href="javascript:void(0)" 
+										   id="btnKomentar-<?php echo $namaJenisField.($idxField+1); ?>" 
+										   targetKomentar="textKomentar-<?php echo $namaJenisField.($idxField+1); ?>" 
+										   onclick="addKomentarModal(this.id, <?php echo $id_dokumen; ?>, '<?php echo $stat_revisi; ?>', <?php echo $detail_dokumen[$namaJenisField][$idxField]['id_detail']; ?>)" 
+										   style="position:absolute; right:4.3%; margin-top:25px; padding:2px;" title="Tambah Telaah" class="btn btn-xs btn-primary">
+											<i class="fa fa-lg <?php echo ($idxField+1) < count(@$detail_dokumen[$namaJenisField]) ? 'fa-comments-o' : 'fa-comments'; ?>" ></i>
 										</a>
 									</div>
 								</div>
@@ -563,8 +586,17 @@
 									</div>
 									<div style="width:100%">
 										<textarea type="text" name="<?php echo $namaTembusan; ?>[]" class="form-control" placeholder="<?php echo $namaTembusan; ?>" rows="6" style="float:left; margin-left:5px; width:75%;" required="" data-toggle="tooltip" title="Isi bagian ini sebagai mestinya."><?php echo @$detail_dokumen[$namaJenisField][$idxField]['teks']; ?></textarea>
-										<a href="javascript:void(0)" onclick="addTembusan(this, <?php echo ($idxField +1); ?>)" style="position:absolute; right:2%;" title="Tambah Isi" class="btn btn-xs btn-success">
+										<a href="javascript:void(0)" 
+										   onclick="addTembusan(this, <?php echo ($idxField +1); ?>)" 
+										   style="position:absolute; right:4.4%; padding:3px;" class="btn btn-success btn-xs">
 											<i class="fa fa-lg fa-plus <?php echo ($idxField +1) < count(@$detail_dokumen[$namaJenisField]) ? 'fa-minus' : ''; ?>"></i>
+										</a>
+										<a href="javascript:void(0)" 
+										   id="btnKomentar-<?php echo $namaJenisField.($idxField+1); ?>" 
+										   targetKomentar="textKomentar-<?php echo $namaJenisField.($idxField+1); ?>" 
+										   onclick="addKomentarModal(this.id, <?php echo $id_dokumen; ?>, '<?php echo $stat_revisi; ?>', <?php echo $detail_dokumen[$namaJenisField][$idxField]['id_detail']; ?>)" 
+										   style="position:absolute; right:4.3%; margin-top:25px; padding:2px;" title="Tambah Telaah" class="btn btn-xs btn-primary">
+											<i class="fa fa-lg <?php echo ($idxField+1) < count(@$detail_dokumen[$namaJenisField]) ? 'fa-comments-o' : 'fa-comments'; ?>" ></i>
 										</a>
 									</div>
 								</div>
@@ -616,39 +648,158 @@
 						</div>
 					</form>
 
-					<script>
-						$("#view_doc").click(function(e) {
-							$("#form-keputusan").attr("action", "<?php echo site_url('backend/format/surat_perintah/sanusi'); ?>");
-						});
+<!-- Modal Open Action -->
+<div id="modal-comment" class="modal fade animate" data-backdrop="true" aria-hidden="true" style="display:none;">
+  <div class="modal-dialog" id="animate" data-ui-class="bounce">
+    <div class="modal-content">
+      <div class="modal-header">
+      	<h5 class="modal-title">Jelajah Komentar</h5>
+      </div>
+      <div id="textarea-komentar" class="modal-body text-center p-lg">
+		  <div id="showTextArea"></div>
+		  <input type="hidden" id="hiddenIdTextChat" />
+		  <input type="hidden" id="hiddenIdDoc" />
+		  <input type="hidden" id="hiddenStat" />
+		  <input type="hidden" id="hiddenIdDetail" />
+      </div>
+      <div class="modal-footer">
+		<div style="margin-bottom:5px"><input id="chatKomentar" type="text" name="write-comment" style="width:100%" /></div>
+		<button type="button" class="btn btn-primary p-x-md" onclick="btnSubmitModal(this)">Submit</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div>
+</div>
+				
+<button id="btn-modal" class="btn white active" style="display:none"
+		data-toggle="modal" 
+		data-target="#modal-comment" 
+		data-ui-toggle-class="bounce" 
+		data-ui-target="#animate">Bounce</button>
+<!-- Modal Close Action -->
 
-						$("#save_doc").click(function(e) {
-							$("#form-keputusan").attr("action", "<?php echo site_url('backend/format/surat_perintah/save_document'); ?>");
-						});
+<script>
+	$("#view_doc").click(function(e) {
+		$("#form-keputusan").attr("action", "<?php echo site_url('backend/format/surat_perintah/sanusi'); ?>");
+	});
 
-						$('textarea[name="super_judul"]').keyup(function() {
-							$('textarea[name^="Memutuskan"]').text($(this).val());
-						});
+	$("#save_doc").click(function(e) {
+		$("#form-keputusan").attr("action", "<?php echo site_url('backend/format/surat_perintah/save_document'); ?>");
+	});
 
-						$('textarea[name^="Menimbang"], textarea[name^="Mengingat"]').blur(function() {
-							var str = $(this).val(),
-							strcheck = (str === '') ? '' : str+';';
-							$(this).val(strcheck);
-						})
-						.focus(function() {
-							var str = $(this).val();
-							$(this).val(str.slice(0, -1));
-						});
+	$('textarea[name="super_judul"]').keyup(function() {
+		$('textarea[name^="Memutuskan"]').text($(this).val());
+	});
 
-						$('textarea[name^="Memutuskan"]').blur(function() {
-							var str = $(this).val(),
-							strcheck = (str === '') ? '' : str+'.';
-							$(this).val(strcheck);
-						}).focus(function() {
-							var str = $(this).val();
-							$(this).val(str.slice(0, -1));
-						});
+	$('textarea[name^="Menimbang"], textarea[name^="Mengingat"]').blur(function() {
+		var str = $(this).val(),
+		strcheck = (str === '') ? '' : str+';';
+		$(this).val(strcheck);
+	})
+	.focus(function() {
+		var str = $(this).val();
+		$(this).val(str.slice(0, -1));
+	});
 
-						$('input[name^="pointerDiktum"]').keyup(function() {
-							$(this).val(($(this).val()).toUpperCase());
-						});
-					</script>
+	$('textarea[name^="Memutuskan"]').blur(function() {
+		var str = $(this).val(),
+		strcheck = (str === '') ? '' : str+'.';
+		$(this).val(strcheck);
+	}).focus(function() {
+		var str = $(this).val();
+		$(this).val(str.slice(0, -1));
+	});
+
+	$('input[name^="pointerDiktum"]').keyup(function() {
+		$(this).val(($(this).val()).toUpperCase());
+	});
+
+	// modal dialog for commentar	
+	function addKomentarModal(thisId, id_doc, stat, id_detail) {
+		$('#btn-modal').click();
+		var split = thisId.split('-');
+		var getHiddenKomen = $('#textKomentar-'+split[1]).text();
+		var type = split[1].substring(0, split[1].length - 1);
+		$.ajax({
+			url: '<?php echo site_url(); ?>/Keputusan_menteri_doc/getKomentarHistory?id='+id_doc+'&stat='+stat+'&jenis='+type+'&id_detail='+id_detail,
+			type: 'GET',
+			beforeSend: function() {
+				$('#textarea-komentar').html('Loading...');
+			},
+			success: function(data) {
+				// &#13;&#10;
+				var reEle = '<div id="showTextArea"></div>'+
+							'<input type="hidden" id="hiddenIdTextChat" />'+
+							'<input type="hidden" id="hiddenIdDoc" />'+
+							'<input type="hidden" id="hiddenStat" />'+
+							'<input type="hidden" id="hiddenIdDetail" />';
+				$('#textarea-komentar').html(reEle);
+				var _month = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+				var datax = JSON.parse(data);
+				var str = '';
+				if(datax.length > 0) {
+					for(var i = 0; i < datax.length; i++) {
+						var d = new Date(datax[i].comm_date);
+						var convdate = d.getDate()+' '+_month[d.getMonth()]+' '+d.getFullYear()+' '+d.getHours()+':'+d.getMinutes();
+						var usr = datax[i].name !== null ? datax[i].name : 'Unknown';
+						str += '<textarea style="font-family:Verdana; width:100%;" disabled>'+usr+'&nbsp;&nbsp;&nbsp;('+convdate+') \r'+datax[i].pesan+'</textarea>';
+					}
+				}
+				else {
+					str = 'Tidak Ada Komentar';
+				}
+				
+				$('#showTextArea').html(str);
+				$('#chatKomentar').val(getHiddenKomen);
+				$('#hiddenIdTextChat').val('#textKomentar-'+split[1]);
+				$('#hiddenIdDoc').val(id_doc);
+				$('#hiddenStat').val(stat);
+				$('#hiddenIdDetail').val(id_detail);
+			}
+		});
+	}
+												
+	function btnSubmitModal(ele) {
+		var chatting = $('#chatKomentar').val();
+		var id_detail = $('#hiddenIdDetail').val();
+		if(chatting === '') {
+			alert('Kolom Komentar Kosong!');
+			return false;
+		}
+		else {
+			var r = confirm("Anda Yakin?");
+			if(r === true) {
+				$.ajax({
+					url: '<?php echo site_url(); ?>/Keputusan_menteri_doc/submitKomentarHistory',
+					type: 'POST',
+					data: 'id_detail='+id_detail+'&pesan='+chatting,
+					beforeSend: function() {},
+					success: function(data) {
+						var datax = JSON.parse(data);
+						if(datax.status === 1) {
+							var eleComment = $('#hiddenIdTextChat').val();
+							var id_doc = $('#hiddenIdDoc').val(id_doc);
+							var stat = $('#hiddenStat').val(stat);
+							$(eleComment).text(chatting);
+							alert('Komentar Berhasil di Simpan');
+							$(ele).attr("data-dismiss", "modal");
+						}
+						else {
+							alert('Komentar Tidak Berhasil di Simpan');
+						}
+					}
+				});
+			}
+		}
+	}
+
+	function addKomentar(thisId) {
+		idTarget  = $('#'+thisId).attr('targetKomentar');
+		if($('#'+idTarget).css('display') === 'none') {
+			$('#'+idTarget).show(400);
+		}
+		else if($('#'+idTarget).css('display') === 'block') {
+			$('#'+idTarget).hide(400);
+		}
+		return false;
+	}
+</script>

@@ -805,7 +805,7 @@ function addLampiran(ele) {
 		var getHiddenKomen = $('#textKomentar-'+split[1]).text();
 		var type = split[1].substring(0, split[1].length - 1);
 		$.ajax({
-			url: '<?php echo site_url(); ?>/Keputusan_menteri_doc/getKomentarHistory?id='+id_doc+'&stat='+stat+'&jenis='+type,
+			url: '<?php echo site_url(); ?>/Keputusan_menteri_doc/getKomentarHistory?id='+id_doc+'&stat='+stat+'&jenis='+type+'&id_detail='+id_detail,
 			type: 'GET',
 			beforeSend: function() {
 				$('#textarea-komentar').html('Loading...');

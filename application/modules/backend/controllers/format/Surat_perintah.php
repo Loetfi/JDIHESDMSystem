@@ -1473,11 +1473,24 @@ class Surat_perintah extends CI_Controller {
 			$id = $this->input->get('id');
 			$rev = $this->input->get('stat');
 			$type = $this->input->get('jenis');
+			$id_detail = $this->input->get('id_detail');
 			$query = $this->db->query("
-				SELECT * FROM komentar_doc a
-				INNER JOIN dokumen_detail b ON b.id_detail = a.id_detail
-				INNER JOIN dokumen_revisi c ON c.id_revisi = b.id_revisi
-				WHERE c.status_revisi = '$rev' AND b.id_dokumen = $id");
+				SELECT 
+					a.pesan
+					,a.id_detail
+					,a.cdate AS comm_date
+					,a.user_id
+					,d.login_id
+					,c.id_revisi
+					,c.id_dokumen
+					,d.name
+					,d.email
+					,d.id_flow
+				FROM komentar_doc a
+				INNER JOIN dokumen_detail b on b.id_detail = a.id_detail
+				INNER JOIN dokumen_revisi c on c.id_revisi = b.id_revisi
+				INNER JOIN login d on d.login_id = a.user_id
+				WHERE c.status_revisi = '$rev' and b.id_dokumen = $id AND b.jenis_field = '$type' AND a.id_detail = $id_detail");
 			echo json_encode($query->result());
 		}
 

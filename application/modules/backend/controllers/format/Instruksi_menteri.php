@@ -1248,16 +1248,42 @@ class Instruksi_menteri extends CI_Controller {
 			$id = $this->input->get('id');
 			$rev = $this->input->get('stat');
 			$type = $this->input->get('jenis');
-			$query = $this->db->query("SELECT * FROM komentar_doc a
-				INNER JOIN dokumen_detail b ON b.id_detail = a.id_detail 
-				INNER JOIN (
-					SELECT a.id_dokumen, a.cuser, a.login_id FROM dokumen a
-					JOIN dokumen_revisi b ON b.id_dokumen = a.id_dokumen
-					WHERE a.id_dokumen = $id AND b.status_revisi = '$rev'
-				) c ON c.id_dokumen = b.id_dokumen
-				INNER JOIN login d ON d.login_id = c.login_id
-				where b.jenis_field = '$type'");
+			$id_detail = $this->input->get('id_detail');
+			$query = $this->db->query("
+				SELECT 
+					a.pesan
+					,a.id_detail
+					,a.cdate AS comm_date
+					,a.user_id
+					,d.login_id
+					,c.id_revisi
+					,c.id_dokumen
+					,d.name
+					,d.email
+					,d.id_flow
+				FROM komentar_doc a
+				INNER JOIN dokumen_detail b on b.id_detail = a.id_detail
+				INNER JOIN dokumen_revisi c on c.id_revisi = b.id_revisi
+				INNER JOIN login d on d.login_id = a.user_id
+				WHERE c.status_revisi = '$rev' and b.id_dokumen = $id AND b.jenis_field = '$type' AND a.id_detail = $id_detail");
 			echo json_encode($query->result());
+		}
+
+		function submitKomentarHistory() {
+			$post = $this->input->post();
+			$dataKomentar = array(
+				'id_detail'	=> $post['id_detail'],
+				'pesan'		=> $post['pesan'],
+				'cdate'		=> date("Y-m-d H:i:s"),
+				'user_id'	=> @$this->session->userdata('login_id')
+			);
+			$query = $this->db->insert('komentar_doc', $dataKomentar);
+			if(@$query) {
+				echo json_encode(array('status' => 1));
+			}
+			else {
+				echo json_encode(array('status' => 0));
+			}
 		}
 	}
 	/* End of file dashboard.php */
