@@ -274,7 +274,7 @@ function saveFormat() {
 		}
 		else if(localStorage.getItem("saveformat") !== null) {
 			var getLocal = JSON.parse(localStorage.getItem("saveformat"));
-			$(".pointer").each(function(num) {console.log(getLocal[num]);
+			$(".pointer").each(function(num) {
 				var theType = (getLocal[num] === undefined) ? '' : getLocal[num].type;
 				arr[num] = {pointer:$(this).val(), val:$(this).next().val(), type:theType};
 			});
@@ -292,6 +292,7 @@ function saveFormat() {
 				console.log('loading...');
 			},
 			success: function(data) {
+				alert(data);
 				location.reload();
 			}
 		});
@@ -319,20 +320,6 @@ function saveContentFormat() {
 			localStorage.setItem("saveformat", JSON.stringify(arrFormat));
 			localStorage.setItem("saveformatcontent", JSON.stringify(arrContent));
 		}
-		else if(localStorage.getItem("saveformat") !== null) {
-			$(".pointer").each(function(num) {
-				if(chval === $(this).next().val()) {
-					arrFormat[num] = {pointer:$(this).val(), val:$(this).next().val(), type:right_opt};
-					arrContent[num] = {val:$(this).next().val(), pointer:$(this).val(), mform:right_opt, content:getContent(chval, right_opt)};
-				}
-				else {
-					arrFormat[num] = {pointer:$(this).val(), val:$(this).next().val(), type:''};
-					arrContent[num] = {val:$(this).next().val(), pointer:$(this).val(), mform:'', content:''};
-				}
-			});
-			localStorage.setItem("saveformat", JSON.stringify(arrFormat));
-			localStorage.setItem("saveformatcontent", JSON.stringify(arrContent));
-		}
 		else {
 			var jsonStr = JSON.parse(localStorage.getItem("saveformat"));
 			var jsonStrContent = JSON.parse(localStorage.getItem("saveformatcontent"));
@@ -342,18 +329,22 @@ function saveContentFormat() {
 			else {
 				for(var i = 0; i < jsonStr.length; i++) {
 					if(chval === jsonStr[i].val) {
-						arrFormat[i] = {pointer:jsonStr[i].pointer, val:jsonStr[i].val, type:right_opt};
-						arrContent[i] = {val:jsonStrContent[i].val, pointer:jsonStrContent[i].pointer, mform:right_opt, content:getContent(chval, right_opt)};
+						/*arrFormat[i] = {pointer:jsonStr[i].pointer, val:jsonStr[i].val, type:right_opt};
+						arrContent[i] = {val:jsonStrContent[i].val, pointer:jsonStrContent[i].pointer, mform:right_opt, content:getContent(chval, right_opt)};*/
+						arrFormat[i] = {pointer:$(".focused").children()[0].value, val:$(".focused").children()[1].value, type:right_opt};
+						arrContent[i] = {val:$(".focused").children()[1].value, pointer:$(".focused").children()[0].value, mform:right_opt, content:getContent(chval, right_opt)};
 					}
 					else {
 						arrFormat[i] = {pointer:jsonStr[i].pointer, val:jsonStr[i].val, type:jsonStr[i].type};
 						arrContent[i] = {val:jsonStrContent[i].val, pointer:jsonStrContent[i].pointer, mform:jsonStrContent[i].mform, content:jsonStrContent[i].content};
 					}
 				}
+				
 				localStorage.setItem("saveformat", JSON.stringify(arrFormat));
 				localStorage.setItem("saveformatcontent", JSON.stringify(arrContent));
 			}
 		}
+
 		$.ajax({
 			url: '<?php base_url(); ?>files/saveformat',
 			type: 'POST',
@@ -362,7 +353,6 @@ function saveContentFormat() {
 				console.log('loading...');
 			},
 			success: function(data) {
-				console.log(data);
 				$.ajax({
 					url: '<?php base_url(); ?>files/savefile',
 					type: 'POST',
@@ -488,10 +478,10 @@ function displayContent(mform, content) {
 function mform1() {
 	return '<textarea data-toggle="tooltip"'+
 			'title="title" type="text" name="textarea-mfrom1"'+
-			'class="form-control" placeholder="Isi" rows="6" required></textarea>';
+			'class="form-control" placeholder="Isi" rows="6" id="form1" required></textarea>';
 }
 function mform2() {
-	return '<div style="display:inline-block; width:100%;">'+
+	return '<div id="form2" style="display:inline-block; width:100%;">'+
 			'<div style="float:left; width:20%">'+
 			'<input type="text" name="text-pointer" class="form-control" placeholder="Pointer" data-toggle="tooltip" title="" />'+
 			'<select name="select-page" class="form-control" style="cursor:pointer; margin-top:10px;" data-toggle="tooltip" title="title">'+
@@ -512,7 +502,7 @@ function mform2() {
 			'</div>';
 }
 function mform3() {
-	return '<div style="display:inline-block; width:100%;">'+
+	return '<div id="form3" style="display:inline-block; width:100%;">'+
 			'<div>'+
 			'<textarea data-toggle="tooltip" title="title" type="text" name="textarea_baku" class="form-control" placeholder="Format Baku" rows="3" required></textarea>'+
 			'</div>'+
