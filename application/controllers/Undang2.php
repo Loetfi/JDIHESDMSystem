@@ -11,7 +11,7 @@ class Undang2 extends CI_Controller {
 	function index() {
 		$data = array(
 			'contents'	=> 'NewUndang2', 
-			'title'		=> 'Dashbord Sistem'
+			'title'		=> 'Buat Dokumen Undang-Undang'
 		);
 		$this->load->view('backend/template/head', $data, FALSE);
 		// $this->load->view('');
@@ -927,6 +927,90 @@ class Undang2 extends CI_Controller {
 		$this->insert_pasal($babPasalAll);
 		
 		return $alldata;
+	}
+	
+	/* New Action for Add Form */
+	public function view_doc_new() {
+		$str = file_get_contents(base_url('format/contentformat/contentformat_undang2.json'));
+		$json = json_decode($str, true);
+		echo "<pre>"; print_r($json);
+		//echo FCPATH;
+	}
+	
+	public function save_doc_new() {
+		$str = file_get_contents(base_url('format/contentformat/contentformat_undang2.json'));
+		$json = json_decode($str, true);
+		
+		$doc_name = $this->input->get();
+		$doc_id = $this->insert_document_new($doc_name['doc_name']);
+		if($doc_id === FALSE) {
+			echo json_encode(array('code' => '400', 'status' => 'Gagal Input'));
+		}
+		
+		$check = false;
+		foreach($json as $key => $value) {
+			$array = array(
+				'id_dokumen' => $doc_id,
+				'id_revisi' => null,
+				'jenis_field' => ($value['val'] !== '') ? $value['val'] : null,
+				'pointer' => ($value['content']['pointer'] !== '') ? $value['content']['pointer'] : null,
+				'layout' => ($value['content']['page'] !== null) ? $value['content']['page'] : null,
+				'sublevel' => ($value['content']['level'] !== '') ? $value['content']['level'] : null,
+				'content' => ($value['content']['content'] !== '') ? $value['content']['content'] : null
+			);
+			$result = $this->insert_document_detail($array);
+			
+			if($result === FALSE) {
+				$check = true;
+			}
+		}
+		
+		if($check === false) {
+			echo json_encode(array('code' => '200', 'status' => 'Berhasil Input'));
+		}
+		else {
+			echo json_encode(array('code' => '400', 'status' => 'Gagal Input'));
+		}
+	}
+	
+	function insert_document_new($nama_dokumen) {
+		$this->db->trans_begin();
+		$dataDokumen = array(
+			'jenis_dokumen'	=> 'Undang-undang',
+			'nama_dokumen'	=> $nama_dokumen,
+			'login_id'		=> !empty($this->session->userdata('login_id')) ? $this->session->userdata('login_id') : 2, // 2 is admin
+			'cuser'			=> !empty($this->session->userdata('login_id')) ? $this->session->userdata('login_id') : 2, // 2 is admin
+			'cdate'			=> date('Y-m-d H:i:s'),
+			'status'		=> 1,
+			'submit_doc'	=> 0,
+			'relasi_doc'	=> 0
+		);
+		$queryDokumen = $this->db->insert('dokumen', $dataDokumen);
+		$id_doc = $this->db->insert_id();
+		
+		if($this->db->trans_status() === FALSE) {
+			$this->db->trans_rollback();
+			return $this->db->trans_status();
+		}
+		else {
+			$this->db->trans_commit();
+			return $id_doc;
+		}
+	}
+	
+	function insert_document_detail($data) {
+		$dataDokumenDetail = array(
+			'id_dokumen'	=> $data['id_dokumen'],
+			'id_revisi'		=> $data['id_revisi'],
+			'jenis_field'	=> $data['jenis_field'],
+			'pointer'		=> $data['pointer'],
+			'layout'		=> $data['layout'],
+			'sublevel'		=> $data['sublevel'],
+			'teks'			=> $data['content'],
+			'cdate'			=> date('Y-m-d H:i:s'),
+			'status'		=> 0
+		);
+		return $this->db->insert('dokumen_detail', $dataDokumenDetail);
 	}
 	
 }

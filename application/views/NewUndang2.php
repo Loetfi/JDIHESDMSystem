@@ -42,6 +42,22 @@
 </style>
 <div class="padding">
 	<div class="row">
+		<div class="col-md-12">
+			<div class="box">
+				<div class="box-header light lt">
+					<h3>Rancangan Undang-Undang</h3>
+					<small>Membuat sebuah dokumen Undang-Undang</small>
+				</div>
+				<div class="padding">
+					<fieldset> 
+						<div class="form-group">
+							<label for="">Nama Dokumen</label>
+							<input type="text" class="form-control" name="nama_dokumen" placeholder="Masukan nama inisial dari dokumen yang akan dibuat" required="" data-toggle="tooltip" title="" data-original-title="Masukan nama inisial dari dokumen yang akan dibuat">
+						</div> 
+					</fieldset>
+				</div>
+			</div>
+		</div>
 		<div class="col-md-3">
 			<div class="box">
 				<div id="left-menus" class="box-header">
@@ -91,8 +107,8 @@
 </div>
 
 <div class="fix-btn">
-	<button type="submit" class="btn btn-primary btn-m">Submit</button>
-	<button type="submit" class="btn btn-info btn-m">Lihat Format</button>
+	<button type="submit" class="btn btn-primary btn-m" name="submit_btn">Submit</button>
+	<button type="submit" class="btn btn-info btn-m" name="view_btn">Lihat Format</button>
 </div>
 
 <!-- button modal -->
@@ -534,5 +550,34 @@ $('input[name="isi_text"]').keyup(function(e) {
     if(e.keyCode === 13) {
         $('#btnYes').click();
     }
+});
+	
+$('button[name="submit_btn"]').click(function() {
+	var doc_name = $('input[name="nama_dokumen"]').val();
+	if(doc_name === '') {
+		alert('Nama Dokumen Kosong!');
+	}
+	else {
+		//window.open("<?php echo site_url('index.php/undang2/save_doc_new?doc_name='); ?>"+doc_name);
+		$.ajax({
+			url: '<?php echo site_url('index.php/undang2/save_doc_new'); ?>',
+			data: 'doc_name='+doc_name,
+			type: 'GET',
+			beforeSend: function() {
+				console.log('Loading...');
+			},
+			success: function(data) {
+				data = JSON.parse(data);
+				alert(data.status);
+			},
+			error: function(e) {
+				console.log(e);
+			}
+		});
+	}
+});
+
+$('button[name="view_btn"]').click(function() {
+	window.open("<?php echo site_url('index.php/undang2/view_doc_new'); ?>");
 });
 </script>
