@@ -40,7 +40,7 @@ class Welcome extends CI_Controller {
 
 	public function index($compay_id = NULL)
 	{ 
-		$url = 'https://ibid.co.id/backend/service/stok/acv/data/index/'.$compay_id; //linkservice('master')."item/get";  
+		$url = 'https://adms-stock.ibid.astra.co.id/acv/data/index/'.$compay_id;//.$compay_id; //linkservice('master')."item/get";  
 		$res = file_get_contents($url);
 		echo $res;
 
